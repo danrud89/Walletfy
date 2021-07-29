@@ -259,8 +259,15 @@ input {
     border: 1px solid #ced4da;
     padding: 7px;
     transition: border-color .25s ease-in-out;
+}
 
-
+.data-control {
+    width: 85%;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border: 1px solid #ced4da;
+    padding: 7px;
+    transition: border-color .25s ease-in-out;
 }
 
 .user-options {
