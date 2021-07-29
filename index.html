@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="style1.css" type="text/css" />
     <link rel="stylesheet" href="icons/css/fontello.css" type="text/css" />
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="icon" href="img/favicon.png">
 
 </head>
@@ -49,33 +50,36 @@
         <section>
             <div class="wrapper">
                 <div class="login-box">
-                    <h1>Sign in</h1>
+                    <h1>Zaloguj</h1>
                     <div id="toggle">
                         <i class="indicator"></i>
                     </div>
-                    <div class="textbox">
-                        <p>
-                            <label for="username" class="uname" data-icon="u"> Your email or username </label>
-                            <input id="username" name="username" required="required" type="text" placeholder="Username" />
-                        </p>
+                    <div class="login-input">
+                        <div class="login-icon">
+                            <span class="material-icons">
+                                person
+                            </span>
+                        </div>
+                        <input input type="email" class="form-control" placeholder="E-mail" aria-label="email" name="email" required autofocus>
                     </div>
-
-                    <div class="textbox">
-                        <p>
-                            <label for="password" class="youpasswd" data-icon="p"> Your password </label>
-                            <input id="password" name="password" required="required" data-icon="p" type="password" placeholder="Password" />
-                        </p>
+                    <div class="login-input">
+                        <div class="login-icon">
+                            <span class="material-icons">
+                                vpn_key
+                            </span>
+                        </div>
+                        <input type="password" class="form-control" placeholder="Hasło" aria-label="hasło" name="password" required>
                     </div>
                     <p class="keeplogin">
                         <input type="checkbox" name="loginkeeping" id="loginkeeping" value="loginkeeping" />
-                        <label for="loginkeeping">Keep me logged in</label>
+                        <label for="loginkeeping">Zapamiętaj mnie</label>
                     </p>
                     <p class="login button">
-                        <input type="submit" value="Login" />
+                        <input type="submit" value="Zaloguj" />
                     </p>
                     <p class="change_link">
-                        Not a member yet ?
-                        <a href="D:\Repozytoria\Wall€tfy\register.html">Join us</a>
+                        Nie posiadasz konta ?
+                        <a href="D:\Repozytoria\Wall€tfy\register.html">Zarejestruj się</a>
                     </p>
                 </div>
             </div>

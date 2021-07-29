@@ -1,0 +1,162 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Wall€tfy</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="descritpion" content="Dzięki WALLETFY - aplikacji do zarządzania finansami, Twoje zarządzanie budżetem stanie się prostsze!" />
+    <meta name="keywords" content="budżet,finanse,wydatki,przychody,bilans" />
+    <meta http-equiv="X-UA-Compatible" content="IE = edge, chrome = 1" />
+
+    <link rel="stylesheet" href="bootstrap5/css/bootstrap.min.css" type="text/css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="add_expense.css" type="text/css" />
+    <link rel="stylesheet" href="icons/css/fontello.css" type="text/css" />
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="icon" href="img/favicon.png">
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="description">
+            <section div class="motto">
+                <div class="motto1">
+                    <p>Wall€tfy!</p>
+                </div>
+                <div class="motto2">
+                    <p>Application that makes money</p>
+                    <p>management easier !</p>
+                </div>
+            </section>
+
+            <section>
+                <div class="social">
+                    <p>Follow us :</p>
+                    <div class="fb">
+                        <a href="https://www.facebook.com/daniel.rudnik.35/" class="fblink"><i class="icon-facebook"></i></a>
+                    </div>
+                    <div class="ln">
+                        <p><a href="https://www.linkedin.com/in/daniel-rudnik-8894811b2/" class="lnlink"><i class="icon-linkedin"></i></a></p>
+                    </div>
+                    <div class="gh">
+                        <p><a href="https://github.com/danrud89" class="ghlink"><i class="icon-github-squared"></i></a></p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <section>
+            <div class="wrapper">
+                <div class="expense-box">
+                    <h1>DODAJ WYDATEK</h1>
+                    <div id="toggle">
+                        <i class="indicator"></i>
+                    </div>
+                    <form>
+                        <div class="expense-input">
+                            <div class="expense-icon">
+                                <span class="material-icons">
+                                    attach_money
+                                </span>
+                            </div>
+                            <input class="form-data" type="number" class="form-control" placeholder="Kwota" min="0" max="99999.99" step="0.01" aria-label="kwota" name="amount" required>
+                        </div>
+                        <div class="expense-input">
+                            <div class="expense-icon">
+                                <span class="material-icons">
+                                    date_range
+                                </span>
+                            </div>
+                            <input type="date" class="form-control" aria-label="data" required>
+                        </div>
+                        <div class="expense-input">
+                            <div class="expense-icon">
+                                <span class="material-icons">
+                                    <span class="material-icons-outlined">
+                                        credit_score
+                                    </span>
+                                </span>
+                            </div>
+                            <select name="options" class="user-options">
+                                <option value="">--- Proszę wybrać opcję ---</option>
+                                <option value="credit-card">Karta kredytowa</option>
+                                <option value="cash">Gotówka</option>
+                                <option value="debet-card">Karta debetowa</option>
+                                <option value="blik">Blik</option>
+                                <option value="transfer">Przelew</option>
+                            </select>
+                        </div>
+                        <div class="expense-input">
+                            <div class="expense-icon">
+                                <span class="material-icons">
+                                    <span class="material-icons-outlined">
+                                        shopping_bag
+                                    </span>
+                                </span>
+                            </div>
+                            <select name="options" class="user-options">
+                                <option value="">--- Proszę wybrać opcję ---</option>
+                                <option value="food">Jedzenie</option>
+                                <option value="home">Mieszkanie</option>
+                                <option value="clothes">Odzież</option>
+                                <option value="transport">Transport</option>
+                                <option value="health">Zdrowie</option>
+                                <option value="hygiene">Higiena</option>
+                                <option value="kids">Dzieci</option>
+                                <option value="entertainment">Rozrywka</option>
+                                <option value="trip">Wycieczka</option>
+                                <option value="school">Szkoła/Nauka</option>
+                                <option value="books">Książki</option>
+                                <option value="debt">Spłata długów</option>
+                                <option value="pension">Fundusz Emerytalny</option>
+                                <option value="donation">Darowizna</option>
+                                <option value="other">Inne wydatki</option>
+                            </select>
+                        </div>
+                        <div class="expense-input">
+                            <div class="expense-icon">
+                                <span class="material-icons">
+                                    description
+                                </span>
+                            </div>
+                            <textarea class="form-data" maxlength="50" placeholder="Komentarz (opcjonalne)" name="comment"></textarea>
+                        </div>
+                        <div class="submit">
+                            <p class="acceptButton">
+                                <input type="submit" value="DODAJ" />
+                            </p>
+                            <p class="cancelButton">
+                                <a href="menu.html">
+                                    <input type="submit" value="ANULUJ" onclick=href />
+                                </a>
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+        <div class="clearfix"></div>
+    </div>
+    <footer class="page-footer">
+        <div class="container">
+            <p>Wszelkie prawa zastrzeżone. Copyright © 2021. All Rights Reserved </p>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="bootstrap5/js/bootstrap.min.js"></script>
+    <script>
+        const body = document.querySelector('body');
+        const motto = document.querySelector('motto');
+        const toggle = document.getElementById('toggle');
+        toggle.onclick = function() {
+            toggle.classList.toggle('active');
+            body.classList.toggle('active');
+            motto.classList.toggle('active');
+        }
+
+    </script>
+</body>
+
+</html>

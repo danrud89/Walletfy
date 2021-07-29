@@ -13,7 +13,8 @@
     <link rel="stylesheet" href="style2.css" type="text/css" />
     <link rel="stylesheet" href="icons/css/fontello.css" type="text/css" />
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-    <link rel="icon" href="favicon.png">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="icon" href="img/favicon.png">
 
 </head>
 
@@ -50,40 +51,40 @@
             <section>
                 <div class="wrapper">
                     <div class="register-box">
-                        <h1> Sign up </h1>
+                        <h1> Rejestracja </h1>
                         <div id="toggle">
                             <i class="indicator"></i>
                         </div>
-                        <div class="textbox">
-                            <p>
-                                <label for="usernamesignup" class="uname" data-icon="u">Your username</label>
-                                <input id="usernamesignup" name="usernamesignup" required="required" type="text" placeholder="Username" />
-                            </p>
+                        <div class="register-input">
+                            <div class="register-icon">
+                                <span class="material-icons">
+                                    person
+                                </span>
+                            </div>
+                            <input input type="email" class="form-control" placeholder="E-mail" aria-label="email" name="email" required autofocus>
                         </div>
-                        <div class="textbox">
-                            <p>
-                                <label for="emailsignup" class="youmail" data-icon="e"> Your email</label>
-                                <input id="emailsignup" name="emailsignup" required="required" type="email" placeholder="email@mail.com" />
-                            </p>
+                        <div class="register-input">
+                            <div class="register-icon">
+                                <span class="material-icons">
+                                    vpn_key
+                                </span>
+                            </div>
+                            <input type="password" class="form-control" placeholder="Hasło" aria-label="hasło" name="password" required>
                         </div>
-                        <div class="textbox">
-                            <p>
-                                <label for="passwordsignup" class="youpasswd" data-icon="p">Your password </label>
-                                <input id="passwordsignup" name="passwordsignup" required="required" type="password" placeholder="password" />
-                            </p>
-                        </div>
-                        <div class="textbox">
-                            <p>
-                                <label for="passwordsignup_confirm" class="youpasswd" data-icon="p">Confirm your password </label>
-                                <input id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="password" placeholder="password" />
-                            </p>
+                        <div class="register-input">
+                            <div class="register-icon">
+                                <span class="material-icons">
+                                    vpn_key
+                                </span>
+                            </div>
+                            <input type="password" class="form-control" placeholder="Potwierdź hasło" aria-label="potwierdź hasło" name="password" required>
                         </div>
                         <p class="signin button">
-                            <input type="submit" value="Sign up" />
+                            <input type="submit" value="Zarejestruj" />
                         </p>
                         <p class="change_link">
-                            Already a member ?
-                            <a href="D:\Repozytoria\Wall€tfy\index.html"> Go and log in </a>
+                            Masz już konto ?
+                            <a href="D:\Repozytoria\Wall€tfy\index.html">Zaloguj się</a>
                         </p>
                     </div>
                 </div>
@@ -100,9 +101,11 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="bootstrap5/js/bootstrap.min.js"></script>
     <script>
+        const body = document.querySelector('body');
         const toggle = document.getElementById('toggle');
         toggle.onclick = function() {
             toggle.classList.toggle('active');
+            body.classList.toggle('active');
         }
 
     </script>
