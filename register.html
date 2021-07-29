@@ -51,6 +51,9 @@
                 <div class="wrapper">
                     <div class="register-box">
                         <h1> Sign up </h1>
+                        <div id="toggle">
+                            <i class="indicator"></i>
+                        </div>
                         <div class="textbox">
                             <p>
                                 <label for="usernamesignup" class="uname" data-icon="u">Your username</label>
@@ -71,7 +74,7 @@
                         </div>
                         <div class="textbox">
                             <p>
-                                <label for="passwordsignup_confirm" class="youpasswd" data-icon="p">Please confirm your password </label>
+                                <label for="passwordsignup_confirm" class="youpasswd" data-icon="p">Confirm your password </label>
                                 <input id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="password" placeholder="password" />
                             </p>
                         </div>
@@ -80,7 +83,7 @@
                         </p>
                         <p class="change_link">
                             Already a member ?
-                            <a href=""> Go and log in </a>
+                            <a href="D:\Repozytoria\Wall€tfy\index.html"> Go and log in </a>
                         </p>
                     </div>
                 </div>
@@ -91,12 +94,18 @@
 
     <footer class="page-footer">
         <div class="container">
-            <p>Wszelkie prawa zastrzeżone. Copyright © 2021 All Rights Reserved </p>
-            <p>Made with ♥</p>
+            <p>Wszelkie prawa zastrzeżone. Copyright © 2021. All Rights Reserved </p>
         </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="bootstrap5/js/bootstrap.min.js"></script>
+    <script>
+        const toggle = document.getElementById('toggle');
+        toggle.onclick = function() {
+            toggle.classList.toggle('active');
+        }
+
+    </script>
 
 </body>
 
