@@ -119,6 +119,7 @@ body.active {
     transform: translateY(80px);
 }
 
+
 a > .honeycomb-cell {
     -webkit-box-flex: 0;
     flex: 0 1 250px;
@@ -143,7 +144,6 @@ a {
     padding: 0.5em;
     text-align: center;
     z-index: 1;
-
     transition: 1s;
     cursor: pointer;
 }
@@ -163,6 +163,21 @@ a > li .material-icons:hover {
     cursor: pointer;
 }
 
+body.active a > li .material-icons:hover {
+    transform: scale(1.3);
+    color: aliceblue;
+    transition: 1s;
+    cursor: pointer;
+}
+
+body.active a > li .material-icons {
+    display: block;
+    font-size: 60px;
+    color: aliceblue;
+    transition: 1s;
+    cursor: pointer;
+}
+
 .honeycomb-cell_title {
     height: 100%;
     display: -webkit-box;
@@ -176,7 +191,26 @@ a > li .material-icons:hover {
     hyphens: auto;
     word-break: break-word;
     text-transform: uppercase;
-    color: #fff;
+    color: #2a3a49;
+    font-weight: 700;
+    font-size: 1.75em;
+    transition: opacity 1s;
+}
+
+body.active .honeycomb-cell_title {
+    height: 100%;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+    word-break: break-word;
+    text-transform: uppercase;
+    color: aliceblue;
     font-weight: 700;
     font-size: 1.75em;
     transition: opacity 1s;
@@ -209,8 +243,23 @@ a > .honeycomb-cell::before {
     cursor: pointer;
 }
 
+body.active a > .honeycomb-cell::before {
+    background: #2a3a49;
+    transform: scale(1.055);
+    opacity: 0.8;
+    cursor: pointer;
+}
+
 a > .honeycomb-cell:after {
-    background: cadetblue;
+    background: aliceblue;
+    opacity: 0.8;
+    transition: opacity 350ms;
+    -webkit-transition: opacity 350ms;
+    cursor: pointer;
+}
+
+body.active a > .honeycomb-cell:after {
+    background: #2a3a49;
     opacity: 0.8;
     transition: opacity 350ms;
     -webkit-transition: opacity 350ms;
@@ -223,10 +272,14 @@ a > .honeycomb-cell:hover .honeycomb-cell_title {
     cursor: pointer;
 }
 
+body.active a > .honeycomb-cell:hover .honeycomb-cell_title {
+
+    color: aliceblue;
+    cursor: pointer;
+}
 
 
 a > .honeycomb-cell:hover:before {
-    background;
     background-position: center;
     background-repeat: no-repeat;
     background-size: 100%;
@@ -247,62 +300,6 @@ a > .honeycomb_Hidden {
     width: 250px;
     margin: 0 12.5px;
 }
-
-/* Responsive - skeleton
-
-@media (max-width: 550px) {
-    .honeycomb-cell {
-        margin: 81.25px 25px;
-    }
-}
-
-
-@media (min-width: 550px) and (max-width: 825px) {
-    .honeycomb-cell:nth-child(3n) {
-        margin-right: calc(50% - 125px);
-        margin-left: calc(50% - 125px);
-    }
-
-    .honeycomb_Hidden:nth-child(3n + 5) {
-        display: block;
-    }
-}
-
-
-@media (min-width: 825px) and (max-width: 1100px) {
-
-    .honeycomb-cell:nth-child(5n + 4) {
-        margin-left: calc(50% - 275px);
-    }
-
-    .honeycomb-cell:nth-child(5n + 5) {
-        margin-right: calc(50% - 275px);
-    }
-
-    .honeycomb_Hidden:nth-child(5n),
-    .honeycomb_Hidden:nth-child(5n + 3) {
-        display: block;
-    }
-}
-
-@media (min-width: 1100px) {
-    .honeycomb-cell:nth-child(7n + 5) {
-        margin-left: calc(50% - 400px);
-    }
-
-    .honeycomb-cell:nth-child(7n + 7),
-    .honeycomb-cell:nth-child(7n + 5):nth-last-child(2) {
-        margin-right: calc(50% - 400px);
-    }
-
-    .honeycomb_Hidden:nth-child(7n + 7),
-    .honeycomb_Hidden:nth-child(7n + 9),
-    .honeycomb_Hidden:nth-child(7n + 11) {
-        display: block;
-    }
-}
-*/
-
 
 .page-footer {
     font-size: 16px;

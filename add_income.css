@@ -38,11 +38,13 @@ body {
     margin: 8px;
     height: 100%;
     background: #2a3a49;
+    color: aliceblue;
     transition: 0.5s;
 }
 
 body.active {
-    background: url(img/1.jpg);
+    background-color: aliceblue;
+    color: #2a3a49;
 }
 
 .clearfix {
@@ -68,7 +70,6 @@ body.active {
 }
 
 .social p {
-    color: aliceblue;
     font-style: oblique;
     font-family: "Pacifico", cursive;
     margin 0px;
@@ -78,7 +79,6 @@ body.active {
     width: 40vw;
     text-align: left;
     font-family: "Pacifico", cursive;
-    color: aliceblue;
     margin: 50px 10px 10px 5px;
 }
 
@@ -281,7 +281,7 @@ input {
 .submit .acceptButton input {
     cursor: pointer;
     position: relative;
-    flex: 1;
+    width: 90%;
     background: cadetblue;
     padding: 8px 5px;
     font-family: 'BebasNeueRegular', 'Arial Narrow', Arial, sans-serif;
@@ -308,7 +308,7 @@ input {
     cursor: pointer;
     position: absolute;
     right: 7%;
-    flex: 1;
+    width: 30%;
     background: tomato;
     padding: 8px 5px;
     font-family: 'BebasNeueRegular', 'Arial Narrow', Arial, sans-serif;
@@ -354,7 +354,6 @@ input {
     background-color: transparent;
     padding: 10px;
     margin-top: 10px;
-    color: aliceblue;
     height: 20px;
     bottom: 4vh;
     position: fixed;

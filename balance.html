@@ -1,0 +1,140 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Wall€tfy</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="descritpion" content="Dzięki WALLETFY - aplikacji do zarządzania finansami, Twoje zarządzanie budżetem stanie się prostsze!" />
+    <meta name="keywords" content="budżet,finanse,wydatki,przychody,bilans" />
+    <meta http-equiv="X-UA-Compatible" content="IE = edge, chrome = 1" />
+
+    <link rel="stylesheet" href="bootstrap5/css/bootstrap.min.css" type="text/css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="balance.css" type="text/css" />
+    <link rel="stylesheet" href="icons/css/fontello.css" type="text/css" />
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="icon" href="img/favicon.png">
+
+</head>
+
+<body>
+    <div class="container">
+        <div id="toggle">
+            <i class="indicator"></i>
+        </div>
+
+        <div class="welcome-message">
+            <div class="title">
+                <h2 class="title">PRZEGLĄDAJ BILANS</h2>
+            </div>
+
+
+            <form id="date-range-form">
+                <div class="input-group">
+                    <div class="calendar-icon">
+                        <span class="material-icons">
+                            date_range
+                        </span>
+                    </div>
+                    <select id="periodOfTime" class="custom-select" data-live-search="true" name="periodOfTime">
+                        <option value="">--- Proszę wybrać okres ---</option>
+                        <option value="currentMonth">Obecny miesiąc</option>
+                        <option value="previousMonth">Poprzedni miesiąc</option>
+                        <option value="currentYear">Obecny rok</option>
+                        <option value="customPeriod">Niestandardowy</option>
+                    </select>
+                </div>
+                <div class='row'>
+                    <div class='col-12 text-center'>
+                        <h4 class='balanceDates'>BILANS ZA OKRES:(wstaw pobieranie daty)</h4>
+                    </div>
+                </div>
+            </form>
+
+            <div class="table">
+                <div class="col">
+                    <h2>PRZYCHODY</h2>
+                    <table id="tableOfIncomes" class="table table-hover table-active text-inherit table-sm">
+                        <thead>
+                            <tr>
+                                <th onclick="sortTableAlphabetically('tableOfIncomes')" scope="col">Kategoria <span class="material-icons">import_export</span></th>
+                                <th onclick="sortTableNumerically('tableOfIncomes')" scope="col">Kwota <span class="material-icons">import_export</span></th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="col">
+                    <h2>WYDATKI</h2>
+                    <table id="tableOfExpenses" class="table table-hover table-active text-inherit table-sm">
+                        <thead>
+                            <tr>
+                                <th onclick="sortTableAlphabetically('tableOfExpenses')" scope="col">Kategoria <span class="material-icons">import_export</span></th>
+                                <th onclick="sortTableNumerically('tableOfExpenses')" scope="col">Kwota <span class="material-icons">import_export</span></th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="table-responsive-text">
+                    <h2>Lista przychodów</h2>
+                    <table id="tableOfIncomesInDetail" class="table table-hover table-active text-inherit table-sm" style="table-layout: fixed; width: 100%">
+                        <thead>
+                            <tr>
+                                <th onclick="sortTableAlphabetically('tableOfIncomesInDetail')" scope="col">Kategoria <span class="material-icons">import_export</span></th>
+                                <th onclick="sortTableNumerically('tableOfIncomesInDetail')" scope="col">Kwota <span class="material-icons">import_export</span></th>
+                                <th scope="col">Data</th>
+                                <th scope="col">Komentarz</th>
+                                <th style="display:none;"> id</th>
+                                <th width="5%"></th>
+
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+
+                <div class="table-responsive-text">
+                    <h2>Lista wydatków</h2>
+                    <table id="tableOfExpensesInDetail" class="table table-hover table-active text-inherit table-sm" style="table-layout: fixed; width: 100%">
+                        <thead>
+                            <tr>
+                                <th onclick="sortTableAlphabetically('tableOfExpensesInDetail')" scope="col">Kategoria <span class="material-icons">import_export</span></th>
+                                <th onclick="sortTableNumerically('tableOfExpensesInDetail')" scope="col">Kwota <span class="material-icons">import_export</span></th>
+                                <th scope="col">Metoda płatności</th>
+                                <th scope="col">Data</th>
+                                <th scope="col">Komentarz</th>
+                                <th style="display:none;"> id</th>
+                                <th width="5%"></th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+
+            <div class="back">
+                <button type="button">POWRÓT DO MENU GŁÓWNEGO</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="page-footer">
+        <div class="container">
+            <p>Wszelkie prawa zastrzeżone. Copyright © 2021. All Rights Reserved </p>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="bootstrap5/js/bootstrap.min.js"></script>
+    <script>
+        const body = document.querySelector('body');
+        const toggle = document.getElementById('toggle');
+        toggle.onclick = function() {
+            toggle.classList.toggle('active');
+            body.classList.toggle('active');
+        }
+
+    </script>
+</body>
+
+</html>
