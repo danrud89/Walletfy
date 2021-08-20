@@ -9,12 +9,17 @@
     <meta name="keywords" content="budżet,finanse,wydatki,przychody,bilans" />
     <meta http-equiv="X-UA-Compatible" content="IE = edge, chrome = 1" />
 
-    <link rel="stylesheet" href="bootstrap5/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="balance.css" type="text/css" />
+
     <link rel="stylesheet" href="icons/css/fontello.css" type="text/css" />
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <link rel="icon" href="img/favicon.png">
+
 
 </head>
 
@@ -23,16 +28,15 @@
         <div id="toggle">
             <i class="indicator"></i>
         </div>
-
-        <div class="welcome-message">
-            <div class="title">
-                <h2 class="title">PRZEGLĄDAJ BILANS</h2>
+        <div class="row col-sm-12 col-md-6 ">
+            <div class="intro mx-auto my-auto">
+                <h3 class="text-center">PRZEGLĄDAJ BILANS</h3>
             </div>
-
-
+        </div>
+        <div class="welcome-message mt-0 mb-1 mx-2 py-2 px-4 w-100">
             <form id="date-range-form">
-                <div class="input-group">
-                    <div class="calendar-icon">
+                <div class="input-group col-sm-12 col-md-6 mx-auto px-3 py-3 t-3">
+                    <div class="calendar-icon my-1">
                         <span class="material-icons">
                             date_range
                         </span>
@@ -42,31 +46,68 @@
                         <option value="currentMonth">Obecny miesiąc</option>
                         <option value="previousMonth">Poprzedni miesiąc</option>
                         <option value="currentYear">Obecny rok</option>
-                        <option value="customPeriod">Niestandardowy</option>
+                        <option value="customPeriod">
+                            <a href="#" data-toggle="modal" data-target="#dateModal" data-toggle="modal">Niestandardowy</a>
+                        </option>
                     </select>
                 </div>
+
                 <div class='row'>
                     <div class='col-12 text-center'>
-                        <h4 class='balanceDates'>BILANS ZA OKRES:(wstaw pobieranie daty)</h4>
+                        <h4 class='balanceDates'>BILANS ZA OKRES:{{ startDate|date('d/m/Y') }} - {{ endDate|date('d/m/Y')}}</h4>
+                    </div>
+                </div>
+
+                <!-- Modal datePicker -->
+                <div id="dateModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dateModal" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 id="OkresRozliczeniowy" class="text-secondary">Wybierz zakres dat</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span> </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="input-group mb-5">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <span class="material-icons">
+                                                date_range
+                                            </span> </span>
+                                    </div>
+                                    <input id="startDate" type="date" class="form-control" aria-label="data" name="startDate" value="{{ yesterdaysDate }}" required>
+                                </div>
+                                <div class="input-group mb-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <span class="material-icons">
+                                                date_range
+                                            </span> </span>
+                                    </div>
+                                    <input id="endDate" type="date" class="form-control" aria-label="data" name="endDate" value="{{ todaysDate }}" required>
+                                </div>
+                            </div>
+                            <div class="modal-footer btn-group" role="group">
+                                <button type="button" class="btn btn-dark">Zapisz</button>
+                                <button id="modalCloseBtn" type="button" class="btn btn-primary" data-dismiss="modal">Zamknij</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </form>
 
             <div class="table">
                 <div class="col">
-                    <h2>PRZYCHODY</h2>
-                    <table id="tableOfIncomes" class="table table-hover table-active text-inherit table-sm">
+                    <h3 class="text-center">PRZYCHODY</h3>
+                    <table id="tableOfIncomes" class="table table-striped table-bordered table-hover table-active text-inherit table-sm">
                         <thead>
                             <tr>
                                 <th onclick="sortTableAlphabetically('tableOfIncomes')" scope="col">Kategoria <span class="material-icons">import_export</span></th>
-                                <th onclick="sortTableNumerically('tableOfIncomes')" scope="col">Kwota <span class="material-icons">import_export</span></th>
+                                <th onclick="sortTableNumerically('tableOfIncomes')" scope="col">Kwota <span class="material-icons my-auto">import_export</span></th>
                             </tr>
                         </thead>
                     </table>
                 </div>
                 <div class="col">
-                    <h2>WYDATKI</h2>
-                    <table id="tableOfExpenses" class="table table-hover table-active text-inherit table-sm">
+                    <h3 class="text-center">WYDATKI</h3>
+                    <table id="tableOfExpenses" class="table table-striped table-bordered table-hover table-active text-inherit table-sm">
                         <thead>
                             <tr>
                                 <th onclick="sortTableAlphabetically('tableOfExpenses')" scope="col">Kategoria <span class="material-icons">import_export</span></th>
@@ -79,8 +120,8 @@
 
             <div class="row">
                 <div class="table-responsive-text">
-                    <h2>Lista przychodów</h2>
-                    <table id="tableOfIncomesInDetail" class="table table-hover table-active text-inherit table-sm" style="table-layout: fixed; width: 100%">
+                    <h2 class="text-center">Lista przychodów</h2>
+                    <table id="tableOfIncomesInDetail" class="table table-striped table-bordered table-hover table-active text-inherit table-sm" style="table-layout: fixed; width: 100%">
                         <thead>
                             <tr>
                                 <th onclick="sortTableAlphabetically('tableOfIncomesInDetail')" scope="col">Kategoria <span class="material-icons">import_export</span></th>
@@ -96,8 +137,8 @@
                 </div>
 
                 <div class="table-responsive-text">
-                    <h2>Lista wydatków</h2>
-                    <table id="tableOfExpensesInDetail" class="table table-hover table-active text-inherit table-sm" style="table-layout: fixed; width: 100%">
+                    <h2 class="text-center">Lista wydatków</h2>
+                    <table id="tableOfExpensesInDetail" class="table table-striped table-bordered table-hover table-active text-inherit table-sm" style="table-layout: fixed; width: 100%">
                         <thead>
                             <tr>
                                 <th onclick="sortTableAlphabetically('tableOfExpensesInDetail')" scope="col">Kategoria <span class="material-icons">import_export</span></th>
@@ -113,19 +154,23 @@
                 </div>
             </div>
 
-            <div class="back">
-                <button type="button">POWRÓT DO MENU GŁÓWNEGO</button>
+            <div class="row col-sm-12 col-md-6 ">
+                <div class="balanceSummary mx-auto my-auto">
+                    <h3 class="text-center">BILANS:{{sumOfIncomes-sumOfExpenses}}</h3>
+                </div>
+            </div>
+            <div class="back mx-auto my-auto">
+                <button type="button" class="mx-auto my-auto">POWRÓT DO MENU GŁÓWNEGO</button>
             </div>
         </div>
     </div>
 
     <footer class="page-footer">
-        <div class="container">
+        <div class="footer-container">
             <p>Wszelkie prawa zastrzeżone. Copyright © 2021. All Rights Reserved </p>
         </div>
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="bootstrap5/js/bootstrap.min.js"></script>
+
     <script>
         const body = document.querySelector('body');
         const toggle = document.getElementById('toggle');
@@ -133,6 +178,20 @@
             toggle.classList.toggle('active');
             body.classList.toggle('active');
         }
+
+    </script>
+    <script>
+        $('#periodOfTime').change(function() {
+            if (this.value == "customPeriod") {
+                document.getElementById("periodOfTime").setAttribute("onclick", "");
+                $('#dateModal').modal({
+                    show: true
+
+                });
+            } else {
+                document.getElementById("periodOfTime").setAttribute("onclick", "this.form.submit()");
+            }
+        });
 
     </script>
 </body>
