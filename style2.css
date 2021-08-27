@@ -39,7 +39,6 @@ body {
     height: 100%;
     background-color: #2a3a49;
     color: aliceblue;
-    transition: 0.1s;
 }
 
 body.active {

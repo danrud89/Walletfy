@@ -39,12 +39,30 @@ body {
     height: 100%;
     background: #2a3a49;
     color: aliceblue;
-    transition: 0.5s;
 }
 
 body.active {
     background-color: aliceblue;
     color: #2a3a49;
+}
+
+.wallet-dark {
+    position: relative;
+    top: -35px
+}
+
+.wallet-light {
+    display: none;
+}
+
+body.active .wallet-light {
+    display: inline-block;
+    position: relative;
+    top: -35px;
+}
+
+body.active .wallet-dark {
+    display: none;
 }
 
 .clearfix {

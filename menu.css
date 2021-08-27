@@ -19,6 +19,25 @@ body.active {
     color: #2a3a49;
 }
 
+.wallet-dark {
+    position: relative;
+    top: -35px
+}
+
+.wallet-light {
+    display: none;
+}
+
+body.active .wallet-light {
+    display: inline-block;
+    position: relative;
+    top: -35px;
+}
+
+body.active .wallet-dark {
+    display: none;
+}
+
 .clearfix {
     content: "";
     display: block;
@@ -32,7 +51,7 @@ body.active {
 }
 
 .motto {
-    width: 25%;
+    width: 30%;
     text-align: left;
     font-family: "Pacifico", cursive;
     margin: 50px 10px 20px 50px;
