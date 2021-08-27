@@ -32,10 +32,10 @@ body.active {
 }
 
 .motto {
-    width: 40%;
+    width: 25%;
     text-align: left;
     font-family: "Pacifico", cursive;
-    margin: 50px 10px 20px 30px;
+    margin: 50px 10px 20px 50px;
     float: left;
 }
 
@@ -148,12 +148,17 @@ a {
     cursor: pointer;
 }
 
+a:hover {
+    text-decoration: none;
+}
+
 a > li .material-icons {
     display: block;
     font-size: 60px;
     color: #2a3a49;
     transition: 1s;
     cursor: pointer;
+    text-decoration: none;
 }
 
 a > li .material-icons:hover {
@@ -161,6 +166,7 @@ a > li .material-icons:hover {
     color: #2a3a49;
     transition: 1s;
     cursor: pointer;
+    text-decoration: none;
 }
 
 body.active a > li .material-icons:hover {
@@ -168,6 +174,7 @@ body.active a > li .material-icons:hover {
     color: aliceblue;
     transition: 1s;
     cursor: pointer;
+    text-decoration: none;
 }
 
 body.active a > li .material-icons {
@@ -176,6 +183,7 @@ body.active a > li .material-icons {
     color: aliceblue;
     transition: 1s;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .honeycomb-cell_title {
@@ -195,6 +203,7 @@ body.active a > li .material-icons {
     font-weight: 700;
     font-size: 1.75em;
     transition: opacity 1s;
+    text-decoration: none;
 }
 
 body.active .honeycomb-cell_title {
