@@ -80,6 +80,7 @@ body.active .wallet-dark {
 .description {
     float: left;
     width: 50%;
+    margin-top: 10px;
 }
 
 .social {
