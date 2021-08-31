@@ -368,11 +368,6 @@ input {
     border: 1px solid rgb(74, 179, 198);
 }
 
-.wrapper .change_link a:active {
-    position: relative;
-    top: 1px;
-}
-
 [data-icon]:after {
     content: attr(data-icon);
     font-family: 'FontomasCustomRegular';
@@ -390,8 +385,13 @@ input {
         left: 80%;
     }
 
+    .description {
+        margin-bottom: -60px;
+    }
+
     .motto2 {
         display: none;
+        overflow: hidden;
     }
 
     .motto1 {
@@ -429,13 +429,65 @@ input {
 
     .change_link {
         font-size: 10px;
+        height: 26px;
     }
 
-    .change_link p {
-        display: none;
+    .change_link p {}
+
+    .change_link a {
+        position: absolute;
+        right: -2px;
+        bottom: -5px;
+
+    }
+
+    .page-footer {
+        position: absolute;
+        height: 20px;
+        bottom: -10px;
     }
 
 }
+
+@media (min-width:769px) and (max-width:992px) {
+
+    .wrapper .login-box {
+        max-height: 435px;
+        min-width: 200px;
+
+    }
+
+    .change_link {
+        font-size: 10px;
+    }
+
+    .keeplogin label {
+        width: 70%;
+        justify-content: center;
+    }
+
+}
+
+@media (min-width:993px) {
+
+    .wrapper .login-box {
+        max-height: 435px;
+        min-width: 250px;
+
+    }
+
+    .change_link {
+        font-size: 12px;
+    }
+
+    .keeplogin label {
+        width: 70%;
+        justify-content: center;
+    }
+
+}
+
+
 
 .page-footer {
     font-size: 16px;
