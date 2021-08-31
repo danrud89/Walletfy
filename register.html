@@ -22,25 +22,27 @@
 </head>
 
 <body>
-    <div class="container">
-        <div id="toggle">
-            <i class="indicator"></i>
+    <div class="container col-sm-10">
+        <div class="row">
+            <div id="toggle" class="col-sm-12 position-relative mx-1 my-1 px-1 py-1">
+                <i class="indicator"></i>
+            </div>
         </div>
-        <div class="description">
-            <section div class="motto">
-                <div class="motto1">
-                    <p><img class="wallet-dark" src="img/wallet_dark.jpg" alt="" style="transform: scale(0.8);">
-                        <img class="wallet-light" src="img/wallet-light.png" alt="" style="transform: scale(0.8);">Wall€tfy!
-                    </p>
-                </div>
-                <div class="motto2">
-                    <p>Application that makes money</p>
-                    <p>management easier !</p>
-                </div>
-            </section>
+        <div class="row">
+            <div class="description col-md-6">
+                <section div class="motto mb-5">
+                    <div class="motto1 mx-auto my-auto">
+                        <p><img class="wallet-dark" src="img/wallet_dark.jpg" alt="" style="transform: scale(0.8);">
+                            <img class="wallet-light" src="img/wallet-light.png" alt="" style="transform: scale(0.8);">Wall€tfy!
+                        </p>
+                    </div>
+                    <div class="motto2 mx-auto my-auto">
+                        <p>Application that makes money</p>
+                        <p>management easier !</p>
+                    </div>
+                </section>
 
-            <section>
-                <div class="social">
+                <section div class="social col-md-12 mx-auto my-auto py-5">
                     <p>Follow us :</p>
                     <div class="fb">
                         <a href="https://www.facebook.com/daniel.rudnik.35/" class="fblink"><i class="icon-facebook"></i></a>
@@ -51,56 +53,77 @@
                     <div class="gh">
                         <p><a href="https://github.com/danrud89" class="ghlink"><i class="icon-github-squared"></i></a></p>
                     </div>
-                </div>
-            </section>
-        </div>
+                </section>
+            </div>
 
-        <section>
-            <div class="wrapper">
+            <div class="wrapper col-md-12 mx-auto mt-5">
                 <div class="register-box">
-                    <h1> Rejestracja </h1>
-                    <div class="register-input">
-                        <div class="register-icon">
-                            <span class="material-icons">
-                                person
-                            </span>
-                        </div>
-                        <input input type="email" class="form-control" placeholder="E-mail" aria-label="email" name="email" required autofocus>
+
+                    <div class="row">
+                        <div class="register-title mx-auto mb-2 px-2">Rejestracja</div>
                     </div>
-                    <div class="register-input">
-                        <div class="register-icon">
-                            <span class="material-icons">
-                                vpn_key
-                            </span>
+
+                    <div class="row">
+                        <div class="register-input col-sm-12 mx-auto mb-2 px-2 py-3">
+                            <div class="register-icon mx-auto my-auto px-2 py-1.5">
+                                <span class="material-icons">
+                                    person
+                                </span>
+                            </div>
+                            <input input type="email" class="form-control mx-auto my-auto px-2 py-2" placeholder="E-mail" aria-label="email" name="email" required autofocus>
                         </div>
-                        <input type="password" class="form-control" placeholder="Hasło" aria-label="hasło" name="password" required>
                     </div>
-                    <div class="register-input">
-                        <div class="register-icon">
-                            <span class="material-icons">
-                                vpn_key
-                            </span>
+
+                    <div class="row">
+                        <div class="register-input col-sm-12 mx-auto mb-1 px-2 py-1">
+                            <div class="register-icon mx-auto my-auto px-2 py-1.5">
+                                <span class="material-icons">
+                                    vpn_key
+                                </span>
+                            </div>
+                            <input type="password" class="form-control mx-auto my-auto px-2 py-2" placeholder="Hasło" aria-label="hasło" name="password" required>
                         </div>
-                        <input type="password" class="form-control" placeholder="Potwierdź hasło" aria-label="potwierdź hasło" name="password" required>
                     </div>
-                    <p class="signin button">
-                        <input type="submit" value="Zarejestruj" />
-                    </p>
-                    <p class="change_link">
-                        Masz już konto ?
-                        <a href="D:\Repozytoria\Wall€tfy\index.html">Zaloguj się</a>
-                    </p>
+
+                    <div class="row">
+                        <div class="register-input col-sm-12 mx-auto mb-2 px-2 py-2">
+                            <div class="register-icon mx-auto my-auto px-2 py-1.5">
+                                <span class="material-icons">
+                                    vpn_key
+                                </span>
+                            </div>
+                            <input type="password" class="form-control mx-auto my-auto px-2 py-2" placeholder="Potwierdź hasło" aria-label="hasło" name="password" required>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="register-button mx-auto mb-4 px-2 py-0">
+                            <input type="submit" value="Zarejestruj" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="change_link position-absolute mx-auto mt-2 px-1">
+                            <div class="info position-relative d:inline-flex">
+                                <p class="text-left>">Posiadasz już konto ?</p>
+                                <a href="D:\Repozytoria\Wall€tfy\register.html">Zaloguj się</a>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
-        </section>
-        <div class="clearfix"></div>
+        </div>
     </div>
 
-    <footer class="page-footer">
-        <div class="container">
-            <p>Wszelkie prawa zastrzeżone. Copyright © 2021. All Rights Reserved </p>
-        </div>
-    </footer>
+    <div class="row">
+        <footer class="page-footer col-sm-12 col-md-10 mx-auto my-auto px-2">
+            <div class="container">
+                <p>Wszelkie prawa zastrzeżone. Copyright © 2021. All Rights Reserved </p>
+            </div>
+        </footer>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="bootstrap5/js/bootstrap.min.js"></script>
     <script>
