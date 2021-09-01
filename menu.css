@@ -6,10 +6,14 @@
     padding: 0;
 }
 
+body,
+html {
+    height: 100%;
+}
+
 body {
     font-family: 'Poppins', sans-serif;
     background: #2a3a49;
-    height: 100vh;
     color: aliceblue;
 
 }
@@ -44,41 +48,21 @@ body.active .wallet-dark {
     clear: both;
 }
 
-.wrapper {
-    width: 100%;
-    height: 100%;
-    margin: 0 auto;
-}
-
-.motto {
-    width: 30%;
-    text-align: left;
-    font-family: "Pacifico", cursive;
-    margin: 50px 10px 20px 50px;
-    float: left;
-}
 
 .motto1 {
-    margin: 5px;
     font-size: 50px;
+    font-family: "Pacifico", cursive;
 }
 
 .motto2 {
 
-    margin: 5px;
-    font-size: 25px;
-}
-
-.hexmenu {
-    position: absolute;
-    left: 450px;
-    top: 0px;
-    float: left;
+    margin-top: -30px;
+    margin-bottom: -20px;
+    font-size: 20px;
+    font-family: "Pacifico", cursive;
 }
 
 #toggle {
-    position: relative;
-    margin-top: 20px;
     display: block;
     width: 50px;
     left: 80%;
@@ -116,24 +100,18 @@ body.active .wallet-dark {
     background: linear-gradient(to bottom, #008B8B, lightcyan);
 }
 
-.hexagon {
-    margin: 0;
-    padding: 0;
-    float: left;
+.hexmenu {
+    margin-top: -25px;
 }
 
 .honeycomb {
     display: -webkit-box;
-    top: 0vh;
     display: flex;
     flex-wrap: wrap;
     list-style: none;
     -webkit-box-pack: center;
-    justify-content: center;
     -webkit-box-align: center;
     align-items: center;
-    max-width: 1000px;
-    margin: 10px;
     padding: 0;
     transform: translateY(80px);
 }
@@ -159,8 +137,6 @@ a {
     flex: 0 1 250px;
     width: 200px;
     margin: 15.4px 12.5px 25px;
-    position: relative;
-    padding: 0.5em;
     text-align: center;
     z-index: 1;
     transition: 1s;
@@ -171,72 +147,57 @@ a:hover {
     text-decoration: none;
 }
 
-a > li .material-icons {
-    display: block;
+li .material-icons {
     font-size: 60px;
     color: #2a3a49;
     transition: 1s;
     cursor: pointer;
-    text-decoration: none;
 }
 
-a > li .material-icons:hover {
+li .material-icons:hover {
     transform: scale(1.3);
     color: #2a3a49;
     transition: 1s;
     cursor: pointer;
-    text-decoration: none;
+
 }
 
-body.active a > li .material-icons:hover {
+body.active li .material-icons:hover {
     transform: scale(1.3);
     color: aliceblue;
     transition: 1s;
     cursor: pointer;
-    text-decoration: none;
 }
 
-body.active a > li .material-icons {
-    display: block;
+body.active li .material-icons {
     font-size: 60px;
     color: aliceblue;
     transition: 1s;
     cursor: pointer;
-    text-decoration: none;
 }
 
 .honeycomb-cell_title {
     height: 100%;
     display: -webkit-box;
-    display: flex;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     flex-direction: column;
     -webkit-box-pack: center;
-    justify-content: center;
     -webkit-hyphens: auto;
-    hyphens: auto;
-    word-break: break-word;
     text-transform: uppercase;
     color: #2a3a49;
     font-weight: 700;
     font-size: 1.75em;
     transition: opacity 1s;
-    text-decoration: none;
 }
 
 body.active .honeycomb-cell_title {
-    height: 100%;
     display: -webkit-box;
-    display: flex;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     flex-direction: column;
     -webkit-box-pack: center;
-    justify-content: center;
     -webkit-hyphens: auto;
-    hyphens: auto;
-    word-break: break-word;
     text-transform: uppercase;
     color: aliceblue;
     font-weight: 700;
@@ -245,18 +206,18 @@ body.active .honeycomb-cell_title {
 }
 
 
-a > .honeycomb-cell::before,
-a > .honeycomb-cell::after {
+.honeycomb-cell::before,
+.honeycomb-cell::after {
     content: '';
 }
 
-a > .honeycomb-cell::before,
-a > .honeycomb-cell::after {
+.honeycomb-cell::before,
+.honeycomb-cell::after {
     top: -50%;
     left: 0;
     width: 100%;
     height: 200%;
-    display: block;
+    display: flex;
     position: absolute;
     -webkit-clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
     clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
@@ -264,21 +225,21 @@ a > .honeycomb-cell::after {
     cursor: pointer;
 }
 
-a > .honeycomb-cell::before {
+.honeycomb-cell::before {
     background: aliceblue;
     transform: scale(1.055);
     opacity: 0.8;
     cursor: pointer;
 }
 
-body.active a > .honeycomb-cell::before {
+body.active .honeycomb-cell::before {
     background: #2a3a49;
     transform: scale(1.055);
     opacity: 0.8;
     cursor: pointer;
 }
 
-a > .honeycomb-cell:after {
+.honeycomb-cell:after {
     background: aliceblue;
     opacity: 0.8;
     transition: opacity 350ms;
@@ -286,7 +247,7 @@ a > .honeycomb-cell:after {
     cursor: pointer;
 }
 
-body.active a > .honeycomb-cell:after {
+body.active .honeycomb-cell:after {
     background: #2a3a49;
     opacity: 0.8;
     transition: opacity 350ms;
@@ -294,20 +255,19 @@ body.active a > .honeycomb-cell:after {
     cursor: pointer;
 }
 
-a > .honeycomb-cell:hover .honeycomb-cell_title {
+.honeycomb-cell:hover .honeycomb-cell_title {
 
     color: #2a3a49;
     cursor: pointer;
 }
 
-body.active a > .honeycomb-cell:hover .honeycomb-cell_title {
+body.active .honeycomb-cell:hover .honeycomb-cell_title {
 
     color: aliceblue;
     cursor: pointer;
 }
 
-
-a > .honeycomb-cell:hover:before {
+.honeycomb-cell:hover:before {
     background-position: center;
     background-repeat: no-repeat;
     background-size: 100%;
@@ -315,14 +275,14 @@ a > .honeycomb-cell:hover:before {
     cursor: pointer;
 }
 
-a > .honeycomb-cell:hover:after {
+.honeycomb-cell:hover:after {
     opacity: 0;
     background-color: #2a3a49;
     color: transparent;
     cursor: pointer;
 }
 
-a > .honeycomb_Hidden {
+.honeycomb_Hidden {
     display: none;
     opacity: 0;
     width: 250px;
@@ -330,22 +290,43 @@ a > .honeycomb_Hidden {
 }
 
 .page-footer {
+    position: fixed;
     font-size: 16px;
     background-color: transparent;
-    padding: 10px;
-    margin-top: 10px;
     height: 20px;
-    bottom: 4vh;
-    position: fixed;
-}
-
-.page-footer .container {
-    display: flex;
-    justify-content: space-between;
+    bottom: 2vh;
 
 }
 
 .page-footer p {
     font-family: "Arial";
-    margin: 0;
 }
+
+@media (max-width:768px) {
+
+    #toggle {
+        left: 80%;
+    }
+
+    a {
+        margin: 35px 12.5px 35px;
+    }
+
+    .page-footer {
+        font-size: 12px;
+    }
+}
+
+@media (min-width:769px) and (max-width:992px) {
+
+    a {
+        margin: 35px 12.5px 35px 5px;
+    }
+
+    .page-footer {
+        font-size: 14px;
+    }
+
+}
+
+@media (min-width:993px) and (max-width:1199px) {}

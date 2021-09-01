@@ -21,72 +21,78 @@
 </head>
 
 <body>
-    <div class="wrapper">
-
-        <section div class="motto">
-            <div class="motto1">
+    <div class="container col-md-12">
+        <div class="row">
+            <div id="toggle" class="col-sm-12 mx-1 my-3 px-1 py-1">
+                <i class="indicator"></i>
+            </div>
+        </div>
+        <div class="row">
+            <div class="motto1 col-md-12 text-center mx-0 my-1">
                 <p><img class="wallet-dark" src="img/wallet_dark.jpg" alt="" style="transform: scale(0.8);">
                     <img class="wallet-light" src="img/wallet-light.png" alt="" style="transform: scale(0.8);">Wall€tfy!
                 </p>
             </div>
-            <div class="motto2">
-                <p>Application that makes money</p>
-                <p>management easier !</p>
-            </div>
-        </section>
-
-        <section div class="hexmenu">
-            <div id="toggle">
-                <i class="indicator"></i>
-            </div>
-            <div class="hexagon">
-                <ul class="honeycomb">
-                    <a href="add_income.html">
-                        <li class="honeycomb-cell">
-                            <span class="material-icons">savings</span>
-                            <div class="honeycomb-cell_title">INCOMES</div>
-                        </li>
-                    </a>
-                    <a href="add_expense.html">
-                        <li class="honeycomb-cell">
-                            <span class="material-icons">
-                                shopping_cart
-                            </span>
-                            <div class="honeycomb-cell_title">EXPENSES</div>
-                        </li>
-                    </a>
-                    <a href="#">
-                        <li class="honeycomb-cell">
-                            <span class="material-icons">insert_chart_outlined</span>
-                            <div class="honeycomb-cell_title">BALANCE</div>
-                        </li>
-                    </a>
-                    <a href="#">
-                        <li class="honeycomb-cell">
-                            <span class="material-icons">
-                                manage_accounts
-                            </span>
-                            <div class="honeycomb-cell_title">SETTINGS</div>
-                        </li>
-                    </a>
-                    <a href="#">
-                        <li class="honeycomb-cell">
-                            <span class="material-icons">
-                                dvr
-                            </span>
-                            <div class="honeycomb-cell_title">Log out</div>
-                        </li>
-                    </a>
-                </ul>
-            </div>
-        </section>
-        <div class="clearfix"></div>
-    </div>
-    <footer class="page-footer">
-        <div class="container">
-            <p>Wszelkie prawa zastrzeżone. Copyright © 2021. All Rights Reserved </p>
         </div>
-    </footer>
+        <div class="row">
+            <div class="motto2 col-md-12 text-center">
+                <p>Application that makes money management easier !</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="hexmenu col-sm-10 col-lg-12 mx-auto">
+                <div class="hexagon text-center">
+                    <ul class="honeycomb justify-content-center m-3">
+                        <a href="add_income.html" class="position-relative p-2">
+                            <li class="honeycomb-cell">
+                                <span class="material-icons">savings</span>
+                                <div class="honeycomb-cell_title">INCOMES</div>
+                            </li>
+                        </a>
+                        <a href="add_expense.html" class="position-relative p-2">
+                            <li class="honeycomb-cell">
+                                <span class="material-icons">
+                                    shopping_cart
+                                </span>
+                                <div class="honeycomb-cell_title">EXPENSES</div>
+                            </li>
+                        </a>
+                        <a href="balance.html" class="position-relative p-2">
+                            <li class="honeycomb-cell">
+                                <span class="material-icons">insert_chart_outlined</span>
+                                <div class="honeycomb-cell_title">BALANCE</div>
+                            </li>
+                        </a>
+                        <a href="#" class="position-relative p-2">
+                            <li class="honeycomb-cell">
+                                <span class="material-icons">
+                                    manage_accounts
+                                </span>
+                                <div class="honeycomb-cell_title">SETTINGS</div>
+                            </li>
+                        </a>
+                        <a href="index.html" class="position-relative p-2">
+                            <li class="honeycomb-cell">
+                                <span class="material-icons">
+                                    dvr
+                                </span>
+                                <div class="honeycomb-cell_title">Log out</div>
+                            </li>
+                        </a>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <footer class="page-footer col-sm-5 text-left">
+                <div class="container">
+                    <p>Copyright © 2021. All Rights Reserved </p>
+                </div>
+            </footer>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="bootstrap5/js/bootstrap.min.js"></script>
     <script>
