@@ -83,7 +83,7 @@ body.active .wallet-dark {
 }
 
 #toggle {
-    width: 50px;
+    max-width: 50px;
     left: 80%;
     top: 5px;
     height: 25px;
@@ -221,18 +221,6 @@ input {
 .submit {
     display: flex;
 }
-
-[data-icon]:after {
-    content: attr(data-icon);
-    font-family: 'FontomasCustomRegular';
-    color: rgb(106, 159, 171);
-    position: absolute;
-    left: 10px;
-    top: 36px;
-    font-size: 20px;
-    margin-left: 5px;
-}
-
 
 .page-footer {
     position: sticky;

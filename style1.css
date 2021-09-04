@@ -293,14 +293,6 @@ input {
     border: 1px solid rgb(74, 179, 198);
 }
 
-[data-icon]:after {
-    content: attr(data-icon);
-    font-family: 'FontomasCustomRegular';
-    color: rgb(106, 159, 171);
-    position: absolute;
-    font-size: 20px;
-}
-
 @media (max-width:768px) {
 
     #toggle {

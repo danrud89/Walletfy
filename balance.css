@@ -103,7 +103,7 @@ body.active th {
     position: relative;
     display: block;
     width: 50px;
-    left: 95%;
+    left: 80%;
     top: 5px;
     height: 25px;
     border-radius: 25px;
@@ -140,15 +140,11 @@ body.active th {
 }
 
 .input-group {
-    margin-top: 15px;
-    position: relative;
     display: flex;
 }
 
 .custom-select {
-    margin-bottom: 25px;
     text-align: center;
-    padding: 5px;
 }
 
 .row {
@@ -157,17 +153,12 @@ body.active th {
 
 .back button {
     cursor: pointer;
-    position: relative;
-    width: 33%;
-    left: 25vw;
     background: aliceblue;
-    padding: 2px 2px;
     font-family: 'BebasNeueRegular', 'Arial Narrow', Arial, sans-serif;
     color: #2a3a49;
     font-size: 20px;
     border: 1px solid rgb(28, 108, 122);
     text-shadow: 0 1px 1px rgb(0 0 0 / 50%);
-    text-align: center;
     letter-spacing: 2px;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
@@ -182,34 +173,13 @@ body.active th {
 }
 
 body.active .back button {
-    cursor: pointer;
-    position: relative;
-    width: 33%;
-    left: 25vw;
+
     background: #2a3a49;
-    padding: 2px 2px;
-    font-family: 'BebasNeueRegular', 'Arial Narrow', Arial, sans-serif;
     color: aliceblue;
-    font-size: 20px;
-    border: 1px solid rgb(28, 108, 122);
-    text-shadow: 0 1px 1px rgb(0 0 0 / 50%);
-    text-align: center;
-    letter-spacing: 2px;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
-    -webkit-box-shadow: 0px 1px 6px 4px rgb(0 0 0 / 7%) inset, 0px 0px 0px 3px rgb(254 254 254), 0px 5px 3px 3px rgb(210 210 210);
-    -moz-box-shadow: 0px 1px 6px 4px rgba(0, 0, 0, 0.07) inset, 0px 0px 0px 3px rgb(254, 254, 254), 0px 5px 3px 3px rgb(210, 210, 210);
-    box-shadow: 0px 1px 6px 4px rgb(0 0 0 / 7%) inset, 0px 0px 0px 3px rgb(254 254 254), 0px 5px 3px 3px rgb(210 210 210);
-    -webkit-transition: all 0.2s linear;
-    -moz-transition: all 0.2s linear;
-    -o-transition: all 0.2s linear;
-    transition: all 0.2s linear;
 }
 
 .material-icons {
     position: relative;
-    top: 5px;
     line-height: 20px;
 }
 
@@ -220,21 +190,11 @@ body.active .back button {
 }
 
 .page-footer {
+    position: sticky;
     font-size: 16px;
     background-color: transparent;
-    padding: 10px;
-    margin-top: 5px;
-
-}
-
-.page-footer .footer-container {
-    display: flex;
-    justify-content: space-between;
-
 }
 
 .page-footer p {
     font-family: "Arial";
-    margin: 0;
-
 }
