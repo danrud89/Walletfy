@@ -22,67 +22,55 @@
 </head>
 
 <body>
-    <div class="container">
-        <div id="toggle">
-            <i class="indicator"></i>
+    <div class="container col-md-10">
+        <div class="row">
+            <div id="toggle" class="col-sm-12 mx-1 my-3 px-1 py-1">
+                <i class="indicator"></i>
+            </div>
         </div>
-        <div class="description">
-            <section div class="motto">
-                <div class="motto1">
-                    <p><img class="wallet-dark" src="img/wallet_dark.jpg" alt="" style="transform: scale(0.8);">
-                        <img class="wallet-light" src="img/wallet-light.png" alt="" style="transform: scale(0.8);">Wall€tfy!
-                    </p>
-                </div>
-                <div class="motto2">
-                    <p>Application that makes money</p>
-                    <p>management easier !</p>
-                </div>
-            </section>
-
-            <section>
-                <div class="social">
-                    <p>Follow us :</p>
-                    <div class="fb">
-                        <a href="https://www.facebook.com/daniel.rudnik.35/" class="fblink"><i class="icon-facebook"></i></a>
-                    </div>
-                    <div class="ln">
-                        <p><a href="https://www.linkedin.com/in/daniel-rudnik-8894811b2/" class="lnlink"><i class="icon-linkedin"></i></a></p>
-                    </div>
-                    <div class="gh">
-                        <p><a href="https://github.com/danrud89" class="ghlink"><i class="icon-github-squared"></i></a></p>
-                    </div>
-                </div>
-            </section>
+        <div class="row">
+            <div class="motto1 col-md-12 text-center my-1">
+                <p><img class="wallet-dark" src="img/wallet_dark.jpg" alt="" style="transform: scale(0.8);">
+                    <img class="wallet-light" src="img/wallet-light.png" alt="" style="transform: scale(0.8);">Wall€tfy!
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="motto2 col-md-12 text-center">
+                <p>Application that makes money management easier !</p>
+            </div>
         </div>
 
-        <section>
-            <div class="wrapper">
-                <div class="income-box">
-                    <h1>DODAJ PRZYCHÓD</h1>
+        <div class="row">
+            <div class="wrapper col-5 mx-auto mb-1">
+                <div class="income-box mx-auto pl-3 pr-2 pt-3 pb-3">
+                    <div class="title text-center col-12 mb-3">DODAJ PRZYCHÓD</div>
                     <form>
-                        <div class="income-input">
-                            <div class="income-icon">
-                                <span class="material-icons">
-                                    attach_money
-                                </span>
+                        <div class="row">
+                            <div class="income-input mx-auto mt-4">
+                                <div class="income-icon">
+                                    <span class="material-icons px-2 py-2">
+                                        attach_money
+                                    </span>
+                                </div>
+                                <input class="amount-data px-3" type="number" class="form-control" placeholder="Kwota" min="0" max="99999.99" step="0.01" aria-label="kwota" name="amount" style="width: 85%" required>
                             </div>
-                            <input class="form-data" type="number" class="form-control" placeholder="Kwota" min="0" max="99999.99" step="0.01" aria-label="kwota" name="amount" required>
                         </div>
-                        <div class="income-input">
+                        <div class="income-input mx-auto mt-3">
                             <div class="income-icon">
-                                <span class="material-icons">
+                                <span class="material-icons px-2 py-2">
                                     date_range
                                 </span>
                             </div>
-                            <input type="date" class="data-control" aria-label="data" required>
+                            <input type="date" class="data-control px-3" aria-label="data" style="width: 85%" required>
                         </div>
-                        <div class="income-input">
+                        <div class="income-input mx-auto mt-3">
                             <div class="income-icon">
-                                <span class="material-icons">
+                                <span class="material-icons px-2 py-2">
                                     list
                                 </span>
                             </div>
-                            <select name="options" class="user-options">
+                            <select name="options" class="user-options px-4" style="width: 85%">
                                 <option value="">--- Proszę wybrać opcję ---</option>
                                 <option value="salary">Wynagrodzenie</option>
                                 <option value="sell">Sprzedaż internetowa</option>
@@ -92,36 +80,44 @@
                             </select>
 
                         </div>
-                        <div class="income-input">
+                        <div class="income-input mx-auto mt-3 mb-4">
                             <div class="income-icon">
-                                <span class="material-icons">
+                                <span class="material-icons px-2 py-3">
                                     description
                                 </span>
                             </div>
-                            <textarea class="form-data" maxlength="50" placeholder="Komentarz (opcjonalne)" name="comment"></textarea>
+                            <textarea class="form-data px-3 py-2" maxlength="50" placeholder="Komentarz (opcjonalne)" name="comment" style="width: 85%"></textarea>
                         </div>
-                        <div class="submit">
-                            <p class="acceptButton">
-                                <input type="submit" value="DODAJ" />
-                            </p>
 
-                            <p class="cancelButton">
-                                <a href="menu.html">
-                                    <input type="submit" value="ANULUJ" onclick=href />
-                                </a>
-                            </p>
+                        <div class="submit">
+                            <div class="accept mx-auto mt-4">
+                                <p class="acceptButton">
+                                    <input type="submit" value="DODAJ" class="p-2" />
+                                </p>
+                            </div>
+                            <div class="cancel mx-auto mt-4">
+                                <p class="cancelButton">
+                                    <a href="menu.html">
+                                        <input type="submit" value="ANULUJ" class="p-2" />
+                                    </a>
+                                </p>
+                            </div>
                         </div>
                     </form>
                 </div>
             </div>
-        </section>
-        <div class="clearfix"></div>
-    </div>
-    <footer class="page-footer">
-        <div class="container">
-            <p>Wszelkie prawa zastrzeżone. Copyright © 2021. All Rights Reserved </p>
         </div>
-    </footer>
+    </div>
+
+    <div class="container-fluid p-0">
+        <div class="row">
+            <footer class="page-footer col-sm-12 col-md-12">
+                <div class="footer-container text-center mt-3 mx-auto">
+                    <p>Wszelkie prawa zastrzeżone. Copyright © 2021. All Rights Reserved </p>
+                </div>
+            </footer>
+        </div>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="bootstrap5/js/bootstrap.min.js"></script>
     <script>

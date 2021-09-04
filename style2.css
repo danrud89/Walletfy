@@ -141,13 +141,6 @@ a.ghlink {
     height: 50px;
 }
 
-.wrapper {
-    width: 40%;
-    position: relative;
-    align-content: center;
-    max-height: 350px;
-}
-
 .wrapper label {
     color: rgb(64, 92, 96);
     position: relative;
@@ -203,8 +196,8 @@ a.ghlink {
 }
 
 .register-box {
-    max-height: 400px;
-    width: 80%;
+    max-height: 390px;
+    max-width: 300px;
     position: relative;
     color: white;
     background-color: rgb(108, 115, 163, 0.4);
@@ -229,13 +222,6 @@ a.ghlink {
 }
 
 body.active .register-box .register-title {
-    text-align: center;
-    position: relative;
-    font-size: 40px;
-    font-weight: 500;
-    border-bottom: 6px solid #2a3a49;
-    margin-bottom: 25px;
-    padding: 2px 0;
     color: #2a3a49;
 }
 
@@ -260,16 +246,13 @@ input {
     display: flex;
     position: relative;
     color: #495057;
-    text-align: center;
     background-color: #e9ecef;
     border: 1px solid #ced4da;
     border-bottom-left-radius: 5px;
     border-top-left-radius: 5px;
-    padding: 6px;
 }
 
 .wrapper .register-button input {
-    width: 60%;
     cursor: pointer;
     position: relative;
     background: cadetblue;
@@ -277,8 +260,6 @@ input {
     color: #fff;
     font-size: 24px;
     border: 1px solid rgb(28, 108, 122);
-    margin-bottom: 2px;
-    margin-top: 10px;
     text-shadow: 0 1px 1px rgb(0 0 0 / 50%);
     text-align: center;
     letter-spacing: 2px;
@@ -299,7 +280,6 @@ input {
     color: rgb(127, 124, 124);
     height: 35px;
     left: 0;
-    width: 100%;
     font-size: 15px;
     border-top: 1px solid rgb(219, 229, 232);
     -webkit-border-radius: 0 0 5px 5px;
@@ -316,8 +296,7 @@ input {
 .change_link a {
     position: absolute;
     right: 0;
-    bottom: -5px;
-    padding: 3px;
+    bottom: -7px;
     font-weight: bold;
     background: rgb(247, 248, 241);
     color: rgb(29, 162, 193);
@@ -373,10 +352,8 @@ input {
         display: none;
     }
 
-    .wrapper .register-box {
-        max-height: 400px;
-        min-width: 200px;
-
+    .register-box {
+        margin-top: -50px;
     }
 
     .register-box .register-title {
@@ -387,78 +364,42 @@ input {
         font-size: 12px;
     }
 
-    .wrapper .register-button input {
-        width: 70%;
-        position: relative;
-        left: 25%;
-    }
-
-
     .change_link {
-        font-size: 10px;
-        height: 26px;
+        font-size: 11px;
     }
 
-    .change_link p {}
-
-    .change_link a {
-        position: absolute;
-        right: -2px;
-        bottom: -5px;
-
-    }
-
-    .page-footer {
-        position: absolute;
-        height: 20px;
-        bottom: -10px;
+    .footer-container {
+        font-size: 14px;
     }
 
 }
 
 @media (min-width:769px) and (max-width:992px) {
 
-    .wrapper .register-box {
-        max-height: 400px;
-        min-width: 220px;
-
-    }
 
     .register-box .register-title {
         font-size: 36px;
     }
 
     .change_link {
-        font-size: 10px;
+        font-size: 12px;
     }
 
 }
 
 @media (min-width:993px) and (max-width:1199px) {
 
-    .wrapper .register-box {
-        max-height: 400px;
-        min-width: 250px;
-
-    }
 
     .change_link {
         font-size: 13px;
     }
-
 }
 
 .page-footer {
     font-size: 16px;
     background-color: transparent;
     height: 26px;
-    bottom: 0;
-    position: fixed;
-    text-align: center;
-}
-
-.page-footer .container {
-    display: flex;
+    position: sticky;
 }
 
 .page-footer p {

@@ -87,28 +87,10 @@ body.active .wallet-dark {
     font-size: 20px;
 }
 
-.fb {
-    margin: 5px;
-    width: 60px;
-    height: 50px;
-    text-align: center;
-    color: cadetblue;
-    left: auto;
-    float: left;
-}
-
-.ln {
-    margin: 5px;
-    width: 60px;
-    height: 50px;
-    text-align: center;
-    color: cadetblue;
-    left: auto;
-    float: left;
-}
-
+.fb,
+.ln,
 .gh {
-
+    margin: 5px;
     width: 60px;
     height: 50px;
     text-align: center;
@@ -117,14 +99,7 @@ body.active .wallet-dark {
     float: left;
 }
 
-a.fblink {
-    color: white;
-    text-decoration: none;
-    display: block;
-    width: 60px;
-    height: 50px;
-}
-
+a.fblink,
 a.lnlink {
     color: white;
     text-decoration: none;
@@ -141,25 +116,14 @@ a.ghlink {
     height: 50px;
 }
 
-.wrapper {
-    width: 40%;
-    align-content: center;
-    max-height: 350px;
-    position: relative;
-}
-
 .wrapper label {
     color: rgb(64, 92, 96);
     position: relative;
     background-color: aliceblue;
     border-radius: 5px;
-    padding: 5px;
     font-size: 10px;
     border: 1px solid cadetblue;
     box-shadow: 0px 1px 4px 0px rgba(168, 168, 168, 0.6) inset;
-    margin-bottom: 2px;
-    align-items: center;
-    justify-content: center;
 }
 
 #toggle {
@@ -201,8 +165,8 @@ a.ghlink {
 }
 
 .login-box {
-    max-height: 435px;
-    width: 80%;
+    max-height: 430px;
+    max-width: 300px;
     position: relative;
     color: white;
     background-color: rgb(108, 115, 163, 0.4);
@@ -218,9 +182,7 @@ a.ghlink {
 }
 
 .login-box .login-title {
-    text-align: center;
     position: relative;
-    width: auto;
     font-weight: 500;
     font-size: 40px;
     border-bottom: 6px solid aliceblue;
@@ -228,13 +190,6 @@ a.ghlink {
 }
 
 body.active .login-box .login-title {
-    text-align: center;
-    position: relative;
-    font-size: 40px;
-    font-weight: 500;
-    border-bottom: 6px solid #2a3a49;
-    margin-bottom: 25px;
-    padding: 2px 0;
     color: #2a3a49;
 }
 
@@ -243,9 +198,7 @@ input {
 }
 
 .login-input {
-    position: relative;
     display: flex;
-    width: 100%;
 }
 
 .form-control {
@@ -259,27 +212,21 @@ input {
     display: flex;
     position: relative;
     color: #495057;
-    text-align: center;
     background-color: #e9ecef;
     border: 1px solid #ced4da;
     border-bottom-left-radius: 5px;
     border-top-left-radius: 5px;
-    padding: 7px;
 }
 
 .wrapper .login-button input {
     cursor: pointer;
     position: relative;
     background: cadetblue;
-    padding: 8px 5px;
     font-family: 'BebasNeueRegular', 'Arial Narrow', Arial, sans-serif;
     color: #fff;
     font-size: 24px;
     border: 1px solid rgb(28, 108, 122);
-    margin-bottom: 10px;
-    margin-top: 15px;
     text-shadow: 0 1px 1px rgb(0 0 0 / 50%);
-    text-align: center;
     letter-spacing: 2px;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
@@ -294,31 +241,21 @@ input {
 }
 
 .keeplogin {
-    margin-top: 5px;
     color: #1d3c41;
 }
 
 .keeplogin input,
 .keeplogin label {
-    display: inline-block;
     font-size: 12px;
     font-style: italic;
 }
 
-.keeplogin input#loginkeeping {
-    margin-right: 5px;
-}
-
-.keeplogin label {
-    width: 30%;
-}
-
 .change_link {
+    position: absolute;
     color: rgb(127, 124, 124);
-    bottom: 0;
+    height: 35px;
     left: 0;
-    font-size: 16px;
-    padding-left: 5px;
+    font-size: 15px;
     border-top: 1px solid rgb(219, 229, 232);
     -webkit-border-radius: 0 0 5px 5px;
     -moz-border-radius: 0 0 5px 5px;
@@ -328,14 +265,13 @@ input {
 
 .change_link p {
 
-    margin: 5px 0 5px 15px;
+    margin: 5px 0 5px 5px;
 }
 
 .change_link a {
     position: absolute;
     right: 0;
-    bottom: -4px;
-    padding: 3px;
+    bottom: -8px;
     font-weight: bold;
     background: rgb(247, 248, 241);
     color: rgb(29, 162, 193);
@@ -362,10 +298,7 @@ input {
     font-family: 'FontomasCustomRegular';
     color: rgb(106, 159, 171);
     position: absolute;
-    left: 10px;
-    top: 36px;
     font-size: 20px;
-    margin-left: 5px;
 }
 
 @media (max-width:768px) {
@@ -391,103 +324,55 @@ input {
         display: none;
     }
 
-    .wrapper {
-        margin: 0 auto;
-    }
-
     .wrapper .login-box {
-        max-height: 435px;
-        min-width: 200px;
-
+        margin-top: -50px;
     }
 
     .login-input {
         font-size: 12px;
     }
 
-    .wrapper .login-button input {
-        width: 50%;
-        position: relative;
-        left: 25%;
-    }
-
-    .keeplogin label {
-        width: 70%;
-        justify-content: center;
-    }
-
     .change_link {
-        font-size: 10px;
-        height: 26px;
+        padding: 0 4px 4px 2px;
     }
 
-    .change_link p {}
+    .change_link p {
+        font-size: 12px;
+    }
 
     .change_link a {
-        position: absolute;
-        right: -2px;
-        bottom: -5px;
-
+        font-size: 10px;
     }
 
-    .page-footer {
-        position: absolute;
-        height: 20px;
-        bottom: -10px;
+
+    .footer-container {
+        font-size: 14px;
     }
 
 }
 
 @media (min-width:769px) and (max-width:992px) {
 
-    .wrapper .login-box {
-        max-height: 435px;
-        min-width: 200px;
-
-    }
 
     .change_link {
-        font-size: 10px;
-    }
-
-    .keeplogin label {
-        width: 70%;
-        justify-content: center;
+        font-size: 14px;
     }
 
 }
 
 @media (min-width:993px) and (max-width:1199px) {
 
-    .wrapper .login-box {
-        max-height: 435px;
-        min-width: 250px;
-
-    }
-
     .change_link {
-        font-size: 13px;
-    }
-
-    .keeplogin label {
-        width: 50%;
-        justify-content: center;
+        font-size: 14px;
     }
 
 }
-
 
 .page-footer {
     font-size: 16px;
     background-color: transparent;
-    height: 26px;
-    bottom: 0;
-    position: fixed;
-    text-align: center;
-}
+    position: sticky;
 
-.page-footer .container {
-    display: flex;
 }
 
 .page-footer p {

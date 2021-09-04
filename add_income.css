@@ -71,115 +71,20 @@ body.active .wallet-dark {
     clear: both;
 }
 
-.container {
-    width: 100vw;
-    margin: 0 auto;
-    z-index: 2;
-}
-
-.description {
-    float: left;
-    width: 50%;
-}
-
-.social {
-    width: auto;
-    margin: 100px 5px 5px 5px;
-}
-
-.social p {
-    font-style: oblique;
-    font-family: "Pacifico", cursive;
-    margin 0px;
-}
-
-.motto {
-    width: 40vw;
-    text-align: left;
-    font-family: "Pacifico", cursive;
-    margin: 50px 10px 10px 5px;
-}
-
 .motto1 {
-    margin: 5px;
     font-size: 50px;
+    font-family: "Pacifico", cursive;
 }
 
 .motto2 {
-
-    margin: 5px;
     font-size: 20px;
-}
-
-.fb {
-    margin: 5px;
-    width: 60px;
-    height: 50px;
-    text-align: center;
-    color: cadetblue;
-    left: auto;
-    float: left;
-}
-
-.ln {
-    margin: 5px;
-    width: 60px;
-    height: 50px;
-    text-align: center;
-    color: cadetblue;
-    left: auto;
-    float: left;
-}
-
-.gh {
-
-    width: 60px;
-    height: 50px;
-    text-align: center;
-    color: cadetblue;
-    left: auto;
-    float: left;
-}
-
-a.fblink {
-    color: white;
-    text-decoration: none;
-    display: block;
-    width: 60px;
-    height: 50px;
-}
-
-a.lnlink {
-    color: white;
-    text-decoration: none;
-    display: block;
-    width: 60px;
-    height: 50px;
-}
-
-a.ghlink {
-    color: cadetblue;
-    text-decoration: none;
-    display: block;
-    width: 60px;
-    height: 50px;
-}
-
-.wrapper {
-    width: 40%;
-    right: 0px;
-    min-height: 450px;
-    margin: 0px auto;
-    margin-top: 50px;
-    position: relative;
-    float: left;
+    font-family: "Pacifico", cursive;
+    margin-top: -50px;
 }
 
 #toggle {
-    position: relative;
-    display: block;
     width: 50px;
-    left: 95%;
+    left: 80%;
     top: 5px;
     height: 25px;
     border-radius: 25px;
@@ -216,17 +121,11 @@ a.ghlink {
 }
 
 .income-box {
-    width: 40%;
     max-height: 475px;
-    position: absolute;
-    color: white;
+    min-width: 325px;
+    color: aliceblue;
     background-color: rgb(108, 115, 163, 0.4);
-    border: 2px solid cadetblue;
     border-radius: 5px;
-    position: absolute;
-    top: 0px;
-    width: 88%;
-    padding: 18px 6% 60px 6%;
     border: 2px solid rgba(147, 184, 189, 0.8);
     -webkit-box-shadow: 0pt 2px 5px rgba(105, 108, 109, 0.7), 0px 0px 8px 5px rgba(208, 223, 226, 0.4) inset;
     -moz-box-shadow: 0pt 2px 5px rgba(105, 108, 109, 0.7), 0px 0px 8px 5px rgba(208, 223, 226, 0.4) inset;
@@ -235,21 +134,18 @@ a.ghlink {
     -moz-border-radius: 5px;
 }
 
-.income-box h1 {
-    float: left;
+body.active .income-box {
+    color: #2a3a49;
+}
+
+.income-box .title {
     font-size: 30px;
+    font-weight: 500;
     border-bottom: 6px solid aliceblue;
-    margin: 15px 0 15px 0;
-    padding: 13px 0;
     color: aliceblue;
 }
 
-body.active .income-box h1 {
-    float: left;
-    font-size: 30px;
-    border-bottom: 6px solid #2a3a49;
-    margin: 15px 0 15px 0;
-    padding: 13px 0;
+body.active .income-box .title {
     color: #2a3a49;
 }
 
@@ -258,67 +154,36 @@ input {
 }
 
 .income-input {
-    margin-top: 15px;
     position: relative;
     display: flex;
-    width: 100%;
 }
 
 .income-icon {
-    display: flex;
-    position: relative;
-    left: 0;
     color: #495057;
-    text-align: center;
     background-color: #e9ecef;
     border: 1px solid #ced4da;
     border-bottom-left-radius: 5px;
     border-top-left-radius: 5px;
-    padding: 7px;
 }
 
-
+.amount-data,
+.data-control,
+.user-options,
 .form-data {
-    width: 85%;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
     border: 1px solid #ced4da;
-    padding: 7px;
     transition: border-color .25s ease-in-out;
-}
-
-.data-control {
-    width: 85%;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-    border: 1px solid #ced4da;
-    padding: 7px;
-    transition: border-color .25s ease-in-out;
-}
-
-.user-options {
-    width: 85%;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-    border: 1px solid #ced4da;
-    padding: 7px;
-    transition: border-color .25s ease-in-out;
-    padding: 5px;
 }
 
 .submit .acceptButton input {
     cursor: pointer;
-    position: relative;
-    width: 90%;
     background: cadetblue;
-    padding: 8px 5px;
     font-family: 'BebasNeueRegular', 'Arial Narrow', Arial, sans-serif;
-    color: #fff;
+    color: aliceblue;
     font-size: 24px;
     border: 1px solid rgb(28, 108, 122);
-    margin: 10px;
     text-shadow: 0 1px 1px rgb(0 0 0 / 50%);
-    text-align: center;
     letter-spacing: 2px;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
@@ -334,18 +199,12 @@ input {
 
 .submit .cancelButton input {
     cursor: pointer;
-    position: absolute;
-    right: 7%;
-    width: 30%;
     background: tomato;
-    padding: 8px 5px;
     font-family: 'BebasNeueRegular', 'Arial Narrow', Arial, sans-serif;
-    color: #fff;
+    color: aliceblue;
     font-size: 24px;
     border: 1px solid rgb(28, 108, 122);
-    margin: 10px;
     text-shadow: 0 1px 1px rgb(0 0 0 / 50%);
-    text-align: center;
     letter-spacing: 2px;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
@@ -361,8 +220,6 @@ input {
 
 .submit {
     display: flex;
-    width: 100%;
-    margin-top: 15px;
 }
 
 [data-icon]:after {
@@ -378,22 +235,11 @@ input {
 
 
 .page-footer {
+    position: sticky;
     font-size: 16px;
     background-color: transparent;
-    padding: 10px;
-    margin-top: 10px;
-    height: 20px;
-    bottom: 4vh;
-    position: fixed;
-}
-
-.page-footer .container {
-    display: flex;
-    justify-content: space-between;
-
 }
 
 .page-footer p {
     font-family: "Arial";
-    margin: 0;
 }
