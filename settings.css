@@ -1,0 +1,118 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body,
+html {
+    height: 100%;
+}
+
+body {
+    margin: 8px;
+    height: 100%;
+    background: #2a3a49;
+    color: aliceblue;
+    transition: 0.5s;
+}
+
+body.active {
+    background-color: aliceblue;
+    color: #2a3a49;
+}
+
+.clearfix {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.col {
+    width: 50%;
+    float: left;
+    padding: 5px 5px;
+}
+
+.table::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+th,
+td {
+    color: aliceblue;
+}
+
+body.active th,
+body.active td {
+    color: #2a3a49;
+}
+
+
+body.active #settingButton1,
+body.active #settingButton2,
+body.active #settingButton3,
+body.active #settingButton4 {
+    background-color: #2a3a49;
+    color: aliceblue;
+}
+
+body.active #add1,
+body.active #add2,
+body.active #add3 {
+    background-color: #2a3a49;
+    color: aliceblue;
+}
+
+#toggle {
+    position: relative;
+    display: block;
+    width: 50px;
+    left: 80%;
+    top: 5px;
+    height: 25px;
+    border-radius: 25px;
+    background: #2a3a49;
+    opacity: 0.9;
+    box-shadow: inset 0 8px 60px rgba(95, 158, 160, 0.1),
+        inset 0 8px 8px rgba(95, 158, 160, 0.1),
+        inset 0 -4px 4px rgba(95, 158, 160, 0.1);
+    cursor: pointer;
+}
+
+#toggle.active {
+    background-color: lightcyan;
+}
+
+#toggle .indicator {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 25px;
+    height: 25px;
+    background: linear-gradient(to top, #2a3a49, lightblue);
+    border-radius: 50%;
+    transform: scale(0.8);
+    box-shadow: 0 8px 40px rgba(0, 139, 139, 0.5),
+        inset 0 4px 4px rgba(0, 139, 139, 0.2),
+        inset 0 -4px 4px rgba(0, 139, 139, 0.2);
+    transition: 0.5s;
+}
+
+#toggle.active .indicator {
+    left: 25px;
+    background: linear-gradient(to bottom, #2a3a49, lightblue);
+}
+
+
+.page-footer {
+    position: sticky;
+    font-size: 16px;
+    background-color: transparent;
+}
+
+.page-footer p {
+    font-family: "Arial";
+}
