@@ -1,0 +1,554 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Wall€tfy</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="descritpion" content="Dzięki WALLETFY - aplikacji do zarządzania finansami, Twoje zarządzanie budżetem stanie się prostsze!" />
+    <meta name="keywords" content="budżet,finanse,wydatki,przychody,bilans" />
+    <meta http-equiv="X-UA-Compatible" content="IE = edge, chrome = 1" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="balance.css" type="text/css" />
+    <link href="vivify.min.css" rel="stylesheet" type="text/css" />
+
+    <link rel="stylesheet" href="icons/css/fontello.css" type="text/css" />
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="icon" href="img/favicon.png">
+
+
+</head>
+
+<body>
+    <div class="container col-8">
+        <div class="row">
+            <div id="toggle">
+                <i class="indicator"></i>
+            </div>
+        </div>
+        <div class="row">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h2 class="mb-4">USTAWIENIA</h2>
+                </div>
+                <button id="settingButton1" class="btn btn-light btn-hover no-focus btn-block mt-2" onClick="toggleSettingPanel1">Kategorie przychodów <i class="fas fa-chevron-down setting-icon"></i></button>
+
+                <div id="settingTogglePanel1" class="settingTogglePanel w-100 px-2">
+
+                    <table id="tableOfIncomesCategories" class="table table-hover table-active text-white table-sm table-text">
+
+                        <thead>
+                            <tr>
+                                <th onclick="sortTableAlphabetically" scope="col">Kategoria <span class="material-icons align-middle">import_export</span></th>
+                                <th scope="col" width="5%"></th>
+                                <th scope="col" style="display:none;">ID</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr class="editIncomeBtn">
+                                <td></td>
+                                <td><span class="material-icons align-middle">
+                                        edit_note
+                                    </span></td>
+                                <td style="display:none;"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="row">
+                        <div class="col mb-2">
+                            <button class="btn btn-outline-light btn-hover no-focus btn-sm btn-block w-25 mx-auto" style="height:30px" data-toggle="modal" data-target="#addIncomeCategoryModal">Dodaj nową kategorię</button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="modal fade" id="addIncomeCategoryModal" tabindex="-1" role="dialog" aria-labelledby="addIncomeCategory" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 id="addIncomeCategory" class="modal-title text-secondary">Dodaj kategorię przychodów</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Zamknij">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <form>
+                                <div class="modal-body">
+
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><span class="material-icons align-middle">
+                                                    savings
+                                                </span></span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="Nowa kategoria przychodów" maxlength="40" step="any" aria-label="KategoriaPrzychodu" name="newIncomeCategory" required>
+                                    </div>
+
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-outline-success btn-hover">Potwierdź</button>
+                                </div>
+
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="modal fade" id="editIncomeModal" tabindex="-1" role="dialog" aria-labelledby="edytujKategoriePrzychodu" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 id="edytujKategoriePrzychodu" class="modal-title">Edytuj kategorię przychodów</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Zamknij">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <form action="" method="post" id='editIncomeForm'>
+                                <div class="modal-body">
+
+                                    <input type="hidden" id="incomeCategoryIdModal" name="incomeCategoryId">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-shopping-cart"></i></span>
+                                        </div>
+                                        <input type="text" id="incomeCategoryModal" class="form-control" placeholder="Kategoria przychodów" maxlength="40" step="any" aria-label="KategoriaPrzychodu" name="incomeCategory" required>
+                                    </div>
+
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button id="incomeModalSubmit" formaction="/settings/updateIncomeCategory" type="submit" class="btn btn-hover color-8">Potwierdź</button>
+                                    <button type="submit" formaction="/settings/deleteIncomeCategory" class="btn btn-hover color-11">Usuń kategorię</button>
+                                </div>
+
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <button id="settingButton2" class="btn btn-light btn-hover no-focus  btn-block mt-2" onClick="toggleSettingPanel">Kategorie wydatków <i class="fas fa-chevron-down setting-icon"></i></button>
+
+                <div id="settingTogglePanel2" class="settingTogglePanel w-100 px-2">
+
+                    <table id="tableOfExpensesCategories" class="table table-hover table-active text-white table-sm table-text">
+
+                        <thead>
+                            <tr>
+                                <th onclick="sortTableAlphabetically" scope="col">Kategoria <span class="material-icons align-middle">import_export</span></th>
+                                <th scope="col" onclick="sortTableNumerically">Limit <span class="material-icons align-middle">unfold_more</span></th>
+                                <th scope="col" width="5%"></th>
+                                <th scope="col" style="display:none;">ID</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr class="editExpenseBtn">
+                                <td></td>
+                                <td></td>
+                                <td><span class="material-icons align-middle">
+                                        edit_note
+                                    </span></td>
+                                <td style="display:none;"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+                    <div class="row">
+                        <div class="col mb-2">
+                            <button class="btn btn-outline-light btn-hover no-focus btn-sm btn-block w-25 mx-auto" style="height:30px" data-toggle="modal" data-target="#addExpenseCategoryModal">Dodaj nową kategorię</button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="modal fade" id="addExpenseCategoryModal" tabindex="-1" role="dialog" aria-labelledby="addExpenseCategory" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 id="addExpenseCategory" class="modal-title text-secondary">Dodaj kategorię wydatków</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Zamknij">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <form>
+                                <div class="modal-body">
+
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><span class="material-icons align-middle">
+                                                    shopping_cart
+                                                </span></span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="Kategoria wydatków" maxlength="40" step="any" aria-label="KategoriaWydatku" name="newExpenseCategory" required>
+                                    </div>
+
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-outline-success btn-hover">Potwierdź</button>
+                                </div>
+
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="modal fade" id="editExpenseModal" tabindex="-1" role="dialog" aria-labelledby="edytujKategorieWydatku" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 id="edytujKategorieWydatku" class="modal-title">Edytuj kategorię wydatków</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Zamknij">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <form action="" method="post" id='editIncomeForm'>
+                                <div class="modal-body">
+
+                                    <input type="hidden" id="expenseCategoryIdModal" name="expenseCategoryId">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-shopping-cart"></i></span>
+                                        </div>
+                                        <input type="text" id="expenseCategoryModal" class="form-control" placeholder="Kategoria wydatków" maxlength="40" step="any" aria-label="KategoriaWydatków" name="expenseCategory" required>
+                                    </div>
+
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-angle-double-up"></i></span>
+                                        </div>
+                                        <input type="number" id="expenseLimitModal" class="form-control" step="0.01" min="0" max="999999.99" placeholder="Limit (opcjonalne)" aria-label="limitKategorii" name="amount">
+                                    </div>
+                                    <small class="text-muted">Pozostaw puste, by pozbyć się limitu.</small>
+
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button id="incomeModalSubmit" formaction="/settings/updateExpenseCategory" type="submit" class="btn btn-hover color-8">Potwierdź</button>
+                                    <button type="submit" formaction="/settings/deleteExpenseCategory" class="btn btn-hover color-11">Usuń kategorię</button>
+                                </div>
+
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <button id="settingButton3" class="btn btn-light btn-hover no-focus btn-block mt-2" onClick="toggleSettingPanel3">Sposoby płatności <i class="fas fa-chevron-down setting-icon"></i></button>
+
+                <div id="settingTogglePanel3" class="settingTogglePanel w-100 px-2">
+
+                    <table id="tableOfPayment" class="table table-hover table-active text-white table-sm table-text">
+
+                        <thead>
+                            <tr>
+                                <th onclick="sortTableAlphabetically('tableOfPayment')" scope="col">Sposób płatności <i class="fas fa-sort"></i></th>
+                                <th scope="col" width="5%"></th>
+                                <th scope="col" style="display:none;">ID</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr class="editPaymentBtn">
+                                <td></td>
+                                <td><span class="material-icons align-middle">
+                                        edit_note
+                                    </span></td>
+                                <td style="display:none;"></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+
+                    <div class="row">
+                        <div class="col mb-2">
+                            <button class="btn btn-outline-light btn-hover no-focus btn-sm btn-block w-25 mx-auto" style="height:30px" data-toggle="modal" data-target="#addPaymentModal">Dodaj nową metodę płatności</button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="modal fade" id="editPaymentModal" tabindex="-1" role="dialog" aria-labelledby="edytujMetodePlatnosci" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 id="edytujMetodePlatnosci" class="modal-title">Edytuj metodę płatności</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Zamknij">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <form action="" method="post" id='editIncomeForm'>
+                                <div class="modal-body">
+
+                                    <input type="hidden" id="paymentIdModal" name="paymentId">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><span class="material-icons align-middle">
+                                                    credit_score
+                                                </span></span>
+                                        </div>
+                                        <input type="text" id="paymentModal" class="form-control" placeholder="Metoda płatności" maxlength="30" step="any" aria-label="MetodaPlatnosci" name="paymentCategory" required>
+                                    </div>
+
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button formaction="/settings/updatePaymentMethod" type="submit" class="btn btn-hover color-8">Potwierdź</button>
+                                    <button type="submit" formaction="/settings/deletePaymentMethod" class="btn btn-hover color-11">Usuń metodę</button>
+                                </div>
+
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="modal fade" id="addPaymentModal" tabindex="-1" role="dialog" aria-labelledby="dodajMetodePlatnosci" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 id="dodajMetodePlatnosci" class="modal-title text-secondary">Dodaj metodę płatności</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Zamknij">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <form action="" method="post" id='addIncomeForm'>
+                                <div class="modal-body">
+
+                                    <input type="hidden" id="paymentIdModal" name="paymentId">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><span class="material-icons align-middle">
+                                                    credit_score
+                                                </span></span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="Metoda płatności" maxlength="30" step="any" aria-label="MetodaPlatnosci" name="paymentCategory" required>
+                                    </div>
+
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button formaction="/settings/addPaymentMethod" type="submit" class="btn btn-hover btn-outline-success">Potwierdź</button>
+                                </div>
+
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <button id="settingButton4" class="btn btn-light btn-hover no-focus btn-block mt-2" onClick="toggleSettingPanel4">Zarządzaj kontem <i class="fas fa-chevron-down  setting-icon"></i></button>
+
+                <div id="settingTogglePanel4" class="settingTogglePanel w-100 px-2">
+
+                    <div class="row">
+
+                        <div class="col-6 mb-2">
+                            <button class="btn btn-hover btn-secondary no-focus btn-sm btn-block mt-2" data-toggle="modal" data-target="#editProfileModal" style="height:30px">Edytuj profil</button>
+                        </div>
+
+                        <div class="modal fade" id="editProfileModal" tabindex="-1" role="dialog" aria-labelledby="edytujProfil" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 id="edytujProfil" class="modal-title">Edytuj profil</h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Zamknij">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <form action="/settings/updateProfileData" method="post" id='editProfileForm'>
+                                        <div class="modal-body">
+
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"> <i class="fas fa-user-alt"></i> </span>
+                                                </div>
+                                                <input id="name" type="text" class="form-control" placeholder="Imię" aria-label="imie" name="name" value="" required autofocus>
+                                            </div>
+                                            <small id="errorname"></small>
+                                            <div class="input-group mt-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"> <i class="fas fa-envelope"></i> </span>
+                                                </div>
+                                                <input type="email" class="form-control" placeholder="E-mail" aria-label="email" id="email" name="email" value="" required>
+                                                <input type="hidden" value="" name="id" required>
+                                            </div>
+                                            <small id="erroremail"></small>
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-hover color-8">Potwierdź</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-6 mb-2">
+                            <button class="btn btn-hover btn-danger no-focus-red btn-sm btn-block mt-2" data-toggle="modal" data-target="#deleteUserDataModal" style="height:30px">Zresetuj transakcje</button>
+                        </div>
+
+                        <div class="modal fade" id="deleteUserDataModal" tabindex="-1" role="dialog" aria-labelledby="zresetujKonto" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 id="zresetujKonto" class="modal-title">Zresetuj wszystkie transakcje</h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Zamknij">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <form>
+                                        <div class="modal-body">
+                                            Czy na pewno chcesz zresetować wszystkie swoje przychody i wydatki? Zmiany są nieodwracalne.
+
+                                            <input type="hidden" name="resetAccount">
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-hover color-8">Potwierdź</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-6 mb-2">
+                            <button class="btn btn-hover btn-secondary no-focus btn-sm btn-block mt-2" data-toggle="modal" data-target="#changePasswordModal" style="height:30px">Zmień hasło</button>
+                        </div>
+
+                        <div class="modal fade" id="changePasswordModal" tabindex="-1" role="dialog" aria-labelledby="zmienHaslo" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 id="zmienHaslo" class="modal-title">Zmień hasło</h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Zamknij">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <form method="post" action="/settings/changePassword" id="editPasswordForm">
+                                        <div class="modal-body">
+                                            <div class="input-group mt-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"> <i class="fa fa-lock"></i></span>
+                                                </div>
+                                                <input type="password" class="form-control" data-toggle="password" placeholder="Stare hasło" aria-label="Stare hasło" id="oldPassword" name="oldPassword" required>
+
+                                            </div>
+
+                                            <small id="erroroldPassword"></small>
+
+                                            <div class="input-group mt-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"> <i class="fa fa-lock"></i></span>
+                                                </div>
+                                                <input type="password" class="form-control" data-toggle="password" placeholder="Nowe hasło" aria-label="Nowe hasło" id="password" name="password" required>
+                                                <div class="input-group-append" style="cursor:pointer">
+                                                    <span class="input-group-text" onclick="myFunction('password')">
+                                                        <i id="showHideIcon" class="fa fa-eye"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+
+                                            <small id="errorpassword"></small>
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-hover color-8">Potwierdź</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-6 mb-2">
+                            <button class="btn btn-hover btn-danger no-focus-red btn-sm btn-block mt-2" data-toggle="modal" data-target="#deleteAccountModal" style="height:30px">Usuń konto</button>
+                        </div>
+
+                        <div class="modal fade" id="deleteAccountModal" tabindex="-1" role="dialog" aria-labelledby="usunKonto" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 id="usunKonto" class="modal-title">Usuń konto</h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Zamknij">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <form method="post" action="/settings/deleteAccount">
+                                        <div class="modal-body">
+                                            Czy na pewno chcesz usunąć swoje konto wraz ze wszystkimi danymi?
+
+                                            <input type="hidden" name="deleteAccount">
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-hover color-8">Potwierdź</button>
+
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid p-0">
+        <div class="row">
+            <footer class="page-footer col-sm-12 col-md-12">
+                <div class="footer-container text-center mt-2 mb-1 mx-auto">
+                    <p>Wszelkie prawa zastrzeżone. Copyright © 2021. All Rights Reserved </p>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        const body = document.querySelector('body');
+        const toggle = document.getElementById('toggle');
+        toggle.onclick = function() {
+            toggle.classList.toggle('active');
+            body.classList.toggle('active');
+        }
+
+    </script>
+    <script>
+        $('#periodOfTime').change(function() {
+            if (this.value == "customPeriod") {
+                document.getElementById("periodOfTime").setAttribute("onclick", "");
+                $('#dateModal').modal({
+                    show: true
+
+                });
+            } else {
+                document.getElementById("periodOfTime").setAttribute("onclick", "this.form.submit()");
+            }
+        });
+
+    </script>
+</body>
+
+</html>

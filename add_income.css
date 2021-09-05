@@ -176,7 +176,8 @@ input {
     transition: border-color .25s ease-in-out;
 }
 
-.submit .acceptButton input {
+.submit .acceptButton input,
+.submit .cancelButton input {
     cursor: pointer;
     background: cadetblue;
     font-family: 'BebasNeueRegular', 'Arial Narrow', Arial, sans-serif;
@@ -198,24 +199,8 @@ input {
 }
 
 .submit .cancelButton input {
-    cursor: pointer;
+
     background: tomato;
-    font-family: 'BebasNeueRegular', 'Arial Narrow', Arial, sans-serif;
-    color: aliceblue;
-    font-size: 24px;
-    border: 1px solid rgb(28, 108, 122);
-    text-shadow: 0 1px 1px rgb(0 0 0 / 50%);
-    letter-spacing: 2px;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
-    -webkit-box-shadow: 0px 1px 6px 4px rgb(0 0 0 / 7%) inset, 0px 0px 0px 3px rgb(254 254 254), 0px 5px 3px 3px rgb(210 210 210);
-    -moz-box-shadow: 0px 1px 6px 4px rgba(0, 0, 0, 0.07) inset, 0px 0px 0px 3px rgb(254, 254, 254), 0px 5px 3px 3px rgb(210, 210, 210);
-    box-shadow: 0px 1px 6px 4px rgb(0 0 0 / 7%) inset, 0px 0px 0px 3px rgb(254 254 254), 0px 5px 3px 3px rgb(210 210 210);
-    -webkit-transition: all 0.2s linear;
-    -moz-transition: all 0.2s linear;
-    -o-transition: all 0.2s linear;
-    transition: all 0.2s linear;
 }
 
 .submit {
