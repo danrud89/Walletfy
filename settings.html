@@ -36,7 +36,7 @@
                 <div class="col-12 text-center">
                     <h1 class="mb-4">USTAWIENIA</h1>
                 </div>
-                <button id="settingButton1" class="btn btn-light btn-hover no-focus btn-block btn-floating mt-2" onClick="toggle_visibility('settingTogglePanel1');" data-toggle="collapse" data-target="#settingTogglePanel1" aria-expanded="false" aria-controls="settingTogglePanel1">Kategorie przychodów <span class="material-icons align-middle">
+                <button id="settingButton1" class="btn btn-light btn-hover no-focus btn-block btn-floating mt-2 mb-3" onClick="toggle_visibility('settingTogglePanel1');" data-toggle="collapse" data-target="#settingTogglePanel1" aria-expanded="false" aria-controls="settingTogglePanel1">Kategorie przychodów <span class="material-icons align-middle">
                         expand_more
                     </span></button>
 
@@ -52,7 +52,21 @@
                         </thead>
                         <tbody>
 
-                            <tr class="editIncomeBtn">
+                            <tr class="editIncomeBtn" data-toggle="modal" data-target="#editIncomeModal">
+                                <td>Wpisane kategorie...</td>
+                                <td><span class="material-icons align-middle">
+                                        edit_note
+                                    </span></td>
+                                <td style="display:none;"></td>
+                            </tr>
+                            <tr class="editIncomeBtn" data-toggle="modal" data-target="#editIncomeModal">
+                                <td>Wpisane kategorie...</td>
+                                <td><span class="material-icons align-middle">
+                                        edit_note
+                                    </span></td>
+                                <td style="display:none;"></td>
+                            </tr>
+                            <tr class="editIncomeBtn" data-toggle="modal" data-target="#editIncomeModal">
                                 <td>Wpisane kategorie...</td>
                                 <td><span class="material-icons align-middle">
                                         edit_note
@@ -64,7 +78,7 @@
 
                     <div class="row">
                         <div class="col mb-2">
-                            <button id="add1" class="btn btn-outline-light btn-hover no-focus btn-sm btn-block w-25 mx-auto" style="height:30px" data-toggle="modal" data-target="#addIncomeCategoryModal"><span class="material-icons align-top mr-2">
+                            <button id="add1" class="btn btn-outline-light btn-hover no-focus btn-sm btn-block w-25 mx-auto" style="height:40px; border-radius: 25px; font-size: 18px;" data-toggle="modal" data-target="#addIncomeCategoryModal"><span class="material-icons align-middle mr-2 pb-1">
                                     add_circle_outline
                                 </span>Dodaj nową</button>
                         </div>
@@ -109,7 +123,7 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h4 id="edytujKategoriePrzychodu" class="modal-title">Edytuj kategorię przychodów</h4>
+                                <h4 id="edytujKategoriePrzychodu" class="modal-title text-secondary">Edycja kategorii przychodów</h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Zamknij">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -120,16 +134,18 @@
                                     <input type="hidden" id="incomeCategoryIdModal" name="incomeCategoryId">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="fas fa-shopping-cart"></i></span>
+                                            <span class="input-group-text"><span class="material-icons align-midle">
+                                                    attach_money
+                                                </span></span>
                                         </div>
-                                        <input type="text" id="incomeCategoryModal" class="form-control" placeholder="Kategoria przychodów" maxlength="40" step="any" aria-label="KategoriaPrzychodu" name="incomeCategory" required>
+                                        <input type="text" id="incomeCategoryModal" class="form-control" placeholder="Nazwa" maxlength="40" step="any" aria-label="KategoriaPrzychodu" name="incomeCategory" required>
                                     </div>
 
                                 </div>
 
                                 <div class="modal-footer">
-                                    <button id="incomeModalSubmit" type="submit" class="btn btn-hover btn-floating">Potwierdź</button>
-                                    <button type="submit" formaction="/settings/deleteIncomeCategory" class="btn btn-hover btn-floating">Usuń kategorię</button>
+                                    <button id="incomeModalSubmit" type="submit" class="btn btn-outline-success btn-hover btn-floating">Potwierdź</button>
+                                    <button type="submit" class="btn btn-outline-danger btn-hover btn-floating">Usuń kategorię</button>
                                 </div>
 
                             </form>
@@ -139,7 +155,7 @@
                 </div>
 
 
-                <button id="settingButton2" class="btn btn-light btn-hover no-focus btn-floating btn-block mt-2" onClick="toggleSettingPanel2" data-toggle="collapse" data-target="#settingTogglePanel2" aria-expanded="false" aria-controls="settingTogglePanel2">Kategorie wydatków<span class="material-icons align-middle ">
+                <button id="settingButton2" class="btn btn-light btn-hover no-focus btn-floating btn-block mt-2 mb-3" onClick="toggleSettingPanel2" data-toggle="collapse" data-target="#settingTogglePanel2" aria-expanded="false" aria-controls="settingTogglePanel2">Kategorie wydatków<span class="material-icons align-middle ">
                         expand_more
                     </span></button>
 
@@ -155,7 +171,21 @@
                         </thead>
                         <tbody>
 
-                            <tr class="editExpenseBtn">
+                            <tr class="editExpenseBtn" data-toggle="modal" data-target="#editExpenseModal">
+                                <td>Wpisane kategorie...</td>
+                                <td><span class="material-icons align-middle">
+                                        edit_note
+                                    </span></td>
+                                <td style="display:none;"></td>
+                            </tr>
+                            <tr class="editExpenseBtn" data-toggle="modal" data-target="#editExpenseModal">
+                                <td>Wpisane kategorie...</td>
+                                <td><span class="material-icons align-middle">
+                                        edit_note
+                                    </span></td>
+                                <td style="display:none;"></td>
+                            </tr>
+                            <tr class="editExpenseBtn" data-toggle="modal" data-target="#editExpenseModal">
                                 <td>Wpisane kategorie...</td>
                                 <td><span class="material-icons align-middle">
                                         edit_note
@@ -167,7 +197,7 @@
 
                     <div class="row">
                         <div class="col mb-2">
-                            <button id="add1" class="btn btn-outline-light btn-hover no-focus btn-sm btn-block w-25 mx-auto" style="height:30px" data-toggle="modal" data-target="#addIncomeCategoryModal"><span class="material-icons align-top mr-2">
+                            <button id="add1" class="btn btn-outline-light btn-hover no-focus btn-sm btn-block w-25 mx-auto" style="height:40px; border-radius: 25px; font-size: 18px;" data-toggle="modal" data-target="#addExpenseCategoryModal"><span class="material-icons align-middle mr-2 pb-1">
                                     add_circle_outline
                                 </span>Dodaj nową</button>
                         </div>
@@ -212,7 +242,7 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h4 id="edytujKategorieWydatku" class="modal-title">Edytuj kategorię wydatków</h4>
+                                <h4 id="edytujKategorieWydatku" class="modal-title text-secondary">Edycja kategorii wydatków</h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Zamknij">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -223,24 +253,28 @@
                                     <input type="hidden" id="expenseCategoryIdModal" name="expenseCategoryId">
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="fas fa-shopping-cart"></i></span>
+                                            <span class="input-group-text"><span class="material-icons align-midle">
+                                                    shopping_cart
+                                                </span></span>
                                         </div>
-                                        <input type="text" id="expenseCategoryModal" class="form-control" placeholder="Kategoria wydatków" maxlength="40" step="any" aria-label="KategoriaWydatków" name="expenseCategory" required>
+                                        <input type="text" id="expenseCategoryModal" class="form-control" placeholder="Nazwa" maxlength="40" step="any" aria-label="KategoriaWydatków" name="expenseCategory" required>
                                     </div>
 
                                     <div class="input-group">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="fas fa-angle-double-up"></i></span>
+                                            <span class="input-group-text"><span class="material-icons align-midle">
+                                                    price_change
+                                                </span></span>
                                         </div>
                                         <input type="number" id="expenseLimitModal" class="form-control" step="0.01" min="0" max="999999.99" placeholder="Limit (opcjonalne)" aria-label="limitKategorii" name="amount">
                                     </div>
-                                    <small class="text-muted">Pozostaw puste, by pozbyć się limitu.</small>
+                                    <small class="text-muted">Pole puste = 0</small>
 
                                 </div>
 
                                 <div class="modal-footer">
-                                    <button id="incomeModalSubmit" formaction="/settings/updateExpenseCategory" type="submit" class="btn btn-hover btn-floating">Potwierdź</button>
-                                    <button type="submit" formaction="/settings/deleteExpenseCategory" class="btn btn-hover btn-floating">Usuń kategorię</button>
+                                    <button id="expenseModalSubmit" type="submit" class="btn btn-outline-success btn-hover btn-floating">Potwierdź</button>
+                                    <button type="submit" class="btn btn-outline-danger btn-hover btn-floating">Usuń kategorię</button>
                                 </div>
 
                             </form>
@@ -250,7 +284,7 @@
                 </div>
 
 
-                <button id="settingButton3" class="btn btn-light btn-hover no-focus btn-floating btn-block mt-2" onClick="toggleSettingPanel3" data-toggle="collapse" data-target="#settingTogglePanel3" aria-expanded="false" aria-controls="settingTogglePanel3">Sposoby płatności<span class="material-icons align-middle ">
+                <button id="settingButton3" class="btn btn-light btn-hover no-focus btn-floating btn-block mt-2 mb-3" onClick="toggleSettingPanel3" data-toggle="collapse" data-target="#settingTogglePanel3" aria-expanded="false" aria-controls="settingTogglePanel3">Sposoby płatności<span class="material-icons align-middle ">
                         expand_more
                     </span></button>
 
@@ -262,12 +296,25 @@
                             <tr>
                                 <th onclick="sortTableAlphabetically" scope="col">Sposób płatności<span class="material-icons align-middle">import_export</span></th>
                                 <th scope="col" width="5%"></th>
-                                <th scope="col" style="display:none;">ID</th>
                             </tr>
                         </thead>
                         <tbody>
 
-                            <tr class="editPaymentBtn">
+                            <tr class="editPaymentBtn" data-toggle="modal" data-target="#editPaymentModal">
+                                <td>Wpisane kategorie...</td>
+                                <td><span class="material-icons align-middle">
+                                        edit_note
+                                    </span></td>
+                                <td style="display:none;"></td>
+                            </tr>
+                            <tr class="editPaymentBtn" data-toggle="modal" data-target="#editPaymentModal">
+                                <td>Wpisane kategorie...</td>
+                                <td><span class="material-icons align-middle">
+                                        edit_note
+                                    </span></td>
+                                <td style="display:none;"></td>
+                            </tr>
+                            <tr class="editPaymentBtn" data-toggle="modal" data-target="#editPaymentModal">
                                 <td>Wpisane kategorie...</td>
                                 <td><span class="material-icons align-middle">
                                         edit_note
@@ -281,7 +328,7 @@
 
                     <div class="row">
                         <div class="col mb-2">
-                            <button id="add3" class="btn btn-outline-light btn-hover no-focus btn-sm btn-block w-25 mx-auto" style="height:30px" data-toggle="modal" data-target="#addPaymentModal"><span class="material-icons align-top mr-2">
+                            <button id="add3" class="btn btn-outline-light btn-hover no-focus btn-sm btn-block w-25 mx-auto" style="height:40px; border-radius: 25px; font-size: 20px;" data-toggle="modal" data-target="#addPaymentModal"><span class="material-icons align-middle mr-2 pb-1">
                                     add_circle_outline
                                 </span>Dodaj nową</button>
                         </div>
@@ -293,7 +340,7 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h4 id="edytujMetodePlatnosci" class="modal-title">Edytuj metodę płatności</h4>
+                                <h4 id="edytujMetodePlatnosci" class="modal-title text-secondary">Edycja metod płatności</h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Zamknij">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -314,8 +361,8 @@
                                 </div>
 
                                 <div class="modal-footer">
-                                    <button type="submit" class="btn btn-hover btn-floating">Potwierdź</button>
-                                    <button type="submit" class="btn btn-hover btn-floating">Usuń metodę</button>
+                                    <button id="paymentModalSubmit" type="submit" class="btn btn-outline-success btn-hover btn-floating">Potwierdź</button>
+                                    <button type="submit" class="btn btn-outline-danger btn-hover btn-floating">Usuń kategorię</button>
                                 </div>
 
                             </form>
@@ -359,7 +406,7 @@
                 </div>
 
 
-                <button id="settingButton4" class="btn btn-light btn-hover no-focus btn-floating btn-block mt-2" onClick="toggleSettingPanel4" data-toggle="collapse" data-target="#settingTogglePanel4" aria-expanded="false" aria-controls="settingTogglePanel4">Zarządzaj kontem <span class="material-icons align-middle ">
+                <button id="settingButton4" class="btn btn-light btn-hover no-focus btn-floating btn-block mt-2" onClick="toggleSettingPanel4" data-toggle="collapse" data-target="#settingTogglePanel4" aria-expanded="false" aria-controls="settingTogglePanel4">Konto użytkownika<span class="material-icons align-middle ">
                         expand_more
                     </span></button>
 
@@ -368,14 +415,14 @@
                     <div class="row">
 
                         <div class="col-6 mb-2">
-                            <button class="btn btn-hover btn-secondary no-focus btn-sm btn-block btn-floating mt-4" data-toggle="modal" data-target="#editProfileModal" style="height:30px">Edytuj profil</button>
+                            <button class="btn btn-hover btn-secondary no-focus btn-sm btn-block btn-floating mt-4" data-toggle="modal" data-target="#editProfileModal" style="height:30px">Edycja profilu</button>
                         </div>
 
                         <div class="modal fade" id="editProfileModal" tabindex="-1" role="dialog" aria-labelledby="edytujProfil" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h4 id="edytujProfil" class="modal-title">Edytuj profil</h4>
+                                        <h4 id="edytujProfil" class="modal-title text-secondary">Edytuj profil</h4>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Zamknij">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
@@ -385,14 +432,18 @@
 
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
-                                                    <span class="input-group-text"> <i class="fas fa-user-alt"></i> </span>
+                                                    <span class="input-group-text"><span class="material-icons align-middle">
+                                                            account_circle
+                                                        </span></span>
                                                 </div>
-                                                <input id="name" type="text" class="form-control" placeholder="Imię" aria-label="imie" name="name" value="" required autofocus>
+                                                <input id="name" type="text" class="form-control" placeholder="Login" aria-label="imie" name="name" value="" required autofocus>
                                             </div>
                                             <small id="errorname"></small>
                                             <div class="input-group mt-3">
                                                 <div class="input-group-prepend">
-                                                    <span class="input-group-text"> <i class="fas fa-envelope"></i> </span>
+                                                    <span class="input-group-text"> <span class="material-icons align-middle">
+                                                            email
+                                                        </span></span>
                                                 </div>
                                                 <input type="email" class="form-control" placeholder="E-mail" aria-label="email" id="email" name="email" value="" required>
                                                 <input type="hidden" value="" name="id" required>
@@ -401,7 +452,7 @@
 
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="submit" class="btn btn-hover btn-floating">Potwierdź</button>
+                                            <button type="submit" class="btn btn-outline-success btn-hover btn-floating">Potwierdź</button>
                                         </div>
                                     </form>
                                 </div>
@@ -409,22 +460,21 @@
                         </div>
 
                         <div class="col-6 mb-2">
-                            <button class="btn btn-hover btn-danger no-focus-red btn-sm btn-block btn-floating mt-4" data-toggle="modal" data-target="#deleteUserDataModal" style="height:30px">Zresetuj transakcje</button>
+                            <button class="btn btn-hover btn-danger no-focus-red btn-sm btn-block btn-floating mt-4" data-toggle="modal" data-target="#deleteUserDataModal" style="height:30px">Usuwanie transakcji</button>
                         </div>
 
                         <div class="modal fade" id="deleteUserDataModal" tabindex="-1" role="dialog" aria-labelledby="zresetujKonto" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h4 id="zresetujKonto" class="modal-title">Zresetuj wszystkie transakcje</h4>
+                                        <h4 id="zresetujKonto" class="modal-title text-secondary">Usuń wszystkie transakcje</h4>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Zamknij">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
                                     <form>
-                                        <div class="modal-body">
-                                            Czy na pewno chcesz trwale usunąć wszystkie zapisane transakcje? Operacja jest nieodwracalna.
-
+                                        <div class="modal-body text-secondary">
+                                            Czy na pewno chcesz trwale usunąć wszystkie zapisane transakcje? Operacji nie będzie można cofnąć.
                                             <input type="hidden" name="resetAccount">
 
                                         </div>
@@ -458,7 +508,10 @@
                                         <div class="modal-body">
                                             <div class="input-group mt-3">
                                                 <div class="input-group-prepend">
-                                                    <span class="input-group-text"> <i class="fa fa-lock"></i></span>
+                                                    <span class="input-group-text">
+                                                        <span class="material-icons align-middle">
+                                                            lock
+                                                        </span></span>
                                                 </div>
                                                 <input type="password" class="form-control" data-toggle="password" placeholder="Stare hasło" aria-label="Stare hasło" id="oldPassword" name="oldPassword" required>
 
@@ -468,12 +521,16 @@
 
                                             <div class="input-group mt-3">
                                                 <div class="input-group-prepend">
-                                                    <span class="input-group-text"> <i class="fa fa-lock"></i></span>
+                                                    <span class="input-group-text"><span class="material-icons align-middle">
+                                                            lock
+                                                        </span></span>
                                                 </div>
                                                 <input type="password" class="form-control" data-toggle="password" placeholder="Nowe hasło" aria-label="Nowe hasło" id="password" name="password" required>
                                                 <div class="input-group-append" style="cursor:pointer">
                                                     <span class="input-group-text" onclick="myFunction('password')">
-                                                        <i id="showHideIcon" class="fa fa-eye"></i>
+                                                        <span id="showHideIcon" class="material-icons align-middle">
+                                                            visibility_off
+                                                        </span>
                                                     </span>
                                                 </div>
                                             </div>
@@ -482,7 +539,7 @@
 
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="submit" class="btn btn-hover btn-floating">Potwierdź</button>
+                                            <button type="submit" class="btn btn-outline-success btn-hover btn-floating">Potwierdź</button>
                                         </div>
                                     </form>
                                 </div>
@@ -504,7 +561,7 @@
                                     </div>
                                     <form>
                                         <div class="modal-body text-secondary">
-                                            Czy na pewno chcesz trwale usunąć swoje konto wraz z zapisanymi danymi? Operacja jest nieodwracalna.
+                                            Czy na pewno chcesz trwale usunąć swoje konto wraz z zapisanymi danymi? Operacji nie będzie można cofnąć.
 
                                             <input type="hidden" name="deleteAccount">
 
@@ -521,6 +578,11 @@
                     </div>
 
                 </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="back mx-auto mt-5 mb-2">
+                <button type="button" class="p-2">POWRÓT DO MENU GŁÓWNEGO</button>
             </div>
         </div>
     </div>
