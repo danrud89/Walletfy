@@ -122,7 +122,7 @@ body.active .wallet-dark {
 
 .expense-box {
     max-height: 535px;
-    min-width: 325px;
+    min-width: 345px;
     color: white;
     background-color: rgb(108, 115, 163, 0.4);
     border: 2px solid cadetblue;

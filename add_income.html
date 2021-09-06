@@ -44,7 +44,7 @@
         <div class="row">
             <div class="wrapper col-4 mx-auto mb-1">
                 <div class="income-box mx-auto pl-3 pr-2 pt-3 pb-3">
-                    <div class="title text-center col-12 mb-3">DODAJ PRZYCHÓD</div>
+                    <div class="title text-center col-12 mb-3">ADD NEW INCOME</div>
                     <form>
                         <div class="row">
                             <div class="income-input mx-auto mt-4">
@@ -53,7 +53,7 @@
                                         attach_money
                                     </span>
                                 </div>
-                                <input class="amount-data px-3" type="number" class="form-control" placeholder="Kwota" min="0" max="99999.99" step="0.01" aria-label="kwota" name="amount" style="width: 85%" required>
+                                <input class="amount-data px-3" type="number" class="form-control" placeholder="Value" min="0" max="99999.99" step="0.01" aria-label="value" name="amount" style="width: 85%" required>
                             </div>
                         </div>
                         <div class="income-input mx-auto mt-3">
@@ -62,7 +62,7 @@
                                     date_range
                                 </span>
                             </div>
-                            <input type="date" class="data-control px-3" aria-label="data" style="width: 85%" required>
+                            <input type="date" class="data-control px-3" aria-label="date" style="width: 85%" required>
                         </div>
                         <div class="income-input mx-auto mt-3">
                             <div class="income-icon">
@@ -71,12 +71,13 @@
                                 </span>
                             </div>
                             <select name="options" class="user-options px-4" style="width: 85%">
-                                <option value="">--- Proszę wybrać opcję ---</option>
-                                <option value="salary">Wynagrodzenie</option>
-                                <option value="sell">Sprzedaż internetowa</option>
-                                <option value="interest">Odsetki</option>
-                                <option value="gift">Darowizna</option>
-                                <option value="other">Inne</option>
+                                <option value="">--- Please select option ---</option>
+                                <option value="salary">Salary</option>
+                                <option value="sell">Internet sale</option>
+                                <option value="interest">Interest</option>
+                                <option value="donation">Donation</option>
+                                <option value="gift">Gift</option>
+                                <option value="other">Other</option>
                             </select>
 
                         </div>
@@ -86,19 +87,19 @@
                                     description
                                 </span>
                             </div>
-                            <textarea class="form-data px-3 py-2" maxlength="50" placeholder="Komentarz (opcjonalne)" name="comment" style="width: 85%"></textarea>
+                            <textarea class="form-data px-3 py-2" maxlength="50" placeholder="Commentary (not required)" name="comment" style="width: 85%"></textarea>
                         </div>
 
                         <div class="submit mb-2">
                             <div class="accept mx-auto mt-4">
                                 <p class="acceptButton">
-                                    <input type="submit" value="DODAJ" class="p-2" />
+                                    <input type="submit" value="CREATE" class="p-2" />
                                 </p>
                             </div>
                             <div class="cancel mx-auto mt-4">
                                 <p class="cancelButton">
                                     <a href="menu.html">
-                                        <input type="submit" value="ANULUJ" class="p-2" />
+                                        <input type="submit" value="CANCEL" class="p-2" />
                                     </a>
                                 </p>
                             </div>
