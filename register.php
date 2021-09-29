@@ -9,13 +9,11 @@
     <meta name="keywords" content="budżet,finanse,wydatki,przychody,bilans" />
     <meta http-equiv="X-UA-Compatible" content="IE = edge, chrome = 1" />
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="bootstrap5/css/bootstrap.min.css" type="text/css" />
-    <link rel="stylesheet" href="style1.css" type="text/css" />
+    <link rel="stylesheet" href="register.css" type="text/css" />
     <link rel="stylesheet" href="icons/css/fontello.css" type="text/css" />
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -59,67 +57,76 @@
             </div>
 
             <div class="wrapper col-6 mx-auto mt-5">
-                <div class="login-box mx-auto">
+                <div class="register-box">
 
                     <div class="row">
-                        <div class="login-title text-center mx-auto mb-2 px-2">Sign in</div>
+                        <div class="register-title mx-auto mb-2 px-2">Sign up</div>
                     </div>
-                    <div class="row">
-                        <div class="login-input col-sm-12 mx-auto mb-2 mt-2 px-2 py-2">
-                            <div class="login-icon mx-auto my-auto px-2 py-2">
-                                <span class="material-icons">
-                                    person
-                                </span>
+                    <form method="post" action="signup.php" id="SignUpForm">
+                        <div class="row">
+                            <div class="register-input col-sm-12 mx-auto mt-4 mb-3">
+                                <div class="register-icon mx-auto">
+                                    <span class="material-icons px-2 py-1">
+                                        person
+                                    </span>
+                                </div>
+                                <input input type="email" class="form-control mx-auto my-auto px-2 py-2" placeholder="E-mail" aria-label="email" name="email" required autofocus>
                             </div>
-                            <input input type="email" class="form-control mx-auto my-auto px-2 py-2" placeholder="E-mail" aria-label="email" name="email" required autofocus>
                         </div>
-                    </div>
 
-                    <div class="row">
-                        <div class="login-input col-sm-12 mx-auto mb-2 px-2 py-2">
-                            <div class="login-icon mx-auto my-auto px-2 py-2">
-                                <span class="material-icons">
-                                    vpn_key
-                                </span>
+                        <div class="row">
+                            <div class="register-input col-sm-12 mx-auto mb-2">
+                                <div class="register-icon mx-auto">
+                                    <span class="material-icons px-2 py-1">
+                                        vpn_key
+                                    </span>
+                                </div>
+                                <input type="password" class="form-control mx-auto my-auto px-2 py-2" placeholder="password" aria-label="password" name="password" required>
                             </div>
-                            <input type="password" class="form-control mx-auto my-auto px-2 py-2" placeholder="password" aria-label="password" name="password" required>
                         </div>
-                    </div>
 
+                        <div class="row">
+                            <div class="register-input col-sm-12 mx-auto mb-3">
+                                <div class="register-icon mx-auto">
+                                    <span class="material-icons px-2 py-1">
+                                        vpn_key
+                                    </span>
+                                </div>
+                                <input type="password" class="form-control mx-auto my-auto px-2 py-2" placeholder="confirm password" aria-label="password" name="password" required>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="register-button ml-2 mb-4 px-1 py-1">
+                                <input type="submit" value="Sign up" class="mx-auto my-auto px-1 py-1" />
+                            </div>
+                        </div>
+                    </form>
                     <div class="row">
-                        <div class="keeplogin col-sm-12 mx-auto my-auto px-2 py-2">
-                            <input type="checkbox" name="loginkeeping" id="loginkeeping" value="loginkeeping" />
-                            <label for="loginkeeping" class="p-1">Remember me</label>
-                        </div>
-                    </div>
-
-                    <div class=" row">
-                        <div class="login-button ml-2 mt-3 mb-3 p-2">
-                            <input type="submit" value="Sign in" class="mx-auto my-auto px-1 py-1" />
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="change_link position-absolute mt-4 px-auto py-auto">
+                        <div class="change_link position-absolute mt-2 px-auto py-auto">
                             <div class="info position-relative d:inline-flex">
-                                <p class="text-left ">Not a member yet ?</p>
-                                <a href="register.html" class="p-1" style="margin-bottom: 2px;">Sign up</a>
+                                <p class="text-left ">Already have an account ?</p>
+                                <a href="index.html" class="p-1" style="margin-bottom: 1px;">Sign in</a>
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
     </div>
-    <div class="container-fluid p-0">
+
+    <div class="container-fluid p-0 mt-4 mt-lg-5">
         <div class="row">
-            <footer class="page-footer col-sm-12 col-md-12 mt-md-3 mt-lg-5">
+            <footer class="page-footer col-sm-12 col-md-12 mt-lg-5">
                 <div class="footer-container text-center mx-auto">
                     <p>Wszelkie prawa zastrzeżone. Copyright © 2021. All Rights Reserved </p>
                 </div>
             </footer>
         </div>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="bootstrap5/js/bootstrap.min.js"></script>
     <script>
@@ -131,6 +138,7 @@
         }
 
     </script>
+
 </body>
 
 </html>

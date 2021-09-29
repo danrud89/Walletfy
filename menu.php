@@ -1,3 +1,11 @@
+<?php
+session_start();
+if (!isset($_SESSION['loggedin'])) {
+	header('Location: index.html');
+	exit;
+}
+?>
+
 <html lang="pl">
 
 <head>
@@ -127,7 +135,7 @@
                 </button>
             </div>
             <div class="modal-body py-0 bg-light">
-                <form>
+                <form action="income.php" method="post">
                     <div class="row">
                         <div class="income-input mx-auto mt-4">
                             <div class="income-icon">
@@ -194,7 +202,7 @@
                 </button>
             </div>
             <div class="modal-body py-0 bg-light">
-                <form>
+                <form action="expense.php" method="post">
                     <div class="expense-box mx-auto pl-4 pr-3 py-3">
                         <div class="title text-center mx-auto">ADD NEW EXPENSE</div>
                         <div class="expense-input mx-auto mt-4">
