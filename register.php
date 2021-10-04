@@ -1,3 +1,14 @@
+<?php
+// Initialize the session
+session_start();
+ 
+// Check if the user is logged in, if yes - redirect him to main menu page
+if(isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true){
+    header("location: menu.php");
+    exit;
+}
+?>
+
 <!DOCTYPE HTML>
 <html lang="pl">
 
@@ -63,6 +74,7 @@
                         <div class="register-title mx-auto mb-2 px-2">Sign up</div>
                     </div>
                     <form method="post" action="signup.php" id="SignUpForm">
+                    <?php include('errors.php'); ?>
                         <div class="row">
                             <div class="register-input col-sm-12 mx-auto mt-4 mb-3">
                                 <div class="register-icon mx-auto">
@@ -70,7 +82,7 @@
                                         person
                                     </span>
                                 </div>
-                                <input input type="email" class="form-control mx-auto my-auto px-2 py-2" placeholder="E-mail" aria-label="email" name="email" required autofocus>
+                                <input input type="text" class="form-control mx-auto my-auto px-2 py-2" placeholder="login" aria-label="login" name="login" required autofocus>
                             </div>
                         </div>
 
@@ -92,14 +104,14 @@
                                         vpn_key
                                     </span>
                                 </div>
-                                <input type="password" class="form-control mx-auto my-auto px-2 py-2" placeholder="confirm password" aria-label="password" name="password" required>
+                                <input type="password" class="form-control mx-auto my-auto px-2 py-2" placeholder="confirm password" aria-label="password" name="confpassword" required>
                             </div>
                         </div>
 
 
                         <div class="row">
                             <div class="register-button ml-2 mb-4 px-1 py-1">
-                                <input type="submit" value="Sign up" class="mx-auto my-auto px-1 py-1" />
+                                <input type="submit" value="Sign up" name="reg_user" class="mx-auto my-auto px-1 py-1" />
                             </div>
                         </div>
                     </form>
@@ -107,7 +119,7 @@
                         <div class="change_link position-absolute mt-2 px-auto py-auto">
                             <div class="info position-relative d:inline-flex">
                                 <p class="text-left ">Already have an account ?</p>
-                                <a href="index.html" class="p-1" style="margin-bottom: 1px;">Sign in</a>
+                                <a href="index.php" class="p-1" style="margin-bottom: 1px;">Sign in</a>
                             </div>
                         </div>
                     </div>

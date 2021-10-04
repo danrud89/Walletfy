@@ -5,6 +5,7 @@ if ( !isset($_POST['email'], $_POST['password']) ) {
     header('Location: index.php');
 	exit('Please fill both the email and password fields!');
 }
+
 // Prepare SQL to prevent SQL injection.
 if ($stmt = $con->prepare('SELECT id, password FROM accounts WHERE username = ?')) {
 	$stmt->bind_param('s', $_POST['email']);
@@ -26,11 +27,11 @@ if ($stmt = $con->prepare('SELECT id, password FROM accounts WHERE username = ?'
 		// Incorrect password
 		echo 'Incorrect username and/or password!';
 	}
-} else {
+	
+}else {
 	// Incorrect username
 	echo 'Incorrect username and/or password!';
 }
-
 	$stmt->close();
 }
 ?>
