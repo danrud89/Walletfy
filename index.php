@@ -72,8 +72,7 @@ if(isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true){
             <div class="wrapper col-6 mx-auto mt-5">
                
                 <form action="signin.php" method="post" name="loginForm" onsubmit="return validation()" >
-                <?php include('errors.php'); ?>
-                    <div class="login-box mx-auto">
+                     <div class="login-box mx-auto">
 
                         <div class="row">
                             <div class="login-title text-center mx-auto mb-2 px-2">Sign in</div>
@@ -86,6 +85,11 @@ if(isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true){
                                     </span>
                                 </div>
                                 <input input type="text" class="form-control mx-auto my-auto px-2 py-2" placeholder="login" aria-label="login" name="login" required autofocus>
+                                <span class="invalid-feedback"><?php if(isset($_SESSION['username_err']))
+												{
+												echo $_SESSION['username_err'];
+												unset($_SESSION['username_err']);
+												}?></span>
                             </div>
                         </div>
 
@@ -96,7 +100,12 @@ if(isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true){
                                         vpn_key
                                     </span>
                                 </div>
-                                <input type="password" class="form-control mx-auto my-auto px-2 py-2 <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>"" placeholder="password" aria-label="password" name="password" required>
+                                <input type="password" class="form-control mx-auto my-auto px-2 py-2" placeholder="password" aria-label="password" name="password" required>
+                                <span class="invalid-feedback"><?php if(isset($_SESSION['login_err']))
+												{
+												echo $_SESSION['login_err'];
+												unset($_SESSION['login_err']);
+												}?></span>
                             </div>
                         </div>
 
@@ -109,7 +118,7 @@ if(isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true){
 
                         <div class=" row">
                             <div class="login-button ml-2 mt-3 mb-3 p-2">
-                                <input type="submit" value="Sign in" class="mx-auto my-auto px-1 py-1" />
+                                <input type="submit" name="sign_in" value="Sign in" class="mx-auto my-auto px-1 py-1" />
                             </div>
                         </div>
 
@@ -154,15 +163,23 @@ if(isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true){
                  return false;
             }
             else{
-            if( userName.length == "" ){
-                alert("Login is empty");
+            if( userName.trim()  === "" || userName == null ){
+                alert("Login field is empty");
                  return false;
             }
-            if(userPassword.length == ""){
+            if(userPassword.trim() === "" || userPassword == null){
                     alert("Password field is empty");
                         return false;
                     }
                 }
+            }
+            if(userPassword.length < 8 || userPassword.length > 20){
+                alert("Password must contain beetween 8 and 20 characters!");
+                    return false;
+            }
+            if(userName.length <= 3 ){
+                alert("Login must contain at least 3 charakters !");
+                    return false;
             }
     </script>
 </body>
