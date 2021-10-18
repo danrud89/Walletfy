@@ -85,11 +85,11 @@ if(isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true){
                                     </span>
                                 </div>
                                 <input input type="text" class="form-control mx-auto my-auto px-2 py-2" placeholder="login" aria-label="login" name="login" required autofocus>
-                                <span class="invalid-feedback"><?php if(isset($_SESSION['username_err']))
+                                <div class="invalid-feedback"><?php if(isset($_SESSION['username_err']))
 												{
 												echo $_SESSION['username_err'];
 												unset($_SESSION['username_err']);
-												}?></span>
+												}?></div>
                             </div>
                         </div>
 
@@ -101,11 +101,11 @@ if(isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true){
                                     </span>
                                 </div>
                                 <input type="password" class="form-control mx-auto my-auto px-2 py-2" placeholder="password" aria-label="password" name="password" required>
-                                <span class="invalid-feedback"><?php if(isset($_SESSION['login_err']))
+                                <div class="invalid-feedback"><?php if(isset($_SESSION['password_err']))
 												{
-												echo $_SESSION['login_err'];
-												unset($_SESSION['login_err']);
-												}?></span>
+												echo $_SESSION['password_err'];
+												unset($_SESSION['password_err']);
+												}?></div>
                             </div>
                         </div>
 
@@ -156,8 +156,8 @@ if(isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true){
     </script>
     <script>
         function validation() {
-            let userName = document.loginForm.email.value;
-            let userPassword = document.loginForm.password.value;
+            let userName = document.querySelector("input[name='login']").value;
+            let userPassword = document.querySelector("input[name='password']").value;
             if(userName.length == "" && userPassword.length == "") { 
                 (alert("Login and Password fields are empty"));
                  return false;
@@ -172,14 +172,6 @@ if(isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true){
                         return false;
                     }
                 }
-            }
-            if(userPassword.length < 8 || userPassword.length > 20){
-                alert("Password must contain beetween 8 and 20 characters!");
-                    return false;
-            }
-            if(userName.length <= 3 ){
-                alert("Login must contain at least 3 charakters !");
-                    return false;
             }
     </script>
 </body>

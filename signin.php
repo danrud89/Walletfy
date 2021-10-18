@@ -2,41 +2,35 @@
 session_start();
 
 // initializing variables
-$username = $password = "";
-$username_err = $login_err = "";
+$login = $password = "";
 
 // connect to the database
 require_once "config.php";
 mysqli_report(MYSQLI_REPORT_STRICT);
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['sign_in'])) {
         $db = mysqli_connect(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_NAME);
         if ($db === false) {
-            exit("ERROR: Could not connect. " . mysqli_connect_error());
+            exit("ERROR: Could not connect. " .mysqli_connect_error());
         } else {
             // LOG IN USER
-            if (isset($_POST['sign_in'])) {
                 // receive all input values from the form
-                $login = mysqli_real_escape_string($db, strip_tags(trim($_POST['login'])));
-                $password = mysqli_real_escape_string($db, strip_tags(trim($_POST['password'])));
+                $login = strip_tags(trim($_POST['login']));
+                $password = strip_tags(trim($_POST['password']));
 
                 // form validation: ensure that the form is correctly filled ...
                 if (empty($login)) {
                     $_SESSION['username_err'] =  "Username is required !";
                 }
-                if (!preg_match('/^[a-zA-Z0-9_]+$/', trim($_POST['login']))){
+                if (preg_match('/^[a-zA-Z0-9_]+$/', trim($_POST['login'])) == false){
                     $_SESSION['username_err'] = "Login can only contain letters, numbers, and underscores.";
                 }
 
                 if (empty($password)) {
-                    $_SESSION['login_err'] =  "Password is required !";
+                    $_SESSION['password_err'] = "Password is required !";
                 }
             }
-            else {
-                echo "Oops! Something went wrong. Please try again later.";
-                exit();
-            }
-            if (empty($username_err) && empty($login_err)) {
+            if (empty($username_err) && empty($password_err)) {
                 $user_check_query = "SELECT * FROM accounts WHERE LOGIN ='$login' LIMIT 1";
                 $result = mysqli_query($db, $user_check_query);
                 $user = mysqli_fetch_assoc($result);
@@ -53,12 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     exit();
                 }
             }
-            else {
-                echo "Oops! Something went wrong. Please try again later.";
-                exit();
-            }
         }
-    } 
  else {
     echo "Oops! Something went wrong. Please try again later.";
     exit();

@@ -80,7 +80,7 @@ if(isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true){
                                         person
                                     </span>
                                 </div>
-                                <input input type="text" class="form-control mx-auto my-auto px-2 py-2" placeholder="login" aria-label="login" name="login" required autofocus>
+                                <input input type="text" class="form-control mx-auto my-auto px-2 py-2" placeholder="login" aria-label="login" name="login" autofocus>
                                 <div class="invalid-feedback"><?php if(isset($_SESSION['username_err']))
 												{
 												echo $_SESSION['username_err'];
@@ -96,7 +96,7 @@ if(isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true){
                                         vpn_key
                                     </span>
                                 </div>
-                                <input type="password" class="form-control mx-auto my-auto px-2 py-2" placeholder="password" aria-label="password" name="password" required>
+                                <input type="password" class="form-control mx-auto my-auto px-2 py-2" placeholder="password" aria-label="password" name="password">
                                 <div class="invalid-feedback"><?php if(isset($_SESSION['password_err']))
 												{
 												echo $_SESSION['password_err'];
@@ -112,7 +112,7 @@ if(isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true){
                                         vpn_key
                                     </span>
                                 </div>
-                                <input type="password" class="form-control mx-auto my-auto px-2 py-2" placeholder="confirm password" aria-label="password" name="confpassword" required>
+                                <input type="password" class="form-control mx-auto my-auto px-2 py-2" placeholder="confirm password" aria-label="password" name="confpassword">
                                 <div class="invalid-feedback"><?php if(isset($_SESSION['confirm_password_err']))
 												{
 												echo $_SESSION['confirm_password_err'];
@@ -124,7 +124,7 @@ if(isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true){
 
                         <div class="row">
                             <div class="register-button ml-2 mb-4 px-1 py-1">
-                                <input type="submit" value="Sign up" name="reg_user" class="mx-auto my-auto px-1 py-1" />
+                               <button><input type="submit" value="Sign up" name="reg_user" class="mx-auto my-auto px-1 py-1" /></button> 
                             </div>
                         </div>
                     
@@ -164,11 +164,11 @@ if(isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true){
     </script>
 <script>
         function validation() {
-            let userName = document.registerForm.login.value;
-            let userPassword = document.loginForm.password.value;
-            let confPassword = document.loginForm.confpassword.value;
-            if(userName.length == "" && userPassword.length == "") { 
-                (alert("Login and Password fields are empty"));
+            let userName = document.querySelector("input[name='login']").value;
+            let userPassword = document.querySelector("input[name='password']").value;
+            let confPassword = document.querySelector("input[name='confpassword']").value;
+            if(userName.length == "" && userPassword.length == "" && confPassword.length == "") { 
+                alert("All fields are empty !");
                  return false;
             }
             else{
@@ -176,21 +176,22 @@ if(isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true){
                     alert("Login field is empty");
                     return false;
                 }
-            if(userPassword.trim() === "" || userPassword == null){
-                    alert("Password field is empty");
+                if(userPassword.trim() === "" || userPassword == null){
+                        alert("Password field is empty");
+                            return false;
+                        }
+                if(userPassword.length < 8 || userPassword.length > 20){
+                    alert("Password must contain beetween 8 and 20 characters!");
                         return false;
-                    }
-            if(userPassword.length < 8 || userPassword.length > 20){
-                alert("Password must contain beetween 8 and 20 characters!");
+                }
+                if(userName.length <= 3 ){
+                    alert("Login must contain at least 3 charakters !");
+                        return false;
+                }
+                if(userPassword != confPassword){
+                    alert("Password do not match !");
                     return false;
-            }
-            if(userName.length <= 3 ){
-                alert("Login must contain at least 3 charakters !");
-                    return false;
-            }
-            if(userPassword != confPassword){
-                alert("Password do not match !")
-            }
+                }
         }
     }
     </script>

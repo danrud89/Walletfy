@@ -248,7 +248,7 @@ if (!isset($_SESSION['loggedin'])) {
                                 <option value="">--- Please select option ---</option>
                                 <option value="food">Food</option>
                                 <option value="home">Housekeeping</option>
-                                <option value="clothes">Clother</option>
+                                <option value="clothes">Clothes</option>
                                 <option value="transport">Transport</option>
                                 <option value="health">Health</option>
                                 <option value="hygiene">Hygiene</option>
