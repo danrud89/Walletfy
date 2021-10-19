@@ -1,9 +1,9 @@
 <?php
 // Initialize the session
 session_start();
- 
+
 // Check if the user is logged in, if yes - redirect him to main menu page
-if(isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true){
+if (isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true) {
     header("location: menu.php");
     exit;
 }
@@ -68,11 +68,11 @@ if(isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true){
             </div>
 
             <div class="wrapper col-6 mx-auto mt-5">
-            <form method="post" action="signup.php" id="SignUpForm" name="registerForm" onsubmit="return validation()">
-                <div class="register-box">
-                    <div class="row">
-                        <div class="register-title mx-auto mb-2 px-2">Sign up</div>
-                    </div>
+                <form method="post" action="signup.php" id="SignUpForm" name="registerForm" onsubmit="return validation()">
+                    <div class="register-box">
+                        <div class="row">
+                            <div class="register-title mx-auto mb-2 px-2">Sign up</div>
+                        </div>
                         <div class="row">
                             <div class="register-input col-sm-12 mx-auto mt-4 mb-3">
                                 <div class="register-icon mx-auto">
@@ -80,12 +80,11 @@ if(isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true){
                                         person
                                     </span>
                                 </div>
-                                <input input type="text" class="form-control mx-auto my-auto px-2 py-2" placeholder="login" aria-label="login" name="login" autofocus>
-                                <div class="invalid-feedback"><?php if(isset($_SESSION['username_err']))
-												{
-												echo $_SESSION['username_err'];
-												unset($_SESSION['username_err']);
-												}?></div>
+                                <input input type="text" class="form-control mx-auto my-auto px-2 py-2" placeholder="login" aria-label="login" name="login" autofocus required>
+                                <div class="invalid-feedback"><?php if (isset($_SESSION['username_err'])) {
+                                                                    echo $_SESSION['username_err'];
+                                                                    unset($_SESSION['username_err']);
+                                                                } ?></div>
                             </div>
                         </div>
 
@@ -96,12 +95,11 @@ if(isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true){
                                         vpn_key
                                     </span>
                                 </div>
-                                <input type="password" class="form-control mx-auto my-auto px-2 py-2" placeholder="password" aria-label="password" name="password">
-                                <div class="invalid-feedback"><?php if(isset($_SESSION['password_err']))
-												{
-												echo $_SESSION['password_err'];
-												unset($_SESSION['password_err']);
-												}?></div>
+                                <input type="password" class="form-control mx-auto my-auto px-2 py-2" placeholder="password" aria-label="password" name="password" required>
+                                <div class="invalid-feedback"><?php if (isset($_SESSION['password_err'])) {
+                                                                    echo $_SESSION['password_err'];
+                                                                    unset($_SESSION['password_err']);
+                                                                } ?></div>
                             </div>
                         </div>
 
@@ -112,31 +110,30 @@ if(isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true){
                                         vpn_key
                                     </span>
                                 </div>
-                                <input type="password" class="form-control mx-auto my-auto px-2 py-2" placeholder="confirm password" aria-label="password" name="confpassword">
-                                <div class="invalid-feedback"><?php if(isset($_SESSION['confirm_password_err']))
-												{
-												echo $_SESSION['confirm_password_err'];
-												unset($_SESSION['confirm_password_err']);
-												}?></div>
+                                <input type="password" class="form-control mx-auto my-auto px-2 py-2" placeholder="confirm password" aria-label="password" name="confpassword" required>
+                                <div class="invalid-feedback"><?php if (isset($_SESSION['confirm_password_err'])) {
+                                                                    echo $_SESSION['confirm_password_err'];
+                                                                    unset($_SESSION['confirm_password_err']);
+                                                                } ?></div>
                             </div>
                         </div>
 
 
                         <div class="row">
                             <div class="register-button ml-2 mb-4 px-1 py-1">
-                               <button><input type="submit" value="Sign up" name="reg_user" class="mx-auto my-auto px-1 py-1" /></button> 
+                                <button><input type="submit" value="Sign up" name="reg_user" class="mx-auto my-auto px-1 py-1" /></button>
                             </div>
                         </div>
-                    
-                    <div class="row">
-                        <div class="change_link position-absolute mt-2 px-auto py-auto">
-                            <div class="info position-relative d:inline-flex">
-                                <p class="text-left ">Already have an account ?</p>
-                                <a href="index.php" class="p-1" style="margin-bottom: 1px;">Sign in</a>
+
+                        <div class="row">
+                            <div class="change_link position-absolute mt-2 px-auto py-auto">
+                                <div class="info position-relative d:inline-flex">
+                                    <p class="text-left ">Already have an account ?</p>
+                                    <a href="index.php" class="p-1" style="margin-bottom: 1px;">Sign in</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 </form>
             </div>
         </div>
@@ -162,38 +159,42 @@ if(isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true){
             body.classList.toggle('active');
         }
     </script>
-<script>
+    <script>
         function validation() {
             let userName = document.querySelector("input[name='login']").value;
             let userPassword = document.querySelector("input[name='password']").value;
             let confPassword = document.querySelector("input[name='confpassword']").value;
-            if(userName.length == "" && userPassword.length == "" && confPassword.length == "") { 
+            if (userName.length == "" && userPassword.length == "" && confPassword.length == "") {
                 alert("All fields are empty !");
-                 return false;
-            }
-            else{
-                 if( userName.trim()  === "" || userName == null ){
+                return false;
+            } else {
+                if (userName.trim() === "" || userName == null) {
                     alert("Login field is empty");
                     return false;
                 }
-                if(userPassword.trim() === "" || userPassword == null){
-                        alert("Password field is empty");
-                            return false;
-                        }
-                if(userPassword.length < 8 || userPassword.length > 20){
-                    alert("Password must contain beetween 8 and 20 characters!");
-                        return false;
-                }
-                if(userName.length <= 3 ){
+                if (userName.length < 3) {
                     alert("Login must contain at least 3 charakters !");
-                        return false;
+                    return false;
                 }
-                if(userPassword != confPassword){
+                if (userPassword.trim() === "" || userPassword == null) {
+                    alert("Password field is empty");
+                    return false;
+                }
+                if (userPassword.length < 8 || userPassword.length > 20) {
+                    alert("Password must contain beetween 8 and 20 characters!");
+                    return false;
+                }
+                if (confPassword.trim() === "" || confPassword == null) {
+                    alert("Password field is empty");
+                    return false;
+                }
+               
+                if (userPassword != confPassword) {
                     alert("Password do not match !");
                     return false;
                 }
+            }
         }
-    }
     </script>
 </body>
 

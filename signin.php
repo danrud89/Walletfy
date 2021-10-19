@@ -3,6 +3,7 @@ session_start();
 
 // initializing variables
 $login = $password = "";
+$username_err = $password_err = "";
 
 // connect to the database
 require_once "config.php";
