@@ -172,7 +172,7 @@
 
             <div class="row">
                 <div class="back mx-auto mt-2 mb-2">
-                    <button type="button" class="p-2">BACK TO MAIN MENU</button>
+                   <a href="menu.php"><button type="button" class="p-2">BACK TO MAIN MENU</button></a>
                 </div>
             </div>
         </div>

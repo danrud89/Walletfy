@@ -1,8 +1,8 @@
 <?php
 session_start();
 if (!isset($_SESSION['loggedin'])) {
-	header('Location: index.html');
-	exit;
+    header('Location: index.html');
+    exit;
 }
 ?>
 
@@ -70,7 +70,7 @@ if (!isset($_SESSION['loggedin'])) {
                         </a>
 
 
-                        <a href="balance.html" class="position-relative p-2">
+                        <a href="balance.php" class="position-relative p-2">
                             <li class="honeycomb-cell">
                                 <span class="material-icons">insert_chart_outlined</span>
                                 <div class="honeycomb-cell_title">BALANCE</div>
@@ -78,7 +78,7 @@ if (!isset($_SESSION['loggedin'])) {
                         </a>
 
 
-                        <a href="settings.html" class="position-relative p-2">
+                        <a href="settings.php" class="position-relative p-2">
                             <li class="honeycomb-cell">
                                 <span class="material-icons">
                                     manage_accounts
@@ -88,7 +88,7 @@ if (!isset($_SESSION['loggedin'])) {
                         </a>
 
 
-                        <a href="index.html" class="position-relative p-2">
+                        <a href="index.php" class="position-relative p-2">
                             <li class="honeycomb-cell">
                                 <span class="material-icons">
                                     dvr
@@ -120,7 +120,6 @@ if (!isset($_SESSION['loggedin'])) {
             toggle.classList.toggle('active');
             body.classList.toggle('active');
         }
-
     </script>
 </body>
 
@@ -148,13 +147,12 @@ if (!isset($_SESSION['loggedin'])) {
                     </div>
                     <div class="error">
                         <?php
-                            if(isset($_SESSION['amount_err']))
-                            {
+                        if (isset($_SESSION['amount_err'])) {
                             echo $_SESSION['amount_err'];
                             unset($_SESSION['amount_err']);
-                            }
+                        }
                         ?>
-                        </div>
+                    </div>
                     <div class="income-input mx-auto mt-3">
                         <div class="income-icon">
                             <span class="material-icons px-2 py-2 text-muted">
@@ -165,13 +163,12 @@ if (!isset($_SESSION['loggedin'])) {
                     </div>
                     <div class="error">
                         <?php
-                            if(isset($_SESSION['date_err']))
-                            {
+                        if (isset($_SESSION['date_err'])) {
                             echo $_SESSION['date_err'];
                             unset($_SESSION['date_err']);
-                            }
+                        }
                         ?>
-                        </div>
+                    </div>
                     <div class="income-input mx-auto mt-3">
                         <div class="income-icon">
                             <span class="material-icons px-2 py-2">
@@ -190,13 +187,12 @@ if (!isset($_SESSION['loggedin'])) {
                     </div>
                     <div class="error">
                         <?php
-                            if(isset($_SESSION['category_err']))
-                            {
+                        if (isset($_SESSION['category_err'])) {
                             echo $_SESSION['category_err'];
                             unset($_SESSION['category_err']);
-                            }
+                        }
                         ?>
-                        </div>
+                    </div>
                     <div class="income-input mx-auto mt-3 mb-4">
                         <div class="income-icon">
                             <span class="material-icons px-2 py-3">
@@ -207,26 +203,25 @@ if (!isset($_SESSION['loggedin'])) {
                     </div>
                     <div class="error">
                         <?php
-                            if(isset($_SESSION['comment_err']))
-                            {
+                        if (isset($_SESSION['comment_err'])) {
                             echo $_SESSION['comment_err'];
                             unset($_SESSION['comment_err']);
-                            }
+                        }
                         ?>
-                        </div>
+                    </div>
                 </form>
             </div>
 
             <div class="modal-footer justify-content-center flex-column flex-md-row btn-group">
-                <input type="submit" name="addIncome" value="ADD" class="btn btn-floating btn-outline-success mr-2">
+                <input type="submit" name="addExpense" value="ADD" class="btn btn-floating btn-outline-success mr-2">
                 <input type="button" class="btn btn-floating btn-danger waves-effect" value="CLOSE" data-dismiss="modal">
-            </div>
-            <div class="incomeAdded">
-            <?php
-            if (isset($_SESSION['incomeAddedCorrectly']))
-            echo '<h5> class="text-center mx-auto text-success">Income has been added correctly!</h5>';
-            unset($_SESSION['incomeAddedCorrectly']);
-            ?>
+                <div class="incomeAdded">
+                    <?php
+                    if (isset($_SESSION['expenseAddedCorrectly']))
+                        echo '<h5> class="text-center mx-auto text-success">Income has been added correctly!</h5>';
+                    unset($_SESSION['incomeAddedCorrectly']);
+                    ?>
+                </div>
             </div>
         </div>
     </div>
@@ -255,6 +250,15 @@ if (!isset($_SESSION['loggedin'])) {
                             </div>
                             <input class="form-data px-3" type="number" class="form-control" placeholder="Value" min="0" max="99999.99" step="0.01" aria-label="value" name="amount" style="width: 85%" required>
                         </div>
+                        <div class="error">
+                            <?php
+                            if (isset($_SESSION['amount_err'])) {
+                                echo $_SESSION['amount_err'];
+                                unset($_SESSION['amount_err']);
+                            }
+                            ?>
+                        </div>
+
                         <div class="expense-input mx-auto mt-4">
                             <div class="expense-icon">
                                 <span class="material-icons px-2 py-2">
@@ -262,6 +266,14 @@ if (!isset($_SESSION['loggedin'])) {
                                 </span>
                             </div>
                             <input type="date" class="data-control px-3" aria-label="date" style="width: 85%" required>
+                        </div>
+                        <div class="error">
+                            <?php
+                            if (isset($_SESSION['date_err'])) {
+                                echo $_SESSION['date_err'];
+                                unset($_SESSION['date_err']);
+                            }
+                            ?>
                         </div>
                         <div class="expense-input mx-auto mt-4">
                             <div class="expense-icon">
@@ -278,6 +290,14 @@ if (!isset($_SESSION['loggedin'])) {
                                 <option value="transfer">Transfer</option>
                             </select>
                         </div>
+                        <div class="error">
+                            <?php
+                            if (isset($_SESSION['option_err'])) {
+                                echo $_SESSION['option_err'];
+                                unset($_SESSION['option_err']);
+                            }
+                            ?>
+                        </div>
                         <div class="expense-input mx-auto mt-4">
                             <div class="expense-icon">
                                 <span class="material-icons">
@@ -286,7 +306,7 @@ if (!isset($_SESSION['loggedin'])) {
                                     </span>
                                 </span>
                             </div>
-                            <select name="options" class="user-options px-3 text-muted" style="width: 85%">
+                            <select name="purpose" class="user-options px-3 text-muted" style="width: 85%">
                                 <option value="">--- Please select option ---</option>
                                 <option value="food">Food</option>
                                 <option value="home">Housekeeping</option>
@@ -305,21 +325,36 @@ if (!isset($_SESSION['loggedin'])) {
                                 <option value="other">Other</option>
                             </select>
                         </div>
+                        <div class="error">
+                            <?php
+                            if (isset($_SESSION['purpose_err'])) {
+                                echo $_SESSION['purpose_err'];
+                                unset($_SESSION['purpose_err']);
+                            }
+                            ?>
+                        </div>
                         <div class="expense-input mx-auto mt-4 mb-4">
                             <div class="expense-icon">
                                 <span class="material-icons px-2 py-3">
                                     description
                                 </span>
                             </div>
-                            <textarea class="form-data px-3 py-2" maxlength="50" placeholder="Commentary (not required)" name="comment" style="width: 85%"></textarea>
+                            <textarea class="form-data px-3 py-2" minlength="0" maxlength="50" placeholder="Commentary (not required)" name="comment" style="width: 85%"></textarea>
                         </div>
                     </div>
                 </form>
             </div>
 
             <div class="modal-footer justify-content-center flex-column flex-md-row btn-group">
-            <input type="submit" name="addExpense" value="ADD" class="btn btn-floating btn-outline-success mr-2">
+                <input type="submit" name="addExpense" value="ADD" class="btn btn-floating btn-outline-success mr-2">
                 <input type="button" class="btn btn-floating btn-danger waves-effect" value="CLOSE" data-dismiss="modal">
+                <div class="incomeAdded">
+                    <?php
+                    if (isset($_SESSION['incomeAddedCorrectly']))
+                        echo '<h5> class="text-center mx-auto text-success">Income has been added correctly!</h5>';
+                    unset($_SESSION['incomeAddedCorrectly']);
+                    ?>
+                </div>
             </div>
         </div>
     </div>
