@@ -24,19 +24,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['addIncome'])) {
 
         if ($amount <= 0) {
             $_SESSION['amount_err'] = 'Amount must be greater than 0 !';
+            header('Location: menu.php');
+            exit();
         }
         if(strlen($comment) > 50){
-            $_SESSION['comment_err'] = 'Comment cannot contain more than 50 marks !';
-        }
-}	
-    try
-    {
-        $db = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_NAME);
-        if ($db->connect_errno != 0) {
-            throw new Exception(mysqli_connect_errno());
+            $_SESSION['comment_err'] = 'Comment cannot contain more than 50 characters !';
+            header('Location: menu.php');
+            exit();
         }       
-        else
-        {
+      
             $sql_select_category = "SELECT id FROM incomes_category_assigned_to_users WHERE user_id = :user_id AND name = :category";
             $query_select = $db->prepare($sql_select_category);
             $query_select->bindValue(':user_id', $user_id, PDO::PARAM_INT);
@@ -57,12 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['addIncome'])) {
             $query_income->execute();
 
             $_SESSION['incomeAddedCorrectly'] = true;
-            $db->close();
-        }
-    }
-    catch (Exception $e)
-    {
-        echo '<span style="color:red";>Internal server error! Please try again later.</span>';
-    }
+            $db->close();     
+}
 }
 ?>

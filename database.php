@@ -12,7 +12,7 @@ try {
 } catch (PDOException $error) {
 	
 	echo $error->getMessage();
-	exit('Database error ! Try again later.');
+	exit('Internal server error ! Please try again later.');
 	
 }
 
