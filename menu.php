@@ -344,12 +344,11 @@ if (!isset($_SESSION['loggedin'])) {
                             <textarea class="form-data px-3 py-2" minlength="0" maxlength="50" placeholder="Commentary (not required)" name="comment" style="width: 85%"></textarea>
                         </div>
                     </div>
-                </form>
             </div>
 
             <div class="modal-footer justify-content-center flex-column flex-md-row btn-group">
                 <input type="submit" name="addExpense" value="ADD" class="btn btn-floating btn-outline-success mr-2">
-                <input type="button" class="btn btn-floating btn-danger waves-effect" value="CLOSE" data-dismiss="modal">
+                <input type="button" class="btn btn-floating btn-danger waves-effect" name="erase_expense" value="CLOSE" data-dismiss="modal">
                 <div class="incomeAdded">
                     <?php
                     if (isset($_SESSION['incomeAddedCorrectly']))
@@ -358,6 +357,7 @@ if (!isset($_SESSION['loggedin'])) {
                     ?>
                 </div>
             </div>
+            </form>
         </div>
     </div>
 </div>
