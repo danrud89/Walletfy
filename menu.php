@@ -209,20 +209,22 @@ if (!isset($_SESSION['loggedin'])) {
                         }
                         ?>
                     </div>
-                </form>
             </div>
 
             <div class="modal-footer justify-content-center flex-column flex-md-row btn-group">
-                <input type="submit" name="addExpense" value="ADD" class="btn btn-floating btn-outline-success mr-2">
-                <input type="button" class="btn btn-floating btn-danger waves-effect" value="CLOSE" data-dismiss="modal">
+                <input type="submit" name="addIncome" value="ADD" class="btn btn-floating btn-outline-success mr-2">
+                <input type="button" class="btn btn-floating btn-danger waves-effect" name="erase_income" action="erase_expense.php" value="CLOSE" data-dismiss="modal">
                 <div class="incomeAdded">
                     <?php
-                    if (isset($_SESSION['expenseAddedCorrectly']))
+                    if (isset($_SESSION['incomeAddedCorrectly'])){
                         echo '<h5> class="text-center mx-auto text-success">Income has been added correctly!</h5>';
                     unset($_SESSION['incomeAddedCorrectly']);
+                    }
+                    else echo "";
                     ?>
                 </div>
             </div>
+            </form>
         </div>
     </div>
 </div>

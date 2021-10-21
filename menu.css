@@ -17,7 +17,7 @@ body {
     color: aliceblue;
 }
 
-body.modal-open > :not(.modal) {
+body.modal-open> :not(.modal) {
     -webkit-filter: blur(3px);
     -moz-filter: blur(3px);
     -o-filter: blur(3px);
@@ -125,7 +125,7 @@ body.active .wallet-dark {
 }
 
 
-a > .honeycomb-cell {
+a>.honeycomb-cell {
     -webkit-box-flex: 0;
     flex: 0 1 250px;
     max-width: 200px;
@@ -416,6 +416,14 @@ input {
 
 .submit {
     display: flex;
+}
+
+.error {
+    color: red;
+    margin: auto;
+    font-size: 25px;
+    text-align: center;
+
 }
 
 

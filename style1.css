@@ -371,6 +371,13 @@ input {
 
 }
 
+.error {
+    color: red;
+    margin: auto;
+    font-size: 25px;
+    text-align: center;
+}
+
 .page-footer {
     font-size: 16px;
     background-color: transparent;
