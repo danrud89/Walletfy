@@ -6,17 +6,22 @@ if(!isset($_SESSION['logged_id']))
     header('Location: balance.php');
 }
 
-($_POST['start_date'] == '' || $_POST['end_date'] == '') ? 
+$start_date = $end_date = "";
 
-   $_SESSION['e_balance_date'] = 'Nale¿y wybraæ obie daty!';
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['saveDates'])){
+
+   if ($_POST['start_date'] == "" || $_POST['end_date'] == "") { 
+
+   $_SESSION['date_err'] = 'Date fields cannot be empty !';
    header('Location: balance.php');
    exit();
+}
 
 else
 {
     if($_POST['first_date'] > $_POST['second_date'])
     {
-        $_SESSION['e_balance_date'] = 'Pierwsza data nie mo¿e byæ wiêksza ni¿ druga!';
+        $_SESSION['date_err'] = 'Cannot set second date as earlier !';
         header('Location: balance.php');
         exit();
     }
@@ -27,5 +32,6 @@ else
         header('Location: balance_custom.php');
     }
     
+}
 }
 ?>

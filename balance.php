@@ -1,3 +1,11 @@
+<?php
+session_start();
+if (!isset($_SESSION['loggedin'])) {
+    header('Location: index.html');
+    exit;
+}
+?>
+
 <!DOCTYPE HTML>
 <html lang="pl">
 
@@ -37,7 +45,7 @@
             </div>
         </div>
         <div class="welcome-message mt-0 mb-1 mx-2 py-2 px-4 w-100">
-            <form id="date-range-form">
+            <form id="date-range-form" method="POST" action="">
                 <div class="input-group col-sm-12 col-md-6 mx-auto px-3 py-3 t-3">
                     <div class="calendar-icon my-1">
                         <span class="material-icons pb-1 pr-1">
@@ -57,7 +65,7 @@
 
                 <div class='row'>
                     <div class='col-12 text-center mt-3'>
-                        <h4 class='balanceDates'>FINANCIAL BALANCE FROM :{{ startDate|date('d/m/Y') }} TO {{ endDate|date('d/m/Y')}}</h4>
+                        <h4 class='balanceDates'>FINANCIAL BALANCE FROM : <?php if (isset($_SESSION['start_date'])){echo $_SESSION['start-date']; unset($_SESSION['start_date']);} ?> TO : <?php if (isset($_SESSION['end_date'])) {echo $_SESSION['end_date']; unset ($_SESSION['end_date']);}?> </h4>
                     </div>
                 </div>
 
@@ -90,8 +98,16 @@
                                 </form>
                             </div>
                             <div class="modal-footer btn-group" role="group">
-                                <button type="button" class="btn btn-dark">Save</button>
+                                <button type="button" class="btn btn-dark" value="SAVE" name="saveDates"></button>
                                 <button id="modalCloseBtn" type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                                <div class="error">
+                                    <?php
+                                    if (isset($_SESSION['date_err'])) {
+                                        echo $_SESSION['date_err'];
+                                        unset($_SESSION['date_err']);
+                                    }
+                                    ?>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -172,7 +188,7 @@
 
             <div class="row">
                 <div class="back mx-auto mt-2 mb-2">
-                   <a href="menu.php"><button type="button" class="p-2">BACK TO MAIN MENU</button></a>
+                    <a href="menu.php"><button type="button" class="p-2">BACK TO MAIN MENU</button></a>
                 </div>
             </div>
         </div>
@@ -195,7 +211,6 @@
             toggle.classList.toggle('active');
             body.classList.toggle('active');
         }
-
     </script>
     <script>
         $('#periodOfTime').change(function() {
@@ -209,7 +224,6 @@
                 document.getElementById("periodOfTime").setAttribute("onclick", "this.form.submit()");
             }
         });
-
     </script>
 </body>
 

@@ -88,7 +88,7 @@ if (!isset($_SESSION['loggedin'])) {
                         </a>
 
 
-                        <a href="index.php" class="position-relative p-2">
+                        <a href="logout.php" class="position-relative p-2">
                             <li class="honeycomb-cell">
                                 <span class="material-icons">
                                     dvr

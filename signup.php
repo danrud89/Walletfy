@@ -4,15 +4,14 @@ session_start();
 // initializing variables
 $login = "";
 $password = $confpassword = "";
-$username_err = $password_err = $confirm_password_err = "";
+$username_err = $password_err = $confirm_password_err = $wrong_validation =  "";
+$success = "";
 
 // connect to the database
 require_once "database.php";
 mysqli_report(MYSQLI_REPORT_STRICT);
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['reg_user'])) {
-  if ($db === false) {
-    die("ERROR: Could not connect. " . mysqli_connect_error());
-  } else {
+
     // REGISTER USER
     //receive all input values from the form
     $login = strip_tags(trim($_POST['login']));
@@ -79,6 +78,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['reg_user'])) {
 
           $query = "INSERT INTO users 
   			  VALUES(NULL, '$login', '$encryptedPassword')"; //save user data into db
+          if ($db->query($query) === TRUE) {
+            $_SESSION['success']  = "New user added successfully";
+          } else {
+            $_SESSION['wrong_validation'] = "Ooops! Something went wrong ! Please try again later.";
+            header('Location: register.php');
+            exit();
+          }
 
           //assign to user incomes,expenses,payment default template of db
            $sql_insert_incomes_template_default = "INSERT INTO incomes_category_assigned_to_users (user_id, name) 
@@ -100,8 +106,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['reg_user'])) {
           $_SESSION['success'] = "You are now logged in";
           header('location: menu.php');
         }
-  }
-} else {
+} 
+else {
   echo "Oops! Something went wrong. Please try again later.";
   exit();
 }
