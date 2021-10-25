@@ -114,6 +114,8 @@ if (isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true) {
                             <div class="register-button ml-2 mb-4 px-1 py-1">
                                 <button><input type="submit" value="Sign up" name="reg_user" class="mx-auto my-auto px-1 py-1" /></button>
                             </div>
+                            <span><?php echo ((isset($_SESSION['success']) && $_SESSION['success'] != '') ? $_SESSION['success'] : ''); unset($_SESSION['success']); ?> </span>
+                            <span><?php echo ((isset($_SESSION['wrong_validation']) && $_SESSION['wrong_validation'] != '') ? $_SESSION['wrong_validation'] : ''); unset($_SESSION['wrong_validation']); ?> </span>
                         </div>
 
                         <div class="row">

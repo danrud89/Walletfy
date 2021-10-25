@@ -44,6 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['sign_in'])) {
                 $_SESSION['logged_id'] = $user['id'];
                 $_SESSION['logged_user'] = $user['login'];
                 $_SESSION['loggedin'] = true;
+                $_SESSION['login_message'] = "Succesfully login! Redirecting...";
                 header('Location: menu.php');
                 exit();
             } else {

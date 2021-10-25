@@ -23,11 +23,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['reg_user'])) {
     if (empty($login)) {
       $_SESSION['username_err'] = "Username is required !";
       header('Location: register.php');
-            exit();
-    }
-    if (empty($password)) {
-      $_SESSION['password_err'] = "Password is required !";
-      header('Location: register.php');
       exit();
     }
     if ((strlen($login) < 3)) {
@@ -35,7 +30,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['reg_user'])) {
       header('Location: register.php');
       exit();
     }
-    if (preg_match('/^[a-zA-Z0-9_]+$/', trim($_POST['login'])) == false) {
+    if (empty($password)) {
+      $_SESSION['password_err'] = "Password is required !";
+      header('Location: register.php');
+      exit();
+    }
+  
+    if (preg_match('/^[a-zA-Z0-9_]+$/', $login) == false) {
       $_SESSION['username_err'] = "Login can only contain letters, numbers, and underscores.";
       header('Location: register.php');
       exit();

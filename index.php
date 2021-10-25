@@ -112,6 +112,7 @@ if(isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true){
                             <div class="login-button ml-2 mt-3 mb-3 p-2">
                                 <input type="submit" name="sign_in" value="Sign in" class="mx-auto my-auto px-1 py-1" />
                             </div>
+                            <span><?php echo ((isset($_SESSION['login_message']) && $_SESSION['login_message'] != '') ? $_SESSION['login_message'] : ''); unset($_SESSION['login_message']); ?> </span>
                         </div>
 
                         <div class="row">
