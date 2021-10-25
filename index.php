@@ -71,7 +71,7 @@ if(isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true){
 
             <div class="wrapper col-6 mx-auto mt-5">
                
-                <form action="signin.php" method="post" name="loginForm" onsubmit="return validation()" >
+                <form action="signin.php" method="post" name="loginForm" onsubmit="return inputValidation()" >
                      <div class="login-box mx-auto">
 
                         <div class="row">
@@ -85,11 +85,7 @@ if(isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true){
                                     </span>
                                 </div>
                                 <input input type="text" class="form-control mx-auto my-auto px-2 py-2" placeholder="login" aria-label="login" name="login" required autofocus>
-                                <div class="invalid-feedback"><?php if(isset($_SESSION['username_err']))
-												{
-												echo $_SESSION['username_err'];
-												unset($_SESSION['username_err']);
-												}?></div>
+                                <span><?php echo ((isset($_SESSION['login_err']) && $_SESSION['login_err'] != '') ? $_SESSION['login_err'] : ''); unset($_SESSION['login_err']); ?> </span>
                             </div>
                         </div>
 
@@ -101,11 +97,7 @@ if(isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true){
                                     </span>
                                 </div>
                                 <input type="password" class="form-control mx-auto my-auto px-2 py-2" placeholder="password" aria-label="password" name="password" required>
-                                <div class="invalid-feedback"><?php if(isset($_SESSION['password_err']))
-												{
-												echo $_SESSION['password_err'];
-												unset($_SESSION['password_err']);
-												}?></div>
+                                <span><?php echo ((isset($_SESSION['password_login_err']) && $_SESSION['password_login_err'] != '') ? $_SESSION['password_login_err'] : ''); unset($_SESSION['password_login_err']); ?> </span>
                             </div>
                         </div>
 
@@ -155,7 +147,7 @@ if(isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true){
         }
     </script>
     <script>
-        function validation() {
+        function inputValidation() {
             let userName = document.querySelector("input[name='login']").value;
             let userPassword = document.querySelector("input[name='password']").value;
             if(userName.length == "" && userPassword.length == "") { 

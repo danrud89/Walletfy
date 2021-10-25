@@ -81,10 +81,7 @@ if (isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true) {
                                     </span>
                                 </div>
                                 <input input type="text" class="form-control mx-auto my-auto px-2 py-2" placeholder="login" aria-label="login" name="login" autofocus required>
-                                <div class="invalid-feedback"><?php if (isset($_SESSION['username_err'])) {
-                                                                    echo $_SESSION['username_err'];
-                                                                    unset($_SESSION['username_err']);
-                                                                } ?></div>
+                                <span><?php echo ((isset($_SESSION['username_err']) && $_SESSION['username_err'] != '') ? $_SESSION['username_err'] : ''); unset($_SESSION['username_err']); ?> </span>
                             </div>
                         </div>
 
@@ -96,10 +93,7 @@ if (isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true) {
                                     </span>
                                 </div>
                                 <input type="password" class="form-control mx-auto my-auto px-2 py-2" placeholder="password" aria-label="password" name="password" required>
-                                <div class="invalid-feedback"><?php if (isset($_SESSION['password_err'])) {
-                                                                    echo $_SESSION['password_err'];
-                                                                    unset($_SESSION['password_err']);
-                                                                } ?></div>
+                                <span><?php echo ((isset($_SESSION['password_err']) && $_SESSION['password_err'] != '') ? $_SESSION['password_err'] : ''); unset($_SESSION['password_err']); ?> </span>
                             </div>
                         </div>
 
@@ -111,10 +105,7 @@ if (isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true) {
                                     </span>
                                 </div>
                                 <input type="password" class="form-control mx-auto my-auto px-2 py-2" placeholder="confirm password" aria-label="password" name="confpassword" required>
-                                <div class="invalid-feedback"><?php if (isset($_SESSION['confirm_password_err'])) {
-                                                                    echo $_SESSION['confirm_password_err'];
-                                                                    unset($_SESSION['confirm_password_err']);
-                                                                } ?></div>
+                                <span><?php echo ((isset($_SESSION['confirm_password_err']) && $_SESSION['confirm_password_err'] != '') ? $_SESSION['confirm_password_err'] : ''); unset($_SESSION['confirm_password_err']); ?> </span>
                             </div>
                         </div>
 
