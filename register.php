@@ -5,7 +5,7 @@ session_start();
 // Check if the user is logged in, if yes - redirect him to main menu page
 if (isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true) {
     header("location: menu.php");
-    exit;
+    exit();
 }
 ?>
 
@@ -19,7 +19,7 @@ if (isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true) {
     <meta name="descritpion" content="Dzięki WALLETFY - aplikacji do zarządzania finansami, Twoje zarządzanie budżetem stanie się prostsze!" />
     <meta name="keywords" content="budżet,finanse,wydatki,przychody,bilans" />
     <meta http-equiv="X-UA-Compatible" content="IE = edge, chrome = 1" />
-
+    <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
@@ -55,24 +55,19 @@ if (isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true) {
 
                 <section div class="social col-md-12 mx-auto my-auto py-5">
                     <p>Follow us :</p>
-                    <div class="fb">
-                        <a href="https://www.facebook.com/daniel.rudnik.35/" class="fblink"><i class="icon-facebook"></i></a>
-                    </div>
-                    <div class="ln">
-                        <p><a href="https://www.linkedin.com/in/daniel-rudnik-8894811b2/" class="lnlink"><i class="icon-linkedin"></i></a></p>
-                    </div>
-                    <div class="gh">
-                        <p><a href="https://github.com/danrud89" class="ghlink"><i class="icon-github-squared"></i></a></p>
-                    </div>
+                    <a class="mx-3" href="#!" id="ln"><i class="fab fa-linkedin"></i></a>
+                    <a class="mx-3" href="#!" id="fb"><i class="fab fa-facebook-square"></i></a>
+                    <a class="mx-3" href="#!" id="gh"><i class="fab fa-github"></i></a>
                 </section>
             </div>
 
             <div class="wrapper col-6 mx-auto mt-5">
-                <form method="post" action="signup.php" id="SignUpForm" name="registerForm" onsubmit="return validation()">
+                <form action="signup.php" method="post" id="SignUpForm" name="registerForm" onsubmit="return validation()">
                     <div class="register-box">
                         <div class="row">
                             <div class="register-title mx-auto mb-2 px-2">Sign up</div>
                         </div>
+                        <span class="text-danger"><?php echo ((isset($_SESSION['username_err']) && $_SESSION['username_err'] != '') ? $_SESSION['username_err'] : ''); unset($_SESSION['username_err']); ?> </span>
                         <div class="row">
                             <div class="register-input col-sm-12 mx-auto mt-4 mb-3">
                                 <div class="register-icon mx-auto">
@@ -80,8 +75,7 @@ if (isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true) {
                                         person
                                     </span>
                                 </div>
-                                <input input type="text" class="form-control mx-auto my-auto px-2 py-2" placeholder="login" aria-label="login" name="login" autofocus required>
-                                <span><?php echo ((isset($_SESSION['username_err']) && $_SESSION['username_err'] != '') ? $_SESSION['username_err'] : ''); unset($_SESSION['username_err']); ?> </span>
+                                <input type="text" class="form-control mx-auto my-auto px-2 py-2" placeholder="login" aria-label="login" name="login" autofocus required>
                             </div>
                         </div>
 
@@ -112,12 +106,12 @@ if (isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true) {
 
                         <div class="row">
                             <div class="register-button ml-2 mb-4 px-1 py-1">
-                                <button><input type="submit" value="Sign up" name="reg_user" class="mx-auto my-auto px-1 py-1" /></button>
+                                <button class="mx-auto my-auto px-1 py-1" type="submit" id="reg_btn" name="reg_user" >Sign in</button>
                             </div>
                             <span><?php echo ((isset($_SESSION['success']) && $_SESSION['success'] != '') ? $_SESSION['success'] : ''); unset($_SESSION['success']); ?> </span>
                             <span><?php echo ((isset($_SESSION['wrong_validation']) && $_SESSION['wrong_validation'] != '') ? $_SESSION['wrong_validation'] : ''); unset($_SESSION['wrong_validation']); ?> </span>
                         </div>
-
+                    </form>
                         <div class="row">
                             <div class="change_link position-absolute mt-2 px-auto py-auto">
                                 <div class="info position-relative d:inline-flex">
@@ -127,11 +121,12 @@ if (isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true) {
                             </div>
                         </div>
                     </div>
-                </form>
             </div>
         </div>
     </div>
-
+    <span><?php echo var_dump($_POST['login'])?></span>
+    <span><?php echo var_dump($_POST['password'])?></span>
+    <span><?php echo print_r($_SESSION['username_err'])?></span>
     <div class="container-fluid p-0 mt-4 mt-lg-5">
         <div class="row">
             <footer class="page-footer col-sm-12 col-md-12 mt-lg-5">

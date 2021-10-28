@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE = edge, chrome = 1" />
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-
+    <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 
@@ -46,15 +46,9 @@
 
                 <section div class="social col-md-12 mx-auto my-auto py-3">
                     <p>Follow us :</p>
-                    <div class="fb">
-                        <a href="https://www.facebook.com/daniel.rudnik.35/" class="fblink"><i class="icon-facebook"></i></a>
-                    </div>
-                    <div class="ln">
-                        <p><a href="https://www.linkedin.com/in/daniel-rudnik-8894811b2/" class="lnlink"><i class="icon-linkedin"></i></a></p>
-                    </div>
-                    <div class="gh">
-                        <p><a href="https://github.com/danrud89" class="ghlink"><i class="icon-github-squared"></i></a></p>
-                    </div>
+                    <a class="mx-3" href="#!" id="ln"><i class="fab fa-linkedin"></i></a>
+                    <a class="mx-3" href="#!" id="fb"><i class="fab fa-facebook-square"></i></a>
+                    <a class="mx-3" href="#!" id="gh"><i class="fab fa-github"></i></a>
                 </section>
             </div>
 
