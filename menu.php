@@ -49,6 +49,7 @@ if (!isset($_SESSION['loggedin'])) {
         </div>
 
         <div class="row">
+            <div class="wrapper">
             <div class="hexmenu col-sm-10 col-lg-12 mx-auto mb-5">
                 <div class="hexagon text-center">
                     <ul class="honeycomb justify-content-center m-3">
@@ -88,7 +89,7 @@ if (!isset($_SESSION['loggedin'])) {
                         </a>
 
 
-                        <a href="logout.php" class="position-relative p-2">
+                        <a href="index.php" class="position-relative p-2">
                             <li class="honeycomb-cell">
                                 <span class="material-icons">
                                     dvr
@@ -101,6 +102,7 @@ if (!isset($_SESSION['loggedin'])) {
             </div>
         </div>
     </div>
+
     <div class="container-fluid p-0 mt-5">
         <div class="row">
             <footer class="page-footer col-sm-12 col-md-12">
