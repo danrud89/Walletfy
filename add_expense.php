@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['addExpense'])) {
     if(strlen($comment) > 50){
         $_SESSION['comment_err'] = 'Comment cannot contain more than 50 characters !';
     }       
-      
+      require_once 'database.php'; 
             $sql_select_category = "SELECT id FROM expenses_category_assigned_to_users 
             WHERE user_id = :user_id 
             AND name = :category";

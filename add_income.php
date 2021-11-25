@@ -27,7 +27,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['addIncome'])) {
         }
         if(strlen($comment) > 50){
             $_SESSION['comment_err'] = 'Comment cannot contain more than 50 characters !';   
-        }       
+        }
+      require_once 'database.php';         
       try{
             $sql_select_category = "SELECT id FROM incomes_category_assigned_to_users WHERE user_id = :user_id AND name = :category";
             $query_select = $db->prepare($sql_select_category);
@@ -62,7 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['addIncome'])) {
             }
 
             $_SESSION['incomeAddedCorrectly'] = true;
-            $db->close();     
+              
 }
 }
 ?>

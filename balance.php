@@ -45,7 +45,7 @@ if (!isset($_SESSION['loggedin'])) {
             </div>
         </div>
         <div class="welcome-message mt-0 mb-1 mx-2 py-2 px-4 w-100">
-            <form id="date-range-form" method="POST" action="">
+            <form id="date-range-form" method="POST" action="validateModalDatePicker.php">
                 <div class="input-group col-sm-12 col-md-6 mx-auto px-3 py-3 t-3">
                     <div class="calendar-icon my-1">
                         <span class="material-icons pb-1 pr-1">
@@ -65,7 +65,7 @@ if (!isset($_SESSION['loggedin'])) {
 
                 <div class='row'>
                     <div class='col-12 text-center mt-3'>
-                        <h4 class='balanceDates'>FINANCIAL BALANCE FROM : <?php if (isset($_SESSION['start_date'])){echo $_SESSION['start-date']; unset($_SESSION['start_date']);} ?> TO : <?php if (isset($_SESSION['end_date'])) {echo $_SESSION['end_date']; unset ($_SESSION['end_date']);}?> </h4>
+                        <h4 class='balanceDates'>FINANCIAL BALANCE FROM : <?php echo ((isset($_SESSION['first']) && $_SESSION['login_err'] != '') ? $_SESSION['login_err'] : ''); unset($_SESSION['login_err']); ?> TO : <?php if (isset($_SESSION['end_date'])) {echo $_SESSION['end_date']; unset ($_SESSION['end_date']);}?> </h4>
                     </div>
                 </div>
 
@@ -85,7 +85,7 @@ if (!isset($_SESSION['loggedin'])) {
                                                     date_range
                                                 </span> </span>
                                         </div>
-                                        <input id="startDate" type="date" class="form-control" aria-label="data" name="startDate" value="" required>
+                                        <input id="startDate" type="date" class="form-control" aria-label="data" name="startDate" value="<?php echo date('Y-m-d'); ?>" min="2000-01-01" required>
                                     </div>
                                     <div class="input-group mb-1">
                                         <div class="input-group-prepend">
@@ -93,7 +93,7 @@ if (!isset($_SESSION['loggedin'])) {
                                                     date_range
                                                 </span> </span>
                                         </div>
-                                        <input id="endDate" type="date" class="form-control" aria-label="data" name="endDate" value="" required>
+                                        <input id="endDate" type="date" class="form-control" aria-label="data" name="endDate" value="<?php echo date('Y-m-d'); ?>" min="2000-01-01" required>
                                     </div>
                                 </form>
                             </div>
