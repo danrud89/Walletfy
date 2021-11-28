@@ -4,6 +4,14 @@ if (!isset($_SESSION['loggedin'])) {
     header('Location: index.html');
     exit;
 }
+$date = new DateTime();
+$date->format('Y-m-d');
+$firstDate = $_SESSION['startDate'];
+$firstDate->format('d-m-Y');
+$secondDate = $_SESSION['endDate'];
+$secondDate->format('d-m-Y');
+$incomes = $_SESSION['incomesTable'];
+$expenses = $_SESSION['expensesTable'];
 ?>
 
 <!DOCTYPE HTML>
@@ -65,7 +73,9 @@ if (!isset($_SESSION['loggedin'])) {
 
                 <div class='row'>
                     <div class='col-12 text-center mt-3'>
-                        <h4 class='balanceDates'>FINANCIAL BALANCE FROM : <?php echo ((isset($_SESSION['first']) && $_SESSION['login_err'] != '') ? $_SESSION['login_err'] : ''); unset($_SESSION['login_err']); ?> TO : <?php if (isset($_SESSION['end_date'])) {echo $_SESSION['end_date']; unset ($_SESSION['end_date']);}?> </h4>
+                        <h4 class='balanceDates'>FINANCIAL BALANCE FROM : <?php echo ((isset($firstDate) && $firstDate != '') ? $firstDate : '');
+                                                                            unset($firstDate); ?> TO : <?php echo ((isset($secondDate) && $secondDate != '') ? $secondDate : '');
+                                                                                                                    unset($secondDate); ?> </h4>
                     </div>
                 </div>
 
@@ -85,7 +95,7 @@ if (!isset($_SESSION['loggedin'])) {
                                                     date_range
                                                 </span> </span>
                                         </div>
-                                        <input id="startDate" type="date" class="form-control" aria-label="data" name="startDate" value="<?php echo date('Y-m-d'); ?>" min="2000-01-01" required>
+                                        <input id="startDate" type="date" class="form-control" aria-label="data" name="startDate" value="<?php echo $date; ?>" min="2000-01-01" required>
                                     </div>
                                     <div class="input-group mb-1">
                                         <div class="input-group-prepend">
@@ -93,20 +103,16 @@ if (!isset($_SESSION['loggedin'])) {
                                                     date_range
                                                 </span> </span>
                                         </div>
-                                        <input id="endDate" type="date" class="form-control" aria-label="data" name="endDate" value="<?php echo date('Y-m-d'); ?>" min="2000-01-01" required>
+                                        <input id="endDate" type="date" class="form-control" aria-label="data" name="endDate" value="<?php echo $date; ?>" min="2000-01-01" required>
                                     </div>
                                 </form>
                             </div>
                             <div class="modal-footer btn-group" role="group">
-                                <button type="button" class="btn btn-dark" value="SAVE" name="saveDates"></button>
+                                <button type="button" class="btn btn-dark" name="saveDates">Save</button>
                                 <button id="modalCloseBtn" type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
                                 <div class="error">
-                                    <?php
-                                    if (isset($_SESSION['date_err'])) {
-                                        echo $_SESSION['date_err'];
-                                        unset($_SESSION['date_err']);
-                                    }
-                                    ?>
+                                    <?php echo ((isset($_SESSION['date_err']) && $_SESSION['date_err'] != '') ? $_SESSION['date_err'] : '');
+                                    unset($_SESSION['date_err']); ?>
                                 </div>
                             </div>
                         </div>
@@ -123,6 +129,16 @@ if (!isset($_SESSION['loggedin'])) {
                                 <th onclick="sortTableAlphabetically('tableOfIncomes')" scope="col">Category <span class="material-icons align-middle">import_export</span></th>
                                 <th onclick="sortTableNumerically('tableOfIncomes')" scope="col">Value <span class="material-icons align-middle">import_export</span></th>
                             </tr>
+                        <tbody>
+                            <?php
+                            foreach ($incomes as $singleIncome) {
+                                echo '<tr>';
+                                echo '<td>'.$singleIncome[0].'</td>';
+                                echo '<td>'.$singleIncome[1].'</td>';
+                                echo '</tr>';
+                            }
+                            ?>
+                        </tbody>
                         </thead>
                     </table>
                 </div>
@@ -135,6 +151,16 @@ if (!isset($_SESSION['loggedin'])) {
                                 <th onclick="sortTableNumerically('tableOfExpenses')" scope="col">Value <span class="material-icons align-middle">import_export</span></th>
                             </tr>
                         </thead>
+                        <tbody>
+                            <?php
+                            foreach ($expenses as $singleExpense) {
+                                echo '<tr>';
+                                echo '<td>'.$singleExpense[0].'</td>';
+                                echo '<td>'.$singleExpense[1].'</td>';
+                                echo '</tr>';
+                            }
+                            ?>
+                        </tbody>
                     </table>
                 </div>
             </div>
@@ -177,7 +203,7 @@ if (!isset($_SESSION['loggedin'])) {
 
             <div class="row ">
                 <div class="balanceSummary col-sm-12 col-md-6 mt-2 mb-2  mx-auto my-auto">
-                    <h3 class="text-center">BALANCE:{{sumOfIncomes-sumOfExpenses}}</h3>
+                    <h3 class="text-center">BALANCE:{sumOfIncomes-sumOfExpenses}</h3>
                 </div>
             </div>
             <div class="row ">
@@ -224,6 +250,118 @@ if (!isset($_SESSION['loggedin'])) {
                 document.getElementById("periodOfTime").setAttribute("onclick", "this.form.submit()");
             }
         });
+    </script>
+    <script>
+        function sortTableAlphabetically(idOfTable) {
+            var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+            table = document.getElementById(idOfTable);
+            switching = true;
+            //Set the sorting direction to ascending:
+            dir = "asc";
+            /*Make a loop that will continue until
+            no switching has been done:*/
+            while (switching) {
+                //start by saying: no switching is done:
+                switching = false;
+                rows = table.rows;
+                /*Loop through all table rows (except the
+                first, which contains table headers):*/
+                for (i = 1; i < (rows.length - 1); i++) {
+                    //start by saying there should be no switching:
+                    shouldSwitch = false;
+                    /*Get the two elements you want to compare,
+                    one from current row and one from the next:*/
+                    x = rows[i].getElementsByTagName("TD")[0];
+                    y = rows[i + 1].getElementsByTagName("TD")[0];
+                    /*check if the two rows should switch place,
+                    based on the direction, asc or desc:*/
+                    if (dir == "asc") {
+                        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                            //if so, mark as a switch and break the loop:
+                            shouldSwitch = true;
+                            break;
+                        }
+                    } else if (dir == "desc") {
+                        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                            //if so, mark as a switch and break the loop:
+                            shouldSwitch = true;
+                            break;
+                        }
+                    }
+                }
+                if (shouldSwitch) {
+                    /*If a switch has been marked, make the switch
+                    and mark that a switch has been done:*/
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                    //Each time a switch is done, increase this count by 1:
+                    switchcount++;
+                } else {
+                    /*If no switching has been done AND the direction is "asc",
+                    set the direction to "desc" and run the while loop again.*/
+                    if (switchcount == 0 && dir == "asc") {
+                        dir = "desc";
+                        switching = true;
+                    }
+                }
+            }
+        };
+    </script>
+    <script>
+        function sortTableNumerically(idOfTable) {
+            var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+            table = document.getElementById(idOfTable);
+            switching = true;
+            //Set the sorting direction to ascending:
+            dir = "asc";
+            /*Make a loop that will continue until
+            no switching has been done:*/
+            while (switching) {
+                //start by saying: no switching is done:
+                switching = false;
+                rows = table.rows;
+                /*Loop through all table rows (except the
+                first, which contains table headers):*/
+                for (i = 1; i < (rows.length - 1); i++) {
+                    //start by saying there should be no switching:
+                    shouldSwitch = false;
+                    /*Get the two elements you want to compare,
+                    one from current row and one from the next:*/
+                    x = rows[i].getElementsByTagName("TD")[1];
+                    y = rows[i + 1].getElementsByTagName("TD")[1];
+                    /*check if the two rows should switch place,
+                    based on the direction, asc or desc:*/
+                    if (dir == "asc") {
+                        if (Number(x.innerHTML) > Number(y.innerHTML)) {
+                            //if so, mark as a switch and break the loop:
+                            shouldSwitch = true;
+                            break;
+                        }
+                    } else if (dir == "desc") {
+                        if (Number(x.innerHTML) < Number(y.innerHTML)) {
+                            //if so, mark as a switch and break the loop:
+                            shouldSwitch = true;
+                            break;
+                        }
+                    }
+                }
+                if (shouldSwitch) {
+                    /*If a switch has been marked, make the switch
+                    and mark that a switch has been done:*/
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                    //Each time a switch is done, increase this count by 1:
+                    switchcount++;
+                } else {
+                    /*If no switching has been done AND the direction is "asc",
+                    set the direction to "desc" and run the while loop again.*/
+                    if (switchcount == 0 && dir == "asc") {
+                        dir = "desc";
+                        switching = true;
+                    }
+                }
+            }
+        };
     </script>
 </body>
 
