@@ -61,22 +61,36 @@ if (isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true) {
                 </section>
             </div>
 
-            <div class="wrapper col-6 mx-auto mt-5">
+            <div class="wrapper col-6 mx-auto mt-4">
                 <form action="signup.php" method="post" id="SignUpForm" name="registerForm" onsubmit="return validation()">
                     <div class="register-box">
                         <div class="row">
                             <div class="register-title mx-auto mb-2 px-2">Sign up</div>
                         </div>
-                        <span class="text-danger"><?php echo ((isset($_SESSION['username_err']) && $_SESSION['username_err'] != '') ? $_SESSION['username_err'] : '');
-                                                    unset($_SESSION['username_err']); ?> </span>
+                
                         <div class="row">
-                            <div class="register-input col-sm-12 mx-auto mt-4 mb-3">
+                            <div class="register-input col-sm-12 mx-auto mt-4 mb-2">
                                 <div class="register-icon mx-auto">
                                     <span class="material-icons px-2 py-1">
                                         person
                                     </span>
                                 </div>
-                                <input type="text" class="form-control mx-auto my-auto px-2 py-2" placeholder="login" aria-label="login" name="login" autofocus required>
+                                <input type="text" class="form-control mx-auto my-auto px-2 py-2" placeholder="name" aria-label="name" name="name" autofocus required>
+                                <span class="text-danger"><?php echo ((isset($_SESSION['username_err']) && $_SESSION['username_err'] != '') ? $_SESSION['username_err'] : '');
+                                                    unset($_SESSION['username_err']); ?> </span>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="register-input col-sm-12 mx-auto mb-2">
+                                <div class="register-icon mx-auto">
+                                    <span class="material-icons px-2 py-1">
+                                        email
+                                    </span>
+                                </div>
+                                <input type="email" class="form-control mx-auto my-auto px-2" placeholder="email" aria-label="email" name="email" required>
+                                <span class="text-danger"><?php echo ((isset($_SESSION['email_err']) && $_SESSION['email_err'] != '') ? $_SESSION['email_err'] : '');
+                                                    unset($_SESSION['email_err']); ?> </span>
                             </div>
                         </div>
 
@@ -88,7 +102,7 @@ if (isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true) {
                                     </span>
                                 </div>
                                 <input type="password" class="form-control mx-auto my-auto px-2 py-2" placeholder="password" aria-label="password" name="password" required>
-                                <span><?php echo ((isset($_SESSION['password_err']) && $_SESSION['password_err'] != '') ? $_SESSION['password_err'] : '');
+                                <span class="text-danger"><?php echo ((isset($_SESSION['password_err']) && $_SESSION['password_err'] != '') ? $_SESSION['password_err'] : '');
                                         unset($_SESSION['password_err']); ?> </span>
                             </div>
                         </div>
@@ -101,27 +115,27 @@ if (isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true) {
                                     </span>
                                 </div>
                                 <input type="password" class="form-control mx-auto my-auto px-2 py-2" placeholder="confirm password" aria-label="password" name="confpassword" required>
-                                <span><?php echo ((isset($_SESSION['confirm_password_err']) && $_SESSION['confirm_password_err'] != '') ? $_SESSION['confirm_password_err'] : '');
+                                <span class="text-danger"><?php echo ((isset($_SESSION['confirm_password_err']) && $_SESSION['confirm_password_err'] != '') ? $_SESSION['confirm_password_err'] : '');
                                         unset($_SESSION['confirm_password_err']); ?> </span>
                             </div>
                         </div>
 
 
                         <div class="row">
-                            <div class="register-button ml-2 mb-4 px-1 py-1">
+                            <div class="register-button mr-1 mb-4 px-1 py-1">
                                 <button class="mx-auto my-auto px-1 py-1" type="submit" id="reg_btn" name="reg_user">Sign in</button>
                             </div>
-                            <span><?php echo ((isset($_SESSION['success']) && $_SESSION['success'] != '') ? $_SESSION['success'] : '');
+                            <span class="text-success"><?php echo ((isset($_SESSION['success']) && $_SESSION['success'] != '') ? $_SESSION['success'] : '');
                                     unset($_SESSION['success']); ?> </span>
-                            <span><?php echo ((isset($_SESSION['wrong_validation']) && $_SESSION['wrong_validation'] != '') ? $_SESSION['wrong_validation'] : '');
+                            <span class="text-danger"><?php echo ((isset($_SESSION['wrong_validation']) && $_SESSION['wrong_validation'] != '') ? $_SESSION['wrong_validation'] : '');
                                     unset($_SESSION['wrong_validation']); ?> </span>
                         </div>
                 </form>
                 <div class="row">
                     <div class="change_link position-absolute mt-2 px-auto py-auto">
-                        <div class="info position-relative d:inline-flex">
+                        <div class="position-relative d:inline-flex">
                             <p class="text-left ">Already have an account ?</p>
-                            <a href="index.php" class="p-1" style="margin-bottom: 1px;">Sign in</a>
+                            <div class="change px-auto py-auto"><a href="index.php" class="p-1">Sign in</a></div>
                         </div>
                     </div>
                 </div>
@@ -129,9 +143,6 @@ if (isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true) {
         </div>
     </div>
     </div>
-    <span><?php echo var_dump($_POST['login']) ?></span>
-    <span><?php echo var_dump($_POST['password']) ?></span>
-    <span><?php echo print_r($_SESSION['username_err']) ?></span>
     <div class="container-fluid p-0 mt-4 mt-lg-5">
         <div class="row">
             <footer class="page-footer col-sm-12 col-md-12 mt-lg-5">
@@ -158,15 +169,9 @@ if (isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true) {
             let userPassword = document.querySelector("input[name='password']").value;
             let confPassword = document.querySelector("input[name='confpassword']").value;
             if (userName.length == "" && userPassword.length == "" && confPassword.length == "") {
-                //alert("All fields are empty !");
-                $(this).popover({
-                        content: "Login field is empty"
-                    });
-                    $(this).popover('show');
+                alert("All fields are empty !");
                 return false;
-            } 
-            else {
-                $("#reg_btn").click(function() {
+            } else {
                 if (userName.trim() === "" || userName == null) {
                     //alert("Login field is empty");
                     $(this).popover({
@@ -176,48 +181,44 @@ if (isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true) {
                     return false;
                 }
                 if (userName.length < 3) {
-                    //alert("Login must contain at least 3 charakters !");
+                    alert("Login must contain at least 3 charakters !");
                     $(this).popover({
-                        content: "Invalid"
-                    });
-                    $(this).popover('show');
+          content: "Invalid"
+        });
+        $(this).popover('show');
                     return false;
                 }
                 if (userPassword.trim() === "" || userPassword == null) {
-                    //alert("Password field is empty");
+                    alert("Password field is empty");
                     $(this).popover({
-                        content: "Invalid"
-                    });
-                    $(this).popover('show');
+          content: "Invalid"
+        });
+        $(this).popover('show');
                     return false;
                 }
                 if (userPassword.length < 8 || userPassword.length > 20) {
-                    //alert("Password must contain beetween 8 and 20 characters!");
+                    alert("Password must contain beetween 8 and 20 characters!");
                     $(this).popover({
-                        content: "Invalid"
-                    });
-                    $(this).popover('show');
+          content: "Invalid"
+        });
+        $(this).popover('show');
                     return false;
                 }
                 if (confPassword.trim() === "" || confPassword == null) {
-                    //alert("Password field is empty");
+                    alert("Password field is empty");
                     $(this).popover({
-                        content: "Invalid"
-                    });
-                    $(this).popover('show');
+          content: "Invalid"
+        });
+        $(this).popover('show');
                     return false;
                 }
 
                 if (userPassword != confPassword) {
-                    //alert("Password do not match !");
-                    $(this).popover({
-                        content: "Invalid"
-                    });
-                    $(this).popover('show');
+                    alert("Password do not match !");
+                    
                     return false;
                 }
             }
-        }
         }
     </script>
     <script>

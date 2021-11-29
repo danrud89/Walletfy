@@ -175,7 +175,7 @@ body.active #gh {
 }
 
 .register-box {
-    max-height: 390px;
+    max-height: 430px;
     max-width: 300px;
     position: relative;
     color: white;
@@ -234,6 +234,7 @@ input {
 .wrapper .register-button #reg_btn {
     cursor: pointer;
     position: relative;
+    left: 60%;
     background: cadetblue;
     font-family: 'BebasNeueRegular', 'Arial Narrow', Arial, sans-serif;
     color: #fff;
@@ -255,7 +256,8 @@ input {
 }
 
 .change_link {
-    position: absolute;
+    position: relative;
+    bottom: 0%;
     color: rgb(127, 124, 124);
     height: 35px;
     left: 0;
@@ -272,10 +274,15 @@ input {
     margin: 5px 0 5px 5px;
 }
 
+.change_link .change {
+    position: relative;
+    display: inline-flex;
+    left: 80%;
+    bottom: 2.25em;
+}
+
 .change_link a {
-    position: absolute;
-    right: 0;
-    bottom: -7px;
+
     font-weight: bold;
     background: rgb(247, 248, 241);
     color: rgb(29, 162, 193);
