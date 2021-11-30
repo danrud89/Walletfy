@@ -75,7 +75,7 @@ $expenses = $_SESSION['expensesTable'];
                     <div class='col-12 text-center mt-3'>
                         <h4 class='balanceDates'>FINANCIAL BALANCE FROM : <?php echo ((isset($firstDate) && $firstDate != '') ? $firstDate : '');
                                                                             unset($firstDate); ?> TO : <?php echo ((isset($secondDate) && $secondDate != '') ? $secondDate : '');
-                                                                                                                    unset($secondDate); ?> </h4>
+                                                                                                        unset($secondDate); ?> </h4>
                     </div>
                 </div>
 
@@ -83,12 +83,12 @@ $expenses = $_SESSION['expensesTable'];
                 <div id="dateModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dateModal" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 id="customPeriod" class="text-secondary">Select date range</h4>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span> </button>
-                            </div>
-                            <div class="modal-body">
-                                <form method="post" action="validateModalDatePicker.php" id="datePicker">
+                            <form method="post" action="validateModalDatePicker.php" id="datePicker">
+                                <div class="modal-header">
+                                    <h4 id="customPeriod" class="text-secondary">Select date range</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span> </button>
+                                </div>
+                                <div class="modal-body">
                                     <div class="input-group mb-5">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"> <span class="material-icons">
@@ -105,16 +105,16 @@ $expenses = $_SESSION['expensesTable'];
                                         </div>
                                         <input id="endDate" type="date" class="form-control" aria-label="data" name="endDate" value="<?php echo $date; ?>" min="2000-01-01" required>
                                     </div>
-                                </form>
-                            </div>
-                            <div class="modal-footer btn-group" role="group">
-                                <button type="button" class="btn btn-dark" name="saveDates">Save</button>
-                                <button id="modalCloseBtn" type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                                <div class="error">
-                                    <?php echo ((isset($_SESSION['date_err']) && $_SESSION['date_err'] != '') ? $_SESSION['date_err'] : '');
-                                    unset($_SESSION['date_err']); ?>
                                 </div>
-                            </div>
+                                <div class="modal-footer btn-group" role="group">
+                                    <button type="button" class="btn btn-dark" name="saveDates">Save</button>
+                                    <button id="modalCloseBtn" type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                                    <span class="text-alert">
+                                        <?php echo ((isset($_SESSION['date_err']) && $_SESSION['date_err'] != '') ? $_SESSION['date_err'] : '');
+                                        unset($_SESSION['date_err']); ?>
+                                    </span>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -129,17 +129,17 @@ $expenses = $_SESSION['expensesTable'];
                                 <th onclick="sortTableAlphabetically('tableOfIncomes')" scope="col">Category <span class="material-icons align-middle">import_export</span></th>
                                 <th onclick="sortTableNumerically('tableOfIncomes')" scope="col">Value <span class="material-icons align-middle">import_export</span></th>
                             </tr>
+                            </thead>
                         <tbody>
                             <?php
                             foreach ($incomes as $singleIncome) {
                                 echo '<tr>';
-                                echo '<td>'.$singleIncome[0].'</td>';
-                                echo '<td>'.$singleIncome[1].'</td>';
+                                echo '<td>' . $singleIncome[0] . '</td>';
+                                echo '<td>' . $singleIncome[1] . '</td>';
                                 echo '</tr>';
                             }
                             ?>
                         </tbody>
-                        </thead>
                     </table>
                 </div>
                 <div class="col">
@@ -155,8 +155,8 @@ $expenses = $_SESSION['expensesTable'];
                             <?php
                             foreach ($expenses as $singleExpense) {
                                 echo '<tr>';
-                                echo '<td>'.$singleExpense[0].'</td>';
-                                echo '<td>'.$singleExpense[1].'</td>';
+                                echo '<td>' . $singleExpense[0] . '</td>';
+                                echo '<td>' . $singleExpense[1] . '</td>';
                                 echo '</tr>';
                             }
                             ?>
@@ -177,9 +177,20 @@ $expenses = $_SESSION['expensesTable'];
                                 <th scope="col">Commentary</th>
                                 <th style="display:none;"> id</th>
                                 <th width="5%"></th>
-
                             </tr>
                         </thead>
+                        <tbody>
+                            <?php
+                            foreach ($incomes as $singleIncome) {
+                                echo '<tr>';
+                                echo '<td>' . $singleIncome[0] . '</td>';
+                                echo '<td>' . $singleIncome[1] . '</td>';
+                                echo '<td>' . $singleIncome[2] . '</td>';
+                                echo '<td>' . $singleIncome[3] . '</td>';
+                                echo '</tr>';
+                            }
+                            ?>
+                        </tbody>
                     </table>
                 </div>
 
@@ -197,13 +208,56 @@ $expenses = $_SESSION['expensesTable'];
                                 <th width="5%"></th>
                             </tr>
                         </thead>
+                        <tbody>
+                            <?php
+                            foreach ($expenses as $singleExpense) {
+                                echo '<tr>';
+                                echo '<td>' . $singleExpense[0] . '</td>';
+                                echo '<td>' . $singleExpense[1] . '</td>';
+                                echo '<td>' . $singleExpense[2] . '</td>';
+                                echo '<td>' . $singleExpense[3] . '</td>';
+                                echo '<td>' . $singleExpense[4] . '</td>';
+                                echo '</tr>';
+                            }
+                            ?>
+                        </tbody>
                     </table>
                 </div>
             </div>
 
             <div class="row ">
                 <div class="balanceSummary col-sm-12 col-md-6 mt-2 mb-2  mx-auto my-auto">
-                    <h3 class="text-center">BALANCE:{sumOfIncomes-sumOfExpenses}</h3>
+                    <h3 class="text-center">BALANCE SUMMARY</h3>
+                    <table class="table table-hover">
+									<thead>
+										<tr>
+											<th scope="col">TOTAL INCOMES</th>
+											<th scope="col">TOTAL EXPENSES</th>
+											<th scope="col">BALANCE</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<?php
+													$totalSumOfIncomes = 0;
+													$totalSumOfExpenses = 0;
+                                                    $balance = 0;
+													foreach($incomes as $singleIncome) {
+														$totalSumOfIncomes += $singleIncome[1];
+													}
+													foreach($expenses as $singleExpense) {
+														$totalSumOfExpenses += $singleExpense[1];
+													}
+													$balance = round($totalSumOfIncomes - $totalSumOfExpenses,2);
+
+													echo '<td>' . $incomeSummary . '</td>';
+													echo '<td>' . $expenseSummary . '</td>';
+													echo '<td>' . $balance . '</td>';												
+											?>
+										</tr>
+									</tbody>
+								</table>
+                                
                 </div>
             </div>
             <div class="row ">
