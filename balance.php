@@ -23,40 +23,39 @@ $expenses = $_SESSION['expensesTable'];
     <meta name="descritpion" content="Dzięki WALLETFY - aplikacji do zarządzania finansami, Twoje zarządzanie budżetem stanie się prostsze!" />
     <meta name="keywords" content="budżet,finanse,wydatki,przychody,bilans" />
     <meta http-equiv="X-UA-Compatible" content="IE = edge, chrome = 1" />
-  <link href="https://fonts.googleapis.com/css?family=Inconsolata|Montserrat:400,500,700&display=swap" rel="stylesheet"><link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
-<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css'>
-<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css'>
-<link rel="stylesheet" href="./style.css">
-<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	
+	<link href="https://fonts.googleapis.com/css?family=Inconsolata|Montserrat:400,500,700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
-    <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+	<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.all.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="style.css" type="text/css" />
 
 </head>
 <body>
-<!-- partial:index.partial.html -->
 
   <header id="top">
     <h3>Wall€tfy!</h3>
     <nav>
       <ul>
-        <li><span class="material-icons mx-2 align-middle">home</span><a href="menu.html" title="Home">Home</a></li>
+        <li><span class="material-icons mx-2 align-middle">home</span><a href="menu.php" title="Home">Home</a></li>
         <li><span class="material-icons mx-2 align-middle">savings</span><a href="#" data-toggle="modal" data-target="#addIncome">Income</a></li>
         <li><span class="material-icons mx-2 align-middle">shopping_cart</span><a href="#" class="openModal" data-toggle="modal" data-target="#addExpense" title="Expense">Expense</a></li>
-        <li><span class="material-icons mx-2 align-middle">insert_chart_outlined</span><a href="balance.html" title="Balance">Balance</a></li>
+        <li><span class="material-icons mx-2 align-middle">insert_chart_outlined</span><a href="balance.php" title="Balance">Balance</a></li>
         <li><span class="material-icons mx-2 align-middle">manage_accounts</span><a href="settings.html" title="Settings">Settings</a></li>
-		<li><span class="material-icons mx-2 align-middle">logout</span><a href="index.html" title="Log Out">Log Out</a></li>
+		<li><span class="material-icons mx-2 align-middle">logout</span><a href="index.php" title="Log Out">Log Out</a></li>
       </ul>
     </nav>
   </header>
   
   <main>
     
-	  <section id="balance" style="background-image: url(ewallet2.png);">
-        <div class="row mt-1>
+<section id="balance" style="background-image: url(ewallet2.png);">
+<div class="wrapper">
+        <div class="row mt-1">
             <div class="mx-auto my-auto">
                 <h2 class="text-center py-1" id="intro">BALANCE SHEET</h2>
             </div>
@@ -64,29 +63,29 @@ $expenses = $_SESSION['expensesTable'];
 		
         <div class="mb-1 mx-2 py-2 px-4">
             <form id="date-range-form" method="POST" action="validateModalDatePicker.php">
-                <div class="input-group mx-auto px-3 py-3 t-3 w-25">
+                <div class="input-group mx-auto px-1 py-3 t-3 w-50">
                     <div class="calendar-icon my-1">
                         <span class="material-icons pb-1 pr-1">
                             date_range
                         </span>
                     </div>
-                    <select id="periodOfTime" class="custom-select form-control" data-live-search="true" name="periodOfTime">
-                        <option value="default">- Please select period -</option>
+                    <select id="periodOfTime" class="custom-select" data-live-search="true" name="periodOfTime" autocomplete="off">
+                        <option value="" selected disabled>-- Please select period --</option>
                         <option value="currentMonth">Current month</option>
                         <option value="previousMonth">Previous month</option>
                         <option value="currentYear">Current year</option>
-                        <option value="customPeriod"><a href="#" data-toggle="modal" data-target="#dateModal" data-toggle="modal">Custom</a></option>
+                        <option value="customPeriod">
+							<a href="#" class="open-modal" data-target="#dateModal" data-toggle="modal">Custom</a>
+						</option>
                     </select>
                 </div>
-				
 				<!-- Modal datePicker -->
-                <div id="dateModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dateModal" aria-hidden="true">
+                <div id="dateModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dateModal" aria-hidden="true" data-backdrop="false">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
-                            <form method="post" action="validateModalDatePicker.php" id="datePicker">
+						
                                 <div class="modal-header">
-                                    <h4 id="customPeriod" class="text-secondary">Select date range</h4>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span> </button>
+                                    <h4 id="customPeriod" class="text-center">Select date range</h4>
                                 </div>
                                 <div class="modal-body">
                                     <div class="input-group mb-5">
@@ -107,26 +106,25 @@ $expenses = $_SESSION['expensesTable'];
                                     </div>
                                 </div>
                                 <div class="modal-footer btn-group" role="group">
-                                    <button type="button" class="btn btn-dark" name="saveDates">Save</button>
-                                    <button id="modalCloseBtn" type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                                    <input type="submit" class="btn btn-outline-success btn-floating waves-effect" name="saveDates" value="Save">
+                                    <input type="reset"  class="btn btn-danger btn-floating waves-effect" data-dismiss="modal" value="Close">
                                     <span class="text-alert">
                                         <?php echo ((isset($_SESSION['date_err']) && $_SESSION['date_err'] != '') ? $_SESSION['date_err'] : '');
                                         unset($_SESSION['date_err']); ?>
                                     </span>
                                 </div>
-                            </form>
+							
                         </div>
                     </div>
                 </div>
-
-                <div class='row'>
+				</form>
+				<div class='row'>
                     <div class='col-12 text-center mt-3'>
                         <h4 class='balanceDates'>FINANCIAL BALANCE FROM : <?php echo ((isset($firstDate) && $firstDate != '') ? $firstDate : '');
                                                                             unset($firstDate); ?> TO : <?php echo ((isset($secondDate) && $secondDate != '') ? $secondDate : '');
                                                                                                         unset($secondDate); ?> </h4>
                     </div>
-                </div>
-            </form>
+                </div>	
 
             <div class="table mt-5 mb-5">
                 <div class="col">
@@ -278,11 +276,12 @@ $expenses = $_SESSION['expensesTable'];
 
             <div class="row">
                 <div class="mx-auto mt-2 mb-2" id="back">
-                    <a href="menu.html"><button type="button" class="btn btn-dark-moon btn-rounded btn-lg p-1" style="font-size:24px; letter-spacing:2px;"><span class="material-icons align-top mr-1">undo</span>BACK TO MAIN MENU</button></a>
+                    <a href="menu.php"><button type="button" class="btn btn-dark-moon btn-rounded btn-lg p-1" style="font-size:24px; letter-spacing:2px;"><span class="material-icons align-top mr-1">undo</span>BACK TO MAIN MENU</button></a>
                 </div>
             </div>
 			
         </div>
+		</div>
 </section>
 
 <script>
@@ -298,15 +297,8 @@ $expenses = $_SESSION['expensesTable'];
             }
         });
 </script>
-<script>
-$('#periodOfTime').change(function() {
-    var opval = $(this).val();
-    if(opval=="customPeriod"){
-        $('#dateModal').modal("show");
-    }
-});</script>
 
-    <script>
+ <script>
         function sortTableAlphabetically(idOfTable) {
             var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
             table = document.getElementById(idOfTable);
@@ -419,10 +411,6 @@ $('#periodOfTime').change(function() {
         };
     </script>
 	
-   
-<!-- partial -->
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js'></script><script  src="./script.js"></script>
-
 </body>
+
 </html>

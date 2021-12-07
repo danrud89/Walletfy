@@ -3,12 +3,13 @@ html {
     height: 100%;
 }
 
-body.modal-open> :not(.modal) {
-    -webkit-filter: blur(3px);
-    -moz-filter: blur(3px);
-    -o-filter: blur(3px);
-    -ms-filter: blur(3px);
-    filter: blur(3px);
+body.modal-open section#home,
+body.modal-open header#top {
+    -webkit-filter: blur(4px);
+    -moz-filter: blur(4px);
+    -o-filter: blur(4px);
+    -ms-filter: blur(4px);
+    filter: blur(4px);
 }
 
 .before-style,
@@ -67,6 +68,7 @@ a {
 a:hover,
 a.active {
   color: #cfb53b;
+  text-decoration: none;
 }
 #back > a:hover > .btn{
 	color:aliceblue;
@@ -299,7 +301,14 @@ section#home .content .blur form {
   border: 2px solid #fff;
   border-radius: 0.35em;
 }
-
+.wrapper{
+	background-color: rgb(41, 43, 44, 0.95);
+    -webkit-box-shadow: 2px 4px 26px 11px rgba(0, 0, 0, 0.7);
+    -moz-box-shadow: 2px 4px 26px 11px rgba(0, 0, 0, 0.7);
+    box-shadow: 2px 4px 26px 11px rgba(0, 0, 0, 0.7);
+	border-radius: 30px;
+    width: 85%;
+}
 #intro {
 	background-color:transparent;
 	color:aliceblue;
@@ -313,6 +322,9 @@ section#home .content .blur form {
 }
 .login-button{
 	font-size:1.5em;
+}
+.login-button .btn:hover {
+background-image: linear-gradient();
 }
 
 .login-input,

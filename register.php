@@ -91,7 +91,7 @@
 						
 						<div class="row mb-4">
                             <div class="register-button">
-                                  <button type="button" name="sign_in" class="btn btn-danger btn-lg" style="border-radius:15px"/>Sign Up</button>
+                                  <button type="submit" name="sign_in" class="btn btn-danger btn-lg" style="border-radius:15px"/>Sign Up</button>
                             </div>
                             <span class="text-success"><?php echo ((isset($_SESSION['success']) && $_SESSION['success'] != '') ? $_SESSION['success'] : '');
                                     unset($_SESSION['success']); ?> </span>
@@ -101,7 +101,7 @@
 
                         <div class="row">
                             <div class="change_link ">
-                                    <p class="text-left ">Already a member ?<a href="register.php" class="p-1"><button type="button" class="btn btn-danger btn-sm" style="border-radius:10px">Sign in</button></a></p>
+                                    <p class="text-left ">Already a member ?<a href="index.php" class="p-1"><button type="button" class="btn btn-danger btn-sm" style="border-radius:10px">Sign in</button></a></p>
                             </div>
                         </div>
                     

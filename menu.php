@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en" >
 <head>
@@ -29,12 +31,12 @@
             </h5>
     <nav>
       <ul>
-        <li><span class="material-icons mx-2 align-middle">home</span><a href="menu.html" title="Home">Home</a></li>
-        <li><a href="#" data-toggle="modal" data-target="#addIncome"><span class="material-icons mx-2 align-middle">savings</span>Income</a></li>
+        <li><span class="material-icons mx-2 align-middle">home</span><a href="menu.php" title="Home">Home</a></li>
+        <li><span class="material-icons mx-2 align-middle">savings</span><a href="#" data-toggle="modal" data-target="#addIncome">Income</a></li>
         <li><span class="material-icons mx-2 align-middle">shopping_cart</span><a href="#" class="openModal" data-toggle="modal" data-target="#addExpense" title="Expense">Expense</a></li>
-        <li><span class="material-icons mx-2 align-middle">insert_chart_outlined</span><a href="balance.html" title="Balance">Balance</a></li>
-        <li><span class="material-icons mx-2 align-middle">manage_accounts</span><a href="settings.html" title="Settings">Settings</a></li>
-		<li><span class="material-icons mx-2 align-middle">logout</span><a href="index.html" title="Log Out">Log Out</a></li>
+        <li><span class="material-icons mx-2 align-middle">insert_chart_outlined</span><a href="balance.php" title="Balance">Balance</a></li>
+        <li><span class="material-icons mx-2 align-middle">manage_accounts</span><a href="settings.php" title="Settings">Settings</a></li>
+		<li><span class="material-icons mx-2 align-middle">logout</span><a href="index.php" title="Log Out">Log Out</a></li>
       </ul>
     </nav>
   </header>
@@ -66,9 +68,40 @@
         </div>
     </div>
     </section>
-<!-- partial -->
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js'></script><script  src="./script.js"></script>
+
+<script>
+      $(window).load(function(){
+        swal("Good job!", "You clicked the button!", "success");
+      });
+ </script>
+
+<script>
+	var toastMixin = Swal.mixin({
+    toast: true,
+    icon: 'success',
+    title: 'General Title',
+    animation: false,
+    position: 'top-right',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  });
+   
+document.querySelector(".second").addEventListener('click', function(){
+  toastMixin.fire({
+    animation: true,
+    title: 'Signed in Successfully'
+  });
+});
+</script>
+
+<script type="text/javascript"> 
+   
+</script>
 
 </body>
 
@@ -79,9 +112,6 @@
         <div class="modal-content rounded-5">
             <div class="modal-header d-flex justify-content-center">
                 <h4 id="addIncome" class="modal-title mx-auto">ADD NEW INCOME</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Zamknij">
-                    <span aria-hidden="true">&times;</span>
-                </button>
             </div>
             <div class="modal-body py-0 bg-light">
                 <form action="add_income.php" method="post">
@@ -132,7 +162,7 @@
             </div>
             <div class="modal-footer justify-content-center flex-column flex-md-row btn-group">
                 <input type="submit" name="addIncome" value="ADD" class="btn btn-floating btn-outline-success mr-2">
-                <input type="button" class="btn btn-floating btn-danger waves-effect" name="erase_income" action="erase_expense.php" value="CLOSE" data-dismiss="modal">
+                <input type="reset" class="btn btn-floating btn-danger waves-effect" name="erase_income" action="erase_expense.php" value="CLOSE" data-dismiss="modal" onclick="this.form.reset();">
                 
             </div>
             </form>
@@ -147,9 +177,6 @@
         <div class="modal-content rounded-5">
             <div class="modal-header d-flex justify-content-center">
                 <h4 id="addExpense" class="modal-title mx-auto">ADD NEW EXPENSE</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Zamknij">
-                    <span aria-hidden="true">&times;</span>
-                </button>
             </div>
             <div class="modal-body py-0 bg-light">
                 <form action="expense.php" method="post">
@@ -230,7 +257,7 @@
 
             <div class="modal-footer justify-content-center flex-column flex-md-row btn-group">
                 <input type="submit" name="addExpense" value="ADD" class="btn btn-floating btn-outline-success mr-2">
-                <input type="button" class="btn btn-floating btn-danger waves-effect" name="erase_expense" value="CLOSE" data-dismiss="modal">
+                <input type="reset" class="btn btn-floating btn-danger waves-effect" name="erase_expense" value="CLOSE" data-dismiss="modal" onclick="this.form.reset();">
             </div>
             </form>
         </div>
