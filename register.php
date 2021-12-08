@@ -10,6 +10,8 @@
   <link href="https://fonts.googleapis.com/css?family=Inconsolata|Montserrat:400,500,700&display=swap" rel="stylesheet"><link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css'>
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css'><link rel="stylesheet" href="./style.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.all.min.js"></script>
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
@@ -35,7 +37,7 @@
 		  </p>
         </div>
         <div class="blur">
-		  <form action="signin.php" method="post" name="loginForm" onsubmit="return inputValidation()" >
+		  <form action="signin.php" method="post" name="loginForm" onsubmit="return inputValidation()" autocomplete="off" >
  
                         <div class="row mb-3">
                             <div class="register-input">
@@ -70,7 +72,7 @@
                                         vpn_key
                                     </span>
                                 </div>
-                                <input type="password" class="form-control mx-auto my-auto px-2 py-2" placeholder="password" aria-label="password" name="password" required>
+                                <input type="password" id="password" class="form-control mx-auto my-auto px-2 py-2" placeholder="password" aria-label="password" name="password" required>
                                 <span class="text-danger"><?php echo ((isset($_SESSION['password_err']) && $_SESSION['password_err'] != '') ? $_SESSION['password_err'] : '');
                                         unset($_SESSION['password_err']); ?> </span>
                             </div>
@@ -122,7 +124,34 @@
         </div>
     </div>
     </section>
-<!-- partial -->
+	
+<!--info for user corect register-->
+<script>
+$('#btn-submit').on('click',function(e){
+    e.preventDefault();
+    var form = $(this).parents('form');
+    swal.fire({
+        position: 'top-end',
+		icon: 'success',
+		title: 'New user has been added.',
+		showConfirmButton: false,
+		timer: 5000,
+        closeOnConfirm: false
+    }, function(isConfirm){
+        if (isConfirm) form.submit();
+    });
+});
+</script> 
+
+<!--clear the form after page reload -->
+<script >
+    
+    window.onload = function(){
+    
+        document.getElementById("password").innerHTML = "";
+    }
+</script>
+
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js'></script><script  src="./script.js"></script>
 

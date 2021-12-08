@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <html lang="en" >
 <head>
@@ -13,6 +12,8 @@
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css'>
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css'>
 <link rel="stylesheet" href="./style.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.all.min.js"></script>
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
@@ -68,20 +69,15 @@
         </div>
     </div>
     </section>
-
+	
 <script>
-      $(window).load(function(){
-        swal("Good job!", "You clicked the button!", "success");
-      });
- </script>
-
-<script>
-	var toastMixin = Swal.mixin({
+      $(document).ready(function(){
+    var toastMixin = Swal.mixin({
     toast: true,
     icon: 'success',
     title: 'General Title',
     animation: false,
-    position: 'top-right',
+    position: 'bottom-end',
     showConfirmButton: false,
     timer: 3000,
     timerProgressBar: true,
@@ -90,17 +86,13 @@
       toast.addEventListener('mouseleave', Swal.resumeTimer)
     }
   });
-   
-document.querySelector(".second").addEventListener('click', function(){
   toastMixin.fire({
-    animation: true,
     title: 'Signed in Successfully'
   });
-});
-</script>
+		  
+	  });
 
-<script type="text/javascript"> 
-   
+
 </script>
 
 </body>
