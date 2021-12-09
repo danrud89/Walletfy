@@ -17,6 +17,8 @@
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
     <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="bootstrap5/css/bootstrap.min.css" type="text/css" />
 	<link rel="stylesheet" href="style.css" type="text/css" />
 
@@ -38,61 +40,67 @@
         </div>
         <div class="blur">
 		  <form action="signin.php" method="post" name="loginForm" onsubmit="return inputValidation()" autocomplete="off" >
- 
-                        <div class="row mb-3">
-                            <div class="register-input">
+			<p id="text"  style="visibility:hidden; margin-top:-15px;">Caps Lock is ON.</p>
+                        <div class="row mb-2">
+						<label for="username">Username:</label>
+                            <div class="register-input" style="width:90%;">
                                 <div class="register-icon mx-auto my-auto px-2 py-2">
                                     <span class="material-icons">
                                         person
                                     </span>
                                 </div>
-                                <input type="text" class="form-control mx-auto my-auto px-2 py-2" placeholder="name" aria-label="name" name="name" autofocus required>
+                                <input type="text" class="form-control mx-auto my-auto px-2 py-2" placeholder="name" aria-label="name" name="name" onkeypress="capLock(event)" autofocus required>
                                 <span class="text-danger"><?php echo ((isset($_SESSION['username_err']) && $_SESSION['username_err'] != '') ? $_SESSION['username_err'] : '');
                                                     unset($_SESSION['username_err']); ?> </span>
                             </div>
                         </div>
                         
-                        <div class="row mb-3">
-                            <div class="register-input">
+                        <div class="row mb-2">
+						<label for="username">E-mail:       </label>
+                            <div class="register-input" style="width:95%; margin-left:-10px;">
                                 <div class="register-icon mx-auto my-auto px-2 py-2">
                                     <span class="material-icons">
                                         email
                                     </span>
                                 </div>
-                                <input type="email" class="form-control mx-auto my-auto px-2 py-2" placeholder="email" aria-label="email" name="email" required>
+                                <input type="email" class="form-control mx-auto my-auto px-2 py-2" placeholder="email" aria-label="email" name="email" onkeypress="capLock(event)"  required>
                                 <span class="text-danger"><?php echo ((isset($_SESSION['email_err']) && $_SESSION['email_err'] != '') ? $_SESSION['email_err'] : '');
                                                     unset($_SESSION['email_err']); ?> </span>
                             </div>
                         </div>
 
-                        <div class="row mb-3">
-                            <div class="register-input">
+                        <div class="row mb-2">
+						<label for="username">Password:</label>
+                            <div class="register-input" style="min-width:100%;">
                                 <div class="register-icon mx-auto my-auto px-2 py-2">
                                     <span class="material-icons">
                                         vpn_key
                                     </span>
                                 </div>
-                                <input type="password" id="password" class="form-control mx-auto my-auto px-2 py-2" placeholder="password" aria-label="password" name="password" required>
+                                <input type="password" id="password" class="form-control mx-auto my-auto px-2 py-2" placeholder="password" aria-label="password" name="password" onkeypress="capLock(event)" required>
+								<span class="material-icons align-middle" id="togglePassword" style="cursor:pointer; margin:10px 0 0 16px;">visibility_off</span>
                                 <span class="text-danger"><?php echo ((isset($_SESSION['password_err']) && $_SESSION['password_err'] != '') ? $_SESSION['password_err'] : '');
                                         unset($_SESSION['password_err']); ?> </span>
                             </div>
                         </div>
 
-                        <div class="row mb-4">
-                            <div class="register-input ">
+                        <div class="row mb-3">
+						<label for="username">Confirm password:</label>
+                            <div class="register-input" style="min-width:100%;">
                                 <div class="register-icon mx-auto my-auto px-2 py-2">
                                     <span class="material-icons">
                                         vpn_key
                                     </span>
                                 </div>
-                                <input type="password" class="form-control mx-auto my-auto px-2 py-2" placeholder="confirm password" aria-label="password" name="confpassword" required>
+                                <input type="password" id="cpassword" class="form-control mx-auto my-auto px-2 py-2" placeholder="confirm password" aria-label="password" name="confpassword" onkeypress="capLock(event)" required>
+								<span class="material-icons align-middle" id="togglePassword1" style="cursor:pointer; margin:10px 0 0 16px;">visibility_off</span>
                                 <span class="text-danger"><?php echo ((isset($_SESSION['confirm_password_err']) && $_SESSION['confirm_password_err'] != '') ? $_SESSION['confirm_password_err'] : '');
                                         unset($_SESSION['confirm_password_err']); ?> </span>
                             </div>
                         </div>
 						
-						<div class="row mb-4">
-                            <div class="register-button">
+						<div class="row mb-3">
+                            <div class="register-button text-center">
                                   <button type="submit" name="sign_in" class="btn btn-danger btn-lg" style="border-radius:15px"/>Sign Up</button>
                             </div>
                             <span class="text-success"><?php echo ((isset($_SESSION['success']) && $_SESSION['success'] != '') ? $_SESSION['success'] : '');
@@ -143,13 +151,49 @@ $('#btn-submit').on('click',function(e){
 });
 </script> 
 
+<script>
+		togglePassword.addEventListener('click', function togglePassword () {
+	const password = document.querySelector('#password');
+	if (password.type === 'password'){
+		password.type = 'text';
+		$('#togglePassword').text('visibility');	
+	}
+	else {
+		password.type = 'password';
+	   $('#togglePassword').text('visibility_off');	
+	}
+});
+</script>
+
+<script>
+togglePassword1.addEventListener('click', function togglePassword () {
+	const confpassword = document.querySelector('#cpassword');
+	if (cpassword.type === 'password'){
+		cpassword.type = 'text';
+		$('#togglePassword1').text('visibility');	
+	}
+	else {
+		cpassword.type = 'password';
+	   $('#togglePassword1').text('visibility_off');	
+	}
+});
+</script>
+
+<script>
+function capLock(e){
+  let kc = e.keyCode ? e.keyCode : e.which;
+  let sk = e.shiftKey ? e.shiftKey : kc === 16;
+  let visibility = ((kc >= 65 && kc <= 90) && !sk) || 
+      ((kc >= 97 && kc <= 122) && sk) ? 'visible' : 'hidden';
+  document.getElementById('text').style.visibility = visibility
+}
+</script>
+
 <!--clear the form after page reload -->
 <script >
-    
-    window.onload = function(){
-    
-        document.getElementById("password").innerHTML = "";
-    }
+    $(document).ready(function(e) {
+		$('.form-control').value('');
+	}
 </script>
 
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>

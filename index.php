@@ -51,28 +51,31 @@ if(isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true){
 		  </p>
         </div>
         <div class="blur">
-		  <form action="signin.php" method="post" name="loginForm" onsubmit="return inputValidation()" >
- 
-                        <div class="row mt-4 mb-4">
-                            <div class="login-input">
-                                <div class="login-icon mx-auto my-auto px-2 py-2">
+		  <form action="signin.php" method="post" name="loginForm" onsubmit="return inputValidation()" autocomplete="off">
+		  <p id="text"  style="visibility:hidden; margin-top:-15px;">Caps Lock is ON.</p>
+                        <div class="row mt-1 mb-4">
+						 <label for="username">E-mail/login:</label>
+                            <div class="login-input" style="width:90%;">
+                                <div class="login-icon mx-auto my-auto px-2 py-2" >
                                     <span class="material-icons">
                                         email
                                     </span>
                                 </div>
-                                <input type="email" class="form-control mx-auto my-auto px-2 py-2" placeholder="e-mail" aria-label="email" name="email" required autofocus>
+                                <input type="email" class="form-control mx-auto my-auto py-2" placeholder="e-mail" aria-label="email" name="email" onkeypress="capLock(event)" required autofocus>
                                 <span><?php echo ((isset($_SESSION['login_err']) && $_SESSION['login_err'] != '') ? $_SESSION['login_err'] : ''); unset($_SESSION['login_err']); ?> </span>
                             </div>
                         </div>
 
                         <div class="row">
+						<label for="password">Password:</label>
                             <div class="login-input mb-3">
                                 <div class="login-icon">
                                     <span class="material-icons mx-auto my-auto px-2 py-2">
                                         vpn_key
                                     </span>
                                 </div>
-                                <input type="password" class="form-control mx-auto my-auto px-2 py-2" placeholder="password" aria-label="password" name="password" required>
+                                <input type="password" class="form-control mx-auto my-auto px-2 py-2" id="password" placeholder="password" aria-label="password" name="password" onkeypress="capLock(event)" required>
+								<span class="material-icons align-middle" id="togglePassword" style="cursor:pointer; margin:10px 0 0 16px;" onclick="togglePassword('password')">visibility_off</span>
                                 <span><?php echo ((isset($_SESSION['password_login_err']) && $_SESSION['password_login_err'] != '') ? $_SESSION['password_login_err'] : ''); unset($_SESSION['password_login_err']); ?> </span>
                             </div>
                         </div>
@@ -85,7 +88,7 @@ if(isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true){
                         </div>
 
                         <div class="row mb-4">
-                            <div class="login-button">
+                            <div class="login-button text-center">
                                 <button type="submit" name="sign_in" class="btn btn-danger btn-lg" style="border-radius:15px"/>Sign In</button>
                             </div>
                             <span><?php echo ((isset($_SESSION['login_message']) && $_SESSION['login_message'] != '') ? $_SESSION['login_message'] : ''); unset($_SESSION['login_message']); ?> </span>
@@ -116,7 +119,38 @@ if(isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true){
 	
     
 <!-- partial -->
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+<script>
+
+togglePassword.addEventListener('click', function togglePassword (id) {
+	const password = document.querySelector('#password');
+	if (password.type === 'password'){
+		password.type = 'text';
+		$('#togglePassword').text('visibility');	
+	}
+	else {
+		password.type = 'password';
+	   $('#togglePassword').text('visibility_off');	
+	}
+});
+</script>
+
+<script>
+function capLock(e){
+  let kc = e.keyCode ? e.keyCode : e.which;
+  let sk = e.shiftKey ? e.shiftKey : kc === 16;
+  let visibility = ((kc >= 65 && kc <= 90) && !sk) || 
+      ((kc >= 97 && kc <= 122) && sk) ? 'visible' : 'hidden';
+  document.getElementById('text').style.visibility = visibility
+}
+</script>
+
+<script >
+    $(document).ready(function(e) {
+		$('.form-control').value('');
+	}
+</script>
+
+ <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js'></script><script  src="./script.js"></script>
 <script src="sweetalert2.all.min.js"></script>
 
