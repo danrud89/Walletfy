@@ -39,9 +39,8 @@
 		  </p>
         </div>
         <div class="blur">
-		  <form action="signup.php" method="post" name="registerForm" autocomplete="off" id="registerForm">
+		  <form action="signup.php" method="post" name="registerForm" autocomplete="off" id="registerForm" onsubmit="return validation()">
 			<p id="text"  style="visibility:hidden; margin-top:-15px;">Caps Lock is ON.</p>
-                     
 			<div class="row mb-2 py-2">
 						<label for="username">Login:</label>
                             <div class="register-input">
@@ -50,12 +49,12 @@
                                         person
                                     </span>
                                 </div>
-                                <input type="text" id="username" class="form-control mx-auto my-auto px-2 py-2" placeholder="name" aria-label="username" name="username" onkeypress="capLock(event)" min="3">
-								<i class="fas fa-check-circle" style="position:absolute; left:85%; top:12px; visibility:hidden;"></i>
-								<i class="fas fa-exclamation-circle" style="position:absolute; left:85%; top:12px; visibility:hidden;"></i>
-								<small>Error message</small>
-                                <span class="text-danger"><?php echo ((isset($_SESSION['password_err']) && $_SESSION['password_err'] != '') ? $_SESSION['password_err'] : '');
-                                        unset($_SESSION['password_err']); ?> </span>
+                                <input type="text" id="username" class="form-control mx-auto my-auto px-2 py-2" placeholder="name" aria-label="username" name="username" onkeypress="capLock(event)" min="3" autofocus>
+								<i class="fas fa-check-circle" id="ok1" style="position:absolute; left:85%; top:12px; visibility:hidden;"></i>
+								<i class="fas fa-exclamation-circle" id="wrong1" style="position:absolute; left:85%; top:12px; visibility:hidden;"></i>
+								<small id="login_error">Error message</small>
+                                <span class="text-danger"><?php echo ((isset($_SESSION['username_err']) && $_SESSION['username_err'] != '') ? $_SESSION['username_err'] : '');
+                                        unset($_SESSION['username_err']); ?> </span>
                             </div>
                         </div>
 						
@@ -69,11 +68,11 @@
                                     </span>
                                 </div>
                                 <input type="email" id="email" class="form-control mx-auto my-auto py-2" placeholder="email@test.com" aria-label="e-mail" name="email" onkeypress="capLock(event)">
-								<i class="fas fa-check-circle" style="position:absolute; left:85%; top:12px; visibility:hidden;"></i>
-								<i class="fas fa-exclamation-circle" style="position:absolute; left:85%; top:12px; visibility:hidden;"></i>
-								<small>Error message</small>
-                                <span class="text-danger"><?php echo ((isset($_SESSION['password_err']) && $_SESSION['password_err'] != '') ? $_SESSION['password_err'] : '');
-                                        unset($_SESSION['password_err']); ?> </span>
+								<i class="fas fa-check-circle" id="ok2" style="position:absolute; left:85%; top:12px; visibility:hidden;"></i>
+								<i class="fas fa-exclamation-circle" id="wrong2" style="position:absolute; left:85%; top:12px; visibility:hidden;"></i>
+								<small id="email_error">Error message</small>
+                                <span class="text-danger"><?php echo ((isset($_SESSION['email_err']) && $_SESSION['email_err'] != '') ? $_SESSION['email_err'] : '');
+                                        unset($_SESSION['email_err']); ?> </span>
                             </div>
                         </div>
 						
@@ -87,9 +86,9 @@
                                     </span>
                                 </div>
                                 <input type="password" id="password" class="form-control mx-auto my-auto px-2 py-2" placeholder="password" aria-label="password" name="password" onkeypress="capLock(event)" min="8" max="20">
-								<i class="fas fa-check-circle" style="position:absolute; left:75%; top:12px; visibility:hidden;"></i>
-								<i class="fas fa-exclamation-circle" style="position:absolute; left:75%; top:12px; visibility:hidden;"></i>
-								<small>Error message</small>
+								<i class="fas fa-check-circle" id="ok3" style="position:absolute; left:75%; top:12px; visibility:hidden;"></i>
+								<i class="fas fa-exclamation-circle" id="wrong3" style="position:absolute; left:75%; top:12px; visibility:hidden;"></i>
+								<small id="password_error">Error message</small>
 								<span class="material-icons align-middle" id="togglePassword" style="cursor:pointer; margin:10px 0 0 10px;">visibility_off</span>
                                 <span class="text-danger"><?php echo ((isset($_SESSION['password_err']) && $_SESSION['password_err'] != '') ? $_SESSION['password_err'] : '');
                                         unset($_SESSION['password_err']); ?> </span>
@@ -105,9 +104,9 @@
                                     </span>
                                 </div>
                                 <input type="password" id="cpassword" class="form-control mx-auto my-auto px-2 py-2" placeholder="confirm password" aria-label="password" name="confpassword" onkeypress="capLock(event)" min="8" max="20">
-								<i class="fas fa-check-circle" id="ok" style="position:absolute; left:75%; top:12px; visibility:hidden;"></i>
-								<i class="fas fa-exclamation-circle" id="wrong" style="position:absolute; left:75%; top:12px; visibility:hidden;"></i>
-								<small>Error message</small>
+								<i class="fas fa-check-circle" id="ok4" style="position:absolute; left:75%; top:12px; visibility:hidden;"></i>
+								<i class="fas fa-exclamation-circle" id="wrong4" style="position:absolute; left:75%; top:12px; visibility:hidden;"></i>
+								<small id="cpassword_error">Error message</small>
 								<span class="material-icons align-middle" id="togglePassword1" style="cursor:pointer; margin:10px 0 0 10px;">visibility_off</span>
                                 <span class="text-danger"><?php echo ((isset($_SESSION['confirm_password_err']) && $_SESSION['confirm_password_err'] != '') ? $_SESSION['confirm_password_err'] : '');
                                         unset($_SESSION['confirm_password_err']); ?> </span>
@@ -167,88 +166,100 @@ $('#submit').on('click',function(e){
 </script> 
 
 <script>
-
-const form = document.getElementById('registerForm');
+function validation() {	
 const username = document.getElementById('username');
 const email = document.getElementById('email');
 const password = document.getElementById('password');
 const password2 = document.getElementById('cpassword');
-
-form.addEventListener('submit', e => {
-	e.preventDefault();
-	
-	checkInputs();
-	function checkInputs() {
 	// trim to remove the whitespaces
 	const usernameValue = username.value.trim();
 	const emailValue = email.value.trim();
 	const passwordValue = password.value.trim();
 	const password2Value = password2.value.trim();
 	
-	if(usernameValue === '' || userNameValue === null) {
-		setErrorFor(username, 'Username cannot be blank');
-		$('#wrong').css('visibility', 'visible');
-	} else {
-		setSuccessFor(username);
-		$('#ok').css('visibility', 'visible');
+	if (usernameValue === '' || usernameValue === null || usernameValue.length < 3) { 
+		$('#login_error').css('visibility', 'visible');
+		$('#login_error').text('Must contain at least 3 charakters !');
+		$('#wrong1').css('visibility', 'visible');
+		$('#ok1').css('visibility', 'hidden');
+		$('#username').css('border', 'solid 2px #e74c3c');
+		return false;
+	}
+	 else{
+		$('#username').css('border', 'solid 2px #2ecc71');
+		$('#ok1').css('visibility', 'visible');
+		$('#wrong1').css('visibility', 'hidden');
+		$('#login_error').css('visibility', 'hidden');
+	 }
+
+	if(emailValue === '' || emailValue === null || !isEmail(emailValue)) {
+		$('#email_error').css('visibility', 'visible');
+		$('#email_error').text('Invalid email format');
+		$('#wrong2').css('visibility', 'visible');
+		$('#ok2').css('visibility', 'hidden');
+		$('#email').css('border', 'solid 2px #e74c3c');
+		return false;
+	}
+	  else {
+		$('#email').css('border', 'solid 2px #2ecc71');
+		$('#ok2').css('visibility', 'visible');
+		$('#wrong2').css('visibility', 'hidden');
+		$('#email_error').css('visibility', 'hidden');
 	}
 	
-	if(username.length < 8 ) {
-		setErrorFor(username, 'Username must contain at least 3 charakters');
-		$('#wrong').css('visibility', 'visible');
-	} else {
-		setSuccessFor(username);
-		$('#ok').css('visibility', 'visible');
+	if(passwordValue === '' || passwordValue === null) {
+		$('#password_error').css('visibility', 'visible');
+		$('#password_error').text('Password cannot be blank');
+		$('#wrong3').css('visibility', 'visible');
+		$('#ok3').css('visibility', 'hidden');
+		$('#password').css('border', 'solid 2px #e74c3c');
+		return false;
+
+	} else if (passwordValue.length < 6 || passwordValue.length > 20){
+		$('#password_error').css('visibility', 'visible');
+		$('#password_error').text('Must contain beetween 8-20 characters');
+		$('#wrong3').css('visibility', 'visible');
+		$('#ok3').css('visibility', 'hidden');
+		$('#password').css('border', 'solid 2px #e74c3c');
+		return false;
+	}
+	else if (!isPasswordValid(passwordValue)){
+		$('#password_error').css('visibility', 'visible');
+		$('#password_error').text('Must contain only letters, numbers and underscores');
+		$('#wrong3').css('visibility', 'visible');
+		$('#ok3').css('visibility', 'hidden');
+		$('#password').css('border', 'solid 2px #e74c3c');
+		return false;
+	}
+	else {
+		$('#password').css('border', 'solid 2px #2ecc71');
+		$('#ok3').css('visibility', 'visible');
+		$('#wrong3').css('visibility', 'hidden');
+		$('#password_error').css('visibility', 'hidden');
 	}
 	
-	if(emailValue === '') {
-		setErrorFor(email, 'Email cannot be blank');
-		$('#wrong').css('visibility', 'visible');
-	} else if (!isEmail(emailValue)) {
-		setErrorFor(email, 'Not a valid email');
-		$('#wrong').css('visibility', 'visible');
-	} else {
-		setSuccessFor(email);
-		$('#ok').css('visibility', 'visible');
-	}
-	
-	if(passwordValue === '') {
-		setErrorFor(password, 'Password cannot be blank');
-		$('#wrong').css('visibility', 'visible');
-	} else {
-		setSuccessFor(password);
-		$('#ok').css('visibility', 'visible');
-	}
-	
-	if(password2Value === '') {
-		setErrorFor(password2, 'Password2 cannot be blank');
-		$('#wrong').css('visibility', 'visible');
-	} else if(passwordValue !== password2Value) {
-		setErrorFor(password2, 'Passwords does not match');
-		$('#wrong').css('visibility', 'visible');
+	 if(passwordValue !== password2Value) {
+		$('#cpassword_error').css('visibility', 'visible');
+		$('#cpassword_error').text('Passwords do not match');
+		$('#wrong4').css('visibility', 'visible');
+		$('#ok4').css('visibility', 'hidden');
+		$('#cpassword').css('border', 'solid 2px #e74c3c');
+		$('#password_error').css('visibility', 'hidden');
+		return false;
 	} else{
-		setSuccessFor(password2);
-		$('#ok').css('visibility', 'visible');
+		$('#cpassword').css('border', 'solid 2px #2ecc71');
+		$('#ok4').css('visibility', 'visible');
+		$('#wrong4').css('visibility', 'hidden');
+		$('#cpassword_error').css('visibility', 'hidden');
 	}
-}
 
-function setErrorFor(input, message) {
-	const formControl = input.parentElement;
-	const small = formControl.querySelector('small');
-	$('.register-input input').css('border', 'solid 2px #e74c3c')
-	small.innerText = message;
-}
-
-function setSuccessFor(input) {
-	const formControl = input.parentElement;
-	$('.register-input input').css('border', 'solid 2px #2ecc71')
-}
-	
 function isEmail(email) {
 	return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
 }
-});
-
+function isPasswordValid(password){
+return/^[a-zA-Z0-9_]*$/.test(password);
+	}
+}
 </script>
 
 
@@ -293,8 +304,8 @@ function capLock(e){
 <!--clear the form after page reload -->
 <script >
     $(document).ready(function(e) {
-		$('.form-control').value('');
-	}
+		$('.blur .content form#registerForm .register-input .form-control').value('');
+	});
 </script>
 
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>

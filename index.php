@@ -51,22 +51,25 @@ if(isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true){
 		  </p>
         </div>
         <div class="blur">
-		  <form action="signin.php" method="post" name="loginForm" onsubmit="return inputValidation()" autocomplete="off">
-		  <p id="text"  style="visibility:hidden; margin-top:-15px;">Caps Lock is ON.</p>
+		  <form action="signin.php" method="post" name="loginForm"  autocomplete="off" onsubmit="return validation()">
+		  <p id="text" style="visibility:hidden; margin-top:-15px;">Caps Lock is ON.</p>
                         <div class="row mt-1 mb-4">
-						 <label for="username">E-mail/login:</label>
-                            <div class="login-input" style="width:90%;">
+						 <label for="username">E-mail:</label>
+                            <div class="login-input" style="width: 90%;">
                                 <div class="login-icon mx-auto my-auto px-2 py-2" >
                                     <span class="material-icons">
                                         email
                                     </span>
                                 </div>
-                                <input type="email" class="form-control mx-auto my-auto py-2" placeholder="e-mail" aria-label="email" name="email" onkeypress="capLock(event)" required autofocus>
+                                <input type="email" id="email" class="form-control mx-auto my-auto py-2" placeholder="e-mail" aria-label="email" name="email" onkeypress="capLock(event)" autofocus>
+                                <i class="fas fa-check-circle" id="ok" style="position:absolute; left:85%; top:12px; visibility:hidden;"></i>
+								<i class="fas fa-exclamation-circle" id="wrong" style="position:absolute; left:85%; top:12px; visibility:hidden;"></i>
+								<small id="email_error">Error message</small>
                                 <span><?php echo ((isset($_SESSION['login_err']) && $_SESSION['login_err'] != '') ? $_SESSION['login_err'] : ''); unset($_SESSION['login_err']); ?> </span>
                             </div>
                         </div>
 
-                        <div class="row">
+                        <div class="row mb-2">
 						<label for="password">Password:</label>
                             <div class="login-input mb-3">
                                 <div class="login-icon">
@@ -74,8 +77,11 @@ if(isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true){
                                         vpn_key
                                     </span>
                                 </div>
-                                <input type="password" class="form-control mx-auto my-auto px-2 py-2" id="password" placeholder="password" aria-label="password" name="password" onkeypress="capLock(event)" required>
-								<span class="material-icons align-middle" id="togglePassword" style="cursor:pointer; margin:10px 0 0 16px;" onclick="togglePassword('password')">visibility_off</span>
+                                <input type="password" id="password" class="form-control mx-auto my-auto px-2 py-2" id="password" placeholder="password" aria-label="password" name="password" onkeypress="capLock(event)" >
+                                <i class="fas fa-check-circle" id="ok1" style="position:absolute; left:75%; top:12px; visibility:hidden;"></i>
+								<i class="fas fa-exclamation-circle" id="wrong1" style="position:absolute; left:75%; top:12px; visibility:hidden;"></i>
+								<small id="password_error">Error message</small>
+								<span class="material-icons align-middle" id="togglePassword" style="cursor:pointer; margin:10px 0 0 10px;" onclick="togglePassword('password')">visibility_off</span>
                                 <span><?php echo ((isset($_SESSION['password_login_err']) && $_SESSION['password_login_err'] != '') ? $_SESSION['password_login_err'] : ''); unset($_SESSION['password_login_err']); ?> </span>
                             </div>
                         </div>
@@ -120,8 +126,23 @@ if(isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true){
     
 <!-- partial -->
 <script>
+function capLock(e){
+  let kc = e.keyCode ? e.keyCode : e.which;
+  let sk = e.shiftKey ? e.shiftKey : kc === 16;
+  let visibility = ((kc >= 65 && kc <= 90) && !sk) || 
+      ((kc >= 97 && kc <= 122) && sk) ? 'visible' : 'hidden';
+  document.getElementById('text').style.visibility = visibility
+}
+</script>
 
-togglePassword.addEventListener('click', function togglePassword (id) {
+<script >
+    $(document).ready(function(e) {
+		$('.form-control').value('');
+    });
+</script>
+
+<script>
+		togglePassword.addEventListener('click', function togglePassword () {
 	const password = document.querySelector('#password');
 	if (password.type === 'password'){
 		password.type = 'text';
@@ -135,19 +156,69 @@ togglePassword.addEventListener('click', function togglePassword (id) {
 </script>
 
 <script>
-function capLock(e){
-  let kc = e.keyCode ? e.keyCode : e.which;
-  let sk = e.shiftKey ? e.shiftKey : kc === 16;
-  let visibility = ((kc >= 65 && kc <= 90) && !sk) || 
-      ((kc >= 97 && kc <= 122) && sk) ? 'visible' : 'hidden';
-  document.getElementById('text').style.visibility = visibility
-}
-</script>
+function validation() {	
+const email = document.getElementById('email');
+const password = document.getElementById('password');
+	// trim to remove the whitespaces
 
-<script >
-    $(document).ready(function(e) {
-		$('.form-control').value('');
+	const emailValue = email.value.trim();
+	const passwordValue = password.value.trim();
+	
+	if(emailValue === '' || emailValue === null || !isEmail(emailValue)) {
+		$('#email_error').css('visibility', 'visible');
+		$('#email_error').text('Invalid email format');
+		$('#wrong2').css('visibility', 'visible');
+		$('#ok2').css('visibility', 'hidden');
+		$('#email').css('border', 'solid 2px #e74c3c');
+		return false;
 	}
+	  else {
+		$('#email').css('border', 'solid 2px #2ecc71');
+		$('#ok2').css('visibility', 'visible');
+		$('#wrong2').css('visibility', 'hidden');
+		$('#email_error').css('visibility', 'hidden');
+	}
+	
+	if(passwordValue === '' || passwordValue === null) {
+		$('#password_error').css('visibility', 'visible');
+		$('#password_error').text('Password cannot be blank');
+		$('#wrong3').css('visibility', 'visible');
+		$('#ok3').css('visibility', 'hidden');
+		$('#password').css('border', 'solid 2px #e74c3c');
+		return false;
+
+	} else if (passwordValue.length < 6 || passwordValue.length > 20){
+		$('#password_error').css('visibility', 'visible');
+		$('#password_error').text('hint -> contain beetween 8-20 characters');
+		$('#wrong3').css('visibility', 'visible');
+		$('#ok3').css('visibility', 'hidden');
+		$('#password').css('border', 'solid 2px #e74c3c');
+		return false;
+	}
+	else if (!isPasswordValid(passwordValue)){
+		$('#password_error').css('visibility', 'visible');
+		$('#password_error').text('Must contain only letters, numbers and underscores');
+		$('#wrong3').css('visibility', 'visible');
+		$('#ok3').css('visibility', 'hidden');
+		$('#password').css('border', 'solid 2px #e74c3c');
+		return false;
+	}
+	else {
+		$('#password').css('border', 'solid 2px #2ecc71');
+		$('#ok3').css('visibility', 'visible');
+		$('#wrong3').css('visibility', 'hidden');
+		$('#password_error').css('visibility', 'hidden');
+	}
+	
+	 
+
+function isEmail(email) {
+	return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
+}
+function isPasswordValid(password){
+return/^[a-zA-Z0-9_]*$/.test(password);
+	}
+}
 </script>
 
  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
