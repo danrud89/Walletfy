@@ -293,7 +293,7 @@ section#home .content .blur {
 section#home .content .blur form {
   position: relative;
   margin: auto;
-  padding: 1em;
+  padding: 0.5em;
   display: flex;
   min-height:375px;
   flex-direction: column;
@@ -316,7 +316,9 @@ section#home .content .blur form {
 }
 .input-group {
     display: flex;
+	width:100%;
 }
+
 #tableOfIncomesInDetail{
 	color:aliceblue;
 }
@@ -327,10 +329,34 @@ section#home .content .blur form {
 background-image: linear-gradient();
 }
 
+.content .blur form .row{
+	min-width:85%;
+	max-width:95%;	
+}
+
 .login-input,
 .register-input {
     display: flex;
+	width:100%;
+	position: relative;
 }
+
+#ok {
+	color: #2ecc71;
+}
+
+#wrong{
+	color: #e74c3c;
+}
+
+.register-input small {
+	color: #e74c3c;
+	position: absolute;
+	left:16%;
+	top:40px;
+    visibility:hidden;
+}
+
 
 .form-control {
     border-radius: 5px;
@@ -354,7 +380,6 @@ background-image: linear-gradient();
     font-size: 14px;
     background-color: transparent;
 	bottom: 0;
-	
 }
 
 .modal {

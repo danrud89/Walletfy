@@ -39,61 +39,76 @@
 		  </p>
         </div>
         <div class="blur">
-		  <form action="signin.php" method="post" name="loginForm" onsubmit="return inputValidation()" autocomplete="off" >
+		  <form action="signup.php" method="post" name="registerForm" autocomplete="off" id="registerForm">
 			<p id="text"  style="visibility:hidden; margin-top:-15px;">Caps Lock is ON.</p>
-                        <div class="row mb-2">
-						<label for="username">Username:</label>
-                            <div class="register-input" style="width:90%;">
+                     
+			<div class="row mb-2 py-2">
+						<label for="username">Login:</label>
+                            <div class="register-input">
                                 <div class="register-icon mx-auto my-auto px-2 py-2">
                                     <span class="material-icons">
                                         person
                                     </span>
                                 </div>
-                                <input type="text" class="form-control mx-auto my-auto px-2 py-2" placeholder="name" aria-label="name" name="name" onkeypress="capLock(event)" autofocus required>
-                                <span class="text-danger"><?php echo ((isset($_SESSION['username_err']) && $_SESSION['username_err'] != '') ? $_SESSION['username_err'] : '');
-                                                    unset($_SESSION['username_err']); ?> </span>
+                                <input type="text" id="username" class="form-control mx-auto my-auto px-2 py-2" placeholder="name" aria-label="username" name="username" onkeypress="capLock(event)" min="3">
+								<i class="fas fa-check-circle" style="position:absolute; left:85%; top:12px; visibility:hidden;"></i>
+								<i class="fas fa-exclamation-circle" style="position:absolute; left:85%; top:12px; visibility:hidden;"></i>
+								<small>Error message</small>
+                                <span class="text-danger"><?php echo ((isset($_SESSION['password_err']) && $_SESSION['password_err'] != '') ? $_SESSION['password_err'] : '');
+                                        unset($_SESSION['password_err']); ?> </span>
                             </div>
                         </div>
-                        
-                        <div class="row mb-2">
-						<label for="username">E-mail:       </label>
-                            <div class="register-input" style="width:95%; margin-left:-10px;">
+						
+						
+						<div class="row mb-2 py-2">
+						<label for="email">E-mail:</label>
+                            <div class="register-input">
                                 <div class="register-icon mx-auto my-auto px-2 py-2">
                                     <span class="material-icons">
                                         email
                                     </span>
                                 </div>
-                                <input type="email" class="form-control mx-auto my-auto px-2 py-2" placeholder="email" aria-label="email" name="email" onkeypress="capLock(event)"  required>
-                                <span class="text-danger"><?php echo ((isset($_SESSION['email_err']) && $_SESSION['email_err'] != '') ? $_SESSION['email_err'] : '');
-                                                    unset($_SESSION['email_err']); ?> </span>
+                                <input type="email" id="email" class="form-control mx-auto my-auto py-2" placeholder="email@test.com" aria-label="e-mail" name="email" onkeypress="capLock(event)">
+								<i class="fas fa-check-circle" style="position:absolute; left:85%; top:12px; visibility:hidden;"></i>
+								<i class="fas fa-exclamation-circle" style="position:absolute; left:85%; top:12px; visibility:hidden;"></i>
+								<small>Error message</small>
+                                <span class="text-danger"><?php echo ((isset($_SESSION['password_err']) && $_SESSION['password_err'] != '') ? $_SESSION['password_err'] : '');
+                                        unset($_SESSION['password_err']); ?> </span>
                             </div>
                         </div>
-
-                        <div class="row mb-2">
-						<label for="username">Password:</label>
-                            <div class="register-input" style="min-width:100%;">
+						
+						
+                        <div class="row mb-2 py-2">
+						<label for="password">Password:</label>
+                            <div class="register-input">
                                 <div class="register-icon mx-auto my-auto px-2 py-2">
                                     <span class="material-icons">
                                         vpn_key
                                     </span>
                                 </div>
-                                <input type="password" id="password" class="form-control mx-auto my-auto px-2 py-2" placeholder="password" aria-label="password" name="password" onkeypress="capLock(event)" required>
-								<span class="material-icons align-middle" id="togglePassword" style="cursor:pointer; margin:10px 0 0 16px;">visibility_off</span>
+                                <input type="password" id="password" class="form-control mx-auto my-auto px-2 py-2" placeholder="password" aria-label="password" name="password" onkeypress="capLock(event)" min="8" max="20">
+								<i class="fas fa-check-circle" style="position:absolute; left:75%; top:12px; visibility:hidden;"></i>
+								<i class="fas fa-exclamation-circle" style="position:absolute; left:75%; top:12px; visibility:hidden;"></i>
+								<small>Error message</small>
+								<span class="material-icons align-middle" id="togglePassword" style="cursor:pointer; margin:10px 0 0 10px;">visibility_off</span>
                                 <span class="text-danger"><?php echo ((isset($_SESSION['password_err']) && $_SESSION['password_err'] != '') ? $_SESSION['password_err'] : '');
                                         unset($_SESSION['password_err']); ?> </span>
                             </div>
                         </div>
 
-                        <div class="row mb-3">
-						<label for="username">Confirm password:</label>
-                            <div class="register-input" style="min-width:100%;">
+                        <div class="row mb-3 py-2">
+						<label for="confPassword">Confirm password:</label>
+                            <div class="register-input">
                                 <div class="register-icon mx-auto my-auto px-2 py-2">
                                     <span class="material-icons">
                                         vpn_key
                                     </span>
                                 </div>
-                                <input type="password" id="cpassword" class="form-control mx-auto my-auto px-2 py-2" placeholder="confirm password" aria-label="password" name="confpassword" onkeypress="capLock(event)" required>
-								<span class="material-icons align-middle" id="togglePassword1" style="cursor:pointer; margin:10px 0 0 16px;">visibility_off</span>
+                                <input type="password" id="cpassword" class="form-control mx-auto my-auto px-2 py-2" placeholder="confirm password" aria-label="password" name="confpassword" onkeypress="capLock(event)" min="8" max="20">
+								<i class="fas fa-check-circle" id="ok" style="position:absolute; left:75%; top:12px; visibility:hidden;"></i>
+								<i class="fas fa-exclamation-circle" id="wrong" style="position:absolute; left:75%; top:12px; visibility:hidden;"></i>
+								<small>Error message</small>
+								<span class="material-icons align-middle" id="togglePassword1" style="cursor:pointer; margin:10px 0 0 10px;">visibility_off</span>
                                 <span class="text-danger"><?php echo ((isset($_SESSION['confirm_password_err']) && $_SESSION['confirm_password_err'] != '') ? $_SESSION['confirm_password_err'] : '');
                                         unset($_SESSION['confirm_password_err']); ?> </span>
                             </div>
@@ -101,7 +116,7 @@
 						
 						<div class="row mb-3">
                             <div class="register-button text-center">
-                                  <button type="submit" name="sign_in" class="btn btn-danger btn-lg" style="border-radius:15px"/>Sign Up</button>
+                                  <button type="submit" name="sign_in" id="submit" class="btn btn-danger btn-lg" style="border-radius:15px"/>Sign Up</button>
                             </div>
                             <span class="text-success"><?php echo ((isset($_SESSION['success']) && $_SESSION['success'] != '') ? $_SESSION['success'] : '');
                                     unset($_SESSION['success']); ?> </span>
@@ -111,7 +126,7 @@
 
                         <div class="row">
                             <div class="change_link ">
-                                    <p class="text-left ">Already a member ?<a href="index.php" class="p-1"><button type="button" class="btn btn-danger btn-sm" style="border-radius:10px">Sign in</button></a></p>
+                                    <p class="text-center mb-0">Already a member ?<a href="index.php" class="p-1"><button type="button" class="btn btn-danger btn-sm" style="border-radius:10px">Sign in</button></a></p>
                             </div>
                         </div>
                     
@@ -135,7 +150,7 @@
 	
 <!--info for user corect register-->
 <script>
-$('#btn-submit').on('click',function(e){
+$('#submit').on('click',function(e){
     e.preventDefault();
     var form = $(this).parents('form');
     swal.fire({
@@ -150,6 +165,92 @@ $('#btn-submit').on('click',function(e){
     });
 });
 </script> 
+
+<script>
+
+const form = document.getElementById('registerForm');
+const username = document.getElementById('username');
+const email = document.getElementById('email');
+const password = document.getElementById('password');
+const password2 = document.getElementById('cpassword');
+
+form.addEventListener('submit', e => {
+	e.preventDefault();
+	
+	checkInputs();
+	function checkInputs() {
+	// trim to remove the whitespaces
+	const usernameValue = username.value.trim();
+	const emailValue = email.value.trim();
+	const passwordValue = password.value.trim();
+	const password2Value = password2.value.trim();
+	
+	if(usernameValue === '' || userNameValue === null) {
+		setErrorFor(username, 'Username cannot be blank');
+		$('#wrong').css('visibility', 'visible');
+	} else {
+		setSuccessFor(username);
+		$('#ok').css('visibility', 'visible');
+	}
+	
+	if(username.length < 8 ) {
+		setErrorFor(username, 'Username must contain at least 3 charakters');
+		$('#wrong').css('visibility', 'visible');
+	} else {
+		setSuccessFor(username);
+		$('#ok').css('visibility', 'visible');
+	}
+	
+	if(emailValue === '') {
+		setErrorFor(email, 'Email cannot be blank');
+		$('#wrong').css('visibility', 'visible');
+	} else if (!isEmail(emailValue)) {
+		setErrorFor(email, 'Not a valid email');
+		$('#wrong').css('visibility', 'visible');
+	} else {
+		setSuccessFor(email);
+		$('#ok').css('visibility', 'visible');
+	}
+	
+	if(passwordValue === '') {
+		setErrorFor(password, 'Password cannot be blank');
+		$('#wrong').css('visibility', 'visible');
+	} else {
+		setSuccessFor(password);
+		$('#ok').css('visibility', 'visible');
+	}
+	
+	if(password2Value === '') {
+		setErrorFor(password2, 'Password2 cannot be blank');
+		$('#wrong').css('visibility', 'visible');
+	} else if(passwordValue !== password2Value) {
+		setErrorFor(password2, 'Passwords does not match');
+		$('#wrong').css('visibility', 'visible');
+	} else{
+		setSuccessFor(password2);
+		$('#ok').css('visibility', 'visible');
+	}
+}
+
+function setErrorFor(input, message) {
+	const formControl = input.parentElement;
+	const small = formControl.querySelector('small');
+	$('.register-input input').css('border', 'solid 2px #e74c3c')
+	small.innerText = message;
+}
+
+function setSuccessFor(input) {
+	const formControl = input.parentElement;
+	$('.register-input input').css('border', 'solid 2px #2ecc71')
+}
+	
+function isEmail(email) {
+	return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
+}
+});
+
+</script>
+
 
 <script>
 		togglePassword.addEventListener('click', function togglePassword () {

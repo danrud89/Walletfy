@@ -96,7 +96,7 @@ if(isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true){
 
                         <div class="row">
                             <div class="change_link ">
-                                    <p class="text-left">Not a member yet ?<a href="register.php" class="p-1"><button type="button" class="btn btn-danger btn-sm" style="border-radius:10px">Sign up</button></a></p>
+                                    <p class="text-center">Not a member yet ?<a href="register.php" class="p-1"><button type="button" class="btn btn-danger btn-sm" style="border-radius:10px">Sign up</button></a></p>
                             </div>
                         </div>
                     
