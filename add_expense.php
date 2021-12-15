@@ -3,7 +3,23 @@ session_start();
 $expenseAmount = $expenseDate = $expensePurpose = $expenseOptions = "";
 $amount_err = $date_err = $purpose_err = $options_err = "";
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['addExpense'])) {
+function filterInputs($input){
+    return $output = filter_input(INPUT_POST, '$input');
+}
+
+function validateDate($testDate)
+{
+    $dateArray = explode('.', $testDate);
+    if (count($dateArray) == 3) {
+        if (checkdate($dateArray[0], $dateArray[1], $dateArray[2])) {
+            return true;
+        }
+    return false;
+    }
+    return false;
+}
+
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['addExpense'])) {
 
     if(!isset($_POST['amount'])){
     $_SESSION['amount_err'] = 'Amount field cannot be empty !';
@@ -20,14 +36,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['addExpense'])) {
 
     if(empty($amount_err) && empty($date_err) && empty($category_err)){
     $user_id = $_SESSION['logged_id'];
+    
+    if(!is_numeric($_POST['amount'])){
+        $_SESSION['amount_err'] = 'Invalid amount format !';
+    }
+    if(is_float($_POST['amount'])){ 
+    $expenseAmount = filterInputs($_POST['amount']);   
     $expenseAmount = str_replace(',', '.', $_POST['amount']);
-    $expenseDate = $_POST['date'];
-    $expensePurpose = $_POST['purpose'];
-    $expenseOptions = $_POST['options'];
-    $expenseComment = $_POST['comment'];
-
-    if ($amount <= 0) {
+    }
+    else {
+        $_SESSION['amount_err'] = 'Invalid amount format !';  
+    }
+    if ($expenseAmount <= 0) {
         $_SESSION['amount_err'] = 'Amount must be greater than 0 !';    
+    }
+
+    if(validateDate($_POST['date'])){
+    $expenseDate = filterInputs($_POST['date']);
+    }
+    else {
+        $_SESSION['date_err'] = 'Invalid date format !';
+    }
+    $expensePurpose = filterInputs($_POST['purpose']);
+    $expenseOptions = filterInputs($_POST['options']);
+    if(is_string($_POST['comment'])){
+    $expenseComment = filterInputs($_POST['comment']);
+    }
+    else{
+        $_SESSION['comment_err'] = 'Invalid commentary format !';
     }
     if(strlen($comment) > 50){
         $_SESSION['comment_err'] = 'Comment cannot contain more than 50 characters !';
@@ -62,7 +98,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['addExpense'])) {
         echo $error->getMessage();
       }
             $_SESSION['expenseAddedCorrectly'] = true;
-            $db->close();     
 }
 }
 ?>
