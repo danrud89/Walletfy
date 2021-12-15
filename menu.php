@@ -134,12 +134,12 @@
                         </div>
                         <select name="category" class="user-options px-4 text-muted" style="width: 85%">
                             <option value="">--- Please select option ---</option>
-                            <option value="salary">Salary</option>
-                            <option value="sell">Internet sale</option>
-                            <option value="interest">Interest</option>
-                            <option value="donation">Donation</option>
-                            <option value="gift">Gift</option>
-                            <option value="other">Other</option>
+                            <option value="Salary">Salary</option>
+                            <option value="Internet sale">Internet sale</option>
+                            <option value="Interest">Interest</option>
+                            <option value="Donation">Donation</option>
+                            <option value="Gift">Gift</option>
+                            <option value="Other">Other</option>
                         </select>
                     </div>
                    
@@ -200,11 +200,11 @@
                             </div>
                             <select name="options" class="user-options px-3 text-muted" style="width: 85%">
                                 <option value="">--- Please select option ---</option>
-                                <option value="credit-card">Credit card</option>
-                                <option value="cash">Cash</option>
-                                <option value="debet-card">Debet card</option>
-                                <option value="blik">Blik</option>
-                                <option value="transfer">Transfer</option>
+                                <option value="Credit-card">Credit card</option>
+                                <option value="Cash">Cash</option>
+                                <option value="Debet card">Debet card</option>
+                                <option value="Blik">Blik</option>
+                                <option value="Transfer">Transfer</option>
                             </select>
                         </div>
                      
@@ -218,21 +218,21 @@
                             </div>
                             <select name="purpose" class="user-options px-3 text-muted" style="width: 85%">
                                 <option value="">--- Please select option ---</option>
-                                <option value="food">Food</option>
-                                <option value="home">Housekeeping</option>
-                                <option value="clothes">Clothes</option>
-                                <option value="transport">Transport</option>
-                                <option value="health">Health</option>
-                                <option value="hygiene">Hygiene</option>
-                                <option value="kids">Kids</option>
-                                <option value="entertainment">Entertainment</option>
-                                <option value="trip">Travelling</option>
-                                <option value="school">School/Learning</option>
-                                <option value="books">Books</option>
-                                <option value="debt">Debt</option>
-                                <option value="pension">Pension</option>
-                                <option value="donation">Donation</option>
-                                <option value="other">Other</option>
+                                <option value="Food">Food</option>
+                                <option value="Home">Housekeeping</option>
+                                <option value="Clothes">Clothes</option>
+                                <option value="Transport">Transport</option>
+                                <option value="Health">Health</option>
+                                <option value="Hygiene">Hygiene</option>
+                                <option value="Kids">Kids</option>
+                                <option value="Entertainment">Entertainment</option>
+                                <option value="Trip">Travelling</option>
+                                <option value="School">School/Learning</option>
+                                <option value="Books">Books</option>
+                                <option value="Debt">Debt</option>
+                                <option value="Pension">Pension</option>
+                                <option value="Donation">Donation</option>
+                                <option value="Other">Other</option>
                             </select>
                         </div>
                      

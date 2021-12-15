@@ -51,9 +51,9 @@ if(isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true){
 		  </p>
         </div>
         <div class="blur">
-		  <form action="signin.php" method="post" name="loginForm"  autocomplete="off" onsubmit="return validation()">
-		  <p id="text" style="visibility:hidden; margin-top:-15px;">Caps Lock is ON.</p>
-                        <div class="row mt-1 mb-4">
+		  <form action="signin.php" method="post" name="loginForm" id="loginForm" autocomplete="off" onsubmit="return validation()">
+		  <p id="text" style="visibility:hidden; margin:-10px 0 0 0;">Caps Lock is ON !</p>
+                        <div class="row mb-4">
 						 <label for="username">E-mail:</label>
                             <div class="login-input" style="width: 90%;">
                                 <div class="login-icon mx-auto my-auto px-2 py-2" >
@@ -127,11 +127,16 @@ if(isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true){
 <!-- partial -->
 <script>
 function capLock(e){
-  let kc = e.keyCode ? e.keyCode : e.which;
-  let sk = e.shiftKey ? e.shiftKey : kc === 16;
-  let visibility = ((kc >= 65 && kc <= 90) && !sk) || 
-      ((kc >= 97 && kc <= 122) && sk) ? 'visible' : 'hidden';
-  document.getElementById('text').style.visibility = visibility
+var input = document.getElementById('loginForm');
+var alert = document.getElementById("text");
+input.addEventListener("keyup", function(event) {
+
+if (event.getModifierState("CapsLock")) {
+    text.style.visibility = "visible";
+  } else {
+    text.style.visibility = "hidden"
+  }
+});
 }
 </script>
 

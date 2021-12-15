@@ -40,7 +40,7 @@
         </div>
         <div class="blur">
 		  <form action="signup.php" method="post" name="registerForm" autocomplete="off" id="registerForm" onsubmit="return validation()">
-			<p id="text"  style="visibility:hidden; margin-top:-15px;">Caps Lock is ON.</p>
+			<p id="text"  style="visibility:hidden; margin:-10px 0 0 0;">Caps Lock is ON.</p>
 			<div class="row mb-2 py-2">
 						<label for="username">Login:</label>
                             <div class="register-input">
@@ -293,11 +293,16 @@ togglePassword1.addEventListener('click', function togglePassword () {
 
 <script>
 function capLock(e){
-  let kc = e.keyCode ? e.keyCode : e.which;
-  let sk = e.shiftKey ? e.shiftKey : kc === 16;
-  let visibility = ((kc >= 65 && kc <= 90) && !sk) || 
-      ((kc >= 97 && kc <= 122) && sk) ? 'visible' : 'hidden';
-  document.getElementById('text').style.visibility = visibility
+var input = document.getElementById('registerForm');
+var alert = document.getElementById("text");
+input.addEventListener("keyup", function(event) {
+
+if (event.getModifierState("CapsLock")) {
+    text.style.visibility = "visible";
+  } else {
+    text.style.visibility = "hidden"
+  }
+});
 }
 </script>
 
