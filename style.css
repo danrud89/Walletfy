@@ -373,17 +373,11 @@ section#home .content .blur form {
   position: relative;
 }
 
-#ok1,
-#ok2,
-#ok3,
-#ok4 {
+#ok {
   color: #2ecc71;
 }
 
-#wrong1,
-#wrong2,
-#wrong3,
-#wrong4 {
+#wrong {
   color: #e74c3c;
 }
 
@@ -396,7 +390,6 @@ section#home .content .blur form {
   visibility: hidden;
 }
 
-
 .form-control {
   border-radius: 5px;
   opacity: 0.8;
@@ -407,6 +400,39 @@ section#home .content .blur form {
   display: flex;
   position: relative;
   color: #e3e3e3;
+}
+
+#ok,
+#wrong {
+  font-size: 16px;
+  visibility: hidden;
+}
+
+.register-input.success input {
+  border: 2px solid #2ecc71;
+}
+
+.register-input.error input {
+  border: 2px solid #e74c3c;
+}
+
+.register-input.success span#ok {
+  color: #2ecc71;
+  visibility: visible;
+}
+
+.register-input.error span#wrong {
+  color: #e74c3c;
+  visibility: visible;
+}
+
+.register-input small {
+  color: #e74c3c;
+  visibility: hidden;
+}
+
+.register-input.error small {
+  visibility: visible;
 }
 
 .keeplogin input,
