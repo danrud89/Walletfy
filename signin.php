@@ -5,6 +5,21 @@ session_start();
 $login = $password = "";
 $login_err = $password_login_err = "";
 
+function filterInputData($input){
+    $output = filter_input(INPUT_POST, $input);
+    return $output;
+}
+
+function trimInputData($input){
+    $output = trim($input);
+    return $output;
+}
+
+function checkEmptyData($input){
+    if(empty($input)) return true;
+    else return false;
+}
+
 if (($_SERVER["REQUEST_METHOD"] === "post") && (isset($_POST['sign_in']))) {
     // LOG IN USER
     // receive all input values from the form
@@ -42,8 +57,7 @@ if (($_SERVER["REQUEST_METHOD"] === "post") && (isset($_POST['sign_in']))) {
             $_SESSION['logged_id'] = $user['id'];
             $_SESSION['logged_user'] = $user['name'];
             $_SESSION['loggedin'] = true;
-            echo "Succesfully login! Redirecting...";
-            header('Location: menu.php');
+            header('Location: welcomeMessage.php');
             exit();
         } else {
             $_SESSION['loggedin'] = false;

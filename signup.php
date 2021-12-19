@@ -8,6 +8,21 @@ $username_err = $email_err =  $password_err = $confirm_password_err = $wrong_val
 $success = "";
 $register_validate = true;
 
+function filterInputData($input){
+  $output = filter_input(INPUT_POST, $input);
+  return $output;
+}
+
+function trimInputData($input){
+  $output = trim($input);
+  return $output;
+}
+
+function checkEmptyData($input){
+  if(empty($input)) return true;
+  else return false;
+}
+
 if (($_SERVER["REQUEST_METHOD"] === "post") && (isset($_POST['reg_user']))) {
 
     // REGISTER USER
@@ -164,8 +179,8 @@ if (($_SERVER["REQUEST_METHOD"] === "post") && (isset($_POST['reg_user']))) {
         echo "Application Error: Failed to complete request.<br>".$error->getMessage();
       }
 
-        $_SESSION['login'] = $user['name'];
         $_SESSION['logged_id'] = $user['id'];
+        $_SESSION['logged_user'] = $user['name'];
         unset($_POST['reg_user']);
         header('location: index.php');
         exit();
