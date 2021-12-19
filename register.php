@@ -42,7 +42,7 @@
 					</p>
 				</div>
 				<div class="blur">
-					<form action="signup.php" method="post" name="registerForm" autocomplete="off" id="registerForm" onsubmit="return validation();">
+					<form action="signup.php" method="post" name="registerForm" autocomplete="off" id="registerForm">
 						<p id="text" style="visibility:hidden; margin:-10px 0 0 0;">Caps Lock is ON.</p>
 						<div class="row mb-2 py-2">
 							<label for="username">Login:</label>
@@ -170,56 +170,67 @@
 		</script>
 
 		<script>
-			function validation() {
+			const form = document.getElementById('registerForm');
+			const username = document.getElementById('username');
+			const email = document.getElementById('email');
+			const password = document.getElementById('password');
+			const password2 = document.getElementById('cpassword');
+			form.addEventListener('submit', e => {
+				e.preventDefault();
 
-				const username = document.getElementById('username');
-				const email = document.getElementById('email');
-				const password = document.getElementById('password');
-				const password2 = document.getElementById('cpassword');
+				checkInputs();
+			});
 
-
+			function checkInputs() {
 				// trim to remove the whitespaces
-				const usernameValue = username.value.trim();
-				const emailValue = email.value.trim();
-				const passwordValue = password.value.trim();
-				const password2Value = password2.value.trim();
-
+				const usernameValue = trimInputs(username);
+				const emailValue = trimInputs(email);
+				const passwordValue = trimInputs(password);
+				const password2Value = trimInputs(password2);
 				if (usernameValue === '' || usernameValue === null || usernameValue.length < 3) {
 					setErrorFor(username, 'Must contain at least 3 charakters !');
-					return false;
 				} else {
 					setSuccessFor(username);
+					isValid = false;
 				}
 
 				if (emailValue === '' || emailValue === null || !isEmail(emailValue)) {
 					setErrorFor(email, 'Email cannot be blank');
-					return false;
 				} else if (!isEmail(emailValue)) {
 					setErrorFor(email, 'Invalid email syntax');
-					return false;
+
 				} else {
 					setSuccessFor(email);
+					isValid = false;
 				}
 
 				if (passwordValue === '' || passwordValue === null) {
 					setErrorFor(password, 'Password cannot be blank');
-					return false;
 
 				} else if (passwordValue.length < 8 || passwordValue.length > 20) {
 					setErrorFor(password, 'Password must contain beetween 8-20 charackters');
-					return false;
+
 				} else if (!isPasswordValid(passwordValue)) {
 					setErrorFor(password, 'Password must contain only letters, numbers and underscores');
-					return false;
+
 				} else {
 					setSuccessFor(password);
+					isValid = false;
 				}
+				if (password2Value === '' || password2Value === null) {
+					setErrorFor(cpassword, 'Password cannot be blank');
 
-				if (passwordValue !== password2Value) {
+				} else if (passwordValue !== password2Value) {
 					setErrorFor(cpassword, 'Passwords do not match');
-					return false;
+
 				} else {
 					setSuccessFor(cpassword);
+					isValid = false;
+				}
+
+				function trimInputs(data) {
+					output = data.value.trim();
+					return output;
 				}
 
 				function setErrorFor(input, message) {
@@ -298,4 +309,5 @@
 		<script src="./script.js"></script>
 
 </body>
+
 </html>
