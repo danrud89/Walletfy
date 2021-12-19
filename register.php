@@ -138,7 +138,7 @@
 			<div class="container-fluid mt-2">
 				<div class="row">
 					<footer class="page-footer">
-						<div class="footer-container text-center">
+						<div class="footer-container text-left mx-auto">
 							<p>Wszelkie prawa zastrzeżone. Copyright © 2021. All Rights Reserved.
 								Follow me :
 								<a class="mx-3" href="#!" id="ln"><i class="fab fa-linkedin"></i></a>

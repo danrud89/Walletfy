@@ -74,7 +74,7 @@ if (isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true) {
                             </div>
                         </div>
 
-                        <div class="row mb-2">
+                        <div class="row mb-3">
                             <label for="password">Password:</label>
                             <div class="login-input mb-3">
                                 <div class="login-icon">
@@ -117,9 +117,9 @@ if (isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true) {
                 </div>
             </div>
             <div class="container-fluid">
-                <div class="row text-center">
+                <div class="row">
                     <footer class="page-footer">
-                        <div class="footer-container text-center">
+                        <div class="footer-container text-left">
                             <p>Wszelkie prawa zastrzeżone. Copyright © 2021. All Rights Reserved.
                                 Follow me:<a class="mx-3" href="#!" id="ln"><i class="fab fa-linkedin"></i></a>
                                 <a class="mx-3" href="#!" id="fb"><i class="fab fa-facebook-square"></i></a>

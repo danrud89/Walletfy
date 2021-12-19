@@ -383,7 +383,7 @@ section#home .content .blur form {
 
 .login-input small,
 .register-input small {
-  color: #e74c3c;
+  color: #DC143C;
   position: absolute;
   left: 16%;
   top: 40px;
@@ -424,11 +424,6 @@ section#home .content .blur form {
 .register-input.error span#wrong {
   color: #e74c3c;
   visibility: visible;
-}
-
-.register-input small {
-  color: #e74c3c;
-  visibility: hidden;
 }
 
 .register-input.error small {
