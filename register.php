@@ -89,10 +89,10 @@
 									</span>
 								</div>
 								<input type="password" id="password" class="form-control mx-auto my-auto px-2 py-2" placeholder="password" aria-label="password" name="password" onkeypress="capLock(event)" min="8" max="20">
-								<span class="material-icons" id="ok" style="position:absolute; left:75%; top:12px;">check_circle</span>
-								<span class="material-icons" id="wrong" style="position:absolute; left:75%; top:12px;">error_outline</span>
+								<span class="material-icons" id="ok" style="position:absolute; left:77%; top:12px;">check_circle</span>
+								<span class="material-icons" id="wrong" style="position:absolute; left:77%; top:12px;">error_outline</span>
 								<small id="password_error">Error message</small>
-								<span class="material-icons align-middle" id="togglePassword" style="cursor:pointer; margin:10px 0 0 10px;">visibility_off</span>
+								<span class="material-icons align-middle" id="togglePassword" style="cursor:pointer; color:black; opacity:0.6; position:absolute; left:85%; top:10px;">visibility_off</span>
 								<span class="text-danger"><?php echo ((isset($_SESSION['password_err']) && $_SESSION['password_err'] != '') ? $_SESSION['password_err'] : '');
 															unset($_SESSION['password_err']); ?> </span>
 							</div>
@@ -107,10 +107,10 @@
 									</span>
 								</div>
 								<input type="password" id="cpassword" class="form-control mx-auto my-auto px-2 py-2" placeholder="confirm password" aria-label="password" name="confpassword" onkeypress="capLock(event)" min="8" max="20">
-								<span class="material-icons" id="ok" style="position:absolute; left:75%; top:12px;">check_circle</span>
-								<span class="material-icons" id="wrong" style="position:absolute; left:75%; top:12px;">error_outline</span>
+								<span class="material-icons" id="ok" style="position:absolute; left:77%; top:12px;">check_circle</span>
+								<span class="material-icons" id="wrong" style="position:absolute; left:77%; top:12px;">error_outline</span>
 								<small id="cpassword_error">Error message</small>
-								<span class="material-icons align-middle" id="togglePassword1" style="cursor:pointer; margin:10px 0 0 10px;">visibility_off</span>
+								<span class="material-icons align-middle" id="togglePassword1" style="cursor:pointer; color:black; opacity:0.6; position:absolute; left:85%; top:10px;">visibility_off</span>
 								<span class="text-danger"><?php echo ((isset($_SESSION['confirm_password_err']) && $_SESSION['confirm_password_err'] != '') ? $_SESSION['confirm_password_err'] : '');
 															unset($_SESSION['confirm_password_err']); ?> </span>
 							</div>
@@ -195,7 +195,7 @@
 					setErrorFor(email, 'Email cannot be blank');
 					return false;
 				} else if (!isEmail(emailValue)) {
-					setErrorFor(email, 'Not a valid email');
+					setErrorFor(email, 'Invalid email syntax');
 					return false;
 				} else {
 					setSuccessFor(email);
@@ -209,7 +209,7 @@
 					setErrorFor(password, 'Password must contain beetween 8-20 charackters');
 					return false;
 				} else if (!isPasswordValid(passwordValue)) {
-					setErrorFor(password, 'Password can contain letters, numbers and underscores');
+					setErrorFor(password, 'Password must contain only letters, numbers and underscores');
 					return false;
 				} else {
 					setSuccessFor(password);

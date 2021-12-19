@@ -55,15 +55,15 @@ if(isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true){
 		  <p id="text" style="visibility:hidden; margin:-10px 0 0 0;">Caps Lock is ON !</p>
                         <div class="row mb-4">
 						 <label for="username">E-mail:</label>
-                            <div class="login-input" style="width: 90%;">
+                            <div class="login-input">
                                 <div class="login-icon mx-auto my-auto px-2 py-2" >
                                     <span class="material-icons">
                                         email
                                     </span>
                                 </div>
                                 <input type="email" id="email" class="form-control mx-auto my-auto py-2" placeholder="e-mail" aria-label="email" name="email" onkeypress="capLock(event)" autofocus>
-                                <i class="fas fa-check-circle" id="ok" style="position:absolute; left:85%; top:12px; visibility:hidden;"></i>
-								<i class="fas fa-exclamation-circle" id="wrong" style="position:absolute; left:85%; top:12px; visibility:hidden;"></i>
+                                <span class="material-icons align-middle" id="ok" style="position:absolute; left:85%; top:12px;">check_circle</span>
+								<span class="material-icons align-middle" id="wrong" style="position:absolute; left:85%; top:12px;">error_outline</span>
 								<small id="email_error">Error message</small>
                                 <span><?php echo ((isset($_SESSION['login_err']) && $_SESSION['login_err'] != '') ? $_SESSION['login_err'] : ''); unset($_SESSION['login_err']); ?> </span>
                             </div>
@@ -78,10 +78,10 @@ if(isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true){
                                     </span>
                                 </div>
                                 <input type="password" id="password" class="form-control mx-auto my-auto px-2 py-2" id="password" placeholder="password" aria-label="password" name="password" onkeypress="capLock(event)" >
-                                <i class="fas fa-check-circle" id="ok1" style="position:absolute; left:75%; top:12px; visibility:hidden;"></i>
-								<i class="fas fa-exclamation-circle" id="wrong1" style="position:absolute; left:75%; top:12px; visibility:hidden;"></i>
+                                <span class="material-icons align-middle" id="ok" style="position:absolute; left:78%; top:12px;">check_circle</span>
+								<span class="material-icons align-middle" id="wrong" style="position:absolute; left:78%; top:12px;">error_outline</span>
 								<small id="password_error">Error message</small>
-								<span class="material-icons align-middle" id="togglePassword" style="cursor:pointer; margin:10px 0 0 10px;" onclick="togglePassword('password')">visibility_off</span>
+								<span class="material-icons align-middle" id="togglePassword" style="cursor:pointer; color:black; opacity:0.6; position:absolute; left:85%; top:10px;" onclick="togglePassword('password')">visibility_off</span>
                                 <span><?php echo ((isset($_SESSION['password_login_err']) && $_SESSION['password_login_err'] != '') ? $_SESSION['password_login_err'] : ''); unset($_SESSION['password_login_err']); ?> </span>
                             </div>
                         </div>
@@ -169,51 +169,41 @@ const password = document.getElementById('password');
 	const emailValue = email.value.trim();
 	const passwordValue = password.value.trim();
 	
-	if(emailValue === '' || emailValue === null || !isEmail(emailValue)) {
-		$('#email_error').css('visibility', 'visible');
-		$('#email_error').text('Invalid email format');
-		$('#wrong2').css('visibility', 'visible');
-		$('#ok2').css('visibility', 'hidden');
-		$('#email').css('border', 'solid 2px #e74c3c');
-		return false;
-	}
-	  else {
-		$('#email').css('border', 'solid 2px #2ecc71');
-		$('#ok2').css('visibility', 'visible');
-		$('#wrong2').css('visibility', 'hidden');
-		$('#email_error').css('visibility', 'hidden');
-	}
-	
-	if(passwordValue === '' || passwordValue === null) {
-		$('#password_error').css('visibility', 'visible');
-		$('#password_error').text('Password cannot be blank');
-		$('#wrong3').css('visibility', 'visible');
-		$('#ok3').css('visibility', 'hidden');
-		$('#password').css('border', 'solid 2px #e74c3c');
-		return false;
+	if (emailValue === '' || emailValue === null || !isEmail(emailValue)) {
+					setErrorFor(email, 'Email cannot be blank');
+					return false;
+				} else if (!isEmail(emailValue)) {
+					setErrorFor(email, 'Invalid email syntax');
+					return false;
+				} else {
+					setSuccessFor(email);
+				}
 
-	} else if (passwordValue.length < 6 || passwordValue.length > 20){
-		$('#password_error').css('visibility', 'visible');
-		$('#password_error').text('hint -> contain beetween 8-20 characters');
-		$('#wrong3').css('visibility', 'visible');
-		$('#ok3').css('visibility', 'hidden');
-		$('#password').css('border', 'solid 2px #e74c3c');
-		return false;
-	}
-	else if (!isPasswordValid(passwordValue)){
-		$('#password_error').css('visibility', 'visible');
-		$('#password_error').text('Must contain only letters, numbers and underscores');
-		$('#wrong3').css('visibility', 'visible');
-		$('#ok3').css('visibility', 'hidden');
-		$('#password').css('border', 'solid 2px #e74c3c');
-		return false;
-	}
-	else {
-		$('#password').css('border', 'solid 2px #2ecc71');
-		$('#ok3').css('visibility', 'visible');
-		$('#wrong3').css('visibility', 'hidden');
-		$('#password_error').css('visibility', 'hidden');
-	}
+				if (passwordValue === '' || passwordValue === null) {
+					setErrorFor(password, 'Password cannot be blank');
+					return false;
+
+				} else if (passwordValue.length < 8 || passwordValue.length > 20) {
+					setErrorFor(password, 'Password must contain beetween 8-20 charackters');
+					return false;
+				} else if (!isPasswordValid(passwordValue)) {
+					setErrorFor(password, 'Password must contain only letters, numbers and underscores');
+					return false;
+				} else {
+					setSuccessFor(password);
+				}
+                function setErrorFor(input, message) {
+					const formControl = input.parentElement;
+					const small = formControl.querySelector('small');
+					formControl.className = 'register-input error';
+					small.innerText = message;
+					return false;
+				}
+
+				function setSuccessFor(input) {
+					const formControl = input.parentElement;
+					formControl.className = 'register-input success';
+				}
 	
 	 
 
