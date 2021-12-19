@@ -42,7 +42,7 @@
 					</p>
 				</div>
 				<div class="blur">
-					<form action="signup.php" method="post" name="registerForm" autocomplete="off" id="registerForm">
+					<form action="signup.php" method="post" name="registerForm" autocomplete="off" id="registerForm" onsubmit="return validate();">
 						<p id="text" style="visibility:hidden; margin:-10px 0 0 0;">Caps Lock is ON.</p>
 						<div class="row mb-2 py-2">
 							<label for="username">Login:</label>
@@ -56,7 +56,7 @@
 								<span class="material-icons" id="ok" style="position:absolute; left:85%; top:12px;">check_circle</span>
 								<span class="material-icons" id="wrong" style="position:absolute; left:85%; top:12px;">error_outline</span>
 								<small id="login_error">Error message</small>
-								<span class="text-danger"><?php echo ((isset($_SESSION['username_err']) && $_SESSION['username_err'] != '') ? $_SESSION['username_err'] : '');
+								<span class="text-muted"><?php echo ((isset($_SESSION['username_err']) && $_SESSION['username_err'] != '') ? $_SESSION['username_err'] : '');
 															unset($_SESSION['username_err']); ?> </span>
 							</div>
 						</div>
@@ -74,7 +74,7 @@
 								<span class="material-icons" id="ok" style="position:absolute; left:85%; top:12px;">check_circle</span>
 								<span class="material-icons" id="wrong" style="position:absolute; left:85%; top:12px;">error_outline</span>
 								<small id="email_error">Error message</small>
-								<span class="text-danger"><?php echo ((isset($_SESSION['email_err']) && $_SESSION['email_err'] != '') ? $_SESSION['email_err'] : '');
+								<span class="text-muted"><?php echo ((isset($_SESSION['email_err']) && $_SESSION['email_err'] != '') ? $_SESSION['email_err'] : '');
 															unset($_SESSION['email_err']); ?> </span>
 							</div>
 						</div>
@@ -93,7 +93,7 @@
 								<span class="material-icons" id="wrong" style="position:absolute; left:77%; top:12px;">error_outline</span>
 								<small id="password_error">Error message</small>
 								<span class="material-icons align-middle" id="togglePassword" style="cursor:pointer; color:black; opacity:0.6; position:absolute; left:85%; top:10px;">visibility_off</span>
-								<span class="text-danger"><?php echo ((isset($_SESSION['password_err']) && $_SESSION['password_err'] != '') ? $_SESSION['password_err'] : '');
+								<span class="text-muted"><?php echo ((isset($_SESSION['password_err']) && $_SESSION['password_err'] != '') ? $_SESSION['password_err'] : '');
 															unset($_SESSION['password_err']); ?> </span>
 							</div>
 						</div>
@@ -111,14 +111,14 @@
 								<span class="material-icons" id="wrong" style="position:absolute; left:77%; top:12px;">error_outline</span>
 								<small id="cpassword_error">Error message</small>
 								<span class="material-icons align-middle" id="togglePassword1" style="cursor:pointer; color:black; opacity:0.6; position:absolute; left:85%; top:10px;">visibility_off</span>
-								<span class="text-danger"><?php echo ((isset($_SESSION['confirm_password_err']) && $_SESSION['confirm_password_err'] != '') ? $_SESSION['confirm_password_err'] : '');
+								<span class="text-muted"><?php echo ((isset($_SESSION['confirm_password_err']) && $_SESSION['confirm_password_err'] != '') ? $_SESSION['confirm_password_err'] : '');
 															unset($_SESSION['confirm_password_err']); ?> </span>
 							</div>
 						</div>
 
 						<div class="row mb-3">
 							<div class="register-button text-center">
-								<button type="submit" name="sign_in" id="submit" class="btn btn-danger btn-lg" style="border-radius:15px" />Sign Up</button>
+								<button type="submit" name="sign_in" id="submit" class="btn btn-danger btn-lg" style="border-radius:15px" onclick="checkInputs()">Sign Up</button>
 							</div>
 							<span class="text-success"><?php echo ((isset($_SESSION['success']) && $_SESSION['success'] != '') ? $_SESSION['success'] : '');
 														unset($_SESSION['success']); ?> </span>
@@ -170,62 +170,69 @@
 		</script>
 
 		<script>
-			const form = document.getElementById('registerForm');
-			const username = document.getElementById('username');
-			const email = document.getElementById('email');
-			const password = document.getElementById('password');
-			const password2 = document.getElementById('cpassword');
-			form.addEventListener('submit', e => {
-				e.preventDefault();
+			function validate() {
+				if (!checkInputs())
+					return false;
+				else return true;
+			}
+		</script>
 
-				checkInputs();
-			});
-
+		<script>
 			function checkInputs() {
+				let isValid = true;
+				const username = document.getElementById('username');
+				const email = document.getElementById('email');
+				const password = document.getElementById('password');
+				const password2 = document.getElementById('cpassword');
 				// trim to remove the whitespaces
 				const usernameValue = trimInputs(username);
 				const emailValue = trimInputs(email);
 				const passwordValue = trimInputs(password);
 				const password2Value = trimInputs(password2);
+
 				if (usernameValue === '' || usernameValue === null || usernameValue.length < 3) {
 					setErrorFor(username, 'Must contain at least 3 charakters !');
+					isValid = false;
 				} else {
 					setSuccessFor(username);
-					isValid = false;
 				}
 
-				if (emailValue === '' || emailValue === null || !isEmail(emailValue)) {
+				if (emailValue === '' || emailValue === null) {
 					setErrorFor(email, 'Email cannot be blank');
+					isValid = false;
 				} else if (!isEmail(emailValue)) {
 					setErrorFor(email, 'Invalid email syntax');
+					isValid = false;
 
 				} else {
 					setSuccessFor(email);
-					isValid = false;
 				}
 
 				if (passwordValue === '' || passwordValue === null) {
 					setErrorFor(password, 'Password cannot be blank');
+					isValid = false;
 
 				} else if (passwordValue.length < 8 || passwordValue.length > 20) {
 					setErrorFor(password, 'Password must contain beetween 8-20 charackters');
+					isValid = false;
 
 				} else if (!isPasswordValid(passwordValue)) {
 					setErrorFor(password, 'Password must contain only letters, numbers and underscores');
-
+					isValid = false;
 				} else {
 					setSuccessFor(password);
-					isValid = false;
+
 				}
 				if (password2Value === '' || password2Value === null) {
 					setErrorFor(cpassword, 'Password cannot be blank');
+					isValid = false;
 
 				} else if (passwordValue !== password2Value) {
 					setErrorFor(cpassword, 'Passwords do not match');
+					isValid = false;
 
 				} else {
 					setSuccessFor(cpassword);
-					isValid = false;
 				}
 
 				function trimInputs(data) {
@@ -253,6 +260,7 @@
 				function isPasswordValid(password) {
 					return /^[a-zA-Z0-9_]*$/.test(password);
 				}
+				return isValid;
 			}
 		</script>
 
