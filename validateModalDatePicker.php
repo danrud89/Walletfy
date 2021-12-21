@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] === "post") {
         require_once 'database.php';
         switch($userPeriodSelected){
 
-            // user select current month from select 
+            // user select -> current month from select 
             case "currentMonth":
                 $time = $date->format('Y-m-01');
                 try {
@@ -56,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] === "post") {
                 }
                 break;
 
-                // user select previus month from select 
+                // user select -> previus month from select 
                 case "previousMonth":
                     $currentYear = $date->format('Y');
                     $previousMonth = $date->format('m') - 1;
@@ -108,7 +108,7 @@ if ($_SERVER["REQUEST_METHOD"] === "post") {
                     }
                     break;
 
-                    // user select current year from select 
+                    // user select -> current year from select 
                     case "currentYear":
                         $time = $date->format('Y-01-01');
                         try {
@@ -149,7 +149,7 @@ if ($_SERVER["REQUEST_METHOD"] === "post") {
                         }
                         break;
 
-                        // user select custom period from select 
+                        // user select -> custom period from select 
                         case "customPeriod":
                             if (trim($_POST['startDate']) === "" || trim($_POST['endDate']) === "") {
                                 $_SESSION['date_err'] = 'Fields cannot be empty !';

@@ -4,19 +4,30 @@ $expenseAmount = $expenseDate = $expensePurpose = $expenseOptions = "";
 $amount_err = $date_err = $purpose_err = $options_err = "";
 
 function filterInputs($input){
-    return $output = filter_input(INPUT_POST, '$input');
+    $output = filter_input(INPUT_POST, '$input');
+    return $output;
 }
-
+ 
 function validateDate($testDate)
-{
+{   $dateValid = false;
     $dateArray = explode('.', $testDate);
     if (count($dateArray) == 3) {
         if (checkdate($dateArray[0], $dateArray[1], $dateArray[2])) {
-            return true;
+            $dateValid = true;
+            return $dateValid;
         }
-    return false;
+        return $dateValid;
     }
-    return false;
+    return $dateValid;
+}
+
+function checkDataSet($inputData){
+    $dataIsSet = false;
+    if(isset($inputData)) {
+        $dataIsSet = true;
+        return $dataIsSet;
+    }
+    return $dataIsSet;
 }
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['addExpense'])) {

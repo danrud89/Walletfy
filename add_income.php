@@ -5,19 +5,22 @@ $amount_err = $date_err = $category_err = $comment_err = "";
 
 function filterInputs($inputData)
 {
-    return $outputData = filter_input(INPUT_POST, '$inputData');
+    $outputData = filter_input(INPUT_POST, '$inputData');
+    return $outputData;
 }
 
 function validateDate($testDate)
 {
+    $dateValid = false;
     $dateArray = explode('.', $testDate);
     if (count($dateArray) == 3) {
-        if (checkdate($dateArray[0], $dateArray[1], $dateArray[2])) {
-            return true;
+        if (checkdate($dateArray[2], $dateArray[1], $dateArray[0])) {
+            $dateValid = true;
+            return $dateValid;
         }
-        return false;
+        return $dateValid;
     }
-    return false;
+    return $dateValid;
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['addIncome'])) {
