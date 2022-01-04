@@ -58,7 +58,7 @@ $negativeBalanceMessage = "Watch out ! You spent a little too much money";
 
     <main>
 
-        <section id="balance" style="background-image: url(ewallet2.png);">
+        <section id="balance" style="background-image: url(pap1.jpg);">
             <div class="wrapper">
                 <div class="row mt-1">
                     <div class="mx-auto my-auto">
@@ -135,7 +135,7 @@ $negativeBalanceMessage = "Watch out ! You spent a little too much money";
                     <div class="table mt-5 mb-5">
                         <div class="col">
                             <h3 class="text-center" style="color:aliceblue;">INCOMES</h3>
-                            <table id="tableOfIncomes" class="table table-striped table-bordered table-hover table-active text-inherit table-sm">
+                            <table id="tableOfIncomes" class="table table-striped table-bordered table-hover table-active text-inherit table-sm table-responsive-sm">
                                 <thead class="bg-dark border-secondary">
                                     <tr>
                                         <th onclick="sortTableAlphabetically('tableOfIncomes')" scope="col" class="text-center">Category <span class="material-icons align-middle">import_export</span></th>
@@ -157,7 +157,7 @@ $negativeBalanceMessage = "Watch out ! You spent a little too much money";
 
                         <div class="col">
                             <h3 class="text-center" style="color:aliceblue">EXPENSES</h3>
-                            <table id="tableOfExpenses" class="table table-striped table-bordered table-hover table-active text-inherit table-sm">
+                            <table id="tableOfExpenses" class="table table-striped table-bordered table-hover table-active text-inherit table-sm table-responsive-sm">
                                 <thead class="bg-dark border-secondary">
                                     <tr class="table-active">
                                         <th onclick="sortTableAlphabetically('tableOfExpenses')" scope="col" class="text-center">Category <span class="material-icons align-middle">import_export</span></th>
@@ -181,7 +181,7 @@ $negativeBalanceMessage = "Watch out ! You spent a little too much money";
                     <div class="row">
                         <div class="table-responsive-text mb-2">
                             <h2 class="text-center" style="color:aliceblue">List of Incomes</h2>
-                            <table id="tableOfIncomesInDetail" class="table table-striped table-bordered table-hover table-active text-inherit table-sm" style="table-layout: fixed; width: 100%">
+                            <table id="tableOfIncomesInDetail" class="table table-striped table-bordered table-hover table-active text-inherit table-sm " style="table-layout: fixed; width: 100%">
                                 <thead class="bg-dark border-secondary">
                                     <tr>
                                         <th onclick="sortTableAlphabetically('tableOfIncomesInDetail')" scope="col" class="text-center">Category <span class="material-icons align-middle">import_export</span></th>
@@ -241,8 +241,8 @@ $negativeBalanceMessage = "Watch out ! You spent a little too much money";
                     <div class="row ">
                         <div class="balanceSummary col-sm-12 col-md-6 mt-2 mb-2  mx-auto my-auto">
                             <h3 class="text-center">BALANCE SUMMARY</h3>
-                            <table class="table table-hover table-bordered" style="pointer-events: none;">
-                                <thead class="bg-dark border-secondary text-center">
+                            <table class="table table-hover table-bordered table-responsive table-active table-responsive-sm">
+                                <thead class="bg-dark border-secondary text-center" style="pointer-events: none;">
                                     <tr>
                                         <th scope="col">TOTAL INCOMES</th>
                                         <th scope="col">TOTAL EXPENSES</th>
@@ -250,7 +250,7 @@ $negativeBalanceMessage = "Watch out ! You spent a little too much money";
                                     </tr>
                                 </thead>
                                 <tbody class="bg-secondary">
-                                    <tr>
+                                    <tr style="pointer-events: none;">
                                         <?php
                                         $totalSumOfIncomes = 0;
                                         $totalSumOfExpenses = 0;

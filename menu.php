@@ -135,7 +135,7 @@ $incomeAddedCorrectly = $_SESSION['incomeAddedCorrectly'];
 
                     <div class="income-input mx-auto mt-3 mb-4">
                         <div class="income-icon">
-                            <span class="material-icons px-2 py-3">
+                            <span class="material-icons px-2 py-4">
                                 description
                             </span>
                         </div>
@@ -229,7 +229,7 @@ $incomeAddedCorrectly = $_SESSION['incomeAddedCorrectly'];
 
                         <div class="expense-input mx-auto mt-4 mb-4">
                             <div class="expense-icon">
-                                <span class="material-icons px-2 py-3">
+                                <span class="material-icons px-2 py-4">
                                     description
                                 </span>
                             </div>

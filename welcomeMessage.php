@@ -1,96 +1,77 @@
-<!DOCTYPE HTML>
-<html lang="pl">
+<?php
+// Initialize the session
+session_start();
+
+// Check if the user is logged in, if yes - redirect him to main menu page
+if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === false) {
+    header("Location: index.php");
+    exit;
+}
+$userName = $_SESSION['logged_user'];
+$userID = $_SESSION['logged_id'];
+$expenseAddedCorrectly = $_SESSION['expenseAddedCorrectly'];
+$incomeAddedCorrectly = $_SESSION['incomeAddedCorrectly'];
+?>
+
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8">
     <title>Wall€tfy</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="descritpion" content="Dzięki WALLETFY - aplikacji do zarządzania finansami, Twoje zarządzanie budżetem stanie się prostsze!" />
     <meta name="keywords" content="budżet,finanse,wydatki,przychody,bilans" />
     <meta http-equiv="X-UA-Compatible" content="IE = edge, chrome = 1" />
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-    <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
-
-    <link rel="stylesheet" href="bootstrap5/css/bootstrap.min.css" type="text/css" />
-    <link rel="stylesheet" href="welcomeMessage.css" type="text/css" />
-    <link rel="stylesheet" href="icons/css/fontello.css" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata|Montserrat:400,500,700&display=swap" rel="stylesheet">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css'>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css'>
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.all.min.js"></script>
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="icon" href="img/favicon.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="bootstrap5/css/bootstrap.min.css" type="text/css" />
+    <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="bootstrap5/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="style.css" type="text/css" />
 
 </head>
 
 <body>
-    <div class="container col-md-10 px-2 py-2 mx-auto my-auto">
-        <div class="row">
-            <div id="toggle" class="col-sm-12 position-relative mx-1 my-1 px-1 py-1">
-                <i class="indicator"></i>
-            </div>
-        </div>
-        <div class="row">
-            <div class="description col-md-4">
-                <section div class="motto mb-5">
-                    <div class="motto1 mx-auto my-auto">
-                        <p><img class="wallet-dark" src="img/wallet_dark.jpg" alt="" style="transform: scale(0.8);">
-                            <img class="wallet-light" src="img/wallet-light.png" alt="" style="transform: scale(0.8);">Wall€tfy!
-                        </p>
-                    </div>
-                    <div class="motto2 mx-auto my-auto">
-                        <p>Application that makes money</p>
-                        <p>management easier !</p>
-                    </div>
-                </section>
-
-                <section div class="social col-md-12 mx-auto my-auto py-3">
-                    <p>Follow us :</p>
-                    <a class="mx-3" href="#!" id="ln"><i class="fab fa-linkedin"></i></a>
-                    <a class="mx-3" href="#!" id="fb"><i class="fab fa-facebook-square"></i></a>
-                    <a class="mx-3" href="#!" id="gh"><i class="fab fa-github"></i></a>
-                </section>
-            </div>
-
-            <div class="wrapper col-8 mx-auto mt-3">
-
-                <div class="row vertical-center">
-                    <div class="main-container py-2 px-4 col-md-8 offset-md-2 col-lg-6 offset-lg-3 my-5">
-
-                        <div class="row p-2">
-                            <div class="welcome-message">
-                                <p class="welcome-text text-center mt-2">Thank you for registering with our website.</p>
-                                <p class="welcome-text text-center">You can now login !</p>
-                                <div class="row">
-                                    <div class="login-button text-center mb-3">
-                                        <button type="button" id="logbtn" class="btn btn-sm mb-2"><a href="index.php" class="p-1" style="margin-bottom: 1px;">Sign in</a></button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+    <main>
+            <div class="main" style="background-image: url(ewallet2.png);">
+            <div class="wrapper1 vertical-center mx-auto mt-5" style="opacity: 0.9;">
+                <div class="row py-2 px-4 col-md-8 offset-md-3 col-lg-6 offset-lg-3 my-5 mt-5">
+                    <p style="font-size: 1.25em;">
+                        Welcome aboard! I'm glad You say YES. Wall€tfy! was develop to create a trustworthy place for You to make money menagement easier.
+                    </p>
+                    <p style="font-size: 1.25em;">
+                        Click the button below to return to the login page.
+                    </p>
+                </div>
+                <div class="row">
+                    <div class="mx-auto mt-2 mb-4">
+                        <a href="index.php"><button type="button" class="btn btn-rounded btn-danger btn-lg p-1" style="font-size:2em; letter-spacing:2px;"><span class="material-icons align-top mr-1">reply</span>Back to login page</button></a>
                     </div>
                 </div>
             </div>
+            </div>
 
-            <div class="container-fluid p-0">
+            <div class="container-fluid">
                 <div class="row">
-                    <footer class="page-footer col-sm-12 col-md-12 mt-md-0">
-                        <div class="footer-container text-center mx-auto">
-                            <p>Wszelkie prawa zastrzeżone. Copyright © 2021. All Rights Reserved </p>
+                    <footer class="page-footer">
+                        <div class="footer-container text-center ml-5 offset-md-3">
+                            <p class="text-center">Wszelkie prawa zastrzeżone. Copyright © 2021. All Rights Reserved.
+                                Follow me:<a class="mx-3 vertical-center" href="#!" id="ln"><i class="fab fa-linkedin"></i></a>
+                                <a class="mx-3" href="#!" id="fb"><i class="fab fa-facebook-square"></i></a>
+                                <a class="mx-3" href="#!" id="gh"><i class="fab fa-github"></i></a>
+                            </p>
                         </div>
                     </footer>
                 </div>
             </div>
-            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-            <script src="bootstrap5/js/bootstrap.min.js"></script>
-            <script>
-                const body = document.querySelector('body');
-                const toggle = document.getElementById('toggle');
-                toggle.onclick = function() {
-                    toggle.classList.toggle('active');
-                    body.classList.toggle('active');
-                }
-            </script>
-</body>
-
-</html>

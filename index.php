@@ -149,7 +149,7 @@ if (isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true) {
         </script>
 
         <script>
-            $(document).ready(function(e) {
+            $(document).ready(function() {
                 $('.form-control').value('');
             });
         </script>

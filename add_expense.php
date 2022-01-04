@@ -3,9 +3,9 @@ session_start();
 $expenseAmount = $expenseDate = $expensePurpose = $expenseOptions = "";
 $amount_err = $date_err = $purpose_err = $options_err = "";
 
-function filterInputs($input){
-    $output = filter_input(INPUT_POST, '$input');
-    return $output;
+function filterInputs($inputData){
+    $outputData = filter_input(INPUT_POST, '$inputData');
+    return $outputData;
 }
  
 function validateDate($testDate)

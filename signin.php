@@ -57,7 +57,7 @@ if (($_SERVER["REQUEST_METHOD"] === "post") && (isset($_POST['sign_in']))) {
             $_SESSION['logged_id'] = $user['id'];
             $_SESSION['logged_user'] = $user['name'];
             $_SESSION['loggedin'] = true;
-            header('Location: welcomeMessage.php');
+            header('Location: menu.php');
             exit();
         } else {
             $_SESSION['loggedin'] = false;

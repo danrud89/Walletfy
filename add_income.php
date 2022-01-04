@@ -3,8 +3,7 @@ session_start();
 $incomeAmount = $incomeDate = $incomeCategory = "";
 $amount_err = $date_err = $category_err = $comment_err = "";
 
-function filterInputs($inputData)
-{
+function filterInputs($inputData){
     $outputData = filter_input(INPUT_POST, '$inputData');
     return $outputData;
 }
