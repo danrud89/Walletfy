@@ -92,16 +92,21 @@ if (isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true) {
                             </div>
                         </div>
 
-                        <div class="row mb-4">
-                            <div class="keeplogin mx-auto my-auto px-2 py-1">
-                                <input type="checkbox" class="align-middle" name="loginkeeping" id="loginkeeping" value="loginkeeping" />
-                                <label class="align-middle" for="loginkeeping">Remember me</label>
+                        <div class="form-group d-md-flex w-100 mb-4">
+                            <div class="form-check w-50 float-left" style="padding-left: 1.5em;">
+                                <label class="custom-control fill-checkbox">
+                                    <input type="checkbox" class="fill-control-input">
+                                    <span class="fill-control-description">Remember Me</span>
+                                </label>
+                            </div>
+                            <div class="w-50" style="position:absolute; left:60%">
+                                <a href="#">Forgot Password?</a>
                             </div>
                         </div>
 
                         <div class="row mb-4">
                             <div class="login-button text-center">
-                                <button type="submit" name="sign_in" class="btn btn-danger btn-lg" style="border-radius:15px" onclick="checkInputs()">Sign In</button>
+                                <button type="submit" name="sign_in" class="btn btn-danger btn-lg" style="border-radius:15px; background: linear-gradient(to bottom, #d45555, #992929);" onclick="checkInputs()">Sign In</button>
                             </div>
                             <span><?php echo ((isset($_SESSION['login_message']) && $_SESSION['login_message'] != '') ? $_SESSION['login_message'] : '');
                                     unset($_SESSION['login_message']); ?> </span>
@@ -109,7 +114,7 @@ if (isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true) {
 
                         <div class="row">
                             <div class="change_link ">
-                                <p class="text-center">Not a member yet ?<a href="register.php" class="p-1"><button type="button" class="btn btn-danger btn-sm" style="border-radius:10px">Sign up</button></a></p>
+                                <p class="text-center">Not a member yet? <a href="register.php" class="p-1"><button type="button" class="btn btn-danger btn-sm" style="border-radius:10px; background: linear-gradient(to bottom, #d45555, #992929);">Sign up</button></a></p>
                             </div>
                         </div>
 

@@ -255,6 +255,7 @@ section#balance {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  border-radius: 1em;
 }
 
 section#balance::before {
@@ -330,12 +331,12 @@ section#home .content .lead {
 
 section#home .content .blur {
   position: relative;
-  margin: 1em auto;
+  margin: 0 auto;
   padding: 1em;
   overflow: hidden;
   width: 80%;
   border-radius: 0.35em;
-  background-color: rgba(255, 255, 255, 0.25);
+  background-color: rgba(255, 255, 255, 0.4);
   backdrop-filter: blur(10px);
 }
 
@@ -362,7 +363,7 @@ section#home .content .blur form {
 }
 
 .wrapper1 {
-  background-color: rgba(116, 130, 138, 0.9);
+  background-color: rgba(116, 130, 138, 0.85);
   -webkit-box-shadow: 2px 4px 26px 11px rgba(0, 0, 0, 0.7);
   -moz-box-shadow: 2px 4px 26px 11px rgba(0, 0, 0, 0.7);
   box-shadow: 2px 4px 26px 11px rgba(0, 0, 0, 0.7);
@@ -582,6 +583,14 @@ section#home .content .blur form {
   color: #fff;
   border: 3px solid #eee;
   cursor: pointer;
+}
+
+#redirect {
+  font-size: 2em;
+  letter-spacing: 2px;
+  border: 2px solid #eee;
+  color: aliceblue;
+  background: linear-gradient(to bottom, #d45555, #992929);
 }
 
 @-moz-keyframes dash {

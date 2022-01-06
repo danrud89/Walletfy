@@ -4,8 +4,8 @@ session_start();
 // initializing variables
 $name = $email = "";
 $password = $confpassword = "";
-$username_err = $email_err =  $password_err = $confirm_password_err = $wrong_validation =  "";
-$success = "";
+$username_err = $email_err =  $password_err = $confirm_password_err = "";
+
 $register_validate = true;
 
 function filterInputData($input){
@@ -124,10 +124,6 @@ if (($_SERVER["REQUEST_METHOD"] === "post") && (isset($_POST['reg_user']))) {
         echo "Application Error: Register failed.<br>".$error->getMessage();
       }
 
-      if($query_login){
-        header('location:welcomeMessage.php');
-      }
-
       //assign to user incomes,expenses,payment default template of db
       try{
         $sql_insert_incomes_template_default = "INSERT INTO incomes_category_assigned_to_users (user_id, name) 
@@ -182,7 +178,7 @@ if (($_SERVER["REQUEST_METHOD"] === "post") && (isset($_POST['reg_user']))) {
         $_SESSION['logged_id'] = $user['id'];
         $_SESSION['logged_user'] = $user['name'];
         unset($_POST['reg_user']);
-        header('location: index.php');
+        header('location: welcomeMessage.php');
         exit();
     }  
 } 

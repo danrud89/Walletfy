@@ -23,6 +23,7 @@
 	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" href="bootstrap5/css/bootstrap.min.css" type="text/css" />
 	<link rel="stylesheet" href="style.css" type="text/css" />
+	<script src='https://www.google.com/recaptcha/api.js'></script>
 
 </head>
 
@@ -44,7 +45,7 @@
 				<div class="blur">
 					<form action="signup.php" method="post" name="registerForm" autocomplete="off" id="registerForm" onsubmit="return validate();">
 						<p id="text" style="visibility:hidden; margin:-10px 0 0 0;">Caps Lock is ON.</p>
-						<div class="row mb-2 py-2">
+						<div class="row mb-2">
 							<label for="username">Login:</label>
 							<div class="register-input">
 								<div class="register-icon mx-auto my-auto px-2 py-2">
@@ -115,20 +116,19 @@
 															unset($_SESSION['confirm_password_err']); ?> </span>
 							</div>
 						</div>
-
+						<div class="recaptcha mx-auto mb-2">
+						<div class="g-recaptcha" data-sitekey="6LcoQvMdAAAAAAzDf_dCf50TFqGAummA8zxi82LS"></div>
+						</div>
+						
 						<div class="row mb-3">
 							<div class="register-button text-center">
-								<button type="submit" name="sign_in" id="submit" class="btn btn-danger btn-lg" style="border-radius:15px" onclick="checkInputs()">Sign Up</button>
-							</div>
-							<span class="text-success"><?php echo ((isset($_SESSION['success']) && $_SESSION['success'] != '') ? $_SESSION['success'] : '');
-														unset($_SESSION['success']); ?> </span>
-							<span class="text-danger"><?php echo ((isset($_SESSION['wrong_validation']) && $_SESSION['wrong_validation'] != '') ? $_SESSION['wrong_validation'] : '');
-														unset($_SESSION['wrong_validation']); ?> </span>
+								<button type="submit" name="sign_in" id="submit" class="btn btn-danger btn-lg" style="border-radius:15px; background: linear-gradient(to bottom, #d45555, #992929);" onclick="checkInputs()">Sign Up</button>
+							</div>	
 						</div>
 
 						<div class="row">
 							<div class="change_link ">
-								<p class="text-center mb-0">Already a member ?<a href="index.php" class="p-1"><button type="button" class="btn btn-danger btn-sm" style="border-radius:10px">Sign in</button></a></p>
+								<p class="text-center mb-0">Already a member? <a href="index.php" class="p-1"><button type="button" class="btn btn-danger btn-sm" style="border-radius:10px;background: linear-gradient(to bottom, #d45555, #992929);">Sign in</button></a></p>
 							</div>
 						</div>
 
