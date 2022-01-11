@@ -107,7 +107,7 @@ if (isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true) {
 
                         <div class="row mb-4">
                             <div class="login-button text-center">
-                                <button type="submit" name="sign_in" class="btn btn-danger btn-lg" style="border-radius:15px; background: linear-gradient(to bottom, #d45555, #992929);" onclick="checkLoginInputs()">Sign In</button>
+                                <button type="submit" id="logInBtn" name="sign_in" class="btn btn-lg w-100 ml-2" onclick="checkLoginInputs()">Sign In</button>
                             </div>
                             <span><?php echo ((isset($_SESSION['login_message']) && $_SESSION['login_message'] != '') ? $_SESSION['login_message'] : '');
                                     unset($_SESSION['login_message']); ?> </span>
@@ -115,7 +115,7 @@ if (isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true) {
 
                         <div class="row">
                             <div class="change_link ">
-                                <p class="text-center">Not a member yet? <a href="register.php" class="p-1"><button type="button" class="btn btn-danger btn-sm" style="border-radius:10px; background: linear-gradient(to bottom, #d45555, #992929);">Sign up</button></a></p>
+                                <p class="text-center">Not a member yet? <a href="register.php" class="p-1"><button type="button" id="logInBtn" class="btn btn-sm">Sign up</button></a></p>
                             </div>
                         </div>
 

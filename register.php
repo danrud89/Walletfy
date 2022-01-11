@@ -123,13 +123,13 @@
 
 						<div class="row mb-3">
 							<div class="register-button text-center">
-								<button type="submit" name="sign_in" id="submit" class="btn btn-danger btn-lg" style="border-radius:15px; background: linear-gradient(to bottom, #d45555, #992929);" onclick="checkRegisterInputs()">Sign Up</button>
+								<button type="submit" name="sign_in" id="regBtn" class="btn btn-lg w-100" onclick="checkRegisterInputs()">Sign Up</button>
 							</div>
 						</div>
 
 						<div class="row">
 							<div class="change_link ">
-								<p class="text-center mb-0">Already a member? <a href="index.php" class="p-1"><button type="button" class="btn btn-danger btn-sm" style="border-radius:10px;background: linear-gradient(to bottom, #d45555, #992929);">Sign in</button></a></p>
+								<p class="text-center mb-0">Already a member? <a href="index.php" class="p-1"><button type="button" id="regBtn" class="btn btn-sm" >Sign in</button></a></p>
 							</div>
 						</div>
 

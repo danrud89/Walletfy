@@ -43,10 +43,10 @@ $incomeAddedCorrectly = $_SESSION['incomeAddedCorrectly'];
 </head>
 
 <body>
-    <main>
             <div class="main" style="background-image: url(ewallet2.png);">
-            <div class="wrapper1 vertical-center mx-auto mt-5" style="opacity: 0.9;">
-                <div class="row py-2 px-4 col-md-8 offset-md-3 col-lg-6 offset-lg-3 my-5 mt-5">
+            <div class="wrapper1 mx-auto mt-5">
+                <div class="blur  my-1">
+                <div class="row mb-5">
                     <p style="font-size: 1.25em;">
                         Welcome aboard! I'm glad You say YES. Wall€tfy! was develop to create a trustworthy place for You to make money menagement easier.
                     </p>
@@ -56,9 +56,10 @@ $incomeAddedCorrectly = $_SESSION['incomeAddedCorrectly'];
                 </div>
                 <div class="row">
                     <div class="mx-auto mt-2 mb-4">
-                        <a href="index.php"><button type="button" class="btn btn-rounded btn-danger btn-lg p-1" style="font-size:2em; letter-spacing:2px;"><span class="material-icons align-top mr-1">reply</span>Back to login page</button></a>
+                        <a href="index.php"><button type="button" id="redirect" class="btn btn-hover btn-rounded btn-lg p-2"><span class="material-icons mr-1 mt-2">reply</span>Back to login page</button></a>
                     </div>
                 </div>
+            </div>
             </div>
             </div>
 
@@ -75,3 +76,5 @@ $incomeAddedCorrectly = $_SESSION['incomeAddedCorrectly'];
                     </footer>
                 </div>
             </div>
+</body>
+</html>
