@@ -442,25 +442,30 @@ section#home .content .blur form {
   color: #e3e3e3;
 }
 
-.register-input.success input {
+.register-input.success input,
+.login-input.success input {
   border: 2px solid #2ecc71;
 }
 
-.register-input.error input {
+.register-input.error input,
+.login-input.error input {
   border: 2px solid #e74c3c;
 }
 
-.register-input.success span#ok {
+.register-input.success span#ok,
+.login-input.success span#ok {
   color: #2ecc71;
   visibility: visible;
 }
 
-.register-input.error span#wrong {
+.register-input.error span#wrong,
+.login-input.error span#wrong {
   color: #e74c3c;
   visibility: visible;
 }
 
-.register-input.error small {
+.register-input.error small,
+.login-input.error small {
   visibility: visible;
 }
 

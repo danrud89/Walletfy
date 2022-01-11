@@ -23,6 +23,7 @@
 	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" href="bootstrap5/css/bootstrap.min.css" type="text/css" />
 	<link rel="stylesheet" href="style.css" type="text/css" />
+	<script type="text/javascript" src="main.js"></script>
 	<script src='https://www.google.com/recaptcha/api.js'></script>
 
 </head>
@@ -43,7 +44,7 @@
 					</p>
 				</div>
 				<div class="blur">
-					<form action="signup.php" method="post" name="registerForm" autocomplete="off" id="registerForm" onsubmit="return validate();">
+					<form action="signup.php" method="post" name="registerForm" autocomplete="off" id="registerForm" onsubmit="return validateRegisterForm();">
 						<p id="text" style="visibility:hidden; margin:-10px 0 0 0;">Caps Lock is ON.</p>
 						<div class="row mb-2">
 							<label for="username">Login:</label>
@@ -89,11 +90,11 @@
 										vpn_key
 									</span>
 								</div>
-								<input type="password" id="password" class="form-control mx-auto my-auto px-2 py-2" placeholder="password" aria-label="password" name="password" onkeypress="capLock(event)" min="8" max="20">
+								<input type="password" id="registerPassword" class="form-control mx-auto my-auto px-2 py-2" placeholder="password" aria-label="password" name="password" onkeypress="capLock(event)" min="8" max="20">
 								<span class="material-icons" id="ok" style="position:absolute; left:77%; top:12px;">check_circle</span>
 								<span class="material-icons" id="wrong" style="position:absolute; left:77%; top:12px;">error_outline</span>
 								<small id="password_error">Error message</small>
-								<span class="material-icons align-middle" id="togglePassword" style="cursor:pointer; color:black; opacity:0.6; position:absolute; left:85%; top:10px;">visibility_off</span>
+								<span class="material-icons align-middle" id="eyeIcon" style="cursor:pointer; color:black; opacity:0.6; position:absolute; left:85%; top:10px;" onclick="togglePassword('registerPassword')">visibility_off</span>
 								<span class="text-muted"><?php echo ((isset($_SESSION['password_err']) && $_SESSION['password_err'] != '') ? $_SESSION['password_err'] : '');
 															unset($_SESSION['password_err']); ?> </span>
 							</div>
@@ -107,23 +108,23 @@
 										vpn_key
 									</span>
 								</div>
-								<input type="password" id="cpassword" class="form-control mx-auto my-auto px-2 py-2" placeholder="confirm password" aria-label="password" name="confpassword" onkeypress="capLock(event)" min="8" max="20">
+								<input type="password" id="cRegisterPassword" class="form-control mx-auto my-auto px-2 py-2" placeholder="confirm password" aria-label="password" name="confpassword" onkeypress="capLock(event)" min="8" max="20">
 								<span class="material-icons" id="ok" style="position:absolute; left:77%; top:12px;">check_circle</span>
 								<span class="material-icons" id="wrong" style="position:absolute; left:77%; top:12px;">error_outline</span>
 								<small id="cpassword_error">Error message</small>
-								<span class="material-icons align-middle" id="togglePassword1" style="cursor:pointer; color:black; opacity:0.6; position:absolute; left:85%; top:10px;">visibility_off</span>
+								<span class="material-icons align-middle" id="ceyeIcon" style="cursor:pointer; color:black; opacity:0.6; position:absolute; left:85%; top:10px;" onclick="togglePassword1('cRegisterPassword')">visibility_off</span>
 								<span class="text-muted"><?php echo ((isset($_SESSION['confirm_password_err']) && $_SESSION['confirm_password_err'] != '') ? $_SESSION['confirm_password_err'] : '');
 															unset($_SESSION['confirm_password_err']); ?> </span>
 							</div>
 						</div>
 						<div class="recaptcha mx-auto mb-2">
-						<div class="g-recaptcha" data-sitekey="6LcoQvMdAAAAAAzDf_dCf50TFqGAummA8zxi82LS"></div>
+							<div class="g-recaptcha" data-sitekey="6LcoQvMdAAAAAAzDf_dCf50TFqGAummA8zxi82LS"></div>
 						</div>
-						
+
 						<div class="row mb-3">
 							<div class="register-button text-center">
-								<button type="submit" name="sign_in" id="submit" class="btn btn-danger btn-lg" style="border-radius:15px; background: linear-gradient(to bottom, #d45555, #992929);" onclick="checkInputs()">Sign Up</button>
-							</div>	
+								<button type="submit" name="sign_in" id="submit" class="btn btn-danger btn-lg" style="border-radius:15px; background: linear-gradient(to bottom, #d45555, #992929);" onclick="checkRegisterInputs()">Sign Up</button>
+							</div>
 						</div>
 
 						<div class="row">
@@ -151,170 +152,10 @@
 			</div>
 		</section>
 
-		<!--info for user corect register-->
-		<script>
-			$('#submit').on('click', function(e) {
-				e.preventDefault();
-				var form = $(this).parents('form');
-				swal.fire({
-					position: 'top-end',
-					icon: 'success',
-					title: 'New user has been added.',
-					showConfirmButton: false,
-					timer: 5000,
-					closeOnConfirm: false
-				}, function(isConfirm) {
-					if (isConfirm) form.submit();
-				});
-			});
-		</script>
-
-		<script>
-			function validate() {
-				if (!checkInputs())
-					return false;
-				else return true;
-			}
-		</script>
-
-		<script>
-			function checkInputs() {
-				let isValid = true;
-				const username = document.getElementById('username');
-				const email = document.getElementById('email');
-				const password = document.getElementById('password');
-				const password2 = document.getElementById('cpassword');
-				// trim to remove the whitespaces
-				const usernameValue = trimInputs(username);
-				const emailValue = trimInputs(email);
-				const passwordValue = trimInputs(password);
-				const password2Value = trimInputs(password2);
-
-				if (usernameValue === '' || usernameValue === null || usernameValue.length < 3) {
-					setErrorFor(username, 'Must contain at least 3 charakters !');
-					isValid = false;
-				} else {
-					setSuccessFor(username);
-				}
-
-				if (emailValue === '' || emailValue === null) {
-					setErrorFor(email, 'Email cannot be blank');
-					isValid = false;
-				} else if (!isEmail(emailValue)) {
-					setErrorFor(email, 'Invalid email syntax');
-					isValid = false;
-
-				} else {
-					setSuccessFor(email);
-				}
-
-				if (passwordValue === '' || passwordValue === null) {
-					setErrorFor(password, 'Password cannot be blank');
-					isValid = false;
-
-				} else if (passwordValue.length < 8 || passwordValue.length > 20) {
-					setErrorFor(password, 'Password must contain beetween 8-20 charackters');
-					isValid = false;
-
-				} else if (!isPasswordValid(passwordValue)) {
-					setErrorFor(password, 'Password must contain only letters, numbers and underscores');
-					isValid = false;
-				} else {
-					setSuccessFor(password);
-
-				}
-				if (password2Value === '' || password2Value === null) {
-					setErrorFor(cpassword, 'Password cannot be blank');
-					isValid = false;
-
-				} else if (passwordValue !== password2Value) {
-					setErrorFor(cpassword, 'Passwords do not match');
-					isValid = false;
-
-				} else {
-					setSuccessFor(cpassword);
-				}
-
-				function trimInputs(data) {
-					output = data.value.trim();
-					return output;
-				}
-
-				function setErrorFor(input, message) {
-					const formControl = input.parentElement;
-					const small = formControl.querySelector('small');
-					formControl.className = 'register-input error';
-					small.innerText = message;
-					return false;
-				}
-
-				function setSuccessFor(input) {
-					const formControl = input.parentElement;
-					formControl.className = 'register-input success';
-				}
-
-				function isEmail(email) {
-					return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
-				}
-
-				function isPasswordValid(password) {
-					return /^[a-zA-Z0-9_]*$/.test(password);
-				}
-				return isValid;
-			}
-		</script>
-
-		<script>
-			togglePassword.addEventListener('click', function togglePassword() {
-				const password = document.querySelector('#password');
-				if (password.type === 'password') {
-					password.type = 'text';
-					$('#togglePassword').text('visibility');
-				} else {
-					password.type = 'password';
-					$('#togglePassword').text('visibility_off');
-				}
-			});
-		</script>
-
-		<script>
-			togglePassword1.addEventListener('click', function togglePassword() {
-				const confpassword = document.querySelector('#cpassword');
-				if (cpassword.type === 'password') {
-					cpassword.type = 'text';
-					$('#togglePassword1').text('visibility');
-				} else {
-					cpassword.type = 'password';
-					$('#togglePassword1').text('visibility_off');
-				}
-			});
-		</script>
-
-		<script>
-			function capLock(e) {
-				var input = document.getElementById('registerForm');
-				var alert = document.getElementById("text");
-				input.addEventListener("keyup", function(event) {
-
-					if (event.getModifierState("CapsLock")) {
-						text.style.visibility = "visible";
-					} else {
-						text.style.visibility = "hidden"
-					}
-				});
-			}
-		</script>
-
-		<!--clear the form after page reload -->
-		<script>
-			$(document).ready(function(e) {
-				$('.blur .content form#registerForm .register-input .form-control').value('');
-			});
-		</script>
-
 		<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
 		<script src='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js'></script>
 		<script src="./script.js"></script>
+		<script src="sweetalert2.all.min.js"></script>
 
 </body>
 

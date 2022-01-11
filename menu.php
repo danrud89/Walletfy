@@ -38,11 +38,12 @@ $incomeAddedCorrectly = $_SESSION['incomeAddedCorrectly'];
     <link rel="stylesheet" href="bootstrap5/css/bootstrap.min.css" type="text/css" />
     <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="bootstrap5/css/bootstrap.min.css" type="text/css" />
+    <script type="text/javascript" src="main.js"></script>
     <link rel="stylesheet" href="style.css" type="text/css" />
 
 </head>
 
-<body>
+<body onload="setTodaysDate()">
     <header id="top">
         <h3>Wall€tfy!</h3>
         <h5 class="loggedAs ml-0">User name:<?php echo $userName ?>
@@ -247,39 +248,6 @@ $incomeAddedCorrectly = $_SESSION['incomeAddedCorrectly'];
             </form>
         </div>
     </div>
-</div>
-
-        <script>
-            $(document).ready(function() {
-                let wasShown = false;
-                if(!wasShown){  var toastMixin = Swal.mixin({
-                    toast: true,
-                    icon: 'success',
-                    title: 'General Title',
-                    animation: false,
-                    position: 'bottom-end',
-                    showConfirmButton: false,
-                    timer: 3000,
-                    timerProgressBar: true,
-                    didOpen: (toast) => {
-                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                        toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    }
-                });
-                toastMixin.fire({
-                    title: 'Signed in Successfully'
-                });
-                wasShown = true;
-            }
-      
-            });
-        </script>
-        <script>
-         var now = new Date();
-        var day = ("0" + now.getDate()).slice(-2);
-        var month = ("0" + (now.getMonth() + 1)).slice(-2);
-        var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
-        $('input[type=date]').val(today);
-        </script>
+</div> 
 </body>
 </html>
