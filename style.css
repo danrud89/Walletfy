@@ -608,13 +608,13 @@ section#home .content .blur form {
   color: cornsilk;
   border-radius: 10px;
   border: 2px solid #eee;
-  background: linear-gradient(to bottom, cornflowerblue, mediumblue);
+  background: linear-gradient(to bottom, cornflowerblue, rgb(93, 93, 233));
   transition: 0.5s ease-in-out;
 }
 
 #logInBtn:hover,
 #regBtn:hover {
-  background: linear-gradient(to bottom, mediumblue, cornflowerblue);
+  background: linear-gradient(to bottom, rgb(93, 93, 233), cornflowerblue);
   transform: scale(1.05);
 
 }

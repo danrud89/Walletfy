@@ -106,8 +106,8 @@ if (isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true) {
                         </div>
 
                         <div class="row mb-4">
-                            <div class="login-button text-center">
-                                <button type="submit" id="logInBtn" name="sign_in" class="btn btn-lg w-100 ml-2" onclick="checkLoginInputs()">Sign In</button>
+                            <div class="login-button">
+                            <a href="menu.php"><button type="submit" id="logInBtn" name="sign_in" class="btn btn-lg w-100" onclick="checkLoginInputs()">Sign In <span class="material-icons align-bottom  mb-1" style="margin-left: 1em;">input</span></button></a>
                             </div>
                             <span><?php echo ((isset($_SESSION['login_message']) && $_SESSION['login_message'] != '') ? $_SESSION['login_message'] : '');
                                     unset($_SESSION['login_message']); ?> </span>

@@ -117,13 +117,13 @@
 															unset($_SESSION['confirm_password_err']); ?> </span>
 							</div>
 						</div>
-						<div class="recaptcha mx-auto mb-2">
+						<div class="recaptcha ml-2 mb-2">
 							<div class="g-recaptcha" data-sitekey="6LcoQvMdAAAAAAzDf_dCf50TFqGAummA8zxi82LS"></div>
 						</div>
 
 						<div class="row mb-3">
 							<div class="register-button text-center">
-								<button type="submit" name="sign_in" id="regBtn" class="btn btn-lg w-100" onclick="checkRegisterInputs()">Sign Up</button>
+								<button type="submit" name="sign_in" id="regBtn" class="btn btn-lg w-100" onclick="checkRegisterInputs()">Sign Up <span class="material-icons align-bottom mb-1" style="margin-left: 0.5em;">touch_app</span></button>
 							</div>
 						</div>
 
