@@ -78,7 +78,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === false) {
 <body onload="setTodaysDate()">
     <header id="top">
         <h3>Wall€tfy!</h3>
-        <h5 class="loggedAs ml-0">User name:<?php echo $userName ?>
+        <h5 class="loggedAs ml-0">User :<?php echo $userName ?>
         </h5>
         <nav>
             <ul>
@@ -87,7 +87,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === false) {
                 <li><span class="material-icons mx-2 align-middle">shopping_cart</span><a href="#" class="openModal" data-toggle="modal" data-target="#addExpense" title="Expense">Expense</a></li>
                 <li><span class="material-icons mx-2 align-middle">insert_chart_outlined</span><a href="balance.php" title="Balance">Balance</a></li>
                 <li><span class="material-icons mx-2 align-middle">manage_accounts</span><a href="settings.php" title="Settings">Settings</a></li>
-                <li><span class="material-icons mx-2 align-middle">logout</span><a href="index.php" title="Log Out">Log Out</a></li>
+                <li><span class="material-icons mx-2 align-middle">logout</span><a href="index.php" title="Log Out">Exit</a></li>
             </ul>
         </nav>
     </header>
@@ -102,7 +102,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === false) {
                         Walcome to Wall€tfy! - a personal finance application that makes money management easy. The app is designed to streamline cash tracking and help you save money.
                     </p>
                     <p class="lead">
-                        On the top You can select the option You are interested in from the navigation bar. Add a new income, expense, view the balance of the period You are interested in or personalize Your account in the settings.
+                        On the top You can select the option You are interested in from the navigation menu. Add a new income, expense, view the balance of the period You are interested in or personalize Your account in the settings.
                     </p>
                 </div>
             </div>
@@ -213,7 +213,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === false) {
                                             date_range
                                         </span>
                                     </div>
-                                    <input type="date" class="data-control px-3" aria-label="date" style="width: 85%" min="2000-01-01" max="2030-12-31" value="<?php echo date('Y-m-d'); ?>" required>
+                                    <input type="date" class="data-control px-3" aria-label="date" name="date" style="width: 85%" min="2000-01-01" max="2030-12-31" value="<?php echo date('Y-m-d'); ?>" required>
                                 </div>
 
                                 <div class="expense-input mx-auto mt-4">

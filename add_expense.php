@@ -74,7 +74,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['addExpense'])) {
     else{
         $_SESSION['comment_err'] = 'Invalid commentary format !';
     }
-    if(strlen($comment) > 50){
+    if(strlen($expenseComment) > 50){
         $_SESSION['comment_err'] = 'Comment cannot contain more than 50 characters !';
     }       
       require_once 'database.php'; 
@@ -89,9 +89,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['addExpense'])) {
 
             $result = $query_select->fetch();
         }
-        catch(Exception $e){
-            echo $error->getMessage();
+        catch (PDOException $e) {
+            echo "DataBase Error: Request failed.<br>" . $e->getMessage();
+        } catch (Exception $e) {
+            echo "Application Error: Request failed.<br>" . $error->getMessage();
         }
+        
         try{
             $sql_insert_expense = "INSERT INTO expenses VALUES(NULL, :id_user, :expense_category, :expense_amount, :expense_date, :expense_comment)"; 
             $query_expense = $db->prepare($sql_insert_expense);
@@ -102,10 +105,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['addExpense'])) {
             $query_expense->bindValue(':expense_comment', $expenseComment, PDO::PARAM_STR);
             $query_expense->execute();
         }
-       catch(Exception $error)
-      {
-        echo $error->getMessage();
-      }
+        catch (PDOException $e) {
+            echo "DataBase Error: Request failed.<br>" . $e->getMessage();
+        } catch (Exception $e) {
+            echo "Application Error: Request failed.<br>" . $error->getMessage();
+        }
       
       $_SESSION['expenseStatus'] = "Expense has been saved !";
       $_SESSION['expenseStatusCode'] = "success!";

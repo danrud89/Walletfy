@@ -1,20 +1,17 @@
 <?php
 session_start();
-if (!isset($_SESSION['loggedin'])) {
-    header('Location: index.html');
-    exit;
-}
-$date = new DateTime();
-$date->format('Y-m-d');
-$firstDate = $_SESSION['startDate'];
-$firstDate->format('d-m-Y');
-$secondDate = $_SESSION['endDate'];
-$secondDate->format('d-m-Y');
+//if (!isset($_SESSION['loggedin'])) {
+  //  header('Location: index.html');
+    //exit;
+//}
+//$firstDate = $_SESSION['startDate'];
+//$firstDate->format('d-m-Y');
+//$secondDate = $_SESSION['endDate'];
+//$secondDate->format('d-m-Y');
 $incomes = $_SESSION['incomesTable'];
 $expenses = $_SESSION['expensesTable'];
 $positiveBalanceMessage = "Congratulations! Your proper money menagement allowed You to save :{$balance} zł";
 $negativeBalanceMessage = "Watch out ! You spent a little too much money";
-
 ?>
 
 <!DOCTYPE html>
@@ -49,8 +46,8 @@ $negativeBalanceMessage = "Watch out ! You spent a little too much money";
                 <li style="pointer-events: none; cursor: not-allowed;"><span class="material-icons mx-2 align-middle text-muted">savings</span><a class="text-muted" href="#" data-toggle="modal" data-target="#addIncome">Income</a></li>
                 <li style="pointer-events: none; cursor: not-allowed;"><span class="material-icons mx-2 align-middle text-muted">shopping_cart</span><a class="text-muted" href="#" class="openModal" data-toggle="modal" data-target="#addExpense" title="Expense">Expense</a></li>
                 <li style="pointer-events: none; cursor: not-allowed;"><span class="material-icons mx-2 align-middle text-muted">insert_chart_outlined</span><a class="text-muted" href="balance.php" title="Balance">Balance</a></li>
-                <li><span class="material-icons mx-2 align-middle">manage_accounts</span><a href="settings.html" title="Settings">Settings</a></li>
-                <li><span class="material-icons mx-2 align-middle">logout</span><a href="index.php" title="Log Out">Log Out</a></li>
+                <li><span class="material-icons mx-2 align-middle">manage_accounts</span><a href="settings.php" title="Settings">Settings</a></li>
+                <li><span class="material-icons mx-2 align-middle">logout</span><a href="index.php" title="Log Out">Exit</a></li>
             </ul>
         </nav>
     </header>
@@ -84,45 +81,8 @@ $negativeBalanceMessage = "Watch out ! You spent a little too much money";
                                 </option>
                             </select>
                         </div>
-                        <!-- Modal datePicker -->
-                        <div id="dateModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dateModal" aria-hidden="true" data-backdrop="false">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-
-                                    <div class="modal-header">
-                                        <h4 id="customPeriod" class="text-center">Select date range</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="input-group mb-5">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"> <span class="material-icons">
-                                                        date_range
-                                                    </span> </span>
-                                            </div>
-                                            <input id="startDate" type="date" class="form-control" aria-label="data" name="startDate" value="<?php echo $date; ?>" min="2000-01-01" required>
-                                        </div>
-                                        <div class="input-group mb-1">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"> <span class="material-icons">
-                                                        date_range
-                                                    </span> </span>
-                                            </div>
-                                            <input id="endDate" type="date" class="form-control" aria-label="data" name="endDate" value="<?php echo $date; ?>" min="2000-01-01" required>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer btn-group" role="group">
-                                        <input type="submit" class="btn btn-outline-success btn-floating waves-effect" name="saveDates" value="Save">
-                                        <input type="reset" class="btn btn-danger btn-floating waves-effect" data-dismiss="modal" value="Close">
-                                        <span class="text-alert">
-                                            <?php echo ((isset($_SESSION['date_err']) && $_SESSION['date_err'] != '') ? $_SESSION['date_err'] : '');
-                                            unset($_SESSION['date_err']); ?>
-                                        </span>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
                     </form>
+
                     <div class='row'>
                         <div class='col-12 text-center mt-3'>
                             <h4 class='balanceDates'>FINANCIAL BALANCE FROM : <?php echo ((isset($firstDate) && $firstDate != '') ? $firstDate : '');
@@ -296,6 +256,46 @@ $negativeBalanceMessage = "Watch out ! You spent a little too much money";
                 </div>
             </div>
         </section>
+
+         <!-- Modal datePicker -->
+         <div id="dateModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dateModal" aria-hidden="true" data-backdrop="false">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+
+                                    <div class="modal-header">
+                                        <h4 id="customPeriod" class="text-center">Select date range</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                    <form action="validateModalDatePicker.php" method="post" autocomplete="off">
+                                        <div class="input-group mb-5">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"> <span class="material-icons">
+                                                        date_range
+                                                    </span> </span>
+                                            </div>
+                                            <input id="startDate" type="date" class="form-control" aria-label="data" name="startDate" value="<?php echo date('Y-m-d'); ?>" min="2000-01-01" required>
+                                        </div>
+                                        <div class="input-group mb-1">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"> <span class="material-icons">
+                                                        date_range
+                                                    </span> </span>
+                                            </div>
+                                            <input id="endDate" type="date" class="form-control" aria-label="data" name="endDate" value="<?php echo date('Y-m-d'); ?>" min="2000-01-01" required>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer btn-group" role="group">
+                                        <input type="submit" class="btn btn-outline-success btn-floating waves-effect" name="saveDates" value="Save">
+                                        <input type="reset" class="btn btn-danger btn-floating waves-effect" data-dismiss="modal" value="Close">
+                                        <span class="text-alert">
+                                            <?php echo ((isset($_SESSION['date_err']) && $_SESSION['date_err'] != '') ? $_SESSION['date_err'] : '');
+                                            unset($_SESSION['date_err']); ?>
+                                        </span>
+                                    </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
 </body>
 
 </html>

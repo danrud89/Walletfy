@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['addIncome'])) {
         $_SESSION['category_err'] = 'Select matching category !';
     }
 
-       // $user_id = $_SESSION['logged_id'];
+        $user_id = $_SESSION['logged_id'];
 
         if (!is_numeric($_POST['amount'])) {
             $_SESSION['amount_err'] = 'Invalid amount format !';
