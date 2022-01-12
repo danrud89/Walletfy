@@ -103,11 +103,14 @@ function checkRegisterInputs() {
     const email = document.getElementById('email');
     const password = document.getElementById('registerPassword');
     const password2 = document.getElementById('cRegisterPassword');
+    //const captcha = document.getElementById('captcha');
+
     // trim to remove the whitespaces
     const usernameValue = trimInputs(username);
     const emailValue = trimInputs(email);
     const passwordValue = trimInputs(password);
     const password2Value = trimInputs(password2);
+    //const captchaResponse = captcha.getResponse();
 
     if (usernameValue === '' || usernameValue === null || usernameValue.length < 3) {
         setErrorForRegister(username, 'Must contain at least 3 charakters !');
@@ -152,6 +155,12 @@ function checkRegisterInputs() {
     } else {
         setSuccessForRegister(password2);
     }
+
+   /* if(captchaResponse === '' || captchaValue === null){
+        setErrorForRegister(captcha, 'Please verify that you are a Human');
+        isValid = false;
+    }*/
+
     return isValid;
 }
 
@@ -198,30 +207,7 @@ function capLock(e) {
     });
 }
 
-$(document).ready(function () {
-    let wasShown = false;
-    if (!wasShown) {
-        var toastMixin = Swal.mixin({
-            toast: true,
-            icon: 'success',
-            title: 'General Title',
-            animation: false,
-            position: 'bottom-end',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-        });
-        toastMixin.fire({
-            title: 'Signed in Successfully'
-        });
-        wasShown = true;
-    }
 
-});
 
 function setTodaysDate() {
     var now = new Date();
@@ -351,4 +337,5 @@ function sortTableNumerically(idOfTable) {
             }
         }
     }
-};
+}
+

@@ -1,7 +1,7 @@
 <?php
 session_start();
 $incomeAmount = $incomeDate = $incomeCategory = "";
-$amount_err = $date_err = $category_err = $comment_err = "";
+$incomeStatus = $incomeStatusCode = "";
 
 function filterInputs($inputData){
     $outputData = filter_input(INPUT_POST, '$inputData');
@@ -34,7 +34,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['addIncome'])) {
         $_SESSION['category_err'] = 'Select matching category !';
     }
 
-    if (empty($amount_err) && empty($date_err) && empty($category_err)) {
         $user_id = $_SESSION['logged_id'];
 
         if (!is_numeric($_POST['amount'])) {
@@ -97,6 +96,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['addIncome'])) {
             echo "Application Error: Request failed.<br>" . $error->getMessage();
         }
 
-        $_SESSION['incomeAddedCorrectly'] = true;
-    }
+        $incomeStatus = "Income has been saved !";
+      $incomeStatusCode = "success!";
+      $expenseStatus = $_SESSION['incomeStatus'];
+      $expenseStatusCode = $_SESSION['incomeStatusCode'];
+
+}
+else{
+    $incomeStatus = "Something went wrong ! Income has not been saved !";
+    $incomeStatusCode = "error!";
+    $incomeStatus = $_SESSION['incomeStatus'];
+    $incomeStatusCode = $_SESSION['incomeStatusCode'];
 }

@@ -58,7 +58,7 @@
 								<span class="material-icons" id="ok" style="position:absolute; left:85%; top:12px;">check_circle</span>
 								<span class="material-icons" id="wrong" style="position:absolute; left:85%; top:12px;">error_outline</span>
 								<small id="login_error">Error message</small>
-								<span class="text-muted"><?php echo ((isset($_SESSION['username_err']) && $_SESSION['username_err'] != '') ? $_SESSION['username_err'] : '');
+								<span><?php echo ((isset($_SESSION['username_err']) && $_SESSION['username_err'] != '') ? $_SESSION['username_err'] : '');
 															unset($_SESSION['username_err']); ?> </span>
 							</div>
 						</div>
@@ -76,11 +76,10 @@
 								<span class="material-icons" id="ok" style="position:absolute; left:85%; top:12px;">check_circle</span>
 								<span class="material-icons" id="wrong" style="position:absolute; left:85%; top:12px;">error_outline</span>
 								<small id="email_error">Error message</small>
-								<span class="text-muted"><?php echo ((isset($_SESSION['email_err']) && $_SESSION['email_err'] != '') ? $_SESSION['email_err'] : '');
+								<span><?php echo ((isset($_SESSION['email_err']) && $_SESSION['email_err'] != '') ? $_SESSION['email_err'] : '');
 															unset($_SESSION['email_err']); ?> </span>
 							</div>
 						</div>
-
 
 						<div class="row mb-2 py-2">
 							<label for="password">Password:</label>
@@ -95,7 +94,7 @@
 								<span class="material-icons" id="wrong" style="position:absolute; left:77%; top:12px;">error_outline</span>
 								<small id="password_error">Error message</small>
 								<span class="material-icons align-middle" id="eyeIcon" style="cursor:pointer; color:black; opacity:0.6; position:absolute; left:85%; top:10px;" onclick="togglePassword('registerPassword')">visibility_off</span>
-								<span class="text-muted"><?php echo ((isset($_SESSION['password_err']) && $_SESSION['password_err'] != '') ? $_SESSION['password_err'] : '');
+								<span><?php echo ((isset($_SESSION['password_err']) && $_SESSION['password_err'] != '') ? $_SESSION['password_err'] : '');
 															unset($_SESSION['password_err']); ?> </span>
 							</div>
 						</div>
@@ -113,12 +112,15 @@
 								<span class="material-icons" id="wrong" style="position:absolute; left:77%; top:12px;">error_outline</span>
 								<small id="cpassword_error">Error message</small>
 								<span class="material-icons align-middle" id="ceyeIcon" style="cursor:pointer; color:black; opacity:0.6; position:absolute; left:85%; top:10px;" onclick="togglePassword1('cRegisterPassword')">visibility_off</span>
-								<span class="text-muted"><?php echo ((isset($_SESSION['confirm_password_err']) && $_SESSION['confirm_password_err'] != '') ? $_SESSION['confirm_password_err'] : '');
+								<span><?php echo ((isset($_SESSION['confirm_password_err']) && $_SESSION['confirm_password_err'] != '') ? $_SESSION['confirm_password_err'] : '');
 															unset($_SESSION['confirm_password_err']); ?> </span>
 							</div>
 						</div>
+						<div class="row mb-3 p-1">
 						<div class="recaptcha ml-2 mb-2">
-							<div class="g-recaptcha" data-sitekey="6LcoQvMdAAAAAAzDf_dCf50TFqGAummA8zxi82LS"></div>
+							<div id="captcha" class="g-recaptcha" data-sitekey="6LcoQvMdAAAAAAzDf_dCf50TFqGAummA8zxi82LS"></div>
+						</div>
+						<small id="captcha_error">Error message</small>
 						</div>
 
 						<div class="row mb-3">

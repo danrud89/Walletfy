@@ -1,7 +1,7 @@
 <?php
 session_start();
 $expenseAmount = $expenseDate = $expensePurpose = $expenseOptions = "";
-$amount_err = $date_err = $purpose_err = $options_err = "";
+$expenseStatus = $expenseStatusCode = "";
 
 function filterInputs($inputData){
     $outputData = filter_input(INPUT_POST, '$inputData');
@@ -45,8 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['addExpense'])) {
     $_SESSION['options_err'] = 'Select matching category !';
     }
 
-    if(empty($amount_err) && empty($date_err) && empty($category_err)){
-    $user_id = $_SESSION['logged_id'];
+     $user_id = $_SESSION['logged_id'];
     
     if(!is_numeric($_POST['amount'])){
         $_SESSION['amount_err'] = 'Invalid amount format !';
@@ -108,7 +107,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['addExpense'])) {
       {
         echo $error->getMessage();
       }
-            $_SESSION['expenseAddedCorrectly'] = true;
+      $expenseStatus = "Expense has been saved !";
+      $expenseStatusCode = "success!";
+      $_SESSION['expenseStatus'] = $expenseStatus;
+      $_SESSION['expenseStatusCode'] = $expenseStatusCode;
+
 }
+else{
+    $expenseStatus = "Something went wrong ! Expense has not been saved !";
+    $expenseStatusCode = "error!";
+    $_SESSION['expenseStatus'] = $expenseStatus;
+    $_SESSION['expenseStatusCode'] = $expenseStatusCode;
 }
 ?>

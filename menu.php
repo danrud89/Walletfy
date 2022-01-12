@@ -6,7 +6,37 @@ session_start();
 if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === false) {
     header("Location: index.php");
     exit;
+} else {
+?>
+    <script>
+        $(document).ready(function() {
+            let wasShown = false;
+            if (!wasShown) {
+                var toastMixin = Swal.mixin({
+                    toast: true,
+                    icon: 'success',
+                    title: 'General Title',
+                    animation: false,
+                    position: 'bottom-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                });
+                toastMixin.fire({
+                    title: 'Signed in Successfully'
+                });
+                wasShown = true;
+            }
+
+        });
+    </script>
+<?php
 }
+
 $userName = $_SESSION['logged_user'];
 $userID = $_SESSION['logged_id'];
 $expenseAddedCorrectly = $_SESSION['expenseAddedCorrectly'];
@@ -40,6 +70,8 @@ $incomeAddedCorrectly = $_SESSION['incomeAddedCorrectly'];
     <link rel="stylesheet" href="bootstrap5/css/bootstrap.min.css" type="text/css" />
     <script type="text/javascript" src="main.js"></script>
     <link rel="stylesheet" href="style.css" type="text/css" />
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </head>
 
@@ -89,165 +121,195 @@ $incomeAddedCorrectly = $_SESSION['incomeAddedCorrectly'];
             </div>
         </section>
 
-<!-- ModalIncomes-->
-<div class="modal fade" id="addIncome" tabindex="-1" role="dialog" aria-labelledby="addIncome" aria-hidden="true" data-backdrop="false">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content rounded-5">
-            <div class="modal-header d-flex justify-content-center">
-                <h4 id="addIncome" class="modal-title mx-auto">ADD NEW INCOME</h4>
-            </div>
-            <div class="modal-body py-0 bg-light">
-                <form action="#" method="post" autocomplete="off">
-
-                    <div class="income-input mx-auto mt-4">
-                        <div class="income-icon">
-                            <span class="material-icons px-2 py-2">
-                                attach_money
-                            </span>
-                        </div>
-                        <input class="amount-data px-3" type="number" class="form-control" placeholder="Value" min="0" max="99999.99" step="0.01" aria-label="value" name="amount" style="width: 85%" required>
+        <!-- ModalIncomes-->
+        <div class="modal fade" id="addIncome" tabindex="-1" role="dialog" aria-labelledby="addIncome" aria-hidden="true" data-backdrop="false">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content rounded-5">
+                    <div class="modal-header d-flex justify-content-center">
+                        <h4 id="addIncome" class="modal-title mx-auto">ADD NEW INCOME</h4>
                     </div>
+                    <div class="modal-body py-0 bg-light">
+                        <form action="#" method="post" autocomplete="off">
 
-                    <div class="income-input mx-auto mt-3">
-                        <div class="income-icon">
-                            <span class="material-icons px-2 py-2 text-muted">
-                                date_range
-                            </span>
-                        </div>
-                        <input type="date" class="data-control px-3" aria-label="date" name="date" style="width: 85%" required>
-                    </div>
-
-                    <div class="income-input mx-auto mt-3">
-                        <div class="income-icon">
-                            <span class="material-icons px-2 py-2">
-                                list
-                            </span>
-                        </div>
-                        <select name="category" class="user-options px-4 text-muted" style="width: 85%" required>
-                            <option value="">--- Please select option ---</option>
-                            <option value="Salary">Salary</option>
-                            <option value="Internet sale">Internet sale</option>
-                            <option value="Interest">Interest</option>
-                            <option value="Donation">Donation</option>
-                            <option value="Gift">Gift</option>
-                            <option value="Other">Other</option>
-                        </select>
-                    </div>
-
-                    <div class="income-input mx-auto mt-3 mb-4">
-                        <div class="income-icon">
-                            <span class="material-icons px-2 py-4">
-                                description
-                            </span>
-                        </div>
-                        <textarea class="form-data px-3 py-2" minlength="0" maxlength="50" placeholder="Commentary (not required)" name="comment" style="width: 85%"></textarea>
-                    </div>
-            </div>
-            <div class="modal-footer justify-content-center flex-column flex-md-row btn-group">
-                <button type="submit" id="addIncome" name="addIncome" value="ADD" class="btn btn-floating btn-outline-success mr-2">ADD</button>
-                <button type="reset" class="btn btn-floating btn-danger waves-effect" name="erase_income" action="erase_expense.php" value="CLOSE" data-dismiss="modal" onclick="this.form.reset();">CLOSE</button>
-                <span class="text-success"><?php echo ((isset($incomeAddedCorrectly) && $incomeAddedCorrectly != '') ? 'Income saved !' : '');
-														unset($incomeAddedCorrectly); ?> </span>
-            </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-
-<!-- ModalExpenses-->
-<div class="modal fade" id="addExpense" tabindex="-1" role="dialog" aria-labelledby="addExpense" aria-hidden="true" data-backdrop="false">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content rounded-5">
-            <div class="modal-header d-flex justify-content-center">
-                <h4 id="addExpense" class="modal-title mx-auto">ADD NEW EXPENSE</h4>
-            </div>
-            <div class="modal-body py-0 bg-light">
-                <form action="#" method="post" autocomplete="off">
-                    <div class="expense-box mx-auto pl-4 pr-3 py-3">
-                        <div class="title text-center mx-auto">ADD NEW EXPENSE</div>
-                        <div class="expense-input mx-auto mt-0">
-                            <div class="expense-icon">
-                                <span class="material-icons px-2 py-2">
-                                    attach_money
-                                </span>
-                            </div>
-                            <input class="form-data px-3" type="number" class="form-control" placeholder="Value" min="0" max="99999.99" step="0.01" aria-label="value" name="amount" style="width: 85%" required>
-                        </div>
-
-                        <div class="expense-input mx-auto mt-4">
-                            <div class="expense-icon">
-                                <span class="material-icons px-2 py-2">
-                                    date_range
-                                </span>
-                            </div>
-                            <input type="date" class="data-control px-3" aria-label="date" style="width: 85%" min="2000-01-01" max="2030-12-31" value = 'setDate();'required>
-                        </div>
-
-                        <div class="expense-input mx-auto mt-4">
-                            <div class="expense-icon">
-                                <span class="material-icons px-2 py-2">
-                                    credit_score
-                                </span>
-                            </div>
-                            <select name="options" class="user-options px-3 text-muted" style="width: 85%" required>
-                                <option value="">--- Please select option ---</option>
-                                <option value="Credit-card">Credit card</option>
-                                <option value="Cash">Cash</option>
-                                <option value="Debet card">Debet card</option>
-                                <option value="Blik">Blik</option>
-                                <option value="Transfer">Transfer</option>
-                            </select>
-                        </div>
-
-                        <div class="expense-input mx-auto mt-4">
-                            <div class="expense-icon">
-                                <span class="material-icons">
+                            <div class="income-input mx-auto mt-4">
+                                <div class="income-icon">
                                     <span class="material-icons px-2 py-2">
-                                        shopping_bag
+                                        attach_money
                                     </span>
-                                </span>
+                                </div>
+                                <input class="amount-data px-3" type="number" class="form-control" placeholder="Value" min="0" max="99999.99" step="0.01" aria-label="value" name="amount" style="width: 85%" required>
                             </div>
-                            <select name="purpose" class="user-options px-3 text-muted" style="width: 85%" required>
-                                <option value="">--- Please select option ---</option>
-                                <option value="Food">Food</option>
-                                <option value="Home">Housekeeping</option>
-                                <option value="Clothes">Clothes</option>
-                                <option value="Transport">Transport</option>
-                                <option value="Health">Health</option>
-                                <option value="Hygiene">Hygiene</option>
-                                <option value="Kids">Kids</option>
-                                <option value="Entertainment">Entertainment</option>
-                                <option value="Trip">Travelling</option>
-                                <option value="School">School/Learning</option>
-                                <option value="Books">Books</option>
-                                <option value="Debt">Debt</option>
-                                <option value="Pension">Pension</option>
-                                <option value="Donation">Donation</option>
-                                <option value="Other">Other</option>
-                            </select>
-                        </div>
 
-                        <div class="expense-input mx-auto mt-4 mb-4">
-                            <div class="expense-icon">
-                                <span class="material-icons px-2 py-4">
-                                    description
-                                </span>
+                            <div class="income-input mx-auto mt-3">
+                                <div class="income-icon">
+                                    <span class="material-icons px-2 py-2 text-muted">
+                                        date_range
+                                    </span>
+                                </div>
+                                <input type="date" class="data-control px-3" aria-label="date" name="date" style="width: 85%" required>
                             </div>
-                            <textarea class="form-data px-3 py-2" minlength="0" maxlength="50" placeholder="Commentary (not required)" name="comment" style="width: 85%"></textarea>
-                        </div>
+
+                            <div class="income-input mx-auto mt-3">
+                                <div class="income-icon">
+                                    <span class="material-icons px-2 py-2">
+                                        list
+                                    </span>
+                                </div>
+                                <select name="category" class="user-options px-4 text-muted" style="width: 85%" required>
+                                    <option value="">--- Please select option ---</option>
+                                    <option value="Salary">Salary</option>
+                                    <option value="Internet sale">Internet sale</option>
+                                    <option value="Interest">Interest</option>
+                                    <option value="Donation">Donation</option>
+                                    <option value="Gift">Gift</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+
+                            <div class="income-input mx-auto mt-3 mb-4">
+                                <div class="income-icon">
+                                    <span class="material-icons px-2 py-4">
+                                        description
+                                    </span>
+                                </div>
+                                <textarea class="form-data px-3 py-2" minlength="0" maxlength="50" placeholder="Commentary (not required)" name="comment" style="width: 85%"></textarea>
+                            </div>
                     </div>
+                    <div class="modal-footer justify-content-center flex-column flex-md-row btn-group">
+                        <button type="submit" id="addIncome" name="addIncome" value="ADD" class="btn btn-floating btn-outline-success mr-2">ADD</button>
+                        <button type="reset" class="btn btn-floating btn-danger waves-effect" name="erase_income" action="erase_expense.php" value="CLOSE" data-dismiss="modal" onclick="this.form.reset();">CLOSE</button>
+                        <span class="text-success"><?php echo ((isset($incomeAddedCorrectly) && $incomeAddedCorrectly != '') ? 'Income saved !' : '');
+                                                    unset($incomeAddedCorrectly); ?> </span>
+                    </div>
+                    </form>
+                </div>
             </div>
-
-            <div class="modal-footer justify-content-center flex-column flex-md-row btn-group">
-                <button type="submit" id="addExpense" name="addExpense" value="ADD" class="btn btn-floating btn-outline-success mr-2">ADD</button>
-                <button type="reset" class="btn btn-floating btn-danger waves-effect" name="erase_expense" value="CLOSE" action="erase_expense.php" data-dismiss="modal" onclick="this.form.reset();">CLOSE</button>
-                <span class="text-success"><?php echo ((isset($expenseAddedCorrectly) && $expenseAddedCorrectly != '') ? 'Expense saved !' : '');
-														unset($expenseAddedCorrectly); ?> </span>
-            </div>
-            </form>
         </div>
-    </div>
-</div> 
+
+
+        <!-- ModalExpenses-->
+        <div class="modal fade" id="addExpense" tabindex="-1" role="dialog" aria-labelledby="addExpense" aria-hidden="true" data-backdrop="false">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content rounded-5">
+                    <div class="modal-header d-flex justify-content-center">
+                        <h4 id="addExpense" class="modal-title mx-auto">ADD NEW EXPENSE</h4>
+                    </div>
+                    <div class="modal-body py-0 bg-light">
+                        <form action="#" method="post" autocomplete="off">
+                            <div class="expense-box mx-auto pl-4 pr-3 py-3">
+                                <div class="title text-center mx-auto">ADD NEW EXPENSE</div>
+                                <div class="expense-input mx-auto mt-0">
+                                    <div class="expense-icon">
+                                        <span class="material-icons px-2 py-2">
+                                            attach_money
+                                        </span>
+                                    </div>
+                                    <input class="form-data px-3" type="number" class="form-control" placeholder="Value" min="0" max="99999.99" step="0.01" aria-label="value" name="amount" style="width: 85%" required>
+                                </div>
+
+                                <div class="expense-input mx-auto mt-4">
+                                    <div class="expense-icon">
+                                        <span class="material-icons px-2 py-2">
+                                            date_range
+                                        </span>
+                                    </div>
+                                    <input type="date" class="data-control px-3" aria-label="date" style="width: 85%" min="2000-01-01" max="2030-12-31" value="$_SESSION['date']" required>
+                                </div>
+
+                                <div class="expense-input mx-auto mt-4">
+                                    <div class="expense-icon">
+                                        <span class="material-icons px-2 py-2">
+                                            credit_score
+                                        </span>
+                                    </div>
+                                    <select name="options" class="user-options px-3 text-muted" style="width: 85%" required>
+                                        <option value="">--- Please select option ---</option>
+                                        <option value="Credit-card">Credit card</option>
+                                        <option value="Cash">Cash</option>
+                                        <option value="Debet card">Debet card</option>
+                                        <option value="Blik">Blik</option>
+                                        <option value="Transfer">Transfer</option>
+                                    </select>
+                                </div>
+
+                                <div class="expense-input mx-auto mt-4">
+                                    <div class="expense-icon">
+                                        <span class="material-icons">
+                                            <span class="material-icons px-2 py-2">
+                                                shopping_bag
+                                            </span>
+                                        </span>
+                                    </div>
+                                    <select name="purpose" class="user-options px-3 text-muted" style="width: 85%" required>
+                                        <option value="">--- Please select option ---</option>
+                                        <option value="Food">Food</option>
+                                        <option value="Home">Housekeeping</option>
+                                        <option value="Clothes">Clothes</option>
+                                        <option value="Transport">Transport</option>
+                                        <option value="Health">Health</option>
+                                        <option value="Hygiene">Hygiene</option>
+                                        <option value="Kids">Kids</option>
+                                        <option value="Entertainment">Entertainment</option>
+                                        <option value="Trip">Travelling</option>
+                                        <option value="School">School/Learning</option>
+                                        <option value="Books">Books</option>
+                                        <option value="Debt">Debt</option>
+                                        <option value="Pension">Pension</option>
+                                        <option value="Donation">Donation</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+
+                                <div class="expense-input mx-auto mt-4 mb-4">
+                                    <div class="expense-icon">
+                                        <span class="material-icons px-2 py-4">
+                                            description
+                                        </span>
+                                    </div>
+                                    <textarea class="form-data px-3 py-2" minlength="0" maxlength="50" placeholder="Commentary (not required)" name="comment" style="width: 85%"></textarea>
+                                </div>
+                            </div>
+                    </div>
+
+                    <div class="modal-footer justify-content-center flex-column flex-md-row btn-group">
+                        <button type="submit" id="addExpense" name="addExpense" value="ADD" class="btn btn-floating btn-outline-success mr-2">ADD</button>
+                        <button type="reset" class="btn btn-floating btn-danger waves-effect" name="erase_expense" value="CLOSE" action="erase_expense.php" data-dismiss="modal" onclick="this.form.reset();">CLOSE</button>
+                        <span class="text-success"><?php echo ((isset($expenseAddedCorrectly) && $expenseAddedCorrectly != '') ? 'Expense saved !' : '');
+                                                    unset($expenseAddedCorrectly); ?> </span>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <?php
+        if (isset($_POST['addExpense']) && isset($_SESSION['expenseStatus']) && $_SESSION['expenseStatus'] != "") {
+        ?>
+            <script>
+                swal({
+                    position: 'top-end',
+                    title: "<?php echo $_SESSION['expenseStatus']; ?>",
+                    icon: "<?php echo $_SESSION['expenseStatusCode']; ?>",
+                    button: "OK",
+                });
+            </script>
+        <?php
+            unset($expenseStatus);
+        }
+        if (isset($_POST['addIncome']) && isset($_SESSION['incomeStatus']) && $_SESSION['incomeStatus'] != "") {
+        ?>
+            <script>
+                swal({
+                    position: 'top-end',
+                    title: "<?php echo $_SESSION['incomeStatus']; ?>",
+                    icon: "<?php echo $_SESSION['incomeStatusCode']; ?>",
+                    button: "OK",
+                });
+            </script>
+        <?php
+            unset($incomeStatus);
+        }
+        ?>
+
 </body>
+
 </html>
