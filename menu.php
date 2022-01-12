@@ -2,7 +2,7 @@
 // Initialize the session
 session_start();
 
-// Check if the user is logged in, if yes - redirect him to main menu page
+/* Check if the user is logged in, if yes - redirect him to main menu page
 if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === false) {
     header("Location: index.php");
     exit;
@@ -36,11 +36,11 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === false) {
     </script>
 <?php
 }
-
-$userName = $_SESSION['logged_user'];
-$userID = $_SESSION['logged_id'];
-$expenseAddedCorrectly = $_SESSION['expenseAddedCorrectly'];
-$incomeAddedCorrectly = $_SESSION['incomeAddedCorrectly'];
+*/
+//$userName = $_SESSION['logged_user'];
+//$userID = $_SESSION['logged_id'];
+//$expenseAddedCorrectly = $_SESSION['expenseAddedCorrectly'];
+//$incomeAddedCorrectly = $_SESSION['incomeAddedCorrectly'];
 ?>
 
 <!DOCTYPE html>
@@ -129,7 +129,7 @@ $incomeAddedCorrectly = $_SESSION['incomeAddedCorrectly'];
                         <h4 id="addIncome" class="modal-title mx-auto">ADD NEW INCOME</h4>
                     </div>
                     <div class="modal-body py-0 bg-light">
-                        <form action="#" method="post" autocomplete="off">
+                        <form action="add_income.php" method="post" autocomplete="off">
 
                             <div class="income-input mx-auto mt-4">
                                 <div class="income-icon">
@@ -146,7 +146,7 @@ $incomeAddedCorrectly = $_SESSION['incomeAddedCorrectly'];
                                         date_range
                                     </span>
                                 </div>
-                                <input type="date" class="data-control px-3" aria-label="date" name="date" style="width: 85%" required>
+                                <input type="date" class="data-control px-3" aria-label="date" name="date" value="<?php echo date('Y-m-d'); ?>" style="width: 85%" required>
                             </div>
 
                             <div class="income-input mx-auto mt-3">
@@ -177,7 +177,7 @@ $incomeAddedCorrectly = $_SESSION['incomeAddedCorrectly'];
                     </div>
                     <div class="modal-footer justify-content-center flex-column flex-md-row btn-group">
                         <button type="submit" id="addIncome" name="addIncome" value="ADD" class="btn btn-floating btn-outline-success mr-2">ADD</button>
-                        <button type="reset" class="btn btn-floating btn-danger waves-effect" name="erase_income" action="erase_expense.php" value="CLOSE" data-dismiss="modal" onclick="this.form.reset();">CLOSE</button>
+                        <button type="reset" class="btn btn-floating btn-danger waves-effect" name="erase_income"  value="CLOSE" data-dismiss="modal" onclick="this.form.reset();">CLOSE</button>
                         <span class="text-success"><?php echo ((isset($incomeAddedCorrectly) && $incomeAddedCorrectly != '') ? 'Income saved !' : '');
                                                     unset($incomeAddedCorrectly); ?> </span>
                     </div>
@@ -195,7 +195,7 @@ $incomeAddedCorrectly = $_SESSION['incomeAddedCorrectly'];
                         <h4 id="addExpense" class="modal-title mx-auto">ADD NEW EXPENSE</h4>
                     </div>
                     <div class="modal-body py-0 bg-light">
-                        <form action="#" method="post" autocomplete="off">
+                        <form action="add_expense.php" method="post" autocomplete="off">
                             <div class="expense-box mx-auto pl-4 pr-3 py-3">
                                 <div class="title text-center mx-auto">ADD NEW EXPENSE</div>
                                 <div class="expense-input mx-auto mt-0">
@@ -213,7 +213,7 @@ $incomeAddedCorrectly = $_SESSION['incomeAddedCorrectly'];
                                             date_range
                                         </span>
                                     </div>
-                                    <input type="date" class="data-control px-3" aria-label="date" style="width: 85%" min="2000-01-01" max="2030-12-31" value="$_SESSION['date']" required>
+                                    <input type="date" class="data-control px-3" aria-label="date" style="width: 85%" min="2000-01-01" max="2030-12-31" value="<?php echo date('Y-m-d'); ?>" required>
                                 </div>
 
                                 <div class="expense-input mx-auto mt-4">
@@ -286,7 +286,6 @@ $incomeAddedCorrectly = $_SESSION['incomeAddedCorrectly'];
         ?>
             <script>
                 swal({
-                    position: 'top-end',
                     title: "<?php echo $_SESSION['expenseStatus']; ?>",
                     icon: "<?php echo $_SESSION['expenseStatusCode']; ?>",
                     button: "OK",
@@ -307,7 +306,7 @@ $incomeAddedCorrectly = $_SESSION['incomeAddedCorrectly'];
             </script>
         <?php
             unset($incomeStatus);
-        }
+            }
         ?>
 
 </body>

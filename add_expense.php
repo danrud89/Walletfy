@@ -1,7 +1,6 @@
 <?php
 session_start();
 $expenseAmount = $expenseDate = $expensePurpose = $expenseOptions = "";
-$expenseStatus = $expenseStatusCode = "";
 
 function filterInputs($inputData){
     $outputData = filter_input(INPUT_POST, '$inputData');
@@ -107,16 +106,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['addExpense'])) {
       {
         echo $error->getMessage();
       }
-      $expenseStatus = "Expense has been saved !";
-      $expenseStatusCode = "success!";
-      $_SESSION['expenseStatus'] = $expenseStatus;
-      $_SESSION['expenseStatusCode'] = $expenseStatusCode;
-
+      
+      $_SESSION['expenseStatus'] = "Expense has been saved !";
+      $_SESSION['expenseStatusCode'] = "success!";
 }
 else{
-    $expenseStatus = "Something went wrong ! Expense has not been saved !";
-    $expenseStatusCode = "error!";
-    $_SESSION['expenseStatus'] = $expenseStatus;
-    $_SESSION['expenseStatusCode'] = $expenseStatusCode;
+    $_SESSION['expenseStatus'] = "Something went wrong ! Expense has not been saved !";
+    $_SESSION['expenseStatusCode'] = "error!";
 }
 ?>

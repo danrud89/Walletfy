@@ -1,8 +1,7 @@
 <?php
 session_start();
 $incomeAmount = $incomeDate = $incomeCategory = "";
-$incomeStatus = $incomeStatusCode = "";
-
+$incomeComment = "";
 function filterInputs($inputData){
     $outputData = filter_input(INPUT_POST, '$inputData');
     return $outputData;
@@ -34,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['addIncome'])) {
         $_SESSION['category_err'] = 'Select matching category !';
     }
 
-        $user_id = $_SESSION['logged_id'];
+       // $user_id = $_SESSION['logged_id'];
 
         if (!is_numeric($_POST['amount'])) {
             $_SESSION['amount_err'] = 'Invalid amount format !';
@@ -57,11 +56,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['addIncome'])) {
         }
 
         $incomeCategory = filterInputs($_POST['category']);
+
         if (!is_string($_POST['comment'])) {
             $_SESSION['comment_err'] = 'Invalid comment format !';
         } else {
             $incomeComment = $_POST['comment'];
-            if (strlen($comment) > 50) {
+            if (strlen($incomeComment) > 50) {
                 $_SESSION['comment_err'] = 'Comment cannot contain more than 50 characters !';
             }
         }
@@ -96,15 +96,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['addIncome'])) {
             echo "Application Error: Request failed.<br>" . $error->getMessage();
         }
 
-        $incomeStatus = "Income has been saved !";
-      $incomeStatusCode = "success!";
-      $expenseStatus = $_SESSION['incomeStatus'];
-      $expenseStatusCode = $_SESSION['incomeStatusCode'];
-
+      $_SESSION['incomeStatus'] = "Income has been saved !";
+      $_SESSION['incomeStatusCode'] = "success!";
 }
 else{
-    $incomeStatus = "Something went wrong ! Income has not been saved !";
-    $incomeStatusCode = "error!";
-    $incomeStatus = $_SESSION['incomeStatus'];
-    $incomeStatusCode = $_SESSION['incomeStatusCode'];
+    $_SESSION['incomeStatus'] = "Something went wrong ! Income has not been saved !";
+    $_SESSION['incomeStatusCode'] = "error!";;
 }
