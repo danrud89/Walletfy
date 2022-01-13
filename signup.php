@@ -4,7 +4,6 @@ session_start();
 // initializing variables
 $name = $email = "";
 $password = $confpassword = "";
-$username_err = $email_err =  $password_err = $confirm_password_err = "";
 
 $register_validate = true;
 
@@ -27,13 +26,6 @@ if (($_SERVER["REQUEST_METHOD"] === "post") && (isset($_POST['reg_user']))) {
 
     // REGISTER USER
     //receive all input values from the form
-    $name = !empty($_POST['name']) ? trim($_POST['name']) : null;
-    $email = !empty($_POST['email']) ? trim($_POST['email']) : null;
-    $password = !empty($_POST['password']) ? trim($_POST['password']) : null;
-    $confpassword = !empty($_POST['confpassword']) ? trim($_POST['confpassword']) : null;
-    
-    // form validation: ensure that the form is correctly filled 
-
     if (!isset($_POST['name']) || empty($_POST['name'])) {
       $register_validate = false;
       $_SESSION['username_err'] = "Username is required !";
@@ -74,6 +66,12 @@ if (($_SERVER["REQUEST_METHOD"] === "post") && (isset($_POST['reg_user']))) {
       header('location: register.php');
     }
 
+    // form validation: ensure that the form is correctly filled 
+    $name = !empty($_POST['name']) ? trimInputData($_POST['name']) : null;
+    $email = !empty($_POST['email']) ? trimInputData($_POST['email']) : null;
+    $password = !empty($_POST['password']) ? trimInputData($_POST['password']) : null;
+    $confpassword = !empty($_POST['confpassword']) ? trimInputData($_POST['confpassword']) : null;
+  
     // check the database to make sure 
     // a user with the same login do not exist
     $user_check_query = "SELECT COUNT(name) AS num FROM users WHERE name = :name";
@@ -124,7 +122,7 @@ if (($_SERVER["REQUEST_METHOD"] === "post") && (isset($_POST['reg_user']))) {
         echo "Application Error: Register failed.<br>".$error->getMessage();
       }
 
-      //assign to user incomes,expenses,payment default template of db
+      //assign to user: incomes,expenses,payment defaults templates of db tables
       try{
         $sql_insert_incomes_template_default = "INSERT INTO incomes_category_assigned_to_users (user_id, name) 
         SELECT users.id, incomes_category_default.name 

@@ -36,10 +36,10 @@
 					<svg class="title">
 						<text x="0" y="40">Wall€tfy!</text>
 					</svg>
-					<p class="lead">
+					<p class="lead text-justify">
 						Say hello to Wall€tfy! - a personal finance application that makes money management easy. The app is designed to streamline cash tracking and help you save money.
 					</p>
-					<p class="lead">
+					<p class="lead text-justify">
 						With Wall€tfy! you will no longer look in amazement at your wallet at the end of the month. Register and join the wide group of satisfied users just now!
 					</p>
 				</div>

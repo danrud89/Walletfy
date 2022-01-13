@@ -207,8 +207,6 @@ function capLock(e) {
     });
 }
 
-
-
 function setTodaysDate() {
     var now = new Date();
     var day = ("0" + now.getDate()).slice(-2);

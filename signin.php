@@ -2,11 +2,10 @@
 session_start();
 
 // initializing variables
-$login = $password = "";
-$login_err = $password_login_err = "";
+$email = $password = "";
 
-function filterInputData($input){
-    $output = filter_input(INPUT_POST, $input);
+function filterInputEmail($input){
+    $output = filter_input(INPUT_POST, $input, FILTER_VALIDATE_EMAIL);
     return $output;
 }
 
@@ -23,8 +22,9 @@ function checkEmptyData($input){
 if (($_SERVER["REQUEST_METHOD"] === "post") && (isset($_POST['sign_in']))) {
     // LOG IN USER
     // receive all input values from the form
-    $login = filter_input(INPUT_POST, trim($_POST['email']), FILTER_VALIDATE_EMAIL);
-    $password = filter_input(INPUT_POST, trim($_POST['password']));
+    $email = !empty($_POST['email']) ? trimInputData($_POST['email']) : null;
+    $email = filterInputEmail($_POST['email']);
+    $password = !empty($_POST['password']) ? trimInputData($_POST['password']) : null;
 
     // form validation: ensure that the form is correctly filled 
     if (empty($login)) {
@@ -36,7 +36,6 @@ if (($_SERVER["REQUEST_METHOD"] === "post") && (isset($_POST['sign_in']))) {
     if (empty($password)) {
         $_SESSION['password_login_err'] = "Password is required !";
     }
-    if (empty($login_err) && empty($password_login_err)) {
     // connect to the database
     require_once 'database.php';
     try{
@@ -65,7 +64,7 @@ if (($_SERVER["REQUEST_METHOD"] === "post") && (isset($_POST['sign_in']))) {
             exit();
         }
     }
-} else {
+ else {
     echo "Oops! Something went wrong. Please try again later.";
     exit();
 }

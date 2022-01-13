@@ -32,14 +32,16 @@ $negativeBalanceMessage = "Watch out ! You spent a little too much money";
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css" type="text/css" />
-    <script type="text/javascript" src="main.js"></script>
+    
 
 </head>
 
-<body>
+<body onload="setTodaysDate()">
 
     <header id="top">
         <h3>Wall€tfy!</h3>
+        <h4 class="loggedAs mr-5 text-left mt-3 align-middle">USER :<?php echo $_SESSION['logged_user'] ?>
+        </h4>
         <nav>
             <ul>
                 <li><span class="material-icons mx-2 align-middle">home</span><a href="menu.php" title="Home">Home</a></li>
@@ -263,11 +265,12 @@ $negativeBalanceMessage = "Watch out ! You spent a little too much money";
                                 <div class="modal-content">
 
                                     <div class="modal-header">
-                                        <h4 id="customPeriod" class="text-center">Select date range</h4>
+                                        <h4 id="customPeriod" class="text-center mx-auto my-auto">Select date range</h4>
                                     </div>
-                                    <div class="modal-body">
+                                    <div class="modal-body bg-light">
                                     <form action="validateModalDatePicker.php" method="post" autocomplete="off">
-                                        <div class="input-group mb-5">
+                                    <label class="text-muted" for="startDate">Start date:</label>
+                                        <div class="input-group mb-3">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"> <span class="material-icons">
                                                         date_range
@@ -275,6 +278,8 @@ $negativeBalanceMessage = "Watch out ! You spent a little too much money";
                                             </div>
                                             <input id="startDate" type="date" class="form-control" aria-label="data" name="startDate" value="<?php echo date('Y-m-d'); ?>" min="2000-01-01" required>
                                         </div>
+
+                                        <label class="text-muted" for="endDate">End date:</label>
                                         <div class="input-group mb-1">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"> <span class="material-icons">
@@ -284,9 +289,9 @@ $negativeBalanceMessage = "Watch out ! You spent a little too much money";
                                             <input id="endDate" type="date" class="form-control" aria-label="data" name="endDate" value="<?php echo date('Y-m-d'); ?>" min="2000-01-01" required>
                                         </div>
                                     </div>
-                                    <div class="modal-footer btn-group" role="group">
-                                        <input type="submit" class="btn btn-outline-success btn-floating waves-effect" name="saveDates" value="Save">
-                                        <input type="reset" class="btn btn-danger btn-floating waves-effect" data-dismiss="modal" value="Close">
+                                    <div class="modal-footer justify-content-center flex-column flex-md-row btn-group" role="group">
+                                        <button id="saveDates" type="submit" class="btn btn-outline-success btn-floating waves-effect" name="saveDates" value="Save">SAVE</button>
+                                        <button type="reset" class="btn btn-danger btn-floating waves-effect" data-dismiss="modal" value="Close">CLOSE</button>
                                         <span class="text-alert">
                                             <?php echo ((isset($_SESSION['date_err']) && $_SESSION['date_err'] != '') ? $_SESSION['date_err'] : '');
                                             unset($_SESSION['date_err']); ?>
@@ -296,6 +301,7 @@ $negativeBalanceMessage = "Watch out ! You spent a little too much money";
                                 </div>
                             </div>
                         </div>
+                        <script type="text/javascript" src="main.js"></script>
 </body>
 
 </html>

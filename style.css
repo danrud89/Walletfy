@@ -504,7 +504,8 @@ section#home .content .blur form {
 
 
 .modal .modal-content .modal-header {
-  background-color: #2a3a49;
+  background-color: #191a1d;
+  opacity: 0.85;
   border-radius: 5px;
   color: aliceblue;
   border: 2px 2px 0 2px solid rgba(147, 184, 189, 0.8);
@@ -611,6 +612,23 @@ section#home .content .blur form {
   background: linear-gradient(to bottom, cornflowerblue, rgb(93, 93, 233));
   transition: 0.5s ease-in-out;
 }
+
+#addIncome,
+#addExpense,
+#saveDates {
+  border-radius: 20px;
+  letter-spacing: 1px;
+  font-weight: bold;
+  border: 2px solid #2ecc71;
+}
+
+.modal .modal-content .modal-footer button[type='reset'] {
+  border-radius: 20px;
+  letter-spacing: 1px;
+  border: 2px solid #c01818;
+  font-weight: bold;
+}
+
 
 #logInBtn:hover,
 #regBtn:hover {

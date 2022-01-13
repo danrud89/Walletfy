@@ -68,22 +68,18 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === false) {
     <link rel="stylesheet" href="bootstrap5/css/bootstrap.min.css" type="text/css" />
     <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="bootstrap5/css/bootstrap.min.css" type="text/css" />
-    <script type="text/javascript" src="main.js"></script>
     <link rel="stylesheet" href="style.css" type="text/css" />
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+    
 </head>
 
 <body onload="setTodaysDate()">
     <header id="top">
-        <h3>Wall€tfy!</h3>
-        <h5 class="loggedAs ml-0">User :<?php echo $userName ?>
-        </h5>
+        <h4 class="loggedAs ml-2">USER :<?php echo $userName ?>
+        </h4>
         <nav>
             <ul>
                 <li><span class="material-icons mx-2 align-middle">home</span><a href="menu.php" title="Home">Home</a></li>
-                <li><span class="material-icons mx-2 align-middle">savings</span><a href="#" data-toggle="modal" data-target="#addIncome">Income</a></li>
+                <li><span class="material-icons mx-2 align-middle">savings</span><a href="#" class="openModal" data-toggle="modal" data-target="#addIncome">Income</a></li>
                 <li><span class="material-icons mx-2 align-middle">shopping_cart</span><a href="#" class="openModal" data-toggle="modal" data-target="#addExpense" title="Expense">Expense</a></li>
                 <li><span class="material-icons mx-2 align-middle">insert_chart_outlined</span><a href="balance.php" title="Balance">Balance</a></li>
                 <li><span class="material-icons mx-2 align-middle">manage_accounts</span><a href="settings.php" title="Settings">Settings</a></li>
@@ -98,11 +94,11 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === false) {
                     <svg class="title">
                         <text x="0" y="40">Wall€tfy!</text>
                     </svg>
-                    <p class="lead">
+                    <p class="lead text-justify">
                         Walcome to Wall€tfy! - a personal finance application that makes money management easy. The app is designed to streamline cash tracking and help you save money.
                     </p>
-                    <p class="lead">
-                        On the top You can select the option You are interested in from the navigation menu. Add a new income, expense, view the balance of the period You are interested in or personalize Your account in the settings.
+                    <p class="lead text-justify">
+                        On the top You can select the option You are interested in. Add a new income, expense, view the balance of the period You are interested in or personalize Your account in the settings.
                     </p>
                 </div>
             </div>
@@ -176,8 +172,8 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === false) {
                             </div>
                     </div>
                     <div class="modal-footer justify-content-center flex-column flex-md-row btn-group">
-                        <button type="submit" id="addIncome" name="addIncome" value="ADD" class="btn btn-floating btn-outline-success mr-2">ADD</button>
-                        <button type="reset" class="btn btn-floating btn-danger waves-effect" name="erase_income"  value="CLOSE" data-dismiss="modal" onclick="this.form.reset();">CLOSE</button>
+                        <button type="submit" id="addIncome" name="addIncome" value="ADD" class="btn btn-rounded btn-outline-success mr-2 w-25">SAVE</button>
+                        <button type="reset" class="btn btn-rounded btn-danger w-25" name="erase_income"  value="CLOSE" data-dismiss="modal" onclick="this.form.reset();">CLOSE</button>
                         <span class="text-success"><?php echo ((isset($incomeAddedCorrectly) && $incomeAddedCorrectly != '') ? 'Income saved !' : '');
                                                     unset($incomeAddedCorrectly); ?> </span>
                     </div>
@@ -196,7 +192,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === false) {
                     </div>
                     <div class="modal-body py-0 bg-light">
                         <form action="add_expense.php" method="post" autocomplete="off">
-                            <div class="expense-box mx-auto pl-4 pr-3 py-3">
+                            <div class="expense-box mx-auto pl-4 pr-3">
                                 <div class="title text-center mx-auto">ADD NEW EXPENSE</div>
                                 <div class="expense-input mx-auto mt-0">
                                     <div class="expense-icon">
@@ -272,8 +268,8 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === false) {
                     </div>
 
                     <div class="modal-footer justify-content-center flex-column flex-md-row btn-group">
-                        <button type="submit" id="addExpense" name="addExpense" value="ADD" class="btn btn-floating btn-outline-success mr-2">ADD</button>
-                        <button type="reset" class="btn btn-floating btn-danger waves-effect" name="erase_expense" value="CLOSE" action="erase_expense.php" data-dismiss="modal" onclick="this.form.reset();">CLOSE</button>
+                        <button type="submit" id="addExpense" name="addExpense" value="ADD" class="btn btn-floating btn-rounded btn-outline-success mr-2">SAVE</button>
+                        <button type="reset" class="btn btn-floating btn-rounded btn-danger waves-effect" name="erase_expense" value="CLOSE" action="erase_expense.php" data-dismiss="modal" onclick="this.form.reset();">CLOSE</button>
                         <span class="text-success"><?php echo ((isset($expenseAddedCorrectly) && $expenseAddedCorrectly != '') ? 'Expense saved !' : '');
                                                     unset($expenseAddedCorrectly); ?> </span>
                     </div>
@@ -308,7 +304,9 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === false) {
             unset($incomeStatus);
             }
         ?>
-
+<script type="text/javascript" src="main.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>
