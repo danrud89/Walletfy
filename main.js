@@ -181,17 +181,26 @@ $('#submit').on('click', function (e) {
 
 
 function togglePassword(id) {
-    let password = document.getElementById(id);
-    password.type === 'password' ?
+    const password = document.getElementById(id);
+    switch(id){
+        case 'loginPassword':
+            password.type === 'password' ?
         (password.type = 'text', $('#eyeIcon').text('visibility')) : (password.type = 'password',
             $('#eyeIcon').text('visibility_off'));
-}
+            break;
 
-function togglePassword1(id) {
-    let password = document.getElementById(id);
-    password.type === 'password' ?
+        case 'registerPassword':
+            password.type === 'password' ?
+        (password.type = 'text', $('#eyeIcon').text('visibility')) : (password.type = 'password',
+            $('#eyeIcon').text('visibility_off'));
+            break;
+
+        case 'cRegisterPassword':
+            password.type === 'password' ?
         (password.type = 'text', $('#ceyeIcon').text('visibility')) : (password.type = 'password',
             $('#ceyeIcon').text('visibility_off'));
+            break;
+    }  
 }
 
 function capLock(e) {

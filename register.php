@@ -111,7 +111,7 @@
 								<span class="material-icons" id="ok" style="position:absolute; left:77%; top:12px;">check_circle</span>
 								<span class="material-icons" id="wrong" style="position:absolute; left:77%; top:12px;">error_outline</span>
 								<small id="cpassword_error">Error message</small>
-								<span class="material-icons align-middle" id="ceyeIcon" style="cursor:pointer; color:black; opacity:0.6; position:absolute; left:85%; top:10px;" onclick="togglePassword1('cRegisterPassword')">visibility_off</span>
+								<span class="material-icons align-middle" id="ceyeIcon" style="cursor:pointer; color:black; opacity:0.6; position:absolute; left:85%; top:10px;" onclick="togglePassword('cRegisterPassword')">visibility_off</span>
 								<span><?php echo ((isset($_SESSION['confirm_password_err']) && $_SESSION['confirm_password_err'] != '') ? $_SESSION['confirm_password_err'] : '');
 															unset($_SESSION['confirm_password_err']); ?> </span>
 							</div>
