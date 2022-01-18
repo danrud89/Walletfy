@@ -56,7 +56,7 @@ $negativeBalanceMessage = "Watch out ! You spent a little too much money";
 
     <main>
 
-        <section id="balance" style="background-image: url(pap1.jpg);">
+        <section id="balance" style="background-image: url(img/pap1.jpg);">
             <div class="wrapper">
                 <div class="row mt-1">
                     <div class="mx-auto my-auto">

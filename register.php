@@ -30,7 +30,7 @@
 
 <body>
 	<main>
-		<section id="home" style="background-image: url(ewallet.png)">
+		<section id="home" style="background-image: url(img/ewallet.png)">
 			<div class="content">
 				<div>
 					<svg class="title">

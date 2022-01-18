@@ -88,7 +88,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === false) {
         </nav>
     </header>
     <main>
-        <section id="home" style="background-image: url(ewallet.png)">
+        <section id="home" style="background-image: url(img/ewallet.png)">
             <div class="content">
                 <div class="mb-4">
                     <svg class="title">

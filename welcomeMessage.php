@@ -43,7 +43,7 @@ $incomeAddedCorrectly = $_SESSION['incomeAddedCorrectly'];
 </head>
 
 <body>
-            <div class="main" style="background-image: url(ewallet2.png);">
+            <div class="main" style="background-image: url(img/ewallet2.png);">
             <div class="wrapper1 mx-auto mt-5">
                 <div class="blur  my-1">
                 <div class="row mb-5">

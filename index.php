@@ -42,7 +42,7 @@ if (isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true) {
 <body>
 
     <main>
-        <section id="home" style="background-image: url(ewallet.png)">
+        <section id="home" style="background-image: url(img/ewallet.png)">
             <div class="content">
                 <div class="mt-2">
                     <svg class="title">
