@@ -3,14 +3,10 @@
 session_start();
 
 // Check if the user is logged in, if yes - redirect him to main menu page
-if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === false) {
+if (!isset($_SESSION["logged_id"])) {
     header("Location: index.php");
     exit;
 }
-$userName = $_SESSION['logged_user'];
-$userID = $_SESSION['logged_id'];
-$expenseAddedCorrectly = $_SESSION['expenseAddedCorrectly'];
-$incomeAddedCorrectly = $_SESSION['incomeAddedCorrectly'];
 ?>
 
 <!DOCTYPE html>
@@ -48,17 +44,17 @@ $incomeAddedCorrectly = $_SESSION['incomeAddedCorrectly'];
                 <div class="blur  my-1">
                 <div class="row mb-5">
                     <p style="font-size: 1.25em;">
-                        Welcome aboard! I'm glad You say YES. Wall€tfy! was develop to create a trustworthy place for You to make money menagement easier.
+                        Welcome aboard <?= $_SESSION['logged_user']?>! I'm glad You say YES. Wall€tfy! was developed to create a trustworthy place for You to make money menagement easier.
                     </p>
                     <p style="font-size: 1.25em;">
                         Click the button below to return to the login page.
                     </p>
                 </div>
                 <div class="row">
-                    <div class="mx-auto mt-2 mb-4">
-                        <a href="index.php"><button type="button" id="redirect" class="btn btn-hover btn-rounded btn-lg p-2"><span class="material-icons mr-1 mt-2">reply</span>Back to login page</button></a>
+                        <div class="mx-auto mt-2 mb-2">
+                            <a href="index.php"><button type="button" class="btn btn-rounded btn-lg p-2" id="btnBack"><span class="material-icons mr-1 mt-2">reply</span>BACK TO LOGIN PAGE</button></a>
+                        </div>
                     </div>
-                </div>
             </div>
             </div>
             </div>

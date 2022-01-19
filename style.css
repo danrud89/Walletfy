@@ -3,7 +3,8 @@ html {
 }
 
 body.modal-open section#home,
-body.modal-open header#top {
+body.modal-open header#top,
+body.modal-open section#balance {
   -webkit-filter: blur(4px);
   -moz-filter: blur(4px);
   -o-filter: blur(4px);
@@ -430,8 +431,9 @@ section#home .content .blur form {
   color: #DC143C;
   position: absolute;
   left: 16%;
-  top: 40px;
+  top: 42px;
   visibility: hidden;
+  font-weight: 500;
 }
 
 .form-control {
@@ -501,7 +503,6 @@ section#home .content .blur form {
   min-height: 100%;
   border-radius: 0;
 }
-
 
 .modal .modal-content .modal-header {
   background-color: #191a1d;
@@ -613,9 +614,7 @@ section#home .content .blur form {
   transition: 0.5s ease-in-out;
 }
 
-#addIncome,
-#addExpense,
-#saveDates {
+.modal .modal-content .modal-footer button[type='submit'] {
   border-radius: 20px;
   letter-spacing: 1px;
   font-weight: bold;

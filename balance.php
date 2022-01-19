@@ -1,17 +1,13 @@
 <?php
 session_start();
-//if (!isset($_SESSION['loggedin'])) {
-  //  header('Location: index.html');
-    //exit;
-//}
-//$firstDate = $_SESSION['startDate'];
-//$firstDate->format('d-m-Y');
-//$secondDate = $_SESSION['endDate'];
-//$secondDate->format('d-m-Y');
-$incomes = $_SESSION['incomesTable'];
-$expenses = $_SESSION['expensesTable'];
-$positiveBalanceMessage = "Congratulations! Your proper money menagement allowed You to save :{$balance} zł";
-$negativeBalanceMessage = "Watch out ! You spent a little too much money";
+if (!isset($_SESSION['loggedin'])) {
+    header('Location: index.php');
+    exit;
+}
+if (isset($_SESSION['periodOfTime'])) {
+    $incomes = $_SESSION['incomesTable'];
+    $expenses = $_SESSION['expensesTable'];
+}
 ?>
 
 <!DOCTYPE html>
@@ -32,7 +28,7 @@ $negativeBalanceMessage = "Watch out ! You spent a little too much money";
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css" type="text/css" />
-    
+
 
 </head>
 
@@ -40,7 +36,7 @@ $negativeBalanceMessage = "Watch out ! You spent a little too much money";
 
     <header id="top">
         <h3>Wall€tfy!</h3>
-        <h4 class="loggedAs mr-5 text-left mt-3 align-middle">USER :<?php echo $_SESSION['logged_user'] ?>
+        <h4 class="loggedAs mr-5 text-left mt-3 align-middle">USER: <?php echo $_SESSION['logged_user'] ?>
         </h4>
         <nav>
             <ul>
@@ -54,16 +50,15 @@ $negativeBalanceMessage = "Watch out ! You spent a little too much money";
         </nav>
     </header>
 
-    <main>
 
-        <section id="balance" style="background-image: url(img/pap1.jpg);">
+        <section id="balance" style="background-image: url(pap1.jpg);">
             <div class="wrapper">
                 <div class="row mt-1">
                     <div class="mx-auto my-auto">
                         <h2 class="text-center py-1" id="intro">BALANCE SHEET</h2>
                     </div>
                 </div>
-               
+
                 <div class="mb-1 mx-2 py-2 px-4">
                     <form id="date-range-form" method="POST" action="validateModalDatePicker.php">
                         <div class="input-group mx-auto px-1 py-3 t-3 w-50">
@@ -87,8 +82,8 @@ $negativeBalanceMessage = "Watch out ! You spent a little too much money";
 
                     <div class='row'>
                         <div class='col-12 text-center mt-3'>
-                            <h4 class='balanceDates'>FINANCIAL BALANCE FROM : <?php echo ((isset($firstDate) && $firstDate != '') ? $firstDate : '');
-                                                                                unset($firstDate); ?> TO : <?php echo ((isset($secondDate) && $secondDate != '') ? $secondDate : '');
+                            <h4 class='balanceDates'>FINANCIAL BALANCE FROM: <?php echo ((isset($firstDate) && $firstDate != '') ? $firstDate : date('d-m-Y'));
+                                                                                unset($firstDate); ?> TO <?php echo ((isset($secondDate) && $secondDate != '') ? $secondDate : date('d-m-Y'));
                                                                                                             unset($secondDate); ?> </h4>
                         </div>
                     </div>
@@ -215,7 +210,9 @@ $negativeBalanceMessage = "Watch out ! You spent a little too much money";
                                         <?php
                                         $totalSumOfIncomes = 0;
                                         $totalSumOfExpenses = 0;
-                                        $balance = 0;
+                                        $balance = 5;
+                                        $positiveBalanceMessage = "Congratulations! Your proper money menagement allowed You to save :{$balance} zł";
+                                        $negativeBalanceMessage = "Watch out ! You spent a little too much money";
                                         foreach ($incomes as $singleIncome) {
                                             $totalSumOfIncomes += $singleIncome[1];
                                         }
@@ -224,8 +221,8 @@ $negativeBalanceMessage = "Watch out ! You spent a little too much money";
                                         }
                                         $balance = round($totalSumOfIncomes - $totalSumOfExpenses, 2);
                                         echo '<tr>';
-                                        echo '<td>' . $incomeSummary . '</td>';
-                                        echo '<td>' . $expenseSummary . '</td>';
+                                        echo '<td>' . $totalSumOfIncomes . '</td>';
+                                        echo '<td>' . $totalSumOfExpenses . '</td>';
                                         echo '<td>' . $balance . '</td>';
                                         echo '</tr>';
                                         ?>
@@ -238,7 +235,11 @@ $negativeBalanceMessage = "Watch out ! You spent a little too much money";
                     <div class="row">
                         <div class="col-12 text-center">
                             <?php
-                            echo $balance > 0 ? "<h3 id='successInfo'>{$positiveBalanceMessage}</h3> !" : "<h3 id='alertInfo'>{$negativeBalanceMessage}</h3>";
+                            if ($balance > 0) {
+                                echo "<h3 id='successInfo'>{$positiveBalanceMessage}</h3> !";
+                            } else {
+                                echo "<h3 id='alertInfo'>{$negativeBalanceMessage}</h3>";
+                            }
                             ?>
                         </div>
                     </div>
@@ -259,49 +260,49 @@ $negativeBalanceMessage = "Watch out ! You spent a little too much money";
             </div>
         </section>
 
-         <!-- Modal datePicker -->
-         <div id="dateModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dateModal" aria-hidden="true" data-backdrop="false">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
+        <!-- Modal datePicker -->
+        <div id="dateModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dateModal" aria-hidden="true" data-backdrop="false">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
 
-                                    <div class="modal-header">
-                                        <h4 id="customPeriod" class="text-center mx-auto my-auto">Select date range</h4>
-                                    </div>
-                                    <div class="modal-body bg-light">
-                                    <form action="validateModalDatePicker.php" method="post" autocomplete="off">
-                                    <label class="text-muted" for="startDate">Start date:</label>
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"> <span class="material-icons">
-                                                        date_range
-                                                    </span> </span>
-                                            </div>
-                                            <input id="startDate" type="date" class="form-control" aria-label="data" name="startDate" value="<?php echo date('Y-m-d'); ?>" min="2000-01-01" required>
-                                        </div>
-
-                                        <label class="text-muted" for="endDate">End date:</label>
-                                        <div class="input-group mb-1">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"> <span class="material-icons">
-                                                        date_range
-                                                    </span> </span>
-                                            </div>
-                                            <input id="endDate" type="date" class="form-control" aria-label="data" name="endDate" value="<?php echo date('Y-m-d'); ?>" min="2000-01-01" required>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer justify-content-center flex-column flex-md-row btn-group" role="group">
-                                        <button id="saveDates" type="submit" class="btn btn-outline-success btn-floating waves-effect" name="saveDates" value="Save">SAVE</button>
-                                        <button type="reset" class="btn btn-danger btn-floating waves-effect" data-dismiss="modal" value="Close">CLOSE</button>
-                                        <span class="text-alert">
-                                            <?php echo ((isset($_SESSION['date_err']) && $_SESSION['date_err'] != '') ? $_SESSION['date_err'] : '');
-                                            unset($_SESSION['date_err']); ?>
-                                        </span>
-                                    </div>
-                                    </form>
+                    <div class="modal-header">
+                        <h4 id="customPeriod" class="text-center mx-auto my-auto">Select date range</h4>
+                    </div>
+                    <div class="modal-body bg-light">
+                        <form action="validateModalDatePicker.php" method="post" autocomplete="off">
+                            <label class="text-muted" for="startDate">Start date:</label>
+                            <div class="input-group mb-5">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"> <span class="material-icons">
+                                            date_range
+                                        </span> </span>
                                 </div>
+                                <input id="startDate" type="date" class="form-control" aria-label="data" name="startDate" value="<?php echo date('Y-m-d'); ?>" min="2000-01-01" required>
                             </div>
-                        </div>
-                        <script type="text/javascript" src="main.js"></script>
+
+                            <label class="text-muted" for="endDate">End date:</label>
+                            <div class="input-group mb-1">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"> <span class="material-icons">
+                                            date_range
+                                        </span> </span>
+                                </div>
+                                <input id="endDate" type="date" class="form-control" aria-label="data" name="endDate" value="<?php echo date('Y-m-d'); ?>" min="2000-01-01" required>
+                            </div>
+                    </div>
+                    <div class="modal-footer justify-content-center flex-column flex-md-row btn-group" role="group">
+                        <button id="saveDates" type="submit" class="btn btn-outline-success btn-floating waves-effect" name="saveDates" value="Save">SAVE</button>
+                        <button type="reset" class="btn btn-danger btn-floating waves-effect" data-dismiss="modal" value="Close">CLOSE</button>
+                        <span class="text-alert">
+                            <?php echo ((isset($_SESSION['date_err']) && $_SESSION['date_err'] != '') ? $_SESSION['date_err'] : '');
+                            unset($_SESSION['date_err']); ?>
+                        </span>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript" src="main.js"></script>
 </body>
 
 </html>

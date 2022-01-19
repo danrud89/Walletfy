@@ -1,15 +1,12 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['logged_id'])) {
-    header('Location: index.php');
-}
 if ($_SERVER["REQUEST_METHOD"] === "post") {
     $start_date = $end_date = "";
     $date_err = "";
     $_SESSION['logged_id'] = $userID;
 
-    if((isset($_POST['periodOfTime'])) && ($_POST['periodOfTime'] != NULL) || ($_POST['periodOfTime'] != "")){
+    if((isset($_POST['periodOfTime'])) && ($_POST['periodOfTime'] != "")){
         $date = new DateTime();
         $userPeriodSelected = filter_input(INPUT_POST, trim($_POST['periodOfTime']));
         require_once 'database.php';
@@ -200,6 +197,7 @@ if ($_SERVER["REQUEST_METHOD"] === "post") {
                             }
                             break;
         }
+        
         $_SESSION['incomesTable'] = $incomes;
         $_SESSION['expensesTable'] = $expenses;
         header('Location: balance.php');

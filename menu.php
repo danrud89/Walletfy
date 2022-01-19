@@ -1,46 +1,13 @@
 <?php
-// Initialize the session
 session_start();
-
-/* Check if the user is logged in, if yes - redirect him to main menu page
-if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === false) {
+if (!isset($_SESSION["logged_id"])) {
     header("Location: index.php");
-    exit;
-} else {
-?>
-    <script>
-        $(document).ready(function() {
-            let wasShown = false;
-            if (!wasShown) {
-                var toastMixin = Swal.mixin({
-                    toast: true,
-                    icon: 'success',
-                    title: 'General Title',
-                    animation: false,
-                    position: 'bottom-end',
-                    showConfirmButton: false,
-                    timer: 3000,
-                    timerProgressBar: true,
-                    didOpen: (toast) => {
-                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                        toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    }
-                });
-                toastMixin.fire({
-                    title: 'Signed in Successfully'
-                });
-                wasShown = true;
-            }
-
-        });
-    </script>
-<?php
+    exit();
 }
-*/
-//$userName = $_SESSION['logged_user'];
-//$userID = $_SESSION['logged_id'];
+
 //$expenseAddedCorrectly = $_SESSION['expenseAddedCorrectly'];
 //$incomeAddedCorrectly = $_SESSION['incomeAddedCorrectly'];
+$userName = $_SESSION['logged_user'];
 ?>
 
 <!DOCTYPE html>
@@ -48,7 +15,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === false) {
 
 <head>
     <meta charset="UTF-8">
-    <title>Wall€tfy</title>
+    <title>Wall€tfy </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="descritpion" content="Dzięki WALLETFY - aplikacji do zarządzania finansami, Twoje zarządzanie budżetem stanie się prostsze!" />
     <meta name="keywords" content="budżet,finanse,wydatki,przychody,bilans" />
@@ -69,12 +36,12 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === false) {
     <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="bootstrap5/css/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="style.css" type="text/css" />
-    
+
 </head>
 
 <body onload="setTodaysDate()">
     <header id="top">
-        <h4 class="loggedAs ml-2">USER :<?php echo $userName ?>
+        <h4 class="loggedAs ml-2">USER: <?= $_SESSION['logged_user'] ?>
         </h4>
         <nav>
             <ul>
@@ -83,14 +50,14 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === false) {
                 <li><span class="material-icons mx-2 align-middle">shopping_cart</span><a href="#" class="openModal" data-toggle="modal" data-target="#addExpense" title="Expense">Expense</a></li>
                 <li><span class="material-icons mx-2 align-middle">insert_chart_outlined</span><a href="balance.php" title="Balance">Balance</a></li>
                 <li><span class="material-icons mx-2 align-middle">manage_accounts</span><a href="settings.php" title="Settings">Settings</a></li>
-                <li><span class="material-icons mx-2 align-middle">logout</span><a href="index.php" title="Log Out">Exit</a></li>
+                <li><span class="material-icons mx-2 align-middle">logout</span><a href="logout.php" title="Log Out">Exit</a></li>
             </ul>
         </nav>
     </header>
-    <main>
-        <section id="home" style="background-image: url(img/ewallet.png)">
+    
+        <section id="home" style="background-image: url(ewallet.png)">
             <div class="content">
-                <div class="mb-4">
+                <div class="mb-4 mt-5">
                     <svg class="title">
                         <text x="0" y="40">Wall€tfy!</text>
                     </svg>
@@ -100,6 +67,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === false) {
                     <p class="lead text-justify">
                         On the top You can select the option You are interested in. Add a new income, expense, view the balance of the period You are interested in or personalize Your account in the settings.
                     </p>
+                    <?php var_dump($userName) ?>
                 </div>
             </div>
             <div class="container-fluid mt-5">
@@ -172,8 +140,8 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === false) {
                             </div>
                     </div>
                     <div class="modal-footer justify-content-center flex-column flex-md-row btn-group">
-                        <button type="submit" id="addIncome" name="addIncome" value="ADD" class="btn btn-rounded btn-outline-success mr-2 w-25">SAVE</button>
-                        <button type="reset" class="btn btn-rounded btn-danger w-25" name="erase_income"  value="CLOSE" data-dismiss="modal" onclick="this.form.reset();">CLOSE</button>
+                        <button type="submit" id="saveIncome" name="addIncome" value="ADD" class="btn btn-outline-success mr-2 w-25">SAVE</button>
+                        <button type="reset" class="btn btn-rounded btn-danger w-25" name="erase_income" value="CLOSE" data-dismiss="modal" onclick="this.form.reset();">CLOSE</button>
                         <span class="text-success"><?php echo ((isset($incomeAddedCorrectly) && $incomeAddedCorrectly != '') ? 'Income saved !' : '');
                                                     unset($incomeAddedCorrectly); ?> </span>
                     </div>
@@ -268,7 +236,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === false) {
                     </div>
 
                     <div class="modal-footer justify-content-center flex-column flex-md-row btn-group">
-                        <button type="submit" id="addExpense" name="addExpense" value="ADD" class="btn btn-floating btn-rounded btn-outline-success mr-2">SAVE</button>
+                        <button type="submit" id="saveExpense" name="addExpense" value="ADD" class="btn btn-floating btn-outline-success mr-2">SAVE</button>
                         <button type="reset" class="btn btn-floating btn-rounded btn-danger waves-effect" name="erase_expense" value="CLOSE" action="erase_expense.php" data-dismiss="modal" onclick="this.form.reset();">CLOSE</button>
                         <span class="text-success"><?php echo ((isset($expenseAddedCorrectly) && $expenseAddedCorrectly != '') ? 'Expense saved !' : '');
                                                     unset($expenseAddedCorrectly); ?> </span>
@@ -277,6 +245,37 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === false) {
                 </div>
             </div>
         </div>
+
+        <script type="text/javascript" src="main.js"></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        
+        <script>
+            $(document).ready(function() {
+                let wasShown = false;
+                if (!wasShown) {
+                    var toastMixin = Swal.mixin({
+                        toast: true,
+                        icon: 'success',
+                        title: 'General Title',
+                        animation: false,
+                        position: 'bottom-end',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    });
+                    toastMixin.fire({
+                        title: 'Signed in Successfully'
+                    });
+                    wasShown = true;
+                }
+            });
+        </script>
+
         <?php
         if (isset($_POST['addExpense']) && isset($_SESSION['expenseStatus']) && $_SESSION['expenseStatus'] != "") {
         ?>
@@ -288,7 +287,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === false) {
                 });
             </script>
         <?php
-            unset($expenseStatus);
+            unset($_SESSION['expenseStatus']);
         }
         if (isset($_POST['addIncome']) && isset($_SESSION['incomeStatus']) && $_SESSION['incomeStatus'] != "") {
         ?>
@@ -301,12 +300,9 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === false) {
                 });
             </script>
         <?php
-            unset($incomeStatus);
-            }
+            unset($_SESSION['incomeStatus']);
+        }
         ?>
-<script type="text/javascript" src="main.js"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>

@@ -1,3 +1,8 @@
+$(document).ready(function() {
+  $('input[type=email]').val('');
+  $('input[type=password]').val('');
+});
+
 function capLock(e) {
     var input = document.getElementById('loginForm');
     var alert = document.getElementById("text");

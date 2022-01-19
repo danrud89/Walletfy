@@ -1,6 +1,13 @@
+<?php
+session_start();
+if (isset($_SESSION["logged_id"])) {
+    header("Location: menu.php");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 	<meta charset="UTF-8">
 	<title>Wall€tfy</title>
@@ -25,12 +32,11 @@
 	<link rel="stylesheet" href="style.css" type="text/css" />
 	<script type="text/javascript" src="main.js"></script>
 	<script src='https://www.google.com/recaptcha/api.js'></script>
-
 </head>
 
 <body>
 	<main>
-		<section id="home" style="background-image: url(img/ewallet.png)">
+		<section id="home" style="background-image: url(ewallet.png)">
 			<div class="content">
 				<div>
 					<svg class="title">
@@ -116,7 +122,7 @@
 															unset($_SESSION['confirm_password_err']); ?> </span>
 							</div>
 						</div>
-						<div class="row mb-3 p-1">
+						<div class="row register-input mb-3 p-1">
 						<div class="recaptcha ml-2 mb-2">
 							<div id="captcha" class="g-recaptcha" data-sitekey="6LcoQvMdAAAAAAzDf_dCf50TFqGAummA8zxi82LS"></div>
 						</div>
@@ -125,7 +131,7 @@
 
 						<div class="row mb-3">
 							<div class="register-button text-center">
-								<button type="submit" name="sign_in" id="regBtn" class="btn btn-lg w-100" onclick="checkRegisterInputs()">Sign Up <span class="material-icons align-bottom mb-1" style="margin-left: 0.5em;">touch_app</span></button>
+								<button type="submit" name="sign_up" id="regBtn" class="btn btn-lg w-100" onclick="checkRegisterInputs()">Sign Up <span class="material-icons align-bottom mb-1" style="margin-left: 0.5em;">touch_app</span></button>
 							</div>
 						</div>
 

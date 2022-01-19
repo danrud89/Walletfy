@@ -1,11 +1,8 @@
 <?php
-// Initialize the session
 session_start();
-
-// Check if the user is logged in, if yes - redirect him to main menu page
-if (isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true) {
-    header("Location: menu.php");
-    exit;
+if (isset($_SESSION["logged_id"])) {
+  header("Location: menu.php");
+  exit();
 }
 ?>
 
@@ -40,18 +37,17 @@ if (isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true) {
 </head>
 
 <body>
-
     <main>
-        <section id="home" style="background-image: url(img/ewallet.png)">
+        <section id="home" style="background-image: url(ewallet.png)">
             <div class="content">
                 <div class="mt-2">
                     <svg class="title">
                         <text x="0" y="40">Wall€tfy!</text>
                     </svg>
-                    <p class="lead">
+                    <p class="lead text-justify">
                         Say hello to Wall€tfy! - a personal finance application that makes money management easy. The app is designed to streamline cash tracking and help you save money.
                     </p>
-                    <p class="lead">
+                    <p class="lead text-justify">
                         With Wall€tfy! you will no longer look in amazement at your wallet at the end of the month. Register and join the wide group of satisfied users just now!
                     </p>
                 </div>
@@ -70,9 +66,9 @@ if (isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true) {
                                 <span class="material-icons align-middle" id="ok" style="position:absolute; left:85%; top:12px;">check_circle</span>
                                 <span class="material-icons align-middle" id="wrong" style="position:absolute; left:85%; top:12px;">error_outline</span>
                                 <small id="email_error">Error message</small>
-                                <span><?php echo ((isset($_SESSION['login_err']) && $_SESSION['login_err'] != '') ? $_SESSION['login_err'] : '');
-                                        unset($_SESSION['login_err']); ?> </span>
                             </div>
+                            <div class="text-danger text-center"><?php echo ((isset($_SESSION['login_err']) && $_SESSION['login_err'] != '') ? $_SESSION['login_err'] : '');
+                                        unset($_SESSION['login_err']); ?> </div>
                         </div>
 
                         <div class="row mb-3">
@@ -83,13 +79,13 @@ if (isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true) {
                                         vpn_key
                                     </span>
                                 </div>
-                                <input type="password" id="loginPassword" class="form-control mx-auto my-auto px-2 py-2" placeholder="password" aria-label="password" name="password" onkeypress="capLock(event)">
+                                <input type="password" id="loginPassword" value='' class="form-control mx-auto my-auto px-2 py-2" placeholder="password" aria-label="password" name="password" onkeypress="capLock(event)">
                                 <span class="material-icons align-middle" id="ok" style="position:absolute; left:78%; top:12px;">check_circle</span>
                                 <span class="material-icons align-middle" id="wrong" style="position:absolute; left:78%; top:12px;">error_outline</span>
                                 <small id="password_error">Error message</small>
                                 <span class="material-icons align-middle" id="eyeIcon" style="cursor:pointer; color:black; opacity:0.6; position:absolute; left:85%; top:10px;" onclick="togglePassword('loginPassword')">visibility_off</span>
-                                <span><?php echo ((isset($_SESSION['password_login_err']) && $_SESSION['password_login_err'] != '') ? $_SESSION['password_login_err'] : '');
-                                        unset($_SESSION['password_login_err']); ?> </span>
+                                <div class="text-alert"><?php echo ((isset($_SESSION['password_login_err']) && $_SESSION['password_login_err'] != '') ? $_SESSION['password_login_err'] : '');
+                                        unset($_SESSION['password_login_err']); ?> </div>
                             </div>
                         </div>
 
