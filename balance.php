@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['loggedin'])) {
+if (!isset($_SESSION['logged_id'])) {
     header('Location: index.php');
     exit;
 }

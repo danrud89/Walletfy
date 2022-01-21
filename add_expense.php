@@ -1,12 +1,8 @@
 <?php
 session_start();
-$expenseAmount = $expenseDate = $expensePurpose = $expenseOptions = "";
+$expenseAmount = $expenseDate = $expensePurpose = $expensePaymentMethod = "";
+$expenseComment = "";
 
-function filterInputs($inputData){
-    $outputData = filter_input(INPUT_POST, '$inputData');
-    return $outputData;
-}
- 
 function validateDate($testDate)
 {   $dateValid = false;
     $dateArray = explode('.', $testDate);
@@ -20,16 +16,7 @@ function validateDate($testDate)
     return $dateValid;
 }
 
-function checkDataSet($inputData){
-    $dataIsSet = false;
-    if(isset($inputData)) {
-        $dataIsSet = true;
-        return $dataIsSet;
-    }
-    return $dataIsSet;
-}
-
-if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['addExpense'])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['addExpense'])) {
 
     if(!isset($_POST['amount'])){
     $_SESSION['amount_err'] = 'Amount field cannot be empty !';
@@ -40,54 +27,54 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['addExpense'])) {
     if(!isset($_POST['purpose'])){
     $_SESSION['purpose_err'] = 'Select matching category !';
     }
-    if(!isset($_POST['options'])){
-    $_SESSION['options_err'] = 'Select matching category !';
+    if(!isset($_POST['paymentMethod'])){
+    $_SESSION['payment_err'] = 'Select matching category !';
     }
 
-     $user_id = $_SESSION['logged_id'];
+    $user_id = $_SESSION['logged_id'];
+    $expenseAmount = filter_input(INPUT_POST, 'amount'); 
+    $expenseDate = filter_input(INPUT_POST, 'date');
+    $expensePurpose = filter_input(INPUT_POST, 'purpose');
+    $expensePaymentMethod = filter_input(INPUT_POST, 'paymentMethod');
     
-    if(!is_numeric($_POST['amount'])){
-        $_SESSION['amount_err'] = 'Invalid amount format !';
-    }
-    if(is_float($_POST['amount'])){ 
-    $expenseAmount = filterInputs($_POST['amount']);   
-    $expenseAmount = str_replace(',', '.', $_POST['amount']);
-    }
-    else {
-        $_SESSION['amount_err'] = 'Invalid amount format !';  
-    }
-    if ($expenseAmount <= 0) {
-        $_SESSION['amount_err'] = 'Amount must be greater than 0 !';    
-    }
-
-    if(validateDate($_POST['date'])){
-    $expenseDate = filterInputs($_POST['date']);
-    }
-    else {
-        $_SESSION['date_err'] = 'Invalid date format !';
-    }
-    $expensePurpose = filterInputs($_POST['purpose']);
-    $expenseOptions = filterInputs($_POST['options']);
-    if(is_string($_POST['comment'])){
-    $expenseComment = filterInputs($_POST['comment']);
-    }
-    else{
-        $_SESSION['comment_err'] = 'Invalid commentary format !';
-    }
-    if(strlen($expenseComment) > 50){
-        $_SESSION['comment_err'] = 'Comment cannot contain more than 50 characters !';
+    if (!is_string($_POST['comment'])) {
+        $_SESSION['comment_err'] = 'Invalid comment format !';
+    } else {
+        $expenseComment = filter_input(INPUT_POST, 'comment', FILTER_SANITIZE_STRING);
+        if (strlen($expenseComment) > 50) {
+            $_SESSION['comment_err'] = 'Comment cannot contain more than 50 characters !';
+        }
     }       
       require_once 'database.php'; 
+      try{
             $sql_select_category = "SELECT id FROM expenses_category_assigned_to_users 
-            WHERE user_id = :user_id 
-            AND name = :category";
-        try{
-            $query_select = $db->prepare($sql_select_category);
-            $query_select->bindValue(':user_id', $user_id, PDO::PARAM_INT);
-            $query_select->bindValue(':expense_category', $expenseOptions, PDO::PARAM_STR);
-            $query_select->execute();
+            WHERE user_id = :user_id  AND name = :expense_purpose";
+        
+            $query_select_category = $db->prepare($sql_select_category);
+            $query_select_category->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+            $query_select_category->bindValue(':expense_purpose', $expensePurpose, PDO::PARAM_STR);
+            $query_select_category->execute();
 
-            $result = $query_select->fetch();
+            $result = $query_select_category->fetch();
+            $expensePurposeId = $result['id'];
+        }
+        catch (PDOException $e) {
+            echo "DataBase Error: Request failed.<br>" . $e->getMessage();
+        } catch (Exception $e) {
+            echo "Application Error: Request failed.<br>" . $error->getMessage();
+        }
+
+        try{
+            $sql_select_payment = "SELECT id FROM payment_methods_assigned_to_users 
+            WHERE user_id = :user_id AND name = :payment_method";
+        
+            $query_select_payment = $db->prepare($sql_select_payment);
+            $query_select_payment->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+            $query_select_payment->bindValue(':payment_method', $expensePaymentMethod, PDO::PARAM_STR);
+            $query_select_payment->execute();
+
+            $query_result = $query_select_payment->fetch();
+            $expensePaymentId = $query_result['id'];
         }
         catch (PDOException $e) {
             echo "DataBase Error: Request failed.<br>" . $e->getMessage();
@@ -96,10 +83,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['addExpense'])) {
         }
         
         try{
-            $sql_insert_expense = "INSERT INTO expenses VALUES(NULL, :id_user, :expense_category, :expense_amount, :expense_date, :expense_comment)"; 
+            $sql_insert_expense = "INSERT INTO expenses VALUES(NULL, :user_id, :expense_purpose, :expense_payment_method, :expense_amount, :expense_date, :expense_comment)"; 
             $query_expense = $db->prepare($sql_insert_expense);
-            $query_expense->bindValue(':id_user', $user_id, PDO::PARAM_INT);
-            $query_expense->bindValue(':expense_category', $expenseOptions, PDO::PARAM_INT);
+            $query_expense->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+            $query_expense->bindValue(':expense_purpose', $expensePurposeId, PDO::PARAM_INT);
+            $query_expense->bindValue(':expense_payment_method',$expensePaymentId, PDO::PARAM_INT);
             $query_expense->bindValue(':expense_amount', $expenseAmount, PDO::PARAM_STR);
             $query_expense->bindValue(':expense_date', $expenseDate, PDO::PARAM_STR);
             $query_expense->bindValue(':expense_comment', $expenseComment, PDO::PARAM_STR);
@@ -113,9 +101,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['addExpense'])) {
       
       $_SESSION['expenseStatus'] = "Expense has been saved !";
       $_SESSION['expenseStatusCode'] = "success!";
+      header('location: menu.php');
 }
 else{
     $_SESSION['expenseStatus'] = "Something went wrong ! Expense has not been saved !";
     $_SESSION['expenseStatusCode'] = "error!";
+    header('location: menu.php');
 }
 ?>
