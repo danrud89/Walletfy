@@ -3,10 +3,18 @@
 session_start();
 
 // Check if the user is logged in, if yes - redirect him to main menu page
-if (!isset($_SESSION["logged_id"])) {
-    header("Location: index.php");
-    exit;
-}
+//if (!isset($_SESSION['successfullyRegistered'])) {
+   // header("Location: index.php");
+  //  exit;
+//}
+unset($_SESSION['loginStatus']);
+unset($_SESSION['loginStatusCode']);
+unset($_SESSION['emailStatus']);
+unset($_SESSION['emailStatusCode']);
+unset($_SESSION['passwordStatus']);
+unset($_SESSION['passwordStatusCode']);
+unset($_SESSION['serwerStatus']);
+unset($_SESSION['serwerStatusCode']);
 ?>
 
 <!DOCTYPE html>
@@ -39,38 +47,52 @@ if (!isset($_SESSION["logged_id"])) {
 </head>
 
 <body>
-            <div class="main" style="background-image: url(img/ewallet2.png);">
-            <div class="wrapper1 mx-auto mt-5">
-                <div class="blur  my-1">
+    <div class="main" style="background-image: url(ewallet2.png);">
+        <div class="wrapper1 mx-auto mt-5">
+            <div class="blur  my-1">
                 <div class="row mb-5">
                     <p style="font-size: 1.25em;">
-                        Welcome aboard <?= $_SESSION['logged_user']?>! I'm glad You say YES. Wall€tfy! was developed to create a trustworthy place for You to make money menagement easier.
+                        Welcome aboard <?= $_SESSION['logged_user'] ?>! I'm glad You say YES. Wall€tfy! was developed to create a trustworthy place for You to make money menagement easier.
                     </p>
                     <p style="font-size: 1.25em;">
                         Click the button below to return to the login page.
                     </p>
                 </div>
                 <div class="row">
-                        <div class="mx-auto mt-2 mb-2">
-                            <a href="index.php"><button type="button" class="btn btn-rounded btn-lg p-2" id="btnBack"><span class="material-icons mr-1 mt-2">reply</span>BACK TO LOGIN PAGE</button></a>
-                        </div>
+                    <div class="mx-auto mt-2 mb-2">
+                        <a href="index.php"><button type="button" class="btn btn-rounded btn-lg p-2" id="btnBack"><span class="material-icons mr-1 mt-2">reply</span>BACK TO LOGIN PAGE</button></a>
                     </div>
-            </div>
-            </div>
-            </div>
-
-            <div class="container-fluid">
-                <div class="row">
-                    <footer class="page-footer">
-                        <div class="footer-container text-center ml-5 offset-md-3">
-                            <p class="text-center">Wszelkie prawa zastrzeżone. Copyright © 2021. All Rights Reserved.
-                                Follow me:<a class="mx-3 vertical-center" href="#!" id="ln"><i class="fab fa-linkedin"></i></a>
-                                <a class="mx-3" href="#!" id="fb"><i class="fab fa-facebook-square"></i></a>
-                                <a class="mx-3" href="#!" id="gh"><i class="fab fa-github"></i></a>
-                            </p>
-                        </div>
-                    </footer>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <footer class="page-footer">
+                <div class="footer-container text-center ml-5 offset-md-3">
+                    <p class="text-center">Wszelkie prawa zastrzeżone. Copyright © 2021. All Rights Reserved.
+                        Follow me:<a class="mx-3 vertical-center" href="#!" id="ln"><i class="fab fa-linkedin"></i></a>
+                        <a class="mx-3" href="#!" id="fb"><i class="fab fa-facebook-square"></i></a>
+                        <a class="mx-3" href="#!" id="gh"><i class="fab fa-github"></i></a>
+                    </p>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Congratulations !',
+            text: 'Registration successful. Your registration has been received.',
+            showConfirmButton: false,
+            background: '#eee',
+            timer: 3500,
+            timerProgressBar: true,
+        })
+    </script>
 </body>
+
 </html>

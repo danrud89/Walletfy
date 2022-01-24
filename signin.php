@@ -33,7 +33,6 @@ if ((isset($_POST['sign_in'])) && $_SERVER["REQUEST_METHOD"] === "POST") {
         $query->bindValue(':email', $email, PDO::PARAM_STR);
         $query->execute();
         $user = $query->fetch();
-
     } catch (PDOException $e) {
         echo "DataBase Error: Login failed.<br>" . $e->getMessage();
     } catch (Exception $error) {
@@ -43,16 +42,20 @@ if ((isset($_POST['sign_in'])) && $_SERVER["REQUEST_METHOD"] === "POST") {
         $_SESSION['logged_id'] = $user['id'];
         $_SESSION['logged_user'] = $user['name'];
         $_SESSION['logged_in'] = false;
+        unset($_POST['sign_in']);
         header('Location: menu.php');
         exit();
     } else {
         $_SESSION['logged_in'] = true;
         $_SESSION['passwordStatus'] = "Incorrect e-mail/password ! Please check Your details and try again";
         $_SESSION['passwordStatusCode'] = "error";
+        unset($_POST['sign_in']);
         header('Location: index.php');
         exit();
     }
 } else {
+    $_SESSION['serwerStatus'] = "Oooops...something went wrong ! Please try again later.";
+    $_SESSION['serwerStatusCode'] = "error";
     header('Location: index.php');
     exit();
 }

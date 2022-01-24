@@ -164,6 +164,65 @@ if (isset($_SESSION["logged_id"])) {
 		<script src='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js'></script>
 		<script src="./script.js"></script>
 		<script src="sweetalert2.all.min.js"></script>
+		<script>
+        $(document).ready(function() {
+            Swal.fire({
+               title: 'Watch Out!',
+               text: '<?php echo $_SESSION['loginStatus']; ?>',
+               icon: '<?php echo $_SESSION['loginStatusCode']; ?>', 
+               confirmButtonText: 'Try again',
+               confirmButtonColor: '#6495ED',
+			   position: 'center',
+             });
+        })
+    </script>
+		<script>
+        $(document).ready(function() {
+            Swal.fire({
+               title: 'Watch Out!',
+               text: '<?php echo $_SESSION['emailStatus']; ?>',
+               icon: '<?php echo $_SESSION['emailStatusCode']; ?>', 
+               confirmButtonText: 'Try again',
+               confirmButtonColor: '#6495ED',
+			   position: 'center',
+             });
+        })
+    </script>
+       <script>
+        $(document).ready(function() {
+            Swal.fire({
+               title: 'Watch Out!',
+               text: '<?php echo $_SESSION['passwordStatus']; ?>',
+               icon: '<?php echo $_SESSION['passwordStatusCode']; ?>', 
+               confirmButtonText: 'Try again',
+               confirmButtonColor: '#6495ED',
+			   position: 'center',
+             });
+        })
+    </script>
+<script>
+        $(document).ready(function() {
+            Swal.fire({
+               title: 'Internal serwer error!',
+               text: '<?php echo $_SESSION['serwerStatus']; ?>',
+               icon: '<?php echo $_SESSION['serwerStatusCode']; ?>', 
+               confirmButtonText: 'OK',
+               confirmButtonColor: '#6495ED',
+			   position: 'center',
+             });
+        })
+    </script>
+    <?php
+    unset($_SESSION['loginStatus']);
+    unset($_SESSION['loginStatusCode']);
+	unset($_SESSION['emailStatus']);
+    unset($_SESSION['emailStatusCode']);
+    unset($_SESSION['passwordStatus']);
+    unset($_SESSION['passwordStatusCode']);
+	unset($_SESSION['serwerStatus']);
+    unset($_SESSION['serwerStatusCode']);
+
+    ?>
 
 </body>
 

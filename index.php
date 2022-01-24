@@ -85,7 +85,7 @@ if (isset($_SESSION["logged_id"])) {
                             </div>
                         </div>
 
-                        <div class="form-group d-md-flex w-100 mb-4">
+                        <div class="form-group d-md-flex w-100 mb-4 mt-3">
                             <div class="form-check w-50 float-left" style="padding-left: 1.5em;">
                                 <label class="custom-control fill-checkbox">
                                     <input type="checkbox" class="fill-control-input">
@@ -141,6 +141,7 @@ if (isset($_SESSION["logged_id"])) {
                icon: '<?php echo $_SESSION['loginStatusCode']; ?>', 
                confirmButtonText: 'Try again',
                confirmButtonColor: '#6495ED',
+               position: 'center',
              });
         })
     </script>
@@ -152,6 +153,19 @@ if (isset($_SESSION["logged_id"])) {
                icon: '<?php echo $_SESSION['passwordStatusCode']; ?>', 
                confirmButtonText: 'Try again',
                confirmButtonColor: '#6495ED',
+               position: 'center',
+             });
+        })
+    </script>
+    <script>
+        $(document).ready(function() {
+            Swal.fire({
+               title: 'Internal serwer error!',
+               text: '<?php echo $_SESSION['serwerStatus']; ?>',
+               icon: '<?php echo $_SESSION['serwerStatusCode']; ?>', 
+               confirmButtonText: 'OK',
+               confirmButtonColor: '#6495ED',
+			   position: 'center',
              });
         })
     </script>
@@ -161,6 +175,8 @@ if (isset($_SESSION["logged_id"])) {
     unset($_SESSION['loginStatusCode']);
     unset($_SESSION['passwordStatus']);
     unset($_SESSION['passwordStatusCode']);
+    unset($_SESSION['serwerStatus']);
+    unset($_SESSION['serwerStatusCode']);
     ?>
 
 </body>
