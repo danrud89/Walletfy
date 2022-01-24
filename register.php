@@ -51,7 +51,7 @@ if (isset($_SESSION["logged_id"])) {
 				</div>
 				<div class="blur">
 					<form action="signup.php" method="post" name="registerForm" autocomplete="off" id="registerForm" onsubmit="return validateRegisterForm();">
-						<p id="text" style="visibility:hidden; margin:-10px 0 0 0;">Caps Lock is ON.</p>
+						<p id="caps-lock-warn" style="visibility:hidden; margin:-10px 0 0 0; letter-spacing:1px;">Caps Lock is ON.</p>
 						<div class="row mb-2">
 							<label for="username">Login:</label>
 							<div class="register-input">
@@ -60,7 +60,7 @@ if (isset($_SESSION["logged_id"])) {
 										person
 									</span>
 								</div>
-								<input type="text" id="username" class="form-control mx-auto my-auto px-2 py-2" placeholder="name" aria-label="username" name="username" onkeypress="capLock(event)" min="3" autofocus>
+								<input type="text" id="username" class="form-control mx-auto my-auto px-2 py-2" placeholder="name" aria-label="username" name="username" onkeypress="capsLock(event)" min="3" autofocus>
 								<span class="material-icons" id="ok" style="position:absolute; left:85%; top:12px;">check_circle</span>
 								<span class="material-icons" id="wrong" style="position:absolute; left:85%; top:12px;">error_outline</span>
 								<small id="login_error">Error message</small>
@@ -78,7 +78,7 @@ if (isset($_SESSION["logged_id"])) {
 										email
 									</span>
 								</div>
-								<input type="email" id="email" class="form-control mx-auto my-auto py-2" placeholder="email@test.com" aria-label="e-mail" name="email" onkeypress="capLock(event)">
+								<input type="email" id="email" class="form-control mx-auto my-auto py-2" placeholder="email@test.com" aria-label="e-mail" name="email" onkeypress="capsLock(event)">
 								<span class="material-icons" id="ok" style="position:absolute; left:85%; top:12px;">check_circle</span>
 								<span class="material-icons" id="wrong" style="position:absolute; left:85%; top:12px;">error_outline</span>
 								<small id="email_error">Error message</small>
@@ -95,7 +95,7 @@ if (isset($_SESSION["logged_id"])) {
 										vpn_key
 									</span>
 								</div>
-								<input type="password" id="registerPassword" class="form-control mx-auto my-auto px-2 py-2" placeholder="password" aria-label="password" name="password" onkeypress="capLock(event)" min="8" max="20">
+								<input type="password" id="registerPassword" class="form-control mx-auto my-auto px-2 py-2" placeholder="password" aria-label="password" name="password" onkeypress="capsLock(event)" min="8" max="20">
 								<span class="material-icons" id="ok" style="position:absolute; left:77%; top:12px;">check_circle</span>
 								<span class="material-icons" id="wrong" style="position:absolute; left:77%; top:12px;">error_outline</span>
 								<small id="password_error">Error message</small>
@@ -113,7 +113,7 @@ if (isset($_SESSION["logged_id"])) {
 										vpn_key
 									</span>
 								</div>
-								<input type="password" id="cRegisterPassword" class="form-control mx-auto my-auto px-2 py-2" placeholder="confirm password" aria-label="password" name="confpassword" onkeypress="capLock(event)" min="8" max="20">
+								<input type="password" id="cRegisterPassword" class="form-control mx-auto my-auto px-2 py-2" placeholder="confirm password" aria-label="password" name="confpassword" onkeypress="capsLock(event)" min="8" max="20">
 								<span class="material-icons" id="ok" style="position:absolute; left:77%; top:12px;">check_circle</span>
 								<span class="material-icons" id="wrong" style="position:absolute; left:77%; top:12px;">error_outline</span>
 								<small id="cpassword_error">Error message</small>

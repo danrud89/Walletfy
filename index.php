@@ -53,7 +53,7 @@ if (isset($_SESSION["logged_id"])) {
                 </div>
                 <div class="blur">
                     <form action="signin.php" method="post" name="loginForm" id="loginForm" autocomplete="off" onsubmit="return validateLoginForm();">
-                        <p id="text" style="visibility:hidden; margin:-10px 0 0 0;">Caps Lock is ON !</p>
+                        <p id="caps-lock-warn" style="visibility:hidden; margin:-10px 0 0 0; letter-spacing:1px;">Caps Lock is ON !</p>
                         <div class="row mb-4">
                             <label for="username">E-mail:</label>
                             <div class="login-input">
@@ -67,8 +67,6 @@ if (isset($_SESSION["logged_id"])) {
                                 <span class="material-icons align-middle" id="wrong" style="position:absolute; left:85%; top:12px;">error_outline</span>
                                 <small id="email_error">Error message</small>
                             </div>
-                            <div class="text-danger text-center"><?php echo ((isset($_SESSION['login_err']) && $_SESSION['login_err'] != '') ? $_SESSION['login_err'] : '');
-                                        unset($_SESSION['login_err']); ?> </div>
                         </div>
 
                         <div class="row mb-3">
@@ -84,8 +82,6 @@ if (isset($_SESSION["logged_id"])) {
                                 <span class="material-icons align-middle" id="wrong" style="position:absolute; left:78%; top:12px;">error_outline</span>
                                 <small id="password_error">Error message</small>
                                 <span class="material-icons align-middle" id="eyeIcon" style="cursor:pointer; color:black; opacity:0.6; position:absolute; left:85%; top:10px;" onclick="togglePassword('loginPassword')">visibility_off</span>
-                                <div class="text-alert"><?php echo ((isset($_SESSION['password_login_err']) && $_SESSION['password_login_err'] != '') ? $_SESSION['password_login_err'] : '');
-                                        unset($_SESSION['password_login_err']); ?> </div>
                             </div>
                         </div>
 
@@ -136,6 +132,36 @@ if (isset($_SESSION["logged_id"])) {
         <script src='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js'></script>
         <script src="./script.js"></script>
         <script src="sweetalert2.all.min.js"></script>
+
+        <script>
+        $(document).ready(function() {
+            Swal.fire({
+               title: 'Watch Out!',
+               text: '<?php echo $_SESSION['loginStatus']; ?>',
+               icon: '<?php echo $_SESSION['loginStatusCode']; ?>', 
+               confirmButtonText: 'Try again',
+               confirmButtonColor: '#6495ED',
+             });
+        })
+    </script>
+       <script>
+        $(document).ready(function() {
+            Swal.fire({
+               title: 'Watch Out!',
+               text: '<?php echo $_SESSION['passwordStatus']; ?>',
+               icon: '<?php echo $_SESSION['passwordStatusCode']; ?>', 
+               confirmButtonText: 'Try again',
+               confirmButtonColor: '#6495ED',
+             });
+        })
+    </script>
+
+    <?php
+    unset($_SESSION['loginStatus']);
+    unset($_SESSION['loginStatusCode']);
+    unset($_SESSION['passwordStatus']);
+    unset($_SESSION['passwordStatusCode']);
+    ?>
 
 </body>
 

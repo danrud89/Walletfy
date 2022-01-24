@@ -4,31 +4,36 @@ session_start();
 $email = $password = "";
 
 if ((isset($_POST['sign_in'])) && $_SERVER["REQUEST_METHOD"] === "POST") {
-   
-    $password = filter_input(INPUT_POST, 'password');
+
     $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
+    $password = filter_input(INPUT_POST, 'password');
 
     if (empty($email)) {
-        $_SESSION['login_err'] =  "Field is required !";
+        $_SESSION['loginStatus'] = "Field is required!";
+        $_SESSION['loginStatusCode'] = "error";
         header('location: index.php');
     }
-    if (preg_match('/^[a-zA-Z0-9_]+$/', trim($_POST['password'])) == false) {
-        $_SESSION['password_login_err'] = "Password can only contain letters, numbers, and underscores.";
-        header('location: login.php');
-    }
+
     if (empty($password)) {
-        $_SESSION['password_login_err'] = "Password is required !";
+        $_SESSION['passwordStatus'] = "Field is required!";
+        $_SESSION['passwordStatusCode'] = "error";
         header('location: login.php');
     }
-   
+
+    if (preg_match('/^[a-zA-Z0-9_]+$/', trim($_POST['password'])) == false) {
+        $_SESSION['passwordStatus'] = "Password can only contain letters, numbers, and underscores.";
+        $_SESSION['passwordStatusCode'] = "error";
+        header('location: login.php');
+    }
+
     require_once 'database.php';
     try {
         $user_check_query = 'SELECT * FROM users WHERE email = :email';
         $query = $db->prepare($user_check_query);
         $query->bindValue(':email', $email, PDO::PARAM_STR);
         $query->execute();
-
         $user = $query->fetch();
+
     } catch (PDOException $e) {
         echo "DataBase Error: Login failed.<br>" . $e->getMessage();
     } catch (Exception $error) {
@@ -41,7 +46,9 @@ if ((isset($_POST['sign_in'])) && $_SERVER["REQUEST_METHOD"] === "POST") {
         header('Location: menu.php');
         exit();
     } else {
-        $_SESSION['loggedin'] = true;
+        $_SESSION['logged_in'] = true;
+        $_SESSION['passwordStatus'] = "Incorrect e-mail/password ! Please check Your details and try again";
+        $_SESSION['passwordStatusCode'] = "error";
         header('Location: index.php');
         exit();
     }

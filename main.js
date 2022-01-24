@@ -4,15 +4,23 @@ $(document).ready(function() {
 });
 
 function capLock(e) {
-    var input = document.getElementById('loginForm');
-    var alert = document.getElementById("text");
+    const input = document.getElementById('loginForm');
+    const alert = document.getElementById("caps-lock-warn");
     input.addEventListener("keyup", function (event) {
 
-        if (event.getModifierState("CapsLock")) {
-            text.style.visibility = "visible";
-        } else {
-            text.style.visibility = "hidden"
-        }
+        const isCapsLockOn = event.getModifierState("CapsLock");
+        alert.style.visibility = isCapsLockOn ? 'visible' : 'hidden';
+         
+    });
+}
+
+function capsLock(e) {
+    const input = document.getElementById('registerForm');
+    const alert = document.getElementById("caps-lock-warn");
+    input.addEventListener("keyup", function (event) {
+
+        const isCapsLockOn = event.getModifierState("CapsLock");
+        alert.style.visibility = isCapsLockOn ? 'visible' : 'hidden';
     });
 }
 
@@ -206,19 +214,6 @@ function togglePassword(id) {
             $('#ceyeIcon').text('visibility_off'));
             break;
     }  
-}
-
-function capLock(e) {
-    var input = document.getElementById('registerForm');
-    var alert = document.getElementById("text");
-    input.addEventListener("keyup", function (event) {
-
-        if (event.getModifierState("CapsLock")) {
-            text.style.visibility = "visible";
-        } else {
-            text.style.visibility = "hidden"
-        }
-    });
 }
 
 function setTodaysDate() {
