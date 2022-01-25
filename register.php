@@ -167,8 +167,8 @@ if (isset($_SESSION["logged_id"])) {
 		<script>
         $(document).ready(function() {
             Swal.fire({
-               title: 'Watch Out!',
-               text: '<?php echo $_SESSION['loginStatus']; ?>',
+               title: 'Register Failed. Make sure You meet all constraints',
+			   html: '* Username cannot be empty, </br> * Username must contain minimum 3 charackters,</br> * Username can contain only letters,numbers, and underscores.</br></br> Current problem: <?php echo $_SESSION['loginStatus']; ?>',
                icon: '<?php echo $_SESSION['loginStatusCode']; ?>', 
                confirmButtonText: 'Try again',
                confirmButtonColor: '#6495ED',
@@ -179,8 +179,8 @@ if (isset($_SESSION["logged_id"])) {
 		<script>
         $(document).ready(function() {
             Swal.fire({
-               title: 'Watch Out!',
-               text: '<?php echo $_SESSION['emailStatus']; ?>',
+                title: 'Register Failed. Make sure You meet all constraints',
+				html: '* Email cannot be empty, </br> * Email syntax must be valid,</br></br> Current problem: <?php echo $_SESSION['loginStatus']; ?>',
                icon: '<?php echo $_SESSION['emailStatusCode']; ?>', 
                confirmButtonText: 'Try again',
                confirmButtonColor: '#6495ED',
@@ -191,8 +191,20 @@ if (isset($_SESSION["logged_id"])) {
        <script>
         $(document).ready(function() {
             Swal.fire({
-               title: 'Watch Out!',
-               text: '<?php echo $_SESSION['passwordStatus']; ?>',
+			   title: 'Register Failed. Make sure You meet all constraints',
+               html: '* Email cannot be empty, </br></br> * Email syntax must be valid,</br></br> Current problem: <?php echo $_SESSION['emailStatus']; ?>',
+               icon: '<?php echo $_SESSION['passwordStatusCode']; ?>', 
+               confirmButtonText: 'Try again',
+               confirmButtonColor: '#6495ED',
+			   position: 'center',
+             });
+        })
+    </script>
+	<script>
+        $(document).ready(function() {
+            Swal.fire({
+			   title: 'Register Failed. Make sure You meet all constraints',
+               html: '* Passwords cannot be empty, </br></br> * Must contain beetween 8 ÷ 20 characters, </br></br> * Passwords must be the same, </br></br> Current problem: <?php echo $_SESSION['passwordStatus']; ?>',
                icon: '<?php echo $_SESSION['passwordStatusCode']; ?>', 
                confirmButtonText: 'Try again',
                confirmButtonColor: '#6495ED',

@@ -86,13 +86,15 @@ unset($_SESSION['serwerStatusCode']);
             position: 'top-end',
             icon: 'success',
             title: 'Congratulations !',
-            text: 'Registration successful. Your registration has been received.',
+            text: 'Registration successful',
+            footer: 'Your registration has been received',
             showConfirmButton: false,
-            background: '#eee',
+            background: '#fff',
             timer: 3500,
             timerProgressBar: true,
         })
     </script>
+   
 </body>
 
 </html>

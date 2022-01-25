@@ -3,7 +3,6 @@ session_start();
 
 if ($_SERVER["REQUEST_METHOD"] === "post") {
     $start_date = $end_date = "";
-    $date_err = "";
     $_SESSION['logged_id'] = $userID;
 
     if((isset($_POST['periodOfTime'])) && ($_POST['periodOfTime'] != "")){
@@ -43,7 +42,6 @@ if ($_SERVER["REQUEST_METHOD"] === "post") {
                     AND expenses.date_of_expense LIKE '$time%'");
                     $expenses_query->execute();
                     $expenses = $expenses_query->fetchAll(PDO::FETCH_ASSOC);
-                    unset($_SESSION['date_err']);
                 } 
                 catch (PDOException $e) {
                     echo "DataBase Error: Register failed.<br>" . $e->getMessage();
@@ -95,7 +93,7 @@ if ($_SERVER["REQUEST_METHOD"] === "post") {
                         AND expenses.date_of_expense LIKE '$time%'");
                         $expenses_query->execute();
                         $expenses = $expenses_query->fetchAll(PDO::FETCH_ASSOC);
-                        unset($_SESSION['date_err']);
+                       
                     } 
                     catch (PDOException $e) {
                         echo "DataBase Error: Register failed.<br>" . $e->getMessage();
@@ -136,7 +134,7 @@ if ($_SERVER["REQUEST_METHOD"] === "post") {
                             AND expenses.date_of_expense LIKE '$time%'");
                             $expenses_query->execute();
                             $expenses = $expenses_query->fetchAll(PDO::FETCH_ASSOC);
-                            unset($_SESSION['date_err']);
+                            
                         } 
                         catch (PDOException $e) {
                             echo "DataBase Error: Register failed.<br>" . $e->getMessage();
@@ -202,6 +200,19 @@ if ($_SERVER["REQUEST_METHOD"] === "post") {
         $_SESSION['expensesTable'] = $expenses;
         header('Location: balance.php');
     }
+    else {
+        $_SESSION['serwerStatus'] = "NOT POSTED PERIOD OF TIME";
+        $_SESSION['serwerStatusCode'] = "error";
+        header('Location: balance.php');
+        exit();
+
+    }
+}
+else{
+    $_SESSION['serwerStatus'] = "WRONG SERWER METHOD";
+    $_SESSION['serwerStatusCode'] = "error";
+    header('Location: balance.php');
+    exit();
 }
 
 ?>

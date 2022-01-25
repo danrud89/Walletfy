@@ -13,49 +13,49 @@ if (($_SERVER["REQUEST_METHOD"] === "POST") && (isset($_POST['sign_up']))) {
   $password = filter_input(INPUT_POST, 'password');
   $confpassword = filter_input(INPUT_POST, 'confpassword');
 
-  if (!isset($_POST['name']) || empty($_POST['name'])) {
+  if (!isset($name) || empty($name)) {
     $register_validate = false;
     $_SESSION['loginStatus'] = "Username is required !";
     $_SESSION['loginStatusCode'] = "error";
     header('location: register.php');
   }
-  if (strlen($_POST['name']) < 3) {
+  if (strlen($name) < 3) {
     $register_validate = false;
     $_SESSION['loginStatus'] = "Username must contain minimum 3 characters!";
     $_SESSION['loginStatusCode'] = "error";
     header('location: register.php');
   }
-  if (preg_match('/^[a-zA-Z0-9_]+$/', $_POST['name']) === false) {
+  if (preg_match('/^[a-zA-Z0-9_]+$/', $name) === false) {
     $register_validate = false;
     $_SESSION['loginStatus'] = "Must contain letters, numbers, and underscores.";
     $_SESSION['loginStatusCode'] = "error";
     header('location: register.php');
   }
-  if (!isset($_POST['email']) || empty($_POST['email'])) {
+  if (!isset($email) || empty($email)) {
     $register_validate = false;
     $_SESSION['emailStatus'] = "E-mail is required !";
     $_SESSION['emailStatusCode'] = "error";
     header('location: register.php');
   }
-  if (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) === false) {
+  if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
     $register_validate = false;
     $_SESSION['emailStatus'] = "Invalid e-mail syntax !";
     $_SESSION['emailStatusCode'] = "error";
     header('location: register.php');
   }
-  if (!isset($_POST['password']) || empty($_POST['password'])) {
+  if (!isset($password) || empty($password)) {
     $register_validate = false;
     $_SESSION['passwordStatus'] = "Password is required !";
     $_SESSION['passwordStatusCode'] = "error";
     header('location: register.php');
   }
-  if ((strlen($_POST['password']) < 8) || (strlen($_POST['password']) > 20)) {
+  if ((strlen($password) < 8) || (strlen($password) > 20)) {
     $register_validate = false;
     $_SESSION['passwordStatus'] = "Must contain beetween 8 ÷ 20 characters!";
     $_SESSION['passwordStatusCode'] = "error";
     header('location: register.php');
   }
-  if ($_POST['password'] != $_POST['confpassword']) {
+  if ($password != $confpassword) {
     $register_validate = false;
     $_SESSION['passwordStatus'] = "Passwords do not match";
     $_SESSION['passwordStatusCode'] = "error"; 
@@ -65,10 +65,10 @@ if (($_SERVER["REQUEST_METHOD"] === "POST") && (isset($_POST['sign_up']))) {
   require_once "database.php";
   // check the database to make sure 
   // a user with the same login do not exist
-  $user_existance_check_query = "SELECT name, email FROM users WHERE name = '$name' OR email = '$email'" ;
+  $user_existance_check_query = "SELECT name, email FROM users WHERE name = :name OR email = :email" ;
   $user_stmt = $db->prepare($user_existance_check_query);
-  //$user_stmt->bindValue(':name', $name, PDO::PARAM_STR);
-  //$user_stmt->bindValue(':email', $email, PDO::PARAM_STR);
+  $user_stmt->bindValue(':name', $name, PDO::PARAM_STR);
+  $user_stmt->bindValue(':email', $email, PDO::PARAM_STR);
   $user_stmt->execute();
   $user = $user_stmt->fetch();
 

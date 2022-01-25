@@ -28,6 +28,10 @@ if (isset($_SESSION['periodOfTime'])) {
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css" type="text/css" />
+    <script type="text/javascript" src="main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.all.min.js"></script>
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
+    <script type="text/javascript" src="script.js"></script>
 
 
 </head>
@@ -70,10 +74,10 @@ if (isset($_SESSION['periodOfTime'])) {
 
                             <select id="periodOfTime" class="custom-select" data-live-search="true" name="periodOfTime" autocomplete="off" style="cursor:pointer">
                                 <option value="" selected disabled>-- Please select period --</option>
-                                <option value="currentMonth">Current month</option>
-                                <option value="previousMonth">Previous month</option>
-                                <option value="currentYear">Current year</option>
-                                <option value="customPeriod">
+                                <option name="periodOfTime" value="currentMonth">Current month</option>
+                                <option name="periodOfTime" value="previousMonth">Previous month</option>
+                                <option name="periodOfTime" value="currentYear">Current year</option>
+                                <option name="periodOfTime" value="customPeriod">
                                     <a href="#" class="open-modal" data-target="#dateModal" data-toggle="modal">Custom</a>
                                 </option>
                             </select>
@@ -293,16 +297,29 @@ if (isset($_SESSION['periodOfTime'])) {
                     <div class="modal-footer justify-content-center flex-column flex-md-row btn-group" role="group">
                         <button id="saveDates" type="submit" class="btn btn-outline-success btn-floating waves-effect" name="saveDates" value="Save">SAVE</button>
                         <button type="reset" class="btn btn-danger btn-floating waves-effect" data-dismiss="modal" value="Close">CLOSE</button>
-                        <span class="text-alert">
-                            <?php echo ((isset($_SESSION['date_err']) && $_SESSION['date_err'] != '') ? $_SESSION['date_err'] : '');
-                            unset($_SESSION['date_err']); ?>
-                        </span>
                     </div>
                     </form>
                 </div>
             </div>
         </div>
-        <script type="text/javascript" src="main.js"></script>
+        
+        <script>
+        $(document).ready(function() {
+            Swal.fire({
+               title: 'Internal serwer error!',
+               text: '<?php echo $_SESSION['serwerStatus']; ?>',
+               icon: '<?php echo $_SESSION['serwerStatusCode']; ?>', 
+               confirmButtonText: 'OK',
+               confirmButtonColor: '#6495ED',
+			   position: 'center',
+             });
+        })
+    </script>
+    <?php
+	unset($_SESSION['serwerStatus']);
+    unset($_SESSION['serwerStatusCode']);
+    unset($_SESSION['periodOfTime']);
+    ?>
 </body>
 
 </html>
