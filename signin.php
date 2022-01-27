@@ -20,7 +20,7 @@ if ((isset($_POST['sign_in'])) && $_SERVER["REQUEST_METHOD"] === "POST") {
         header('location: login.php');
     }
 
-    if (preg_match('/^[a-zA-Z0-9_]+$/', trim($_POST['password'])) == false) {
+    if (preg_match('/^[a-zA-Z0-9_]+$/', trim($password) == false)) {
         $_SESSION['passwordStatus'] = "Password can only contain letters, numbers, and underscores.";
         $_SESSION['passwordStatusCode'] = "error";
         header('location: login.php');

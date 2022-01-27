@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-// initializing variables
 $name = $email = "";
 $password = $confpassword = "";
 $register_validate = true;
@@ -63,23 +62,27 @@ if (($_SERVER["REQUEST_METHOD"] === "POST") && (isset($_POST['sign_up']))) {
   }
 
   require_once "database.php";
-  // check the database to make sure 
-  // a user with the same login do not exist
-  $user_existance_check_query = "SELECT name, email FROM users WHERE name = :name OR email = :email" ;
-  $user_stmt = $db->prepare($user_existance_check_query);
-  $user_stmt->bindValue(':name', $name, PDO::PARAM_STR);
-  $user_stmt->bindValue(':email', $email, PDO::PARAM_STR);
-  $user_stmt->execute();
-  $user = $user_stmt->fetch();
+  // check the database to make sure user with the same login do not exist
+  $user_name_check_query = "SELECT COUNT(name) AS userLoginCounter FROM users WHERE name = :name" ;
+  $user_name_stmt = $db->prepare($user_name_check_query);
+  $user_name_stmt->bindValue(':name', $name, PDO::PARAM_STR);
+  $user_name_stmt->execute();
+  $userName = $user_name_stmt->fetch(PDO::FETCH_ASSOC);
 
-  if ($user['name'] === $name) { 
+  if ($userName['userLoginCounter'] > 0) { 
     $_SESSION['loginStatus'] = "Login already taken !";
     $_SESSION['loginStatusCode'] = "error";
     $register_validate = false;
     header('location: register.php');
-  }
+  } 
 
-  if ($user['email'] === $email) { 
+  $user_email_check_query = "SELECT COUNT(email) AS userEmailCounter FROM users WHERE email = :email" ;
+  $user_email_stmt = $db->prepare($user_email_check_query);
+  $user_email_stmt->bindValue(':email', $email, PDO::PARAM_STR);
+  $user_email_stmt->execute();
+  $userEmail = $user_stmt->fetch(PDO::FETCH_ASSOC);
+  
+  if ($userEmail['userEmailCounter'] > 0) { 
     $_SESSION['emailStatus'] = "E-mail already taken !";
     $_SESSION['emailStatusCode'] = "error";
     $register_validate = false;
