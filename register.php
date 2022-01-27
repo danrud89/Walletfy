@@ -36,7 +36,7 @@ if (isset($_SESSION["logged_id"])) {
 
 <body>
 	<main>
-		<section id="home" style="background-image: url(ewallet.png)">
+		<section id="home" style="background-image: url(img/ewallet.png)">
 			<div class="content">
 				<div>
 					<svg class="title">
@@ -182,18 +182,6 @@ if (isset($_SESSION["logged_id"])) {
                 title: 'Register Failed. Make sure You meet all constraints',
 				html: '* Email cannot be empty, </br> * Email syntax must be valid,</br></br> Current problem: <?php echo $_SESSION['loginStatus']; ?>',
                icon: '<?php echo $_SESSION['emailStatusCode']; ?>', 
-               confirmButtonText: 'Try again',
-               confirmButtonColor: '#6495ED',
-			   position: 'center',
-             });
-        })
-    </script>
-       <script>
-        $(document).ready(function() {
-            Swal.fire({
-			   title: 'Register Failed. Make sure You meet all constraints',
-               html: '* Email cannot be empty, </br></br> * Email syntax must be valid,</br></br> Current problem: <?php echo $_SESSION['emailStatus']; ?>',
-               icon: '<?php echo $_SESSION['passwordStatusCode']; ?>', 
                confirmButtonText: 'Try again',
                confirmButtonColor: '#6495ED',
 			   position: 'center',

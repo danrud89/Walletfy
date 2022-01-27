@@ -32,6 +32,7 @@ if (!isset($_SESSION["logged_id"])) {
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.all.min.js"></script>
   <script type="text/javascript" src="main.js"></script>
   <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
+  <link rel="icon" href="img/favicon.png">
 </head>
 
 <body>
@@ -51,7 +52,7 @@ if (!isset($_SESSION["logged_id"])) {
     </nav>
   </header>
   
-  <div class="main" style="background-image: url(img/ewallet2.png); top:15%;">
+  <div class="main" style="background-image: url(ewallet2.png); top:15%;">
     <div class="wrapper1 mx-auto mt-5">
       <div class="blur  my-1">
         <div class="row mb-5">
@@ -59,8 +60,8 @@ if (!isset($_SESSION["logged_id"])) {
             Be patient...soon You should see some settings in here...
           </p>
         </div>
-        <div class="row mx-auto">
-          <div class="mx-auto mt-2 mb-2">
+        <div class="row mx-auto justify-content-center">
+          <div class="mx-auto mt-2 mb-2 text-center">
             <a href="index.php"><button type="button" class="btn btn-rounded btn-lg p-2" id="btnBack"><span class="material-icons mr-1 mt-2">reply</span>BACK TO MENU</button></a>
           </div>
         </div>

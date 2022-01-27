@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['addExpense'])) {
       require_once 'database.php'; 
       try{
             $sql_select_category = "SELECT id FROM expenses_category_assigned_to_users 
-            WHERE user_id = :user_id  AND name = :expense_purpose";
+            WHERE user_id = :user_id  AND purpose = :expense_purpose";
         
             $query_select_category = $db->prepare($sql_select_category);
             $query_select_category->bindValue(':user_id', $user_id, PDO::PARAM_INT);
@@ -98,10 +98,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['addExpense'])) {
         } catch (Exception $e) {
             echo "Application Error: Request failed.<br>" . $error->getMessage();
         }
-      
+      if($query_result){
       $_SESSION['expenseStatus'] = "Expense has been saved !";
       $_SESSION['expenseStatusCode'] = "success!";
       header('location: menu.php');
+      }
+      else{
+        $_SESSION['expenseStatus'] = "Something went wrong ! Expense has not been saved !";
+        $_SESSION['expenseStatusCode'] = "error!";
+        header('location: menu.php');
+      }
 }
 else{
     $_SESSION['expenseStatus'] = "Something went wrong ! Expense has not been saved !";

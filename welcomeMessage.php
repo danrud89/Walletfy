@@ -1,12 +1,12 @@
 <?php
-// Initialize the session
+
 session_start();
 
-// Check if the user is logged in, if yes - redirect him to main menu page
-//if (!isset($_SESSION['successfullyRegistered'])) {
-   // header("Location: index.php");
-  //  exit;
-//}
+if (!isset($_SESSION['successfullyRegistered'])) {
+    header("Location: index.php");
+   exit();
+}
+unset($_POST['sign_up']);
 unset($_SESSION['loginStatus']);
 unset($_SESSION['loginStatusCode']);
 unset($_SESSION['emailStatus']);
@@ -43,11 +43,12 @@ unset($_SESSION['serwerStatusCode']);
     <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="bootstrap5/css/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="style.css" type="text/css" />
+    <link rel="icon" href="img/favicon.png">
 
 </head>
 
 <body>
-    <div class="main" style="background-image: url(ewallet2.png);">
+    <div class="main" style="background-image: url(img/ewallet2.png);">
         <div class="wrapper1 mx-auto mt-5">
             <div class="blur  my-1">
                 <div class="row mb-5">

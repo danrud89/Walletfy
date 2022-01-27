@@ -4,7 +4,6 @@ if (!isset($_SESSION["logged_id"])) {
     header("Location: index.php");
     exit();
 }
-$userName = $_SESSION['logged_user'];
 ?>
 
 <!DOCTYPE html>
@@ -35,6 +34,7 @@ $userName = $_SESSION['logged_user'];
     <link rel="stylesheet" href="style.css" type="text/css" />
     <script type="text/javascript" src="main.js"></script>
     <script type="text/javascript" src="script.js"></script>
+    <link rel="icon" href="img/favicon.png">
 
 </head>
 
@@ -54,7 +54,7 @@ $userName = $_SESSION['logged_user'];
         </nav>
     </header>
 
-    <section id="home" style="background-image: url(ewallet.png)">
+    <section id="home" style="background-image: url(img/ewallet.png)">
         <div class="content">
             <div class="mb-4 mt-5">
                 <svg class="title">
@@ -121,12 +121,12 @@ $userName = $_SESSION['logged_user'];
                             </div>
                             <select name="category" class="user-options px-4 text-muted" style="width: 85%" required>
                                 <option value="">--- Please select option ---</option>
-                                <option name="category" value="Salary">Salary</option>
-                                <option name="category" value="Internet Sale">Internet sale</option>
-                                <option name="category" value="Interest">Interest</option>
-                                <option name="category" value="Donation">Donation</option>
-                                <option name="category" value="Gift">Gift</option>
-                                <option name="category" value="Other">Other</option>
+                                <option  value="Salary">Salary</option>
+                                <option  value="Internet Sale">Internet sale</option>
+                                <option  value="Interest">Interest</option>
+                                <option  value="Donation">Donation</option>
+                                <option  value="Gift">Gift</option>
+                                <option  value="Other">Other</option>
                             </select>
                         </div>
 
@@ -142,8 +142,6 @@ $userName = $_SESSION['logged_user'];
                 <div class="modal-footer justify-content-center flex-column flex-md-row btn-group">
                     <button type="submit" id="saveIncome" name="addIncome" value="ADD" class="btn btn-outline-success mr-2 w-25">SAVE</button>
                     <button type="reset" class="btn btn-rounded btn-danger w-25" name="erase_income" value="CLOSE" data-dismiss="modal" onclick="this.form.reset();">CLOSE</button>
-                    <span class="text-success"><?php echo ((isset($incomeAddedCorrectly) && $incomeAddedCorrectly != '') ? 'Income saved !' : '');
-                                                unset($incomeAddedCorrectly); ?> </span>
                 </div>
                 </form>
             </div>
@@ -188,11 +186,11 @@ $userName = $_SESSION['logged_user'];
                                 </div>
                                 <select name="paymentMethod" class="user-options px-3 text-muted" style="width: 85%" required>
                                     <option value="">--- Please select option ---</option>
-                                    <option name="paymentMethod" value="Credit Card">Credit card</option>
-                                    <option name="paymentMethod" value="Cash">Cash</option>
-                                    <option name="paymentMethod" value="Debet Card">Debet card</option>
-                                    <option name="paymentMethod" value="Blik">Blik</option>
-                                    <option name="paymentMethod" value="Transfer">Transfer</option>
+                                    <option  value="Credit Card">Credit card</option>
+                                    <option  value="Cash">Cash</option>
+                                    <option  value="Debet Card">Debet card</option>
+                                    <option  value="Blik">Blik</option>
+                                    <option  value="Transfer">Transfer</option>
                                 </select>
                             </div>
 
@@ -205,22 +203,22 @@ $userName = $_SESSION['logged_user'];
                                     </span>
                                 </div>
                                 <select name="purpose" class="user-options px-3 text-muted" style="width: 85%" required>
-                                    <option name="purpose" value="">--- Please select option ---</option>
-                                    <option name="purpose" value="Food">Food</option>
-                                    <option name="purpose" value="Home">Housekeeping</option>
-                                    <option name="purpose" value="Clothes">Clothes</option>
-                                    <option name="purpose" value="Transport">Transport</option>
-                                    <option name="purpose" value="Health">Health</option>
-                                    <option name="purpose" value="Hygiene">Hygiene</option>
-                                    <option name="purpose" value="Kids">Kids</option>
-                                    <option name="purpose" value="Entertainment">Entertainment</option>
-                                    <option name="purpose" value="Trip">Travelling</option>
-                                    <option name="purpose" value="School">School/Learning</option>
-                                    <option name="purpose" value="Books">Books</option>
-                                    <option name="purpose" value="Debt">Debt</option>
-                                    <option name="purpose" value="Pension">Pension</option>
-                                    <option name="purpose" value="Donation">Donation</option>
-                                    <option name="purpose" value="Other">Other</option>
+                                    <option  value="">--- Please select option ---</option>
+                                    <option " value="Food">Food</option>
+                                    <option  value="Home">Housekeeping</option>
+                                    <option  value="Clothes">Clothes</option>
+                                    <option  value="Transport">Transport</option>
+                                    <option  value="Health">Health</option>
+                                    <option  value="Hygiene">Hygiene</option>
+                                    <option  value="Kids">Kids</option>
+                                    <option  value="Entertainment">Entertainment</option>
+                                    <option  value="Trip">Travelling</option>
+                                    <option  value="School">School/Learning</option>
+                                    <option  value="Books">Books</option>
+                                    <option  value="Debt">Debt</option>
+                                    <option  value="Pension">Pension</option>
+                                    <option  value="Donation">Donation</option>
+                                    <option  value="Other">Other</option>
                                 </select>
                             </div>
 
@@ -238,8 +236,6 @@ $userName = $_SESSION['logged_user'];
                 <div class="modal-footer justify-content-center flex-column flex-md-row btn-group">
                     <button type="submit" id="saveExpense" name="addExpense" value="ADD" class="btn btn-floating btn-outline-success mr-2">SAVE</button>
                     <button type="reset" class="btn btn-floating btn-rounded btn-danger waves-effect" name="erase_expense" value="CLOSE" action="erase_expense.php" data-dismiss="modal" onclick="this.form.reset();">CLOSE</button>
-                    <span class="text-success"><?php echo ((isset($expenseAddedCorrectly) && $expenseAddedCorrectly != '') ? 'Expense saved !' : '');
-                                                unset($expenseAddedCorrectly); ?> </span>
                 </div>
                 </form>
             </div>
@@ -281,7 +277,7 @@ $userName = $_SESSION['logged_user'];
     <script>
         $(document).ready(function() {
             Swal.fire({
-               title: 'Good job!',
+               title: 'Well done!',
                text: '<?php echo $_SESSION['expenseStatus']; ?>',
                icon: '<?php echo $_SESSION['expenseStatusCode']; ?>', 
              });
@@ -290,7 +286,7 @@ $userName = $_SESSION['logged_user'];
        <script>
         $(document).ready(function() {
             Swal.fire({
-               title: 'Good job!',
+               title: 'Well done!',
                text: '<?php echo $_SESSION['incomeStatus']; ?>',
                icon: '<?php echo $_SESSION['incomeStatusCode']; ?>', 
              });
