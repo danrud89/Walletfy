@@ -1,68 +1,67 @@
 <?php
 session_start();
-
-$name = $email = "";
-$password = $confpassword = "";
 $register_validate = true;
+
 
 if (($_SERVER["REQUEST_METHOD"] === "POST") && (isset($_POST['sign_up']))) {
 
-  $name = filter_input(INPUT_POST, 'name');
-  $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
-  $password = filter_input(INPUT_POST, 'password');
-  $confpassword = filter_input(INPUT_POST, 'confpassword');
 
-  if (!isset($name) || empty($name)) {
+  if (!isset($_POST['username']) || empty($_POST['username'])) {
     $register_validate = false;
     $_SESSION['loginStatus'] = "Username is required !";
     $_SESSION['loginStatusCode'] = "error";
     header('location: register.php');
   }
-  if (strlen($name) < 3) {
+  if (strlen($_POST['username']) < 3) {
     $register_validate = false;
     $_SESSION['loginStatus'] = "Username must contain minimum 3 characters!";
     $_SESSION['loginStatusCode'] = "error";
     header('location: register.php');
   }
-  if (preg_match('/^[a-zA-Z0-9_]+$/', $name) === false) {
+  if (preg_match('/^[a-zA-Z0-9_]+$/', $_POST['username']) === false) {
     $register_validate = false;
     $_SESSION['loginStatus'] = "Must contain letters, numbers, and underscores.";
     $_SESSION['loginStatusCode'] = "error";
     header('location: register.php');
   }
-  if (!isset($email) || empty($email)) {
+  if (!isset($_POST['email']) || empty($_POST['email'])) {
     $register_validate = false;
     $_SESSION['emailStatus'] = "E-mail is required !";
     $_SESSION['emailStatusCode'] = "error";
     header('location: register.php');
   }
-  if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
+  if (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) === false) {
     $register_validate = false;
     $_SESSION['emailStatus'] = "Invalid e-mail syntax !";
     $_SESSION['emailStatusCode'] = "error";
     header('location: register.php');
   }
-  if (!isset($password) || empty($password)) {
+  if (!isset($_POST['password']) || empty($_POST['password'])) {
     $register_validate = false;
     $_SESSION['passwordStatus'] = "Password is required !";
     $_SESSION['passwordStatusCode'] = "error";
     header('location: register.php');
   }
-  if ((strlen($password) < 8) || (strlen($password) > 20)) {
+  if ((strlen($_POST['password']) < 8) || (strlen($_POST['password']) > 20)) {
     $register_validate = false;
-    $_SESSION['passwordStatus'] = "Must contain beetween 8 ÷ 20 characters!";
+    $_SESSION['passwordStatus'] = "Password must contain beetween 8 ÷ 20 characters!";
     $_SESSION['passwordStatusCode'] = "error";
     header('location: register.php');
   }
-  if ($password != $confpassword) {
+  if ($_POST['password'] != $_POST['confpassword']) {
     $register_validate = false;
     $_SESSION['passwordStatus'] = "Passwords do not match";
     $_SESSION['passwordStatusCode'] = "error"; 
     header('location: register.php');
   }
 
+  $name = filter_input(INPUT_POST, 'username');
+  $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
+  $password = filter_input(INPUT_POST, 'password');
+  $confpassword = filter_input(INPUT_POST, 'confpassword');
+
   require_once "database.php";
-  // check the database to make sure user with the same login do not exist
+  // check the database to make sure user with the same login or email do not exist
   $user_name_check_query = "SELECT COUNT(name) AS userLoginCounter FROM users WHERE name = :name" ;
   $user_name_stmt = $db->prepare($user_name_check_query);
   $user_name_stmt->bindValue(':name', $name, PDO::PARAM_STR);
@@ -74,19 +73,21 @@ if (($_SERVER["REQUEST_METHOD"] === "POST") && (isset($_POST['sign_up']))) {
     $_SESSION['loginStatusCode'] = "error";
     $register_validate = false;
     header('location: register.php');
+    exit();
   } 
 
   $user_email_check_query = "SELECT COUNT(email) AS userEmailCounter FROM users WHERE email = :email" ;
   $user_email_stmt = $db->prepare($user_email_check_query);
   $user_email_stmt->bindValue(':email', $email, PDO::PARAM_STR);
   $user_email_stmt->execute();
-  $userEmail = $user_stmt->fetch(PDO::FETCH_ASSOC);
+  $userEmail = $user_email_stmt->fetch(PDO::FETCH_ASSOC);
   
   if ($userEmail['userEmailCounter'] > 0) { 
     $_SESSION['emailStatus'] = "E-mail already taken !";
     $_SESSION['emailStatusCode'] = "error";
     $register_validate = false;
     header('location: register.php');
+    exit();
   }
   // register user if there are no errors in the form
   if ($register_validate) {
@@ -105,6 +106,10 @@ if (($_SERVER["REQUEST_METHOD"] === "POST") && (isset($_POST['sign_up']))) {
     } catch (Exception $error) {
       echo "Application Error: Register failed.<br>" . $error->getMessage();
     }
+    $new_user_query = $db -> prepare("SELECT id, name FROM users WHERE email = :email");
+    $new_user_query->bindValue(':email', $email, PDO::PARAM_STR);
+    $new_user_query -> execute();
+    $newUser = $new_user_query -> fetch();
 
     //assign to user: incomes,expenses,payment defaults templates of db tables
     try {
@@ -122,7 +127,7 @@ if (($_SERVER["REQUEST_METHOD"] === "POST") && (isset($_POST['sign_up']))) {
     }
 
     try {
-      $sql_insert_expenses_template_default = "INSERT INTO expenses_category_assigned_to_users (user_id, name) 
+      $sql_insert_expenses_template_default = "INSERT INTO expenses_category_assigned_to_users (user_id, purpose) 
         SELECT users.id, expenses_category_default.name 
         FROM users, expenses_category_default 
         WHERE users.email= :email";
@@ -151,7 +156,6 @@ if (($_SERVER["REQUEST_METHOD"] === "POST") && (isset($_POST['sign_up']))) {
     $_SESSION['logged_id'] = $user['id'];
     $_SESSION['logged_user'] = $user['name'];
     $_SESSION['successfullyRegistered'] = true;
-    unset($_POST['sign_up']);
     header('location: welcomeMessage.php');
     exit();
   }

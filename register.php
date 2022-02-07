@@ -32,6 +32,7 @@ if (isset($_SESSION["logged_id"])) {
 	<link rel="stylesheet" href="style.css" type="text/css" />
 	<script type="text/javascript" src="main.js"></script>
 	<script src='https://www.google.com/recaptcha/api.js'></script>
+	<link rel="icon" href="img/favicon.png">
 </head>
 
 <body>
@@ -64,8 +65,7 @@ if (isset($_SESSION["logged_id"])) {
 								<span class="material-icons" id="ok" style="position:absolute; left:85%; top:12px;">check_circle</span>
 								<span class="material-icons" id="wrong" style="position:absolute; left:85%; top:12px;">error_outline</span>
 								<small id="login_error">Error message</small>
-								<span><?php echo ((isset($_SESSION['username_err']) && $_SESSION['username_err'] != '') ? $_SESSION['username_err'] : '');
-															unset($_SESSION['username_err']); ?> </span>
+								
 							</div>
 						</div>
 
@@ -82,8 +82,7 @@ if (isset($_SESSION["logged_id"])) {
 								<span class="material-icons" id="ok" style="position:absolute; left:85%; top:12px;">check_circle</span>
 								<span class="material-icons" id="wrong" style="position:absolute; left:85%; top:12px;">error_outline</span>
 								<small id="email_error">Error message</small>
-								<span><?php echo ((isset($_SESSION['email_err']) && $_SESSION['email_err'] != '') ? $_SESSION['email_err'] : '');
-															unset($_SESSION['email_err']); ?> </span>
+								
 							</div>
 						</div>
 
@@ -100,8 +99,7 @@ if (isset($_SESSION["logged_id"])) {
 								<span class="material-icons" id="wrong" style="position:absolute; left:77%; top:12px;">error_outline</span>
 								<small id="password_error">Error message</small>
 								<span class="material-icons align-middle" id="eyeIcon" style="cursor:pointer; color:black; opacity:0.6; position:absolute; left:85%; top:10px;" onclick="togglePassword('registerPassword')">visibility_off</span>
-								<span><?php echo ((isset($_SESSION['password_err']) && $_SESSION['password_err'] != '') ? $_SESSION['password_err'] : '');
-															unset($_SESSION['password_err']); ?> </span>
+								
 							</div>
 						</div>
 
@@ -118,16 +116,10 @@ if (isset($_SESSION["logged_id"])) {
 								<span class="material-icons" id="wrong" style="position:absolute; left:77%; top:12px;">error_outline</span>
 								<small id="cpassword_error">Error message</small>
 								<span class="material-icons align-middle" id="ceyeIcon" style="cursor:pointer; color:black; opacity:0.6; position:absolute; left:85%; top:10px;" onclick="togglePassword('cRegisterPassword')">visibility_off</span>
-								<span><?php echo ((isset($_SESSION['confirm_password_err']) && $_SESSION['confirm_password_err'] != '') ? $_SESSION['confirm_password_err'] : '');
-															unset($_SESSION['confirm_password_err']); ?> </span>
+								
 							</div>
 						</div>
-						<div class="row register-input mb-3 p-1">
-						<div class="recaptcha ml-2 mb-2">
-							<div id="captcha" class="g-recaptcha" data-sitekey="6LcoQvMdAAAAAAzDf_dCf50TFqGAummA8zxi82LS"></div>
-						</div>
-						<small id="captcha_error">Error message</small>
-						</div>
+						
 
 						<div class="row mb-3">
 							<div class="register-button text-center">
@@ -164,8 +156,11 @@ if (isset($_SESSION["logged_id"])) {
 		<script src='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js'></script>
 		<script src="./script.js"></script>
 		<script src="sweetalert2.all.min.js"></script>
-		<script>
-        $(document).ready(function() {
+		
+<?php 
+if(isset($_SESSION['loginStatus']) && $_SESSION['loginStatus'] != '')
+{
+    ?>       <script>
             Swal.fire({
                title: 'Register Failed. Make sure You meet all constraints',
 			   html: '* Username cannot be empty, </br> * Username must contain minimum 3 charackters,</br> * Username can contain only letters,numbers, and underscores.</br></br> Current problem: <?php echo $_SESSION['loginStatus']; ?>',
@@ -174,10 +169,17 @@ if (isset($_SESSION["logged_id"])) {
                confirmButtonColor: '#6495ED',
 			   position: 'center',
              });
-        })
     </script>
+	<?php
+unset($_SESSION['loginStatus']);
+unset($_SESSION['loginStatusCode']);
+}
+?>
+<?php
+if(isset($_SESSION['emailStatus']) && $_SESSION['emailStatus'] != '')
+{
+    ?>   
 		<script>
-        $(document).ready(function() {
             Swal.fire({
                 title: 'Register Failed. Make sure You meet all constraints',
 				html: '* Email cannot be empty, </br> * Email syntax must be valid,</br></br> Current problem: <?php echo $_SESSION['loginStatus']; ?>',
@@ -186,10 +188,17 @@ if (isset($_SESSION["logged_id"])) {
                confirmButtonColor: '#6495ED',
 			   position: 'center',
              });
-        })
     </script>
-	<script>
-        $(document).ready(function() {
+	<?php
+unset($_SESSION['emailStatus']);
+unset($_SESSION['emailStatusCode']);
+}
+?>
+<?php 
+if(isset($_SESSION['passwordStatus']) && $_SESSION['passwordStatus'] != '')
+{
+    ?>
+	<script>  
             Swal.fire({
 			   title: 'Register Failed. Make sure You meet all constraints',
                html: '* Passwords cannot be empty, </br></br> * Must contain beetween 8 ÷ 20 characters, </br></br> * Passwords must be the same, </br></br> Current problem: <?php echo $_SESSION['passwordStatus']; ?>',
@@ -198,10 +207,17 @@ if (isset($_SESSION["logged_id"])) {
                confirmButtonColor: '#6495ED',
 			   position: 'center',
              });
-        })
     </script>
+	<?php
+unset($_SESSION['passwordStatus']);
+unset($_SESSION['passwordStatusCode']);
+}
+?>
+<?php 
+if(isset($_SESSION['serwerStatus']) && $_SESSION['serwerStatus'] != '')
+{
+    ?>
 <script>
-        $(document).ready(function() {
             Swal.fire({
                title: 'Internal serwer error!',
                text: '<?php echo $_SESSION['serwerStatus']; ?>',
@@ -210,20 +226,12 @@ if (isset($_SESSION["logged_id"])) {
                confirmButtonColor: '#6495ED',
 			   position: 'center',
              });
-        })
     </script>
-    <?php
-    unset($_SESSION['loginStatus']);
-    unset($_SESSION['loginStatusCode']);
-	unset($_SESSION['emailStatus']);
-    unset($_SESSION['emailStatusCode']);
-    unset($_SESSION['passwordStatus']);
-    unset($_SESSION['passwordStatusCode']);
-	unset($_SESSION['serwerStatus']);
-    unset($_SESSION['serwerStatusCode']);
-
-    ?>
-
+ <?php
+unset($_SESSION['serwerStatus']);
+unset($_SESSION['serwerStatusCode']);
+}
+?>
 </body>
 
 </html>

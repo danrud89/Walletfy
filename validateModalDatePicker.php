@@ -15,8 +15,6 @@ if ((isset($_POST['periodOfTime'])) && $_SERVER["REQUEST_METHOD"] === "POST") {
         case "currentMonth":
             $firstDayOfThisMonth = date('Y-m-d', strtotime('first day of this month'));
             $lastDayOfThisMonth  = date('Y-m-d', strtotime('last day of this month'));
-           // $time = $date->format('Y-m');
-           // $_SESSION['time'] = $time;
             try {
                 $incomes_query_grouped = $db->prepare("SELECT SUM(incomes.amount) AS totalSumOfIncomesGrouped, inc.name 
                 FROM incomes, incomes_category_assigned_to_users AS inc 
@@ -78,6 +76,7 @@ if ((isset($_POST['periodOfTime'])) && $_SERVER["REQUEST_METHOD"] === "POST") {
             }
 
             $_SESSION['incomesTable'] = $incomes;
+            $_SESSION['jsonResult'] = json_encode( $incomes );
             $_SESSION['incomesTableInDetail'] = $incomesDetails;
             $_SESSION['expensesTable'] = $expenses;
             $_SESSION['expensesTableInDetail'] = $expensesDetails;

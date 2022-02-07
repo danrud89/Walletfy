@@ -1,9 +1,11 @@
 <?php
 session_start();
-if (!isset($_SESSION["logged_id"])) {
-    header("Location: index.php");
+
+if (!isset($_SESSION['logged_id'])) {
+    header('Location: index.php');
     exit();
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -38,18 +40,18 @@ if (!isset($_SESSION["logged_id"])) {
 
 </head>
 
-<body onload="setTodaysDate()">
+<body>
     <header id="top">
         <h4 class="loggedAs ml-2">USER: <?= $_SESSION['logged_user'] ?>
         </h4>
         <nav>
-            <ul>
-                <li><span class="material-icons mx-2 align-middle">home</span><a href="menu.php" title="Home">Home</a></li>
-                <li><span class="material-icons mx-2 align-middle">savings</span><a href="#" class="openModal" data-toggle="modal" data-target="#addIncome">Income</a></li>
-                <li><span class="material-icons mx-2 align-middle">shopping_cart</span><a href="#" class="openModal" data-toggle="modal" data-target="#addExpense" title="Expense">Expense</a></li>
-                <li><span class="material-icons mx-2 align-middle">insert_chart_outlined</span><a href="balance.php" title="Balance">Balance</a></li>
-                <li><span class="material-icons mx-2 align-middle">manage_accounts</span><a href="settings.php" title="Settings">Settings</a></li>
-                <li><span class="material-icons mx-2 align-middle">logout</span><a href="logout.php" title="Log Out">Exit</a></li>
+            <ul >
+                <li><a href="menu.php" title="Home"><span class="material-icons mx-2 align-middle">home</span>Home</a></li>
+                <li><a href="#" class="openModal" data-toggle="modal" data-target="#addIncome"><span class="material-icons mx-2 align-middle">savings</span>Income</a></li>
+                <li><a href="#" class="openModal" data-toggle="modal" data-target="#addExpense" title="Expense"><span class="material-icons mx-2 align-middle">shopping_cart</span>Expense</a></li>
+                <li><a href="balance.php" title="Balance"><span class="material-icons mx-2 align-middle">insert_chart_outlined</span>Balance</a></li>
+                <li><a href="settings.php" title="Settings"><span class="material-icons mx-2 align-middle">manage_accounts</span>Settings</a></li>
+                <li><a href="logout.php" title="Log Out"><span class="material-icons mx-2 align-middle">logout</span>Exit</a></li>
             </ul>
         </nav>
     </header>
@@ -66,8 +68,6 @@ if (!isset($_SESSION["logged_id"])) {
                 <p class="lead text-justify">
                     On the top You can select the option You are interested in. Add a new income, expense, view the balance of the period You are interested in or personalize Your account in the settings.
                 </p>
-                <?php var_dump($_SESSION['logged_in'])?>
-
             </div>
         </div>
         <div class="container-fluid mt-5">
@@ -273,33 +273,38 @@ if (!isset($_SESSION["logged_id"])) {
         });
     </script>
 
-
+<?php 
+if(isset($_SESSION['expenseStatus']) && $_SESSION['expenseStatus'] != '')
+{
+    ?>
     <script>
-        $(document).ready(function() {
             Swal.fire({
                title: 'Well done!',
                text: '<?php echo $_SESSION['expenseStatus']; ?>',
                icon: '<?php echo $_SESSION['expenseStatusCode']; ?>', 
              });
-        })
     </script>
+    <?php
+unset($_SESSION['expenseStatus']);
+unset($_SESSION['expenseStatusCode']);
+}
+?>
+<?php 
+if(isset($_SESSION['incomeStatus']) && $_SESSION['incomeStatus'] != '')
+{
+    ?>
        <script>
-        $(document).ready(function() {
             Swal.fire({
                title: 'Well done!',
                text: '<?php echo $_SESSION['incomeStatus']; ?>',
                icon: '<?php echo $_SESSION['incomeStatusCode']; ?>', 
              });
-        })
     </script>
-
-    <?php
-    unset($_SESSION['incomeStatus']);
-    unset($_SESSION['incomeStatusCode']);
-    unset($_SESSION['expenseStatus']);
-    unset($_SESSION['expenseStatusCode']);
-    ?>
-
+<?php
+unset($_SESSION['incomeStatus']);
+unset($_SESSION['incomeStatusCode']);
+}
+?>
 </body>
 
 </html>

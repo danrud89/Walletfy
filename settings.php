@@ -47,12 +47,12 @@ if (!isset($_SESSION["logged_id"])) {
         <li style="pointer-events: none; cursor: not-allowed;"><span class="material-icons mx-2 align-middle text-muted">shopping_cart</span><a class="text-muted" href="#" class="openModal" data-toggle="modal" data-target="#addExpense" title="Expense">Expense</a></li>
         <li style="pointer-events: none; cursor: not-allowed;"><span class="material-icons mx-2 align-middle text-muted">insert_chart_outlined</span><a class="text-muted" href="balance.php" title="Balance">Balance</a></li>
         <li><span class="material-icons mx-2 align-middle">manage_accounts</span><a href="settings.php" title="Settings">Settings</a></li>
-        <li><span class="material-icons mx-2 align-middle">logout</span><a href="index.php" title="Log Out">Exit</a></li>
+        <li><span class="material-icons mx-2 align-middle">logout</span><a href="logout.php" title="Log Out">Exit</a></li>
       </ul>
     </nav>
   </header>
   
-  <div class="main" style="background-image: url(ewallet2.png); top:15%;">
+  <div class="main" style="background-image: url(img/ewallet2.png); top:15%;">
     <div class="wrapper1 mx-auto mt-5">
       <div class="blur  my-1">
         <div class="row mb-5">

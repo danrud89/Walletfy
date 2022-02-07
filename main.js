@@ -1,7 +1,4 @@
-$(document).ready(function() {
-  $('input[type=email]').val('');
-  $('input[type=password]').val('');
-});
+
 
 function capLock(e) {
     const input = document.getElementById('loginForm');
@@ -345,4 +342,6 @@ function sortTableNumerically(idOfTable) {
         }
     }
 }
+
+
 

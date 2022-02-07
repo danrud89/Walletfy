@@ -32,6 +32,7 @@ if (isset($_SESSION["logged_id"])) {
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.all.min.js"></script>
     <script type="text/javascript" src="main.js"></script>
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
+    <link rel="icon" href="img/favicon.png">
 
 
 </head>
@@ -101,8 +102,6 @@ if (isset($_SESSION["logged_id"])) {
                             <div class="login-button">
                             <a href="menu.php"><button type="submit" id="logInBtn" name="sign_in" class="btn btn-lg w-100" onclick="checkLoginInputs()">Sign In <span class="material-icons align-bottom  mb-1" style="margin-left: 1em;">input</span></button></a>
                             </div>
-                            <span><?php echo ((isset($_SESSION['login_message']) && $_SESSION['login_message'] != '') ? $_SESSION['login_message'] : '');
-                                    unset($_SESSION['login_message']); ?> </span>
                         </div>
 
                         <div class="row">
@@ -132,9 +131,11 @@ if (isset($_SESSION["logged_id"])) {
         <script src='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js'></script>
         <script src="./script.js"></script>
         <script src="sweetalert2.all.min.js"></script>
-
+<?php 
+if(isset($_SESSION['loginStatus']) && $_SESSION['loginStatus'] != '')
+{
+    ?>
         <script>
-        $(document).ready(function() {
             Swal.fire({
                title: 'Watch Out!',
                text: '<?php echo $_SESSION['loginStatus']; ?>',
@@ -143,10 +144,17 @@ if (isset($_SESSION["logged_id"])) {
                confirmButtonColor: '#6495ED',
                position: 'center',
              });
-        })
     </script>
+    <?php
+unset($_SESSION['loginStatus']);
+unset($_SESSION['loginStatusCode']);
+}
+?>
+<?php 
+if(isset($_SESSION['passwordStatus']) && $_SESSION['passwordStatus'] != '')
+{
+    ?>
        <script>
-        $(document).ready(function() {
             Swal.fire({
                title: 'Watch Out!',
                text: '<?php echo $_SESSION['passwordStatus']; ?>',
@@ -154,11 +162,18 @@ if (isset($_SESSION["logged_id"])) {
                confirmButtonText: 'Try again',
                confirmButtonColor: '#6495ED',
                position: 'center',
-             });
-        })
+             });   
     </script>
+<?php
+unset($_SESSION['passwordStatus']);
+unset($_SESSION['passwordStatusCode']);
+}
+?>
+<?php 
+if(isset($_SESSION['serwerStatus']) && $_SESSION['serwerStatus'] != '')
+{
+    ?>
     <script>
-        $(document).ready(function() {
             Swal.fire({
                title: 'Internal serwer error!',
                text: '<?php echo $_SESSION['serwerStatus']; ?>',
@@ -166,18 +181,14 @@ if (isset($_SESSION["logged_id"])) {
                confirmButtonText: 'OK',
                confirmButtonColor: '#6495ED',
 			   position: 'center',
-             });
-        })
+             });  
     </script>
-
-    <?php
-    unset($_SESSION['loginStatus']);
-    unset($_SESSION['loginStatusCode']);
-    unset($_SESSION['passwordStatus']);
-    unset($_SESSION['passwordStatusCode']);
-    unset($_SESSION['serwerStatus']);
-    unset($_SESSION['serwerStatusCode']);
-    ?>
+<?php
+unset($_SESSION['serwerStatus']);
+unset($_SESSION['serwerStatusCode']);
+}
+?>
+   
 
 </body>
 
